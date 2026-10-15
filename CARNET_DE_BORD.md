@@ -1,7 +1,7 @@
 # Carnet de bord — GrandNexus 6.4 → 6.5 (réparation)
 
 Branche `main`, tag `v6.4-raw` = extraction brute (témoin). Chaque réparation = 1 commit.
-Rejouer toute la chaîne : `git checkout v6.4-raw -- grandnexus && bash tools/run_all.sh` (sur une branche).
+Rejouer : cœur = `tools/extract_notebook.py` puis `tools/run_all.sh` ; couche 15/05 = `tools/extract_layer_1505.py` puis `tools/run_layer_1505.sh`.
 
 | # | Hypothèse | Résultat | Décision |
 |---|-----------|----------|----------|
@@ -13,8 +13,20 @@ Rejouer toute la chaîne : `git checkout v6.4-raw -- grandnexus && bash tools/ru
 | 6 | La perception reconnaît le type d'entrée | 5/8 : maths et `import` classés TEXT (égalité de scores, TEXT gagne par ordre) | à calibrer (mode laboratoire) |
 | 7 | Le routage par priorité bat le hasard | 1/5 vs 0.8/5 (témoin aléatoire) : pas de différence réelle | le goulot n'est pas le routage mais le passage perception → raisonnement (le raisonneur attend prémisses/règles structurées) |
 
+| 8 | Le raisonneur ne reçoit pas les prémisses | reason() rangeait le contexte sous une autre clé que celle lue par les stratégies → corrigé (R14) | brancher l'extracteur |
+| 9 | Une extraction de prémisses suffit pour raisonner | voie A : 12/12 dans la grammaire vs 6/12 (toujours-oui), 3/12 (hasard), 2/12 (ancienne voie) ; 0/5 hors grammaire, 0 faux « oui » | élargir l'extracteur (verbes, pronoms, relations) |
+| 10 | La couche 15/05 est compatible avec NexusCore | API : oui (register/get/send_message uniquement). Noms : 1 vrai conflit (working_memory v2) détecté et bloqué | couche extraite, collisions en _v2 |
+| 11 | L'orchestrateur répond aux questions | après R15-R23, R27 : 12/12, 0 réponse d'une autre question, ~1 s/question (10 itérations × 0,1 s codées en dur) | ok |
+| 12 | Tout tourne ensemble sur un NexusCore démarré | AVANT R24 : l'horloge mourait après 1 tick (file de messages : TypeError à priorité égale). APRÈS : ~8 000 messages en 3 s, 13 modules vivants, 1 seule erreur (gymnasium absent) | corriger les adressages et l'arrêt lent |
+| 13 | Le CognitionManager parle à ses modules | 12 méthodes appelées n'existaient pas (quick_scan, evaluate, create_plan…) → ponts de délégation (R25) | à valider en mode threads |
+
 ## Ce qui n'est PAS encore fait
-- Couche expérimentale du .py 15/05 (CognitiveOrchestrator, CognitiveClock, SafetyGuard, KernelBridge, EvolutionManager…) : archivée dans `archive/`, non branchée. L'orchestrateur importe `ReasoningEngine`, `LearningManager`, `PerceptionModule` qui n'existent pas.
+- Couche 15/05 : 13 modules attendent une dépendance externe (torch, redis, neo4j, pymongo, pybullet, gymnasium, deap, opentelemetry, slack_sdk, sentence_transformers, sse_starlette).
+- WorkingMemory 15/05 s'enregistre sous « working_memory » comme celle du cœur : volontairement non démarrée (à renommer ou fusionner, décision de Khaled).
+- Adressages morts en fonctionnement : self_model → « monitor » (le cœur dit « cognitive_monitor »), messages envoyés avant le démarrage de leur destinataire (ordre de démarrage).
+- Arrêt lent (~15 s, join avec timeouts) et 2 threads qui survivent (dont Report_Thread du CognitiveMonitor).
+- Deux notions nommées CognitiveContext (état de l'orchestrateur / contexte de requête) à réconcilier.
+- Horloge : canal « fast » déclaré non sain malgré ~120 ticks en 3 s (critère à lire).
 - Seuls PerceptionCore et ReasoningCore déclarent des capacités (@cognitive_capability). Les 20 autres modules ne sont joignables que par appel direct ou par le bus d'événements.
 - `CognitionManager.start()` (threads de fond) non testé : boot(start_threads=True).
 - Doublons conservés côte à côte, non fusionnés : graph_engine_v1, llm_engine_lite (fallback + embeddings à greffer dans llm_engine), resource_manager_ml.
