@@ -377,6 +377,16 @@ def r24_message_queue_tiebreak():
     lines.insert(i, "_MSG_SEQ = itertools.count()  # réparation 6.5 : départage des messages de même priorité\n")
     write(p, "\n".join(lines))
 
+def r25_manager_bridges():
+    """CognitionManager appelait 12 méthodes absentes de ses modules (quick_scan, evaluate,
+    adapt, reflect_on, recognize, process_text, create_plan...). Ponts de délégation vers
+    les méthodes qui existent, installés seulement si absentes."""
+    copy_new("manager_bridges.py", "grandnexus/cognition/manager_bridges.py")
+    append("grandnexus/cognition/cognition_manager.py",
+           "# --- réparation 6.5 : ponts vers l'API réelle des modules (voir manager_bridges.py)\n"
+           "from grandnexus.cognition.manager_bridges import install as _install_bridges\n"
+           "_install_bridges()")
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])
