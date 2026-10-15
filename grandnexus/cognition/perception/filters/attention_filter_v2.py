@@ -86,7 +86,7 @@ class AttentionFilter:
         self._instance_id = str(uuid.uuid4())[:8]
 
         # Stats & state
-        window = int(self.config.history_sec * max(self.config.max_rate.values()))
+        window = int(self.config.history_sec * max(self.config.max_rate.values(), default=50.0))  # réparation 6.5 : 50 Hz = défaut du defaultdict
         self._hist_scores: Deque[float] = deque(maxlen=window)
         self._last_sent: Dict[str, float] = defaultdict(float)   # per driver
         self._drives: Dict[str, float] = {}

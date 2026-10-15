@@ -387,6 +387,12 @@ def r25_manager_bridges():
            "from grandnexus.cognition.manager_bridges import install as _install_bridges\n"
            "_install_bridges()")
 
+def r26_attention_v2_default():
+    """AttentionFilter (15/05) : max() sur max_rate vide par défaut -> plantage à la création."""
+    replace_once("grandnexus/cognition/perception/filters/attention_filter_v2.py",
+                 "window = int(self.config.history_sec * max(self.config.max_rate.values()))",
+                 "window = int(self.config.history_sec * max(self.config.max_rate.values(), default=50.0))  # réparation 6.5 : 50 Hz = défaut du defaultdict")
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])
