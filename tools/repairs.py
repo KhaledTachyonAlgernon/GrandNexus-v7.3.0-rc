@@ -322,6 +322,22 @@ def r21_orchestrator_session_output():
                                       if getattr(i, "timestamp", 0) >= start_time][:3]  # réparation 6.5
 ''')
 
+def r22_orchestrator_cleanup():
+    """Les actions terminées restaient dans active_actions (et y gardaient leurs ressources)
+    tant que la boucle de fond n'appelait pas _cleanup_actions(). Sans cette boucle
+    (process_input synchrone), plus rien ne s'exécutait après la 1re question.
+    Nettoyage fait aussi au début de _process_action_queue()."""
+    for p in ("grandnexus/cognition/orchestration/cognitive_orchestrator.py",
+              "grandnexus/cognition/orchestration/cognitive_orchestrator_v1.py"):
+        replace_once(p, '''        """Process actions from the queue based on priorities and resource constraints."""
+        if not self.action_queue:
+            return
+''', '''        """Process actions from the queue based on priorities and resource constraints."""
+        self._cleanup_actions()  # réparation 6.5 : libère les ressources des actions finies
+        if not self.action_queue:
+            return
+''')
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])

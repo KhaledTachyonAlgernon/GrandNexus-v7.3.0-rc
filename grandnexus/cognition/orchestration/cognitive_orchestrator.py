@@ -909,6 +909,7 @@ class CognitiveOrchestrator:
 
     def _process_action_queue(self):
         """Process actions from the queue based on priorities and resource constraints."""
+        self._cleanup_actions()  # réparation 6.5 : libère les ressources des actions finies
         if not self.action_queue:
             return
 
