@@ -50,7 +50,8 @@ class GrandNexusSystem:
     def modules(self) -> Dict[str, Any]:
         out = {}
         if self.cognition is not None:
-            for attr in ("perception_modules", "reasoning_modules", "learning_modules", "metacognition_modules"):
+            for attr in ("perception_modules", "reasoning_modules", "learning_modules", "metacognition_modules",
+                         "extra_modules"):
                 out.update(getattr(self.cognition, attr, {}) or {})
         return out
 
@@ -142,6 +143,23 @@ def boot(db_file: Optional[str] = None, start_threads: bool = False,
             return n
         if gn.graph is not None:
             _step(gn, "graphe partagé injecté", _share_graph, verbose)
+        def _pathways():
+            # voie perception -> prémisses -> raisonnement (modules ajoutés, rien remplacé)
+            from grandnexus.cognition.perception.premise_extractor import PremiseExtractor
+            from grandnexus.cognition.reasoning.text_reasoner import TextReasoner
+            mods = gn.modules()
+            extractor = PremiseExtractor(nexus_core=gn.core)
+            gn.cognition.extra_modules = {
+                "premise_extractor": extractor,
+                "text_reasoner": TextReasoner(reasoning_core=mods.get("reasoning_core"),
+                                              perception_core=mods.get("perception_core"),
+                                              extractor=extractor, graph_engine=gn.graph,
+                                              working_memory=gn.working, nexus_core=gn.core),
+            }
+            for name, mod in gn.cognition.extra_modules.items():
+                if gn.core is not None:
+                    gn.core.register_module(name, mod)
+        _step(gn, "voie perception→raisonnement", _pathways, verbose)
         gn.cognition.initialized = True
         n = _step(gn, "câblage des capacités", gn.cognition.wire_capabilities, verbose)
         if start_threads:
