@@ -46,6 +46,7 @@ class WorkingMemoryItem:
     metadata: Dict[str, Any] = field(default_factory=dict)
     expiration_time: Optional[float] = None
     embedding: Optional[np.ndarray] = None
+    access_count: int = 0  # réparation 6.5 : utilisé par retrieve/éviction
 
     def __repr__(self) -> str:
         return (f"<WorkingMemoryItem id={self.item_id[-8:]}, "

@@ -285,6 +285,13 @@ def r19_working_memory_sort():
     assert s.count("            scored_items.sort(reverse=True)\n") == 1 and s.count("        scored_items.sort(reverse=True)\n") == 2
     write(p, s.replace("scored_items.sort(reverse=True)", "scored_items.sort(key=lambda x: x[0], reverse=True)  # réparation 6.5"))
 
+def r20_working_memory_item():
+    """WorkingMemoryItem.access_count lu et incrémenté par 4 méthodes, jamais déclaré."""
+    replace_once("grandnexus/memory/working.py",
+                 "    embedding: Optional[np.ndarray] = None\n\n    def __repr__(self) -> str:\n        return (f\"<WorkingMemoryItem",
+                 "    embedding: Optional[np.ndarray] = None\n    access_count: int = 0  # réparation 6.5 : utilisé par retrieve/éviction\n\n"
+                 "    def __repr__(self) -> str:\n        return (f\"<WorkingMemoryItem")
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])
