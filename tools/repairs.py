@@ -212,6 +212,61 @@ def r14_reason_workspace_contract():
                  "                                                      \"source_domain\", \"target_domain\")\n"
                  "                   if k in context.parameters},\n")
 
+def r15_orchestrator_imports():
+    """Le CognitiveOrchestrator importe ReasoningEngine / LearningManager / PerceptionModule
+    depuis les paquets cognition.* : ces classes n'existaient pas. Elles sont fournies
+    par cognition/adapters.py et exposées paresseusement par les __init__ (PEP 562)."""
+    copy_new("adapters.py", "grandnexus/cognition/adapters.py")
+    for pkg, name in (("reasoning", "ReasoningEngine"), ("learning", "LearningManager"),
+                      ("perception", "PerceptionModule")):
+        write(f"grandnexus/cognition/{pkg}/__init__.py",
+              f'"""Paquet cognition.{pkg} (réparation 6.5 : export paresseux de {name})."""\n\n'
+              f'def __getattr__(attr):\n'
+              f'    if attr == "{name}":\n'
+              f'        from grandnexus.cognition.adapters import {name}\n'
+              f'        return {name}\n'
+              f'    raise AttributeError(attr)\n')
+    for p in ("grandnexus/cognition/orchestration/cognitive_orchestrator.py",
+              "grandnexus/cognition/orchestration/cognitive_orchestrator_v1.py"):
+        dedent_from(p, "def create_cognitive_orchestrator(")
+
+def r16_layer_bugs():
+    """Couche 15/05 : défauts de dataclass, texte shell/JS collé dans le code,
+    chemin d'import incohérent (grandnexus.dialogue vs grandnexus/io), openai non protégé."""
+    p = "grandnexus/homeostasis/homeostasis_manager.py"
+    for name, a, b in (("cpu_thr", "0.70", "0.90"), ("mem_thr", "0.75", "0.95")):
+        replace_once(p, f"    {name}: Thresholds = Thresholds({a}, {b})\n",
+                     f"    {name}: Thresholds = field(default_factory=lambda: Thresholds({a}, {b}))\n")
+    for name, a, b, cmt in (("temp_thr", "0.60", "0.80", "        # fraction of Tjmax"),
+                            ("batt_thr", "0.30", "0.10", "        # remaining % (inverse)"),
+                            ("api_thr", "0.70", "0.90", "         # quota usage"),
+                            ("cost_thr", "0.70", "0.90", "        # budget usage")):
+        replace_once(p, f"    {name}: Thresholds = Thresholds({a}, {b}){cmt}\n",
+                     f"    {name}: Thresholds = field(default_factory=lambda: Thresholds({a}, {b})){cmt}\n")
+    s = read(p)
+    if "from dataclasses import dataclass, field" not in s:
+        add_import(p, "from dataclasses import field")
+    p = "grandnexus/io/dialogue_interface.py"
+    s = read(p); i = s.index("curl -N -H")
+    write(p, s[:i] + "\n".join("# " + l for l in s[i:].split("\n")) + "\n")
+    p = "grandnexus/cognition/metacognition/explainability_engine.py"
+    replace_once(p, "import openai  # Assurez-vous", "try:\n    import openai\nexcept ImportError:  # réparation 6.5\n    openai = None\n# Assurez-vous")
+    replace_once("grandnexus/__init__.py", '    "grandnexus.metacognition": "grandnexus.cognition.metacognition",\n',
+                 '    "grandnexus.metacognition": "grandnexus.cognition.metacognition",\n'
+                 '    "grandnexus.dialogue": "grandnexus.io",  # couche 15/05 : en-tête io/, import dialogue/\n')
+
+def r17_resource_history():
+    """L'orchestrateur appelle resource_manager.get_usage_history() : méthode absente,
+    les instantanés existaient déjà (resource_snapshots)."""
+    append("grandnexus/computation/resource_manager.py", '''
+# --- réparation 6.5 : historique demandé par le CognitiveOrchestrator
+def _get_usage_history(self, limit: int = 60):
+    return [{"timestamp": s.timestamp, "cpu": s.cpu_usage, "memory": s.memory_usage,
+             "disk": s.disk_usage} for s in list(self.resource_snapshots)[-limit:]]
+if not hasattr(ResourceManager, "get_usage_history"):
+    ResourceManager.get_usage_history = _get_usage_history
+''')
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])

@@ -41,3 +41,12 @@ def add_import(p, line):
     i = next(k for k, l in enumerate(lines) if l.startswith(("import ", "from ")))
     lines.insert(i, line + "  # réparation 6.5 : fourni avant par l'espace de noms partagé du notebook")
     write(p, "\n".join(lines))
+
+def dedent_from(p, prefix):
+    """Ramène au niveau module une fonction indentée par erreur dans une classe
+    (et tout ce qui la suit jusqu'à la fin du fichier)."""
+    lines = read(p).split("\n")
+    i = next(k for k, l in enumerate(lines) if l.startswith("    " + prefix))
+    for k in range(i, len(lines)):
+        if lines[k].startswith("    "): lines[k] = lines[k][4:]
+    write(p, "\n".join(lines))
