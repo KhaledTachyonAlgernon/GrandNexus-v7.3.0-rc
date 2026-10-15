@@ -45,6 +45,7 @@ class CognitiveState(Enum):
     INTEGRATION = auto()      # Consolidation and synthesis of knowledge
     ADAPTATION = auto()       # Adjusting to new information or environments
     META_REFLECTION = auto()  # Self-analysis and process optimization
+    PERCEPTION = auto()       # réparation 6.5 : cible de la transition « new_input »
 
 
 @dataclass
