@@ -338,6 +338,28 @@ def r22_orchestrator_cleanup():
             return
 ''')
 
+def r23_orchestrator_memory_queries():
+    """L'orchestrateur passait des dict à SemanticMemory.query_concepts (attend SemanticQuery)
+    et EpisodicMemory.retrieve_episodes (attend EpisodicQuery) -> chaque « retrieve » échouait.
+    Méta-analyse : moyenne sur un dict vide -> division par zéro."""
+    for p in ("grandnexus/cognition/orchestration/cognitive_orchestrator.py",
+              "grandnexus/cognition/orchestration/cognitive_orchestrator_v1.py"):
+        s = read(p)
+        if "semantic_results = self.semantic_memory.query_concepts(semantic_query)" in s:
+            replace_once(p, "semantic_results = self.semantic_memory.query_concepts(semantic_query)",
+                         "from grandnexus.memory.semantic import SemanticQuery  # réparation 6.5\n"
+                         "                semantic_results = self.semantic_memory.query_concepts(SemanticQuery(**semantic_query))")
+        if "episodic_results = self.episodic_memory.retrieve_episodes(episodic_query)" in s:
+            replace_once(p, "episodic_results = self.episodic_memory.retrieve_episodes(episodic_query)",
+                         "from grandnexus.memory.episodic import EpisodicQuery  # réparation 6.5\n"
+                         "                _eq = dict(episodic_query)\n"
+                         "                _eq[\"context_factors\"] = {\"recency_bias\": _eq.pop(\"recency_bias\", None)}\n"
+                         "                episodic_results = self.episodic_memory.retrieve_episodes(EpisodicQuery(**_eq))")
+        s = read(p)
+        if "if sum(self.success_rate.values()) / len(self.success_rate) < 0.6:" in s:
+            replace_once(p, "if sum(self.success_rate.values()) / len(self.success_rate) < 0.6:",
+                         "if self.success_rate and sum(self.success_rate.values()) / len(self.success_rate) < 0.6:  # réparation 6.5")
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])

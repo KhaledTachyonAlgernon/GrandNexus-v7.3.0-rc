@@ -1144,7 +1144,8 @@ class CognitiveOrchestrator:
                     "importance_threshold": relevance_threshold,
                     "max_results": max_results
                 }
-                semantic_results = self.semantic_memory.query_concepts(semantic_query)
+                from grandnexus.memory.semantic import SemanticQuery  # réparation 6.5
+                semantic_results = self.semantic_memory.query_concepts(SemanticQuery(**semantic_query))
                 results.extend([(item, "semantic") for item in semantic_results])
 
             # Query episodic memory if specified
@@ -1155,7 +1156,10 @@ class CognitiveOrchestrator:
                     "max_results": max_results,
                     "recency_bias": recency_weight
                 }
-                episodic_results = self.episodic_memory.retrieve_episodes(episodic_query)
+                from grandnexus.memory.episodic import EpisodicQuery  # réparation 6.5
+                _eq = dict(episodic_query)
+                _eq["context_factors"] = {"recency_bias": _eq.pop("recency_bias", None)}
+                episodic_results = self.episodic_memory.retrieve_episodes(EpisodicQuery(**_eq))
                 results.extend([(item, "episodic") for item in episodic_results])
 
             # Store results in working memory
@@ -1390,7 +1394,7 @@ class CognitiveOrchestrator:
                     recommendations.append("Increase exploration to discover new approaches")
 
                 # Recommend more learning if success rates are low
-                if sum(self.success_rate.values()) / len(self.success_rate) < 0.6:
+                if self.success_rate and sum(self.success_rate.values()) / len(self.success_rate) < 0.6:  # réparation 6.5
                     recommendations.append("Increase learning rate to improve performance")
 
             # Store analysis results in working memory
