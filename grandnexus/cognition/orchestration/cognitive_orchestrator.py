@@ -1777,6 +1777,6 @@ class CognitiveOrchestrator:
 
            # Module registration function
 
-    def create_cognitive_orchestrator(nexus_core, config=None):
-        """Factory function to create a CognitiveOrchestrator instance."""
-        return CognitiveOrchestrator(nexus_core, config)
+def create_cognitive_orchestrator(nexus_core, config=None):
+    """Factory function to create a CognitiveOrchestrator instance."""
+    return CognitiveOrchestrator(nexus_core, config)
