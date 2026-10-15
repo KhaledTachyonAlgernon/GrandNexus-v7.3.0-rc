@@ -38,7 +38,7 @@ def add_import(p, line):
     s = read(p)
     if line in s.split("\n"): return
     lines = s.split("\n")
-    i = next(k for k, l in enumerate(lines) if l.startswith(("import ", "from ")))
+    i = next(k for k, l in enumerate(lines) if l.startswith(("import ", "from ")) and "__future__" not in l)
     lines.insert(i, line + "  # réparation 6.5 : fourni avant par l'espace de noms partagé du notebook")
     write(p, "\n".join(lines))
 

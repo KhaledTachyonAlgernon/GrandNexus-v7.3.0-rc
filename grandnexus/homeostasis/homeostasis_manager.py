@@ -21,9 +21,9 @@ Fonctions clés
   bande passante RF, etc.) via setuptools-entrypoints.
 """
 
-from dataclasses import field  # réparation 6.5 : fourni avant par l'espace de noms partagé du notebook
 from __future__ import annotations
 
+from dataclasses import field  # réparation 6.5 : fourni avant par l'espace de noms partagé du notebook
 import logging
 import threading
 import time
