@@ -393,6 +393,16 @@ def r26_attention_v2_default():
                  "window = int(self.config.history_sec * max(self.config.max_rate.values()))",
                  "window = int(self.config.history_sec * max(self.config.max_rate.values(), default=50.0))  # réparation 6.5 : 50 Hz = défaut du defaultdict")
 
+def r27_orchestrator_session_filter_first():
+    """Suite de R21 : le filtre « session courante » s'appliquait APRÈS la coupe à 50
+    résultats ; après une dizaine de questions, les anciennes réponses (plus importantes)
+    occupaient les 50 places et la réponse du moment disparaissait (7/12 au labo).
+    Filtre d'abord, coupe ensuite."""
+    p = "grandnexus/cognition/orchestration/cognitive_orchestrator.py"
+    s = read(p)
+    assert s.count("max_results=50\n") == 2
+    write(p, s.replace("max_results=50\n", "max_results=10**6  # réparation 6.5 : filtrer la session avant de couper\n"))
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])

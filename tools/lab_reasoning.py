@@ -70,6 +70,20 @@ if __name__ == "__main__":
     gn = boot(log_level=logging.CRITICAL)
     s1, r1 = run(gn, IN_GRAMMAR, "Dans la grammaire")
     s2, _ = run(gn, GENERALISATION, "Généralisation (hors grammaire)")
+    if gn.orchestrator is not None:
+        import time
+        ok = contaminated = 0; t0 = time.time()
+        print("\n== Même jeu via le CognitiveOrchestrator (15/05), questions enchaînées")
+        for q, gold in IN_GRAMMAR:
+            r = gn.orchestrator.process_input(q)
+            outs = [o for o in (r["output"] or []) if isinstance(o, dict) and "answer" in o]
+            mine = [o for o in outs if o.get("question") == q]
+            contaminated += len(outs) - len(mine)
+            got = mine[0]["answer"] if mine else None
+            ok += got == gold
+            print(f"  {'✓' if got == gold else '✗'} {q[:60]:62} attendu={gold:14} obtenu={got}")
+        print(f"  orchestrateur : {ok}/{len(IN_GRAMMAR)} | réponses d'une autre question : {contaminated} | "
+              f"{(time.time() - t0) / len(IN_GRAMMAR):.2f}s par question")
     c1 = s1["voie"] >= 10
     c2 = s1["voie"] > max(s1["toujours-oui"], r1, s1["ancienne voie"])
     print(f"\nC1 (≥10/12) : {'PASSÉ' if c1 else 'ÉCHOUÉ'} | C2 (> témoins) : {'PASSÉ' if c2 else 'ÉCHOUÉ'} | "
