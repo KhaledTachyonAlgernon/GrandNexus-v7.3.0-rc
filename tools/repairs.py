@@ -267,6 +267,16 @@ if not hasattr(ResourceManager, "get_usage_history"):
     ResourceManager.get_usage_history = _get_usage_history
 ''')
 
+def r18_orchestrator_state():
+    """La matrice de transition de l'orchestrateur envoie vers CognitiveState.PERCEPTION
+    (« new_input ») mais l'énumération ne définissait pas cet état : plantage à start()."""
+    for p in ("grandnexus/cognition/orchestration/cognitive_orchestrator.py",
+              "grandnexus/cognition/orchestration/cognitive_orchestrator_v1.py"):
+        if "CognitiveState.PERCEPTION" in read(p):
+            replace_once(p, "    META_REFLECTION = auto()  # Self-analysis and process optimization\n",
+                         "    META_REFLECTION = auto()  # Self-analysis and process optimization\n"
+                         "    PERCEPTION = auto()       # réparation 6.5 : cible de la transition « new_input »\n")
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])
