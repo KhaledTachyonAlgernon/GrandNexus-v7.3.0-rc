@@ -421,6 +421,10 @@ class ReasoningCore(CognitiveModuleBase):
             initial_data = {
                 "query": reasoning_query,
                 "context_data": context.parameters,
+                "context": context.parameters,  # réparation 6.5 : clé lue par _infer_input
+                **{k: context.parameters[k] for k in ("premises", "rules", "examples", "observations",
+                                                      "source_domain", "target_domain")
+                   if k in context.parameters},
                 "working_memory_snapshot": {},  # Would be populated from working memory
                 "intermediate_results": []
             }

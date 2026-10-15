@@ -199,6 +199,19 @@ def r13_shared_graph():
                  "        shared = config.get('graph_engine_instance')  # réparation 6.5 : graphe partagé\n"
                  "        self.graph_engine = shared if shared is not None else create_graph_engine(graph_engine_type, **graph_engine_config)\n")
 
+def r14_reason_workspace_contract():
+    """reason() rangeait le contexte sous workspace['context_data'] alors que
+    _infer_input() et _select_next_strategy() le cherchent sous workspace['context']
+    et les entrées (premises, rules...) directement dans le workspace : la déduction
+    n'était donc jamais sélectionnable. Le contrat est rétabli des deux côtés."""
+    replace_once("grandnexus/cognition/reasoning/reasoning_core.py",
+                 "                \"context_data\": context.parameters,\n",
+                 "                \"context_data\": context.parameters,\n"
+                 "                \"context\": context.parameters,  # réparation 6.5 : clé lue par _infer_input\n"
+                 "                **{k: context.parameters[k] for k in (\"premises\", \"rules\", \"examples\", \"observations\",\n"
+                 "                                                      \"source_domain\", \"target_domain\")\n"
+                 "                   if k in context.parameters},\n")
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])
