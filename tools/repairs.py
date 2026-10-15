@@ -277,6 +277,14 @@ def r18_orchestrator_state():
                          "    META_REFLECTION = auto()  # Self-analysis and process optimization\n"
                          "    PERCEPTION = auto()       # réparation 6.5 : cible de la transition « new_input »\n")
 
+def r19_working_memory_sort():
+    """WorkingMemory triait des tuples (score, item) : à score égal, Python compare
+    les items -> TypeError. Tri sur le score seul (ordre stable conservé)."""
+    p = "grandnexus/memory/working.py"
+    s = read(p)
+    assert s.count("            scored_items.sort(reverse=True)\n") == 1 and s.count("        scored_items.sort(reverse=True)\n") == 2
+    write(p, s.replace("scored_items.sort(reverse=True)", "scored_items.sort(key=lambda x: x[0], reverse=True)  # réparation 6.5"))
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])

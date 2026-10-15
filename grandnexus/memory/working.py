@@ -320,7 +320,7 @@ class WorkingMemory:
                 scored_items.append((score, item))
 
             # Sort by score descending and take top N
-            scored_items.sort(reverse=True)
+            scored_items.sort(key=lambda x: x[0], reverse=True)  # réparation 6.5
             results = [item for _, item in scored_items[:max_results]]
 
             # Update access records for returned items
@@ -661,7 +661,7 @@ class WorkingMemory:
         scored_items = [(score_item(item), item_id) for item_id, item in self.memory.items()]
 
         # Sort by score (highest first = most likely to evict)
-        scored_items.sort(reverse=True)
+        scored_items.sort(key=lambda x: x[0], reverse=True)  # réparation 6.5
 
         # Evict the highest-scored items
         evicted = 0
