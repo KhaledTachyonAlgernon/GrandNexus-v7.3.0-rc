@@ -185,10 +185,11 @@ class DialogueInterface:
     def get_status(self) -> Dict[str, Any]:
         return {"active_users": len(self._queues)}
 
-curl -N -H "Content-Type: application/json" \
-     -X POST --data '{"text":"Hello GrandNexus!"}' \
-     http://localhost:8089/chat
-
-const ev=new EventSource("http://localhost:8089/chat",{headers:{},method:"POST",
- body:JSON.stringify({text:"Plan a route to the Moon"})});
-ev.onmessage=e=>console.log(JSON.parse(e.data));
+# curl -N -H "Content-Type: application/json" \
+#      -X POST --data '{"text":"Hello GrandNexus!"}' \
+#      http://localhost:8089/chat
+# 
+# const ev=new EventSource("http://localhost:8089/chat",{headers:{},method:"POST",
+#  body:JSON.stringify({text:"Plan a route to the Moon"})});
+# ev.onmessage=e=>console.log(JSON.parse(e.data));
+# 

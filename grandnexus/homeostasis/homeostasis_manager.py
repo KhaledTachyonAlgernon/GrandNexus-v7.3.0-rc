@@ -21,6 +21,7 @@ Fonctions clés
   bande passante RF, etc.) via setuptools-entrypoints.
 """
 
+from dataclasses import field  # réparation 6.5 : fourni avant par l'espace de noms partagé du notebook
 from __future__ import annotations
 
 import logging
@@ -48,12 +49,12 @@ class HomeostasisConfig:
     # Fenêtre glissante (secondes) pour la moyenne mobile
     history_sec: int = 120
     sample_period: float = 1.0
-    cpu_thr: Thresholds = Thresholds(0.70, 0.90)
-    mem_thr: Thresholds = Thresholds(0.75, 0.95)
-    temp_thr: Thresholds = Thresholds(0.60, 0.80)        # fraction of Tjmax
-    batt_thr: Thresholds = Thresholds(0.30, 0.10)        # remaining % (inverse)
-    api_thr: Thresholds = Thresholds(0.70, 0.90)         # quota usage
-    cost_thr: Thresholds = Thresholds(0.70, 0.90)        # budget usage
+    cpu_thr: Thresholds = field(default_factory=lambda: Thresholds(0.70, 0.90))
+    mem_thr: Thresholds = field(default_factory=lambda: Thresholds(0.75, 0.95))
+    temp_thr: Thresholds = field(default_factory=lambda: Thresholds(0.60, 0.80))        # fraction of Tjmax
+    batt_thr: Thresholds = field(default_factory=lambda: Thresholds(0.30, 0.10))        # remaining % (inverse)
+    api_thr: Thresholds = field(default_factory=lambda: Thresholds(0.70, 0.90))         # quota usage
+    cost_thr: Thresholds = field(default_factory=lambda: Thresholds(0.70, 0.90))        # budget usage
     integration_targets: List[str] = (
         "intrinsic_motivation",
         "attention_filter",

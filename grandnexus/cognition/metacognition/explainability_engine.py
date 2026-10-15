@@ -15,7 +15,11 @@ from dataclasses import dataclass, field
 from grandnexus.core.nexus_core import NexusCore
 from grandnexus.dialogue.dialogue_interface import DialogueInterface
 
-import openai  # Assurez-vous d'avoir accès à OpenAI API ou équivalent local
+try:
+    import openai
+except ImportError:  # réparation 6.5
+    openai = None
+# Assurez-vous d'avoir accès à OpenAI API ou équivalent local
 
 # ──────────────────────────────────────────────────────────────────────────
 # 1. Configuration
