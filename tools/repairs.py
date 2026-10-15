@@ -360,6 +360,23 @@ def r23_orchestrator_memory_queries():
             replace_once(p, "if sum(self.success_rate.values()) / len(self.success_rate) < 0.6:",
                          "if self.success_rate and sum(self.success_rate.values()) / len(self.success_rate) < 0.6:  # réparation 6.5")
 
+def r24_message_queue_tiebreak():
+    """NexusCore (mode asynchrone) : la file de messages stockait (priorité, dict).
+    Deux messages de même priorité en attente -> Python compare les dict -> TypeError
+    dans send_message(). Le thread émetteur meurt : l'horloge cognitive s'arrêtait
+    après 1 tick. Ajout d'un compteur d'ordre d'arrivée (FIFO à priorité égale)."""
+    p = "grandnexus/core/nexus_core.py"
+    replace_once(p, "            heapq.heappush(self.message_queue, (priority, message))  # Use heapq",
+                 "            heapq.heappush(self.message_queue, (priority, next(_MSG_SEQ), message))  # réparation 6.5 : FIFO à égalité")
+    replace_once(p, "                priority, message = heapq.heappop(self.message_queue) # Use heappop",
+                 "                priority, _seq, message = heapq.heappop(self.message_queue)  # réparation 6.5")
+    add_import(p, "import itertools")
+    s = read(p)
+    lines = s.split("\n")
+    i = next(k for k, l in enumerate(lines) if l.startswith("class NexusCore"))
+    lines.insert(i, "_MSG_SEQ = itertools.count()  # réparation 6.5 : départage des messages de même priorité\n")
+    write(p, "\n".join(lines))
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])

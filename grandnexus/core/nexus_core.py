@@ -1,3 +1,4 @@
+import itertools  # réparation 6.5 : fourni avant par l'espace de noms partagé du notebook
 from grandnexus.core.errorRecoveryManager import ErrorRecoveryManager  # réparation 6.5 : fourni avant par l'espace de noms partagé du notebook
 import logging
 import threading
@@ -8,6 +9,8 @@ import json  # For serializing/deserializing module configurations
 from typing import Dict, Any, Optional, List, Callable, Union, Tuple, Set  # Importer Set
 import heapq  # Correctly manage priorities
 
+
+_MSG_SEQ = itertools.count()  # réparation 6.5 : départage des messages de même priorité
 
 class NexusCore:
     """
@@ -649,7 +652,7 @@ class NexusCore:
         }
 
         with self.lock:
-            heapq.heappush(self.message_queue, (priority, message))  # Use heapq
+            heapq.heappush(self.message_queue, (priority, next(_MSG_SEQ), message))  # réparation 6.5 : FIFO à égalité
             self.logger.debug(f"Message from '{source}' to '{target}' (type: {message_type}, priority: {priority}) queued.")
 
         # If asynchronous messaging is disabled, process messages immediately
@@ -664,7 +667,7 @@ class NexusCore:
         """
         with self.lock:
             while self.message_queue:
-                priority, message = heapq.heappop(self.message_queue) # Use heappop
+                priority, _seq, message = heapq.heappop(self.message_queue)  # réparation 6.5
                 self._deliver_message(message)
 
 
