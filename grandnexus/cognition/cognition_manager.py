@@ -1940,3 +1940,7 @@ class CognitionManager(CognitionManagerBase):
         progress = min(0.95, time_elapsed / expected_duration)
 
         return progress
+
+# --- réparation 6.5 : ponts vers l'API réelle des modules (voir manager_bridges.py)
+from grandnexus.cognition.manager_bridges import install as _install_bridges
+_install_bridges()
