@@ -292,6 +292,36 @@ def r20_working_memory_item():
                  "    embedding: Optional[np.ndarray] = None\n    access_count: int = 0  # réparation 6.5 : utilisé par retrieve/éviction\n\n"
                  "    def __repr__(self) -> str:\n        return (f\"<WorkingMemoryItem")
 
+def r21_orchestrator_session_output():
+    """process_input() renvoyait les résultats de raisonnement de N'IMPORTE QUELLE session :
+    la question 2 recevait la réponse de la question 1 (contamination mémoire).
+    Les éléments sont maintenant filtrés sur la session courante (horodatage >= début)."""
+    p = "grandnexus/cognition/orchestration/cognitive_orchestrator.py"
+    replace_once(p, '''                reasoning_results = self.working_memory.retrieve(
+                    query_text="reasoning",
+                    max_results=5
+                )
+''', '''                reasoning_results = self.working_memory.retrieve(
+                    query_text="reasoning",
+                    max_results=50
+                )
+                # réparation 6.5 : seulement ce qui a été produit pendant cette session
+                reasoning_results = [i for i in reasoning_results
+                                     if getattr(i, "timestamp", 0) >= start_time
+                                     and getattr(i, "source", "") == "reasoning"][:5]
+''')
+    replace_once(p, '''                    relevant_items = self.working_memory.retrieve(
+                        query_text=self.context.focus_target or "current_task",
+                        max_results=3
+                    )
+''', '''                    relevant_items = self.working_memory.retrieve(
+                        query_text=self.context.focus_target or "current_task",
+                        max_results=50
+                    )
+                    relevant_items = [i for i in relevant_items
+                                      if getattr(i, "timestamp", 0) >= start_time][:3]  # réparation 6.5
+''')
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])

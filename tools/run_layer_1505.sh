@@ -8,9 +8,10 @@ declare -A MSG=(
  [r18_orchestrator_state]="R18 orchestrateur: état PERCEPTION référencé mais absent de l'énumération"
  [r19_working_memory_sort]="R19 WorkingMemory: tri sur le score seul (égalités -> TypeError)"
  [r20_working_memory_item]="R20 WorkingMemoryItem.access_count déclaré (utilisé partout, jamais défini)"
+ [r21_orchestrator_session_output]="R21 orchestrateur: sortie limitée à la session courante (fuite de la réponse précédente)"
  [r17_resource_history]="R17 ResourceManager.get_usage_history (demandé par l'orchestrateur)"
 )
-for r in r15_orchestrator_imports r16_layer_bugs r17_resource_history r18_orchestrator_state r19_working_memory_sort r20_working_memory_item; do
+for r in r15_orchestrator_imports r16_layer_bugs r17_resource_history r18_orchestrator_state r19_working_memory_sort r20_working_memory_item r21_orchestrator_session_output; do
   python3 repairs.py "$r"
   (cd .. && git add -A && git commit -qm "${MSG[$r]}")
 done

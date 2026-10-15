@@ -1656,8 +1656,12 @@ class CognitiveOrchestrator:
                 # Look for reasoning outputs
                 reasoning_results = self.working_memory.retrieve(
                     query_text="reasoning",
-                    max_results=5
+                    max_results=50
                 )
+                # réparation 6.5 : seulement ce qui a été produit pendant cette session
+                reasoning_results = [i for i in reasoning_results
+                                     if getattr(i, "timestamp", 0) >= start_time
+                                     and getattr(i, "source", "") == "reasoning"][:5]
 
                 if reasoning_results:
                     # Combine reasoning results
@@ -1672,8 +1676,10 @@ class CognitiveOrchestrator:
                     # No explicit reasoning results, return whatever is most relevant
                     relevant_items = self.working_memory.retrieve(
                         query_text=self.context.focus_target or "current_task",
-                        max_results=3
+                        max_results=50
                     )
+                    relevant_items = [i for i in relevant_items
+                                      if getattr(i, "timestamp", 0) >= start_time][:3]  # réparation 6.5
 
                     if relevant_items:
                         result["output"] = [item.content for item in relevant_items]
