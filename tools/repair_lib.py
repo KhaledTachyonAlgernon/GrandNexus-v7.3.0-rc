@@ -38,7 +38,10 @@ def add_import(p, line):
     s = read(p)
     if line in s.split("\n"): return
     lines = s.split("\n")
-    i = next(k for k, l in enumerate(lines) if l.startswith(("import ", "from ")) and "__future__" not in l)
+    i = next((k for k, l in enumerate(lines) if l.startswith(("import ", "from ")) and "__future__" not in l), None)
+    if i is None:  # pas d'import au niveau module : juste après la docstring d'en-tête
+        q = [k for k, l in enumerate(lines) if l.strip().startswith('"""')]
+        i = (q[1] + 1) if len(q) >= 2 else 0
     lines.insert(i, line + "  # réparation 6.5 : fourni avant par l'espace de noms partagé du notebook")
     write(p, "\n".join(lines))
 

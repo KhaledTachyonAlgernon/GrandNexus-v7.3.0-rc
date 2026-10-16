@@ -416,6 +416,13 @@ def r28_working_memory_v2_name():
     replace_once(p, 'wm = self.nexus.get_module("working_memory")',
                  'wm = self.nexus.get_module("working_memory_v2")  # réparation 6.5 : seule la v2 a decay_half_life')
 
+def r29_layer_flat_imports():
+    """Couche 15/05 (pyflakes) : os manquant dans ExplainabilityEngine (plantage à la
+    création), time manquant dans le pilote VirtualGripper. Les autres noms indéfinis
+    signalés sont dans les démos sous __main__ (fragments d'exemple, laissés tels quels)."""
+    add_import("grandnexus/cognition/metacognition/explainability_engine.py", "import os")
+    add_import("grandnexus/actuators/drivers/virtual_gripper.py", "import time")
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])
