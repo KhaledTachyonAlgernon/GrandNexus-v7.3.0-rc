@@ -43,7 +43,7 @@ class AffectConfig:
         "intrinsic_motivation",
         "attention_filter",
         "executive_planner",
-        "working_memory",
+        "working_memory_v2",  # réparation 6.5 : renommage
     )
 
     def __post_init__(self):
@@ -174,7 +174,7 @@ class AffectRegulator:
                 priority=4,
             )
         # Direct parameter tuning examples
-        wm = self.nexus.get_module("working_memory")
+        wm = self.nexus.get_module("working_memory_v2")  # réparation 6.5 : seule la v2 a decay_half_life
         if wm and hasattr(wm, "config"):
             # Higher arousal ⇒ slower decay (retain more)
             wm.config.decay_half_life = max(5.0, 30.0 * (1.0 - self._arousal))

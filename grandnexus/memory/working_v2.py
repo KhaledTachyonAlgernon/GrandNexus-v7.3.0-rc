@@ -68,7 +68,7 @@ class WMConfig:
 # 2. WorkingMemory class
 # ─────────────────────────────────────────────────────────────────────────
 class WorkingMemory:
-    MODULE_NAME = "working_memory"
+    MODULE_NAME = "working_memory_v2"  # réparation 6.5 : cohabite avec la mémoire du cœur
 
     def __init__(
         self,

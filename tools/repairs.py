@@ -403,6 +403,19 @@ def r27_orchestrator_session_filter_first():
     assert s.count("max_results=50\n") == 2
     write(p, s.replace("max_results=50\n", "max_results=10**6  # réparation 6.5 : filtrer la session avant de couper\n"))
 
+def r28_working_memory_v2_name():
+    """Décision de Khaled : la WorkingMemory du 15/05 vit À CÔTÉ de celle du cœur.
+    Elle s'enregistrait sous « working_memory » (écrasait le cœur). Nouveau nom :
+    « working_memory_v2 ». AffectRegulator la visait (decay_half_life n'existe que
+    dans la v2) : ses deux références suivent le renommage."""
+    replace_once("grandnexus/memory/working_v2.py", 'MODULE_NAME = "working_memory"',
+                 'MODULE_NAME = "working_memory_v2"  # réparation 6.5 : cohabite avec la mémoire du cœur')
+    p = "grandnexus/cognition/metacognition/affect_regulator.py"
+    replace_once(p, '        "executive_planner",\n        "working_memory",\n',
+                 '        "executive_planner",\n        "working_memory_v2",  # réparation 6.5 : renommage\n')
+    replace_once(p, 'wm = self.nexus.get_module("working_memory")',
+                 'wm = self.nexus.get_module("working_memory_v2")  # réparation 6.5 : seule la v2 a decay_half_life')
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])

@@ -13,9 +13,10 @@ declare -A MSG=(
  [r23_orchestrator_memory_queries]="R23 orchestrateur: requêtes mémoire typées (SemanticQuery/EpisodicQuery) + division par zéro en méta-analyse"
  [r26_attention_v2_default]="R26 AttentionFilter 15/05: max() sur config vide à la création"
  [r27_orchestrator_session_filter_first]="R27 orchestrateur: filtre de session avant la coupe (réponse courante évincée par les anciennes)"
+ [r28_working_memory_v2_name]="R28 WorkingMemory 15/05 renommée working_memory_v2 (cohabite avec le cœur), AffectRegulator suit"
  [r17_resource_history]="R17 ResourceManager.get_usage_history (demandé par l'orchestrateur)"
 )
-for r in r15_orchestrator_imports r16_layer_bugs r17_resource_history r18_orchestrator_state r19_working_memory_sort r20_working_memory_item r21_orchestrator_session_output r22_orchestrator_cleanup r23_orchestrator_memory_queries r26_attention_v2_default r27_orchestrator_session_filter_first; do
+for r in r15_orchestrator_imports r16_layer_bugs r17_resource_history r18_orchestrator_state r19_working_memory_sort r20_working_memory_item r21_orchestrator_session_output r22_orchestrator_cleanup r23_orchestrator_memory_queries r26_attention_v2_default r27_orchestrator_session_filter_first r28_working_memory_v2_name; do
   python3 repairs.py "$r"
   (cd .. && git add -A && git commit -qm "${MSG[$r]}")
 done
