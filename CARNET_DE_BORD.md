@@ -22,6 +22,10 @@ Rejouer : cœur = `tools/extract_notebook.py` puis `tools/run_all.sh` ; couche 1
 | 14 | Les deux WorkingMemory peuvent cohabiter | v2 renommée « working_memory_v2 », AffectRegulator suit (R28) : les deux tournent ensemble, 0 erreur | ok (décision Khaled) |
 | 15 | L'extracteur généralise au-delà de sa grammaire | dev 0/5 → 5/5, régression 12/12 conservée ; témoin figé AVANT réglage (commit d5d2894) : 6/7 vs 4/7 toujours-oui, 1,7/7 hasard ; seul échec = féminin « végétarienne » | morphologie féminine ; prochain témoin écrit par Khaled |
 | 16 | Les dépendances lourdes sont un mur | pip seul (niveau 1) : 91 → 99 modules importables. Mais Redis/MongoDB = serveurs (connexion refusée / blocage) ; EvolutionManager exige KernelBridge | niveau 1 maintenant, serveurs quand un essai les demande |
+| 17 | La voie raisonne sur des phrases qu'elle n'a jamais vues (témoin de Khaled, 10 items) | **4/10 = toujours-inconnu (4/10)** → K1 ÉCHOUÉ ; 0 « oui » à tort → K2 PASSÉ. Sur les 4 réussites, 2 viennent d'une analyse ratée (n°1, n°6), 2 d'un vrai mécanisme (n°3 existentiel, n°9 pas d'affirmation du conséquent) | capacités manquantes identifiées, nouveau témoin requis après réparation |
+
+Résultat brut : tests_lab/resultats/temoin_khaled_2026-10-16_mesure1.txt. Ce témoin est désormais « vu » :
+après les réparations, son score ne vaudra plus comme mesure de généralisation.
 
 Biais à garder en tête (n°15) : le témoin figé a été écrit par Claude, qui connaît sa propre grammaire.
 Le piège « Some birds sing » a pu orienter le choix de traiter « some » comme non universel. Un témoin
