@@ -35,6 +35,10 @@ GENERALISATION = [
     ("Aucun oiseau n'a de dents. Le moineau est un oiseau. Le moineau a-t-il des dents ?", "non"),
 ]
 
+import json
+HOLDOUT = [tuple(x) for x in json.load(open(pathlib.Path(__file__).resolve().parent.parent
+                                            / "tests_lab" / "holdout_extracteur.json"))["items"]]
+
 def old_route(gn, q):
     rc = gn.modules()["reasoning_core"]
     ctx = CognitiveContext()
@@ -69,7 +73,8 @@ def run(gn, dataset, title, seed=0):
 if __name__ == "__main__":
     gn = boot(log_level=logging.CRITICAL)
     s1, r1 = run(gn, IN_GRAMMAR, "Dans la grammaire")
-    s2, _ = run(gn, GENERALISATION, "Généralisation (hors grammaire)")
+    s2, _ = run(gn, GENERALISATION, "Généralisation (hors grammaire) — jeu de dev")
+    s3, r3 = run(gn, HOLDOUT, "Témoin figé avant réglage (tests_lab/holdout_extracteur.json)")
     if gn.orchestrator is not None:
         import time
         ok = contaminated = 0; t0 = time.time()
@@ -87,5 +92,6 @@ if __name__ == "__main__":
     c1 = s1["voie"] >= 10
     c2 = s1["voie"] > max(s1["toujours-oui"], r1, s1["ancienne voie"])
     print(f"\nC1 (≥10/12) : {'PASSÉ' if c1 else 'ÉCHOUÉ'} | C2 (> témoins) : {'PASSÉ' if c2 else 'ÉCHOUÉ'} | "
-          f"C3 généralisation : {s2['voie']}/{len(GENERALISATION)}")
+          f"C3 dev : {s2['voie']}/{len(GENERALISATION)} | C4 témoin figé : {s3['voie']}/{len(HOLDOUT)} "
+          f"(toujours-oui {s3['toujours-oui']}, hasard {r3:.1f})")
     gn.shutdown()
