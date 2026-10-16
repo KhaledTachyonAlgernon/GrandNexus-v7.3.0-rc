@@ -19,10 +19,16 @@ Rejouer : cœur = `tools/extract_notebook.py` puis `tools/run_all.sh` ; couche 1
 | 11 | L'orchestrateur répond aux questions | après R15-R23, R27 : 12/12, 0 réponse d'une autre question, ~1 s/question (10 itérations × 0,1 s codées en dur) | ok |
 | 12 | Tout tourne ensemble sur un NexusCore démarré | AVANT R24 : l'horloge mourait après 1 tick (file de messages : TypeError à priorité égale). APRÈS : ~8 000 messages en 3 s, 13 modules vivants, 1 seule erreur (gymnasium absent) | corriger les adressages et l'arrêt lent |
 | 13 | Le CognitionManager parle à ses modules | 12 méthodes appelées n'existaient pas (quick_scan, evaluate, create_plan…) → ponts de délégation (R25) | à valider en mode threads |
+| 14 | Les deux WorkingMemory peuvent cohabiter | v2 renommée « working_memory_v2 », AffectRegulator suit (R28) : les deux tournent ensemble, 0 erreur | ok (décision Khaled) |
+| 15 | L'extracteur généralise au-delà de sa grammaire | dev 0/5 → 5/5, régression 12/12 conservée ; témoin figé AVANT réglage (commit d5d2894) : 6/7 vs 4/7 toujours-oui, 1,7/7 hasard ; seul échec = féminin « végétarienne » | morphologie féminine ; prochain témoin écrit par Khaled |
+| 16 | Les dépendances lourdes sont un mur | pip seul (niveau 1) : 91 → 99 modules importables. Mais Redis/MongoDB = serveurs (connexion refusée / blocage) ; EvolutionManager exige KernelBridge | niveau 1 maintenant, serveurs quand un essai les demande |
+
+Biais à garder en tête (n°15) : le témoin figé a été écrit par Claude, qui connaît sa propre grammaire.
+Le piège « Some birds sing » a pu orienter le choix de traiter « some » comme non universel. Un témoin
+rédigé par quelqu'un d'autre reste la vraie mesure.
 
 ## Ce qui n'est PAS encore fait
-- Couche 15/05 : 13 modules attendent une dépendance externe (torch, redis, neo4j, pymongo, pybullet, gymnasium, deap, opentelemetry, slack_sdk, sentence_transformers, sse_starlette).
-- WorkingMemory 15/05 s'enregistre sous « working_memory » comme celle du cœur : volontairement non démarrée (à renommer ou fusionner, décision de Khaled).
+- Couche 15/05 : sans requirements-extra.txt, 13 modules attendent une dépendance externe (torch, redis, neo4j, pymongo, pybullet, gymnasium, deap, opentelemetry, slack_sdk, sentence_transformers, sse_starlette).
 - Adressages morts en fonctionnement : self_model → « monitor » (le cœur dit « cognitive_monitor »), messages envoyés avant le démarrage de leur destinataire (ordre de démarrage).
 - Arrêt lent (~15 s, join avec timeouts) et 2 threads qui survivent (dont Report_Thread du CognitiveMonitor).
 - Deux notions nommées CognitiveContext (état de l'orchestrateur / contexte de requête) à réconcilier.

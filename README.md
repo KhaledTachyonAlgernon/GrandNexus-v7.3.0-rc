@@ -2,6 +2,8 @@
 
 ## Colab
 ```python
+# optionnel (débloque 8 modules du 15/05, voir les 3 niveaux dans le fichier) :
+# !pip install -q -r /content/GrandNexus/requirements-extra.txt
 !unzip -q -o GrandNexus_v6.5.zip -d /content
 %cd /content/GrandNexus
 !python tools/smoke_test.py              # imports module par module (bugs vs dépendances absentes)
