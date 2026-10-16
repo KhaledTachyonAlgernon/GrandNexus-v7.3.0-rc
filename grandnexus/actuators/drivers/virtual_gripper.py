@@ -4,6 +4,7 @@
 """
 Exemple : driver simple simulant un gripper (ouvrir / fermer).
 """
+import time  # réparation 6.5 : fourni avant par l'espace de noms partagé du notebook
 
 class VirtualGripperDriver:  # implémente ActuatorDriver
     def __init__(self):

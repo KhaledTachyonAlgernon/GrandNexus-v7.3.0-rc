@@ -9,6 +9,7 @@ Dependencies :
     pip install openai tiktoken
 """
 
+import os  # réparation 6.5 : fourni avant par l'espace de noms partagé du notebook
 import logging, json, time, uuid, threading
 from typing import Any, Dict, Optional
 from dataclasses import dataclass, field
