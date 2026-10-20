@@ -458,6 +458,59 @@ def r31_interruptible_loops():
     replace_once(p, "                time.sleep(5)  # Court sommeil en cas d'erreur\n",
                  "                self.stop_monitoring.wait(5)  # Court sommeil en cas d'erreur (interruptible)\n")
 
+def r32_deduction_fixpoint():
+    """Diagnostic par oracles : la déduction n'enchaînait que 2 pas (modus ponens + un
+    seul niveau « transitif ») et ignorait la contraposée. Réparation dans la stratégie
+    existante : chaînage jusqu'à stabilité + règles contraposées (si A alors B => si
+    non-B alors non-A)."""
+    p = "grandnexus/cognition/reasoning/reasoning_core.py"
+    replace_once(p, '''        rules = inputs.get("rules", [])
+
+        # Check if we have the necessary inputs
+        if not premises or not rules:
+            return {
+                "outputs": {
+                    "message": "Insufficient inputs for deductive reasoning",''', '''        rules = inputs.get("rules", [])
+
+        # réparation 6.5 : contraposée (si A alors B  =>  si non-B alors non-A)
+        def _neg(p):
+            return p[4:] if p.startswith("not ") else "not " + p
+        _seen_rules = {(r.get("if"), r.get("then")) for r in rules if isinstance(r, dict)}
+        _contra = []
+        for _r in rules:
+            if isinstance(_r, dict) and "if" in _r and "then" in _r and not _r.get("contrapositive"):
+                _c = (_neg(_r["then"]), _neg(_r["if"]))
+                if _c not in _seen_rules:
+                    _seen_rules.add(_c)
+                    _contra.append({"if": _c[0], "then": _c[1], "confidence": _r.get("confidence", 0.95),
+                                    "contrapositive": True})
+        rules = list(rules) + _contra
+
+        # Check if we have the necessary inputs
+        if not premises or not rules:
+            return {
+                "outputs": {
+                    "message": "Insufficient inputs for deductive reasoning",''')
+    replace_once(p, '''        new_conclusions = []
+        for conclusion in conclusions:
+            statement = conclusion["statement"]
+''', '''        new_conclusions = []
+        _known = set(premises) | {c["statement"] for c in conclusions}
+        _frontier = list(conclusions)
+        _i = 0
+        while _i < len(_frontier) and len(_known) < 5000:  # réparation 6.5 : jusqu'à stabilité
+            conclusion = _frontier[_i]
+            _i += 1
+            statement = conclusion["statement"]
+''')
+    replace_once(p, '''                    new_conclusions.append(trans_conclusion)
+''', '''                    if rule["then"] in _known:
+                        continue
+                    _known.add(rule["then"])
+                    new_conclusions.append(trans_conclusion)
+                    _frontier.append(trans_conclusion)
+''')
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])

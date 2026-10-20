@@ -66,9 +66,18 @@ class TextReasoner(CognitiveModuleBase):
             if st and st not in known:
                 known[st] = {"statement": st, "confidence": c.get("confidence", 0.95), "from": c.get("derived_from")}
 
+        # cohérence globale : des prémisses contradictoires rendent toute réponse peu fiable
+        contradictions = sorted(p for p in known if not p.startswith("not ") and ("not " + p) in known)
         verdicts = []
         for g in ex.goals:
             pos, neg = g in known, _negate(g) in known
+            if contradictions:
+                v, conf = "contradictoire", 0.0
+                verdicts.append({"goal": g, "answer": v, "confidence": conf,
+                                 "support": [known[c] for c in contradictions[:3]] +
+                                            [known["not " + c] for c in contradictions[:3]],
+                                 "contradictions": contradictions})
+                continue
             if pos and neg:
                 v, conf = "contradictoire", 0.0
             elif pos:
