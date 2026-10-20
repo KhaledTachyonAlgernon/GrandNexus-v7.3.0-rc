@@ -118,6 +118,7 @@ NUMBER_WORDS = {
 
 ATOM_RE = re.compile(r"^(not )?[^\W\d][\w]*\((?:[\w]+)(?:,[\w]+)?\)$", re.UNICODE)
 EXPR_RE = re.compile(r"^[0-9+\-*/(). ]+$")
+VAR_RE = re.compile(r"(?<=[(,])([XYZ])(?=[,)])")
 
 
 def _norm(s: str) -> str:
@@ -225,6 +226,17 @@ class LLMTranslator(CognitiveModuleBase):
             if bad_atoms:
                 out["rejected"].append({"kind": kind, "item": item, "reason": f"malformed atom {bad_atoms}"})
                 return False
+            if len(atoms) == 2:
+                # safety (range restriction): every variable of the conclusion must appear in the
+                # condition, otherwise "in(X,Y) => in(X,Z)" would put anything inside anything
+                v_if, v_then = set(VAR_RE.findall(atoms[0])), set(VAR_RE.findall(atoms[1]))
+                if v_then - v_if:
+                    out["rejected"].append({"kind": kind, "item": item,
+                                            "reason": f"unsafe rule: variable(s) {sorted(v_then - v_if)} only in the conclusion"})
+                    return False
+                if atoms[0].strip() == atoms[1].strip():
+                    out["rejected"].append({"kind": kind, "item": item, "reason": "rule concludes its own condition"})
+                    return False
             if need_quote and not anchored(str(item.get("quote", "")), text):
                 out["rejected"].append({"kind": kind, "item": item, "reason": "quote not found in text"})
                 return False
