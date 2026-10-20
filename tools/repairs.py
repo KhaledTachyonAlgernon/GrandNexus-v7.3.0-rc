@@ -546,6 +546,108 @@ def r33_llm_engine_anthropic():
                     **_system,
                     messages=['''))
 
+def r34_anthropic_sampling_and_receipts():
+    """Seen on Colab: recent Claude models reject a non-default `temperature`
+    (400 "temperature is deprecated for this model"), and LLMEngine always sent one.
+    - temperature is sent only when explicitly set, and dropped (with one retry) if the
+      model rejects it; the model is remembered so the retry happens once;
+    - every successful call leaves a receipt (API message id, model, input/output tokens)
+      on the response, so real API usage can be proven from inside GrandNexus."""
+    p = "grandnexus/llm_interface/llm_engine.py"
+    replace_once(p, '''        _system = {"system": request_params["system"]} if request_params.get("system") else {}
+
+        if request_type == "completion" or request_type == "chat":
+            # Use completion API
+            prompt = request_params["prompt"]
+            max_tokens = request_params.get("max_tokens", 1000)
+            temperature = request_params.get("temperature", 0.7)''',
+                 '''        _system = {"system": request_params["system"]} if request_params.get("system") else {}
+
+        if request_type == "completion" or request_type == "chat":
+            # Use completion API
+            prompt = request_params["prompt"]
+            max_tokens = request_params.get("max_tokens", 1000)
+            temperature = request_params.get("temperature")  # None = model default (repair 6.6.2)
+            _sampling = {} if (temperature is None or model in getattr(self, "_no_temperature_models", set())) \\
+                else {"temperature": temperature}''')
+    replace_once(p, '''                with client.messages.stream(
+                    model=model,
+                    max_tokens=max_tokens,
+                    temperature=temperature,''', '''                with client.messages.stream(
+                    model=model,
+                    max_tokens=max_tokens,
+                    **_sampling,''')
+    replace_once(p, '''                response = client.messages.create(
+                    model=model,
+                    max_tokens=max_tokens,
+                    temperature=temperature,
+                    **_system,
+                    messages=[
+                        {"role": "user", "content": prompt}
+                    ]
+                )
+
+                response_text = response.content[0].text
+
+                return LLMResponse(
+                    text=response_text,
+                    tokens_used=response.usage.output_tokens,
+                    model_used=model,
+                    request_id=request_params.get("request_id", "")
+                )''', '''                _kwargs = dict(model=model, max_tokens=max_tokens, **_sampling, **_system,
+                               messages=[{"role": "user", "content": prompt}])
+                try:
+                    response = client.messages.create(**_kwargs)
+                except Exception as _e:  # repair 6.6.2: models that reject sampling parameters
+                    if "temperature" in str(_e).lower() and "temperature" in _kwargs:
+                        if not hasattr(self, "_no_temperature_models"):
+                            self._no_temperature_models = set()
+                        self._no_temperature_models.add(model)
+                        _kwargs.pop("temperature")
+                        self.logger.warning(f"{model} rejects temperature: retrying without it")
+                        response = client.messages.create(**_kwargs)
+                    else:
+                        raise
+
+                response_text = "".join(getattr(b, "text", "") for b in response.content)
+
+                result = LLMResponse(
+                    text=response_text,
+                    tokens_used=response.usage.output_tokens,
+                    model_used=getattr(response, "model", model),
+                    request_id=request_params.get("request_id", "")
+                )
+                result.receipt = {"api_id": getattr(response, "id", None),            # repair 6.6.2
+                                  "api_model": getattr(response, "model", model),
+                                  "input_tokens": getattr(response.usage, "input_tokens", None),
+                                  "output_tokens": getattr(response.usage, "output_tokens", None)}
+                return result''')
+
+def r35_graph_manager_interface():
+    """ModuleRegistry refused GraphModuleManager ("provides neither start() nor
+    handle_message()"), seen as an ERROR in the Colab log. start()/stop() are added, and
+    handle_message() forwards point-to-point "graph.*" messages to the event bus where the
+    manager's handlers already listen."""
+    append("grandnexus/graph/graph_module_manager.py", '''
+# --- repair 6.6.2: interface expected by ModuleRegistry / NexusCore
+def _gmm_start(self) -> bool:
+    self.running = True
+    return True
+
+def _gmm_stop(self) -> bool:
+    self.running = False
+    return True
+
+def _gmm_handle_message(self, message):
+    event = message.get("type") or message.get("message_type") or ""
+    if event.startswith("graph.") and self.nexus_core is not None and hasattr(self.nexus_core, "publish_event"):
+        self.nexus_core.publish_event(event, message.get("content") or {}, source=message.get("source"))
+
+for _name, _fn in (("start", _gmm_start), ("stop", _gmm_stop), ("handle_message", _gmm_handle_message)):
+    if not hasattr(GraphModuleManager, _name):
+        setattr(GraphModuleManager, _name, _fn)
+''')
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])
