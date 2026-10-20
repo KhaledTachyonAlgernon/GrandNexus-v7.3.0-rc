@@ -658,6 +658,49 @@ def r36_registry_status_order():
                  '''            if (hasattr(self.core, "update_module_status") and callable(self.core.update_module_status)
                     and name in getattr(self.core, "modules", {})):  # repair 6.6.3: core not told yet''')
 
+def r38_conjunctive_rules():
+    """temoin_neuf_1 diagnosis: transitive relations (X taller than Y, Y taller than Z) need
+    rules with several conditions; the deduction only knew one-condition rules. Rules whose
+    "if" is a LIST of atoms now fire when all conditions are known, and their conclusions are
+    propagated through the one-condition rules, until a fixpoint. Contrapositives are only
+    built for one-condition rules (the contrapositive of A and B => C is not a single rule)."""
+    p = "grandnexus/cognition/reasoning/reasoning_core.py"
+    replace_once(p, '''        _seen_rules = {(r.get("if"), r.get("then")) for r in rules if isinstance(r, dict)}''',
+                 '''        _seen_rules = {(tuple(r["if"]) if isinstance(r.get("if"), list) else r.get("if"), r.get("then"))
+                       for r in rules if isinstance(r, dict)}  # repair 6.7: list conditions are unhashable''')
+    replace_once(p, '''            if isinstance(_r, dict) and "if" in _r and "then" in _r and not _r.get("contrapositive"):''',
+                 '''            if (isinstance(_r, dict) and isinstance(_r.get("if"), str) and isinstance(_r.get("then"), str)
+                    and not _r.get("contrapositive")):''')
+    replace_once(p, '''        conclusions.extend(new_conclusions)
+''', '''        # repair 6.7: conjunctive rules ("if" is a list): fire when every condition is known,
+        # then propagate through one-condition rules, until nothing new appears
+        _conj = [r for r in rules if isinstance(r, dict) and isinstance(r.get("if"), list) and r.get("then")]
+        _changed = bool(_conj)
+        while _changed and len(_known) < 5000:
+            _changed = False
+            for _r in _conj:
+                if _r["then"] in _known or not all(c in _known for c in _r["if"]):
+                    continue
+                _stack = [{"id": str(uuid.uuid4()), "statement": _r["then"],
+                           "confidence": _r.get("confidence", 0.95),
+                           "derived_from": {"rule": _r, "premises": list(_r["if"])}}]
+                _known.add(_r["then"])
+                _changed = True
+                while _stack:
+                    _c = _stack.pop()
+                    new_conclusions.append(_c)
+                    supporting_evidence[_c["id"]] = [f"Derived: {_c['statement']}"]
+                    for _r2 in rules:
+                        if (isinstance(_r2, dict) and isinstance(_r2.get("if"), str)
+                                and _r2["if"] == _c["statement"] and _r2.get("then") not in _known):
+                            _known.add(_r2["then"])
+                            _stack.append({"id": str(uuid.uuid4()), "statement": _r2["then"],
+                                           "confidence": min(_c["confidence"], _r2.get("confidence", 0.95)),
+                                           "derived_from": {"rule": _r2, "prior_conclusion": _c}})
+
+        conclusions.extend(new_conclusions)
+''')
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])
