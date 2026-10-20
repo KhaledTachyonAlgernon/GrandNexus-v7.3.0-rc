@@ -24,8 +24,10 @@ Rejouer : cœur = `tools/extract_notebook.py` puis `tools/run_all.sh` ; couche 1
 | 16 | Les dépendances lourdes sont un mur | pip seul (niveau 1) : 91 → 99 modules importables. Mais Redis/MongoDB = serveurs (connexion refusée / blocage) ; EvolutionManager exige KernelBridge | niveau 1 maintenant, serveurs quand un essai les demande |
 | 17 | La voie raisonne sur des phrases qu'elle n'a jamais vues (témoin de Khaled, 10 items) | **4/10 = toujours-inconnu (4/10)** → K1 ÉCHOUÉ ; 0 « oui » à tort → K2 PASSÉ. Sur les 4 réussites, 2 viennent d'une analyse ratée (n°1, n°6), 2 d'un vrai mécanisme (n°3 existentiel, n°9 pas d'affirmation du conséquent) | capacités manquantes identifiées, nouveau témoin requis après réparation |
 | 18 | L'échec vient-il du manque de pratique, de la langue, du savoir ou du moteur ? (oracles par couche, tools/lab_niveaux.py) | pratique : 3 passages = 4,4,4 (aucun apprentissage possible) ; +langue 6/10 ; +savoir 5/10 ; +inférences 7/10 ; +chaînage complet 9/10. Le moteur n'enchaîne que 2 déductions sur 4 demandées | priorité 1 = moteur (profondeur, contraposée, cohérence globale) ; 2 = langue (essai comparatif analyseur syntaxique / LLM / grammaire) ; 3 = savoir ; 4 = boucle de correction |
+| 19 | Engine depth is the cheapest bottleneck | R32 fixpoint chaining + contraposition: depth probe 2/4 -> 4/4; Khaled set (seen) grammar 4 -> 5/10 (#8 via contraposition); no regression (12/12, 5/5, 6/7, orchestrator 12/12) | wire the LLM as translator |
+| 20 | Claude can serve as an anchored translator without breaking K2 | offline pipeline test with a fake SDK: unquoted premise rejected, knowledge-dependent answers flagged (strict vs with-knowledge), apples -> 3 - 1 + 2 = 4 via sympy, hybrid makes 0 API call when the grammar decides. Real-model scores: pending Khaled's Colab run | bake-off on a FRESH set written by Khaled |
 
-Résultat brut : tests_lab/resultats/temoin_khaled_2026-10-16_mesure1.txt. Ce témoin est désormais « vu » :
+Raw result: tests_lab/resultats/temoin_khaled_2026-10-16_mesure1.txt. Ce témoin est désormais « vu » :
 après les réparations, son score ne vaudra plus comme mesure de généralisation.
 
 Biais à garder en tête (n°15) : le témoin figé a été écrit par Claude, qui connaît sa propre grammaire.
