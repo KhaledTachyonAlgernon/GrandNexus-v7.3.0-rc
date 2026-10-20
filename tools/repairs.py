@@ -648,6 +648,16 @@ for _name, _fn in (("start", _gmm_start), ("stop", _gmm_stop), ("handle_message"
         setattr(GraphModuleManager, _name, _fn)
 ''')
 
+def r36_registry_status_order():
+    """ModuleRegistry.register() set the module state (and pushed it to NexusCore) BEFORE
+    registering the module in NexusCore -> "Cannot update status: Module 'graph' not found"
+    (cosmetic: the module is registered right after). The core is only updated once it
+    knows the module."""
+    replace_once("grandnexus/core/registry.py",
+                 '''            if hasattr(self.core, "update_module_status") and callable(self.core.update_module_status):''',
+                 '''            if (hasattr(self.core, "update_module_status") and callable(self.core.update_module_status)
+                    and name in getattr(self.core, "modules", {})):  # repair 6.6.3: core not told yet''')
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])
