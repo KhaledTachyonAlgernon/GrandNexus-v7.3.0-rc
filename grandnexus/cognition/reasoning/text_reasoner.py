@@ -119,9 +119,12 @@ class TextReasoner(CognitiveModuleBase):
 
     def _from_llm(self, text: str) -> Dict[str, Any]:
         p = self.translator.to_premises(text)
-        trace = ([f"fact     | {f}" for f in p["facts"]] + [f"rule     | {r['if']} => {r['then']}" for r in p["rules"]]
+        def cond(r):
+            return " ∧ ".join(r["if"]) if isinstance(r["if"], list) else r["if"]
+        trace = ([f"fact     | {f}" for f in p["facts"]] + [f"rule     | {cond(r)} => {r['then']}" for r in p["rules"]]
                  + [f"goal     | {g}" for g in p["goals"]] + [f"knowledge| {k}" for k in p["knowledge_facts"]]
-                 + [f"knowledge| {r['if']} => {r['then']}" for r in p["knowledge_rules"]])
+                 + [f"knowledge| {cond(r)} => {r['then']}" for r in p["knowledge_rules"]]
+                 + (["repaired | one corrective round was used"] if p.get("repaired") else []))
         use_k = getattr(self.translator, "use_knowledge", True)
         return {"parser": "llm", "facts": p["facts"], "rules": p["rules"], "goals": p["goals"],
                 "knowledge_facts": p["knowledge_facts"] if use_k else [],
@@ -133,24 +136,34 @@ class TextReasoner(CognitiveModuleBase):
     # -- grounding ------------------------------------------------------------
     @staticmethod
     def _ground(rules: List[Dict[str, Any]], constants: List[str]) -> List[Dict[str, Any]]:
+        """Instantiate the variables X, Y, Z of every rule on the known constants.
+        A rule condition may be one atom or a list of atoms (all required)."""
         out, seen = [], set()
+
+        def key(r):
+            return (tuple(r["if"]) if isinstance(r["if"], list) else r["if"], r["then"])
         for r in rules:
-            variables = sorted({a for atom in (r["if"], r["then"]) for a in _args(atom) if VARIABLE.match(a)})
+            conds = r["if"] if isinstance(r["if"], list) else [r["if"]]
+            variables = sorted({a for atom in conds + [r["then"]] for a in _args(atom) if VARIABLE.match(a)})
             if not variables:
-                if (r["if"], r["then"]) not in seen:
-                    seen.add((r["if"], r["then"]))
+                if key(r) not in seen:
+                    seen.add(key(r))
                     out.append(r)
                 continue
-            for combo in itertools.product(constants[:40], repeat=len(variables)):
+            pool = constants[:40] if len(variables) <= 2 else constants[:15]
+            for combo in itertools.product(pool, repeat=len(variables)):
                 sub = dict(zip(variables, combo))
 
                 def apply(atom: str) -> str:
                     m = ATOM.match(atom.strip())
                     args = [sub.get(a, a) for a in (m.group(3), m.group(4)) if a]
                     return f"{m.group(1) or ''}{m.group(2)}({','.join(args)})"
-                g = {**r, "if": apply(r["if"]), "then": apply(r["then"])}
-                if (g["if"], g["then"]) not in seen:
-                    seen.add((g["if"], g["then"]))
+                g_if = [apply(c) for c in conds]
+                if len(g_if) > 1 and len(set(g_if)) < len(g_if):
+                    continue                     # degenerate grounding (same condition twice)
+                g = {**r, "if": g_if[0] if len(g_if) == 1 else g_if, "then": apply(r["then"])}
+                if key(g) not in seen:
+                    seen.add(key(g))
                     out.append(g)
         return out
 
@@ -211,7 +224,8 @@ class TextReasoner(CognitiveModuleBase):
         goals = list(dict.fromkeys(b["goals"]))
         # a question about a category reasons on a typical member ("Do whales breathe air?")
         categories = {_args(r["if"])[1] for r in b["rules"] + b["knowledge_rules"]
-                      if r["if"].startswith("is(") and len(_args(r["if"])) == 2 and VARIABLE.match(_args(r["if"])[0])}
+                      if isinstance(r["if"], str) and r["if"].startswith("is(") and len(_args(r["if"])) == 2
+                      and VARIABLE.match(_args(r["if"])[0])}
         for g in goals:
             a = _args(g)
             if a and a[0] in categories and not any(_args(f)[:1] == [a[0]] for f in facts):
