@@ -19,9 +19,10 @@ declare -A MSG=(
  [r25_manager_bridges]="R25 CognitionManager: 12 méthodes appelées mais absentes -> ponts de délégation"
  [r31_interruptible_loops]="R31 boucles de fond interruptibles (CognitiveMonitor, ErrorRecovery) : arrêt de 17 s"
  [r32_deduction_fixpoint]="R32 déduction: chaînage jusqu'à stabilité (avant: 2 pas) + contraposée"
+ [r33_llm_engine_anthropic]="R33 LLMEngine Anthropic: modèle configuré et consigne système transmis (ancien défaut retiré)"
  [r9_robustness]="R9 robustesse: create_anomaly_filter hors classe, annotation ast différée, replis sans PyTorch"
 )
-for r in r2_syntax r3_dataclasses r4_graph_factory r5_aliases r6_missing_classes r7_event_bus r8_cognitive_contract r9_robustness r10_flat_namespace_imports r11_logic_bugs r12_graph_registry r13_shared_graph r14_reason_workspace_contract r24_message_queue_tiebreak r25_manager_bridges r31_interruptible_loops r32_deduction_fixpoint; do
+for r in r2_syntax r3_dataclasses r4_graph_factory r5_aliases r6_missing_classes r7_event_bus r8_cognitive_contract r9_robustness r10_flat_namespace_imports r11_logic_bugs r12_graph_registry r13_shared_graph r14_reason_workspace_contract r24_message_queue_tiebreak r25_manager_bridges r31_interruptible_loops r32_deduction_fixpoint r33_llm_engine_anthropic; do
   python3 repairs.py "$r"
   (cd .. && git add -A && git commit -qm "${MSG[$r]}")
 done

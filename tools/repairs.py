@@ -511,6 +511,41 @@ def r32_deduction_fixpoint():
                     _frontier.append(trans_conclusion)
 ''')
 
+def r33_llm_engine_anthropic():
+    """LLMEngine (chemin Anthropic) : complete() ne transmettait jamais le modèle configuré,
+    _call_anthropic retombait sur un modèle retiré (claude-3-sonnet-20240229) et ne savait
+    pas passer de consigne système. Modèle et consigne système sont maintenant transmis."""
+    p = "grandnexus/llm_interface/llm_engine.py"
+    replace_once(p, '''                "request_type": request.request_type,
+                "streaming": request.streaming,
+                "stream_callback": request.stream_callback,
+                "request_id": request.request_id
+            })''', '''                "request_type": request.request_type,
+                "streaming": request.streaming,
+                "stream_callback": request.stream_callback,
+                "request_id": request.request_id,
+                "model": context.get("model") or self.config.model_name,  # réparation 6.5
+                "system": context.get("system"),                          # réparation 6.5
+            })''')
+    replace_once(p, '''        model = request_params.get("model", "claude-3-sonnet-20240229")''',
+                 '''        model = request_params.get("model") or "claude-sonnet-5-5"  # réparation 6.5 : ancien défaut retiré
+        if model.startswith(("text-embedding", "gpt-")):
+            model = "claude-sonnet-5-5"
+        _system = {"system": request_params["system"]} if request_params.get("system") else {}''')
+    s = read(p)
+    old = '''                response = client.messages.create(
+                    model=model,
+                    max_tokens=max_tokens,
+                    temperature=temperature,
+                    messages=['''
+    assert s.count(old) == 1, s.count(old)
+    write(p, s.replace(old, '''                response = client.messages.create(
+                    model=model,
+                    max_tokens=max_tokens,
+                    temperature=temperature,
+                    **_system,
+                    messages=['''))
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])
