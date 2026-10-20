@@ -77,13 +77,23 @@ class GrandNexusSystem:
         log = logging.getLogger("GrandNexus.Boot")
         if self.core is not None and getattr(self.core, "running", False):
             try:
-                self.core.stop()          # arrête aussi tous les modules enregistrés
+                self.core.stop()          # arrête les modules que NexusCore a lui-même démarrés
             except Exception as e:
                 log.warning(f"NexusCore.stop: {e}")
+            # modules démarrés par eux-mêmes (ex. ResourceManager à sa création) : NexusCore les
+            # croit « registered » et ne les arrête pas -> on arrête tout ce qui tourne encore
+            for name, info in list(getattr(self.core, "modules", {}).items()):
+                inst = info.get("instance")
+                if getattr(inst, "running", False) is True and hasattr(inst, "stop"):
+                    try:
+                        inst.stop()
+                    except Exception as e:
+                        log.warning(f"{name}.stop: {e}")
             return
         # mode laboratoire : NexusCore n'a jamais été démarré, on arrête ce qui l'a été
         for obj, meth in ((self.orchestrator, "stop"), (self.resource_manager, "stop"), (self.cognition, "stop"),
-                          (self.graph_manager, "stop")):
+                          (self.graph_manager, "stop"),
+                          (getattr(self.core, "error_recovery", None), "shutdown")):  # lancé dès NexusCore()
             if obj is not None and hasattr(obj, meth):
                 try:
                     getattr(obj, meth)()
