@@ -128,7 +128,7 @@ class TextReasoner(CognitiveModuleBase):
                 "knowledge_rules": p["knowledge_rules"] if use_k else [], "trace": trace,
                 "unparsed": [f"rejected: {r['reason']}" for r in p["rejected"]]
                             + ([] if p["ok"] else ["LLM output unusable"]),
-                "llm": {"rejected": p["rejected"], "ok": p["ok"]}}
+                "llm": {"rejected": p["rejected"], "ok": p["ok"], "raw": (p.get("raw") or "")[:3000]}}
 
     # -- grounding ------------------------------------------------------------
     @staticmethod

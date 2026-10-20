@@ -29,7 +29,7 @@ log = logging.getLogger("GrandNexus.LLMTranslator")
 
 DEFAULT_MODEL = "claude-sonnet-5-5"
 
-PREMISES_SYSTEM = """You translate a short text (French or English) into logic for a symbolic reasoner.
+PREMISES_SYSTEM_V1 = """You translate a short text (French or English) into logic for a symbolic reasoner.
 You do NOT answer the question.
 
 Output ONLY one JSON object, no prose, no code fence:
@@ -58,6 +58,43 @@ Every fact, rule and goal MUST quote the exact span of the text it comes from.
 Anything not literally stated (common sense, word meanings like "a female cat is a cat",
 "an apple is not meat", persistence over time) goes ONLY in "knowledge", with a short "why".
 Never answer the question. Never add facts just to make the question answerable."""
+
+# v2 (6.6.3): examples are NEUTRAL. v1 contained hints taken from Khaled's 16/10 test set
+# (brother_of_bob, female cat, apple/meat, sunset/lights, "left at home"), which inflated
+# the bake-off on that set. v1 is kept above for reproducibility.
+PREMISES_SYSTEM_V2 = """You translate a short text (French or English) into logic for a symbolic reasoner.
+You do NOT answer the question.
+
+Output ONLY one JSON object, no prose, no code fence:
+{"facts":[{"p":"<atom>","quote":"<exact span copied from the text>"}],
+ "rules":[{"if":"<atom>","then":"<atom>","quote":"<exact span>"}],
+ "goals":[{"p":"<atom>","quote":"<exact span of the question>"}],
+ "knowledge":[{"p":"<atom>","why":"<short reason>"} or {"if":"<atom>","then":"<atom>","why":"<short reason>"}]}
+
+Atoms (lowercase, no spaces):
+- is(x,y)    x is a y / x is y (category or property)
+- can(x,y)   x can y
+- in(x,y)    containment of any kind (inside, in, part of, located in, at...)
+- verb(x,y) or verb(x) for any other verb, verb in base form: read(ana,book), leave(train), win(team,match)
+- negation: prefix "not " -> "not is(x,y)"
+Constants: singular, snake_case, no articles. The SAME entity always gets the SAME constant in
+facts, rules and goals ("the manager of the shop" -> manager_of_shop everywhere).
+Universal statements use the variable X (and Y if needed):
+  "All squares are rectangles" -> {"if":"is(X,square)","then":"is(X,rectangle)"}
+  "No fish can walk"           -> {"if":"is(X,fish)","then":"not can(X,walk)"}
+  "Bees make honey"            -> {"if":"is(X,bee)","then":"make(X,honey)"}
+A conditional "if A then B" is one rule; a sentence with two consequences gives two rules.
+Rules have exactly ONE atom in "if" (no "and"): split or move the rest to "knowledge".
+"some / certains / quelques / many / most" are NOT universal: produce no rule for them.
+Co-occurrence or time ("when the bell rings, the students leave") is a rule, never a cause:
+never invent cause(...) atoms.
+Every fact, rule and goal MUST quote the exact span of the text it comes from.
+Anything not literally stated (common sense, word meanings such as "a puppy is a dog",
+"glass is fragile", persistence over time) goes ONLY in "knowledge", with a short "why".
+Never answer the question. Never add facts just to make the question answerable."""
+
+PREMISES_SYSTEM = PREMISES_SYSTEM_V2
+PROMPT_VERSIONS = {"premises-v1": PREMISES_SYSTEM_V1, "premises-v2": PREMISES_SYSTEM_V2}
 
 EQUATION_SYSTEM = """You translate a word problem (French or English) into ONE arithmetic expression whose
 value answers the question. Do NOT compute it.
@@ -101,16 +138,19 @@ def anchored(quote: str, text: str, min_overlap: float = 0.8) -> bool:
 
 
 def extract_json(raw: str) -> Optional[Dict[str, Any]]:
+    """First complete JSON object in `raw` (code fences and trailing prose ignored)."""
     if not raw:
         return None
     raw = re.sub(r"^```(?:json)?|```$", "", raw.strip(), flags=re.MULTILINE).strip()
-    start, end = raw.find("{"), raw.rfind("}")
-    if start < 0 or end <= start:
-        return None
-    try:
-        return json.loads(raw[start:end + 1])
-    except json.JSONDecodeError:
-        return None
+    decoder = json.JSONDecoder()
+    for m in re.finditer(r"\{", raw):
+        try:
+            obj, _ = decoder.raw_decode(raw[m.start():])
+            if isinstance(obj, dict):
+                return obj
+        except json.JSONDecodeError:
+            continue
+    return None
 
 
 class LLMTranslator(CognitiveModuleBase):
@@ -118,7 +158,7 @@ class LLMTranslator(CognitiveModuleBase):
 
     def __init__(self, llm_engine: Any = None, call: Optional[Callable[[str, str], str]] = None,
                  model: str = DEFAULT_MODEL, max_tokens: int = 1500, use_knowledge: bool = True,
-                 nexus_core: Any = None, **kwargs):
+                 nexus_core: Any = None, prompt_version: str = "premises-v2", **kwargs):
         if llm_engine is None and call is None:
             raise ValueError("LLMTranslator needs an llm_engine or a call(system, prompt) function")
         self.llm_engine = llm_engine
@@ -127,6 +167,7 @@ class LLMTranslator(CognitiveModuleBase):
         self.max_tokens = max_tokens
         self.use_knowledge = use_knowledge
         self.nexus_core = nexus_core
+        self.prompt_version = prompt_version
         self.cache: Dict[str, Dict[str, Any]] = {}
         self.stats = {"calls": 0, "cache_hits": 0, "failures": 0, "rejected_items": 0, "seconds": 0.0,
                       "input_tokens": 0, "output_tokens": 0}
@@ -154,7 +195,7 @@ class LLMTranslator(CognitiveModuleBase):
             self.stats["seconds"] += time.time() - t0
 
     def _cached(self, task: str, text: str, system: str, prompt: str) -> Tuple[Optional[Dict[str, Any]], str]:
-        key = hashlib.sha256(f"{task}|{self.model}|{text}".encode()).hexdigest()
+        key = hashlib.sha256(f"{task}|{self.model}|{self.prompt_version}|{text}".encode()).hexdigest()
         if key in self.cache:
             self.stats["cache_hits"] += 1
             return self.cache[key]["parsed"], self.cache[key]["raw"]
@@ -172,7 +213,8 @@ class LLMTranslator(CognitiveModuleBase):
 
     # -- text -> premises -----------------------------------------------------
     def to_premises(self, text: str) -> Dict[str, Any]:
-        parsed, raw = self._cached("premises", text, PREMISES_SYSTEM, f"TEXT:\n{text}")
+        system = PROMPT_VERSIONS.get(self.prompt_version, PREMISES_SYSTEM)
+        parsed, raw = self._cached("premises", text, system, f"TEXT:\n{text}")
         out = {"facts": [], "rules": [], "goals": [], "knowledge_facts": [], "knowledge_rules": [],
                "rejected": [], "ok": parsed is not None, "raw": raw}
         if parsed is None:
