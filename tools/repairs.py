@@ -423,6 +423,19 @@ def r29_layer_flat_imports():
     add_import("grandnexus/cognition/metacognition/explainability_engine.py", "import os")
     add_import("grandnexus/actuators/drivers/virtual_gripper.py", "import time")
 
+def r30_semantic_v2_dataclass():
+    """Révélé sur Colab (sentence_transformers y est installé, le module va plus loin) :
+    - Python 3.11+ refuse une instance de dataclass comme valeur par défaut -> default_factory ;
+    - _init_annoy testait la CLASSE AnnoyCfg (toujours vraie) au lieu de la config, puis
+      appelait AnnoyIndex même si annoy n'est pas installé -> NameError à la création."""
+    p = "grandnexus/memory/semantic_v2.py"
+    for name, cls in (("pg", "PGVectorCfg"), ("neo4j", "Neo4jCfg"), ("annoy", "AnnoyCfg")):
+        replace_once(p, f"    {name}: Optional[{cls}] = {cls}()\n",
+                     f"    {name}: Optional[{cls}] = field(default_factory={cls})  # réparation 6.5\n")
+    replace_once(p, "    def _init_annoy(self):\n        if not AnnoyCfg:\n            return\n",
+                 "    def _init_annoy(self):\n        if not self.cfg.annoy or \"AnnoyIndex\" not in globals():  # réparation 6.5\n"
+                 "            return\n")
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])
