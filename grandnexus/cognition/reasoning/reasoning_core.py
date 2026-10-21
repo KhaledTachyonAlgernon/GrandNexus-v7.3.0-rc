@@ -969,7 +969,7 @@ class ReasoningCore(CognitiveModuleBase):
                     line = line.strip()
                     if line.startswith('- ') or line.startswith('* '):
                         items.append(line[2:].strip())
-                    elif line.startswith('\d+\. '):
+                    elif re.match(r'\d+\.\s', line):  # repair 6.8: was a literal string
                         items.append(line[line.find(' ')+1:].strip())
 
                 if items:

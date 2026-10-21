@@ -701,6 +701,14 @@ def r38_conjunctive_rules():
         conclusions.extend(new_conclusions)
 ''')
 
+def r39_numbered_list_regex():
+    """Original ReasoningCore code: line.startswith('\\d+\\. ') looked for the literal characters
+    backslash-d-plus, so numbered lists ("1. ...") were never recognised (and Python 3.12 warns
+    about the invalid escape). Replaced by a real regular expression."""
+    p = "grandnexus/cognition/reasoning/reasoning_core.py"
+    replace_once(p, "                    elif line.startswith('\\d+\\. '):",
+                 "                    elif re.match(r'\\d+\\.\\s', line):  # repair 6.8: was a literal string")
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
     print("ok", sys.argv[1])
