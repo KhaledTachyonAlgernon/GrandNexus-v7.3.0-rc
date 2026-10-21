@@ -132,9 +132,58 @@ properties of relations such as transitivity, persistence over time) goes ONLY i
 with a short "why".
 Never answer the question. Never add facts just to make the question answerable."""
 
-PREMISES_SYSTEM = PREMISES_SYSTEM_V3
+PREMISES_SYSTEM_V4 = """You translate a short text (French or English) into logic for a symbolic reasoner.
+You do NOT answer the question.
+
+Output ONLY one JSON object, no prose, no code fence:
+{"facts":[{"p":"<atom>","quote":"<exact span copied from the text>"}],
+ "rules":[{"if":"<atom>" or ["<atom>","<atom>"],"then":"<atom>","quote":"<exact span>"}],
+ "goals":[{"p":"<atom>","quote":"<exact span of the question>"}],
+ "knowledge":[{"p":"<atom>","why":"<short reason>"} or {"if":"<atom>" or [...],"then":"<atom>","why":"<short reason>"}]}
+
+Atoms (lowercase, no spaces):
+- is(x,y)    x is a y / x is y (category or property of ONE entity)
+- can(x,y)   x can y
+- in(x,y)    containment of any kind (inside, in, part of, located in, at...)
+- rel(x,y)   any relation between TWO entities, the relation as predicate:
+             older(ana,ben), parent(ann,bob), before(breakfast,lunch), owns(lea,bike)
+             (never encode a relation as a property such as is(ana,older_than_ben))
+- verb(x,y) or verb(x) for any other verb, verb in base form: read(ana,book), leave(train)
+- prop(x)    impersonal statement without a subject: "it is late" -> prop(late)
+- negation: prefix "not " -> "not is(x,y)"
+Constants: singular, snake_case, no articles. The SAME entity always gets the SAME constant in
+facts, rules and goals ("the manager of the shop" -> manager_of_shop everywhere).
+A typical or generic member of a category ("a typical nurse", "un infirmier typique", "nurses" in
+general) is written with the category constant itself: nurse. If two constants still denote the
+same entity, add the knowledge atom same(a,b).
+Something that can change over time is written with the moment as last argument:
+  "the shop was open on Monday"  -> open(shop,monday)
+  "the lamp is off tonight"      -> not on(lamp,tonight)
+  an event at a moment           -> repaired(bike,tuesday)
+How states continue or change after an event is common sense: put it in "knowledge"
+("repaired(bike,tuesday) => works(bike,wednesday)", with a short "why").
+Every statement of the text that is a fact goes in "facts", with its quote.
+Rules use the variables X, Y, Z. "if" is one atom or a list of up to 3 atoms (all required):
+  "All squares are rectangles" -> {"if":"is(X,square)","then":"is(X,rectangle)"}
+  "No fish can walk"           -> {"if":"is(X,fish)","then":"not can(X,walk)"}
+  ancestry is transitive        -> {"if":["ancestor(X,Y)","ancestor(Y,Z)"],"then":"ancestor(X,Z)"}
+Every variable of "then" must appear in "if".
+A conditional "if A then B" is one rule; a sentence with two consequences gives two rules.
+"some / certains / quelques / many / most" are NOT universal: produce no rule for them.
+Co-occurrence or time ("when the bell rings, the students leave") is a rule, never a cause:
+never invent cause(...) atoms.
+Every fact, rule and goal MUST quote the exact span of the text it comes from.
+Anything not literally stated (common sense, word meanings such as "a puppy is a dog",
+properties of relations such as transitivity, persistence over time) goes ONLY in "knowledge",
+with a short "why".
+Never answer the question. Never add facts just to make the question answerable."""
+
+
+# v4 (6.8.0): typical member = category constant, same(a,b) for co-reference, moments as last
+# argument for states that change (neutral examples, none from any test set).
+PREMISES_SYSTEM = PREMISES_SYSTEM_V4
 PROMPT_VERSIONS = {"premises-v1": PREMISES_SYSTEM_V1, "premises-v2": PREMISES_SYSTEM_V2,
-                   "premises-v3": PREMISES_SYSTEM_V3}
+                   "premises-v3": PREMISES_SYSTEM_V3, "premises-v4": PREMISES_SYSTEM_V4}
 
 EQUATION_SYSTEM = """You translate a word problem (French or English) into ONE arithmetic expression whose
 value answers the question. Do NOT compute it.
@@ -220,7 +269,7 @@ class LLMTranslator(CognitiveModuleBase):
 
     def __init__(self, llm_engine: Any = None, call: Optional[Callable[[str, str], str]] = None,
                  model: str = DEFAULT_MODEL, max_tokens: int = 1500, use_knowledge: bool = True,
-                 nexus_core: Any = None, prompt_version: str = "premises-v3", repair_rounds: int = 1, **kwargs):
+                 nexus_core: Any = None, prompt_version: str = "premises-v4", repair_rounds: int = 1, **kwargs):
         if llm_engine is None and call is None:
             raise ValueError("LLMTranslator needs an llm_engine or a call(system, prompt) function")
         self.llm_engine = llm_engine

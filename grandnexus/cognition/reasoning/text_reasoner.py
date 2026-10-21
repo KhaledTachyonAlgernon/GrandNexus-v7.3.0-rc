@@ -19,7 +19,7 @@ import itertools
 import logging
 import re
 import time
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from grandnexus.cognition.contracts import (
     CognitiveContext, CognitiveMode, CognitiveModuleBase, CognitiveProcessType,
@@ -31,6 +31,7 @@ ATOM = re.compile(r"^(not )?([^\W\d]\w*)\((\w+)(?:,(\w+))?\)$", re.UNICODE)
 VARIABLE = re.compile(r"^[XYZ]$")
 QUANTITY_QUESTION = re.compile(r"\b(combien|how many|how much|quel(?:le)? est le nombre|what is the number)\b", re.I)
 DECIDED = ("oui", "non", "contradictoire")
+TYPICAL = re.compile(r"^(?:typical|generic|average|typique|generique|générique)_(\w+)$|^(\w+)_(?:typique|typical|generique|générique)$")
 
 
 def _negate(p: str) -> str:
@@ -40,6 +41,50 @@ def _negate(p: str) -> str:
 def _args(atom: str) -> List[str]:
     m = ATOM.match(atom.strip())
     return [a for a in (m.group(3), m.group(4)) if a] if m else []
+
+
+
+def _rename(atom: str, mapping: Dict[str, str]) -> str:
+    m = ATOM.match(atom.strip()) if isinstance(atom, str) else None
+    if not m:
+        return atom
+    args = [mapping.get(a, a) for a in (m.group(3), m.group(4)) if a]
+    return f"{m.group(1) or ''}{m.group(2)}({','.join(args)})"
+
+
+def _alias_map(pair_atoms: List[str], constants: List[str], goals: List[str]) -> Dict[str, str]:
+    """Co-reference: same(a,b) atoms + the typical-member convention (typical_x == x).
+    Canonical name: the constant used in a goal if any, else the shortest."""
+    pairs = []
+    for a in pair_atoms:
+        m = ATOM.match(a.strip())
+        if m and not m.group(1) and m.group(2) == "same" and m.group(4):
+            pairs.append((m.group(3), m.group(4)))
+    cs = set(constants)
+    for c in constants:
+        t = TYPICAL.match(c)
+        base = t and (t.group(1) or t.group(2))
+        if base and base in cs:
+            pairs.append((c, base))
+    parent: Dict[str, str] = {}
+
+    def find(x):
+        parent.setdefault(x, x)
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+    for a, b in pairs:
+        parent[find(a)] = find(b)
+    in_goal = {x for g in goals for x in _args(g)}
+    groups: Dict[str, List[str]] = {}
+    for x in list(parent):
+        groups.setdefault(find(x), []).append(x)
+    mapping = {}
+    for members in groups.values():
+        canon = sorted(members, key=lambda x: (x not in in_goal, len(x), x))[0]
+        mapping.update({x: canon for x in members if x != canon})
+    return mapping
 
 
 class TextReasoner(CognitiveModuleBase):
@@ -219,9 +264,35 @@ class TextReasoner(CognitiveModuleBase):
                              "support": [known[x] for x in (g, _negate(g)) if x in known]})
         return verdicts
 
+    @staticmethod
+    def _apply_aliases(b: Dict[str, Any], use_knowledge: bool) -> Tuple[Dict[str, Any], Dict[str, str]]:
+        """Merge constants that denote the same entity (same(a,b) and typical_x == x)."""
+        def conds(r):
+            return r["if"] if isinstance(r["if"], list) else [r["if"]]
+        atoms = b["facts"] + b["goals"] + [a for r in b["rules"] for a in conds(r) + [r["then"]]]
+        if use_knowledge:
+            atoms += b["knowledge_facts"] + [a for r in b["knowledge_rules"] for a in conds(r) + [r["then"]]]
+        constants = list(dict.fromkeys(x for a in atoms for x in _args(a) if not VARIABLE.match(x)))
+        pair_atoms = b["facts"] + (b["knowledge_facts"] if use_knowledge else [])
+        mapping = _alias_map(pair_atoms, constants, b["goals"])
+
+        def rule(r):
+            c = [_rename(a, mapping) for a in conds(r)]
+            return {**r, "if": c[0] if len(c) == 1 else c, "then": _rename(r["then"], mapping)}
+        not_same = lambda a: not a.startswith("same(")
+        nb = {**b, "facts": [_rename(a, mapping) for a in b["facts"] if not_same(a)],
+              "goals": [_rename(a, mapping) for a in b["goals"]],
+              "rules": [rule(r) for r in b["rules"]],
+              "knowledge_facts": [_rename(a, mapping) for a in b["knowledge_facts"] if not_same(a)],
+              "knowledge_rules": [rule(r) for r in b["knowledge_rules"]]}
+        return nb, mapping
+
     def _decide(self, b: Dict[str, Any], max_steps: int, perception: Any, t0: float) -> Dict[str, Any]:
-        facts = list(dict.fromkeys(b["facts"]))
-        goals = list(dict.fromkeys(b["goals"]))
+        b_strict, map_s = self._apply_aliases(b, use_knowledge=False)
+        b_full, map_k = self._apply_aliases(b, use_knowledge=True)
+        b = {**b_full, "trace": list(b["trace"]) + [f"alias    | {k} -> {v}" for k, v in map_k.items()]}
+        facts = list(dict.fromkeys(b_strict["facts"]))
+        goals = list(dict.fromkeys(b_strict["goals"]))
         # a question about a category reasons on a typical member ("Do whales breathe air?")
         categories = {_args(r["if"])[1] for r in b["rules"] + b["knowledge_rules"]
                       if isinstance(r["if"], str) and r["if"].startswith("is(") and len(_args(r["if"])) == 2
@@ -232,12 +303,19 @@ class TextReasoner(CognitiveModuleBase):
                 facts.append(f"is({a[0]},{a[0]})")
         constants = list(dict.fromkeys(a for atom in facts + goals + b["knowledge_facts"] for a in _args(atom)
                                        if not VARIABLE.match(a)))
-        strict_rules = self._ground(b["rules"], constants) + self._containment_axioms(facts)
+        strict_rules = self._ground(b_strict["rules"], constants) + self._containment_axioms(facts)
         known_s, reasoning = self._deduce(facts, strict_rules, max_steps)
         strict = self._verdicts(known_s, goals)
-        has_k = bool(b["knowledge_facts"] or b["knowledge_rules"])
+        has_k = bool(b["knowledge_facts"] or b["knowledge_rules"] or map_k != map_s)
         if has_k:
-            facts_k = facts + [f for f in b["knowledge_facts"] if f not in facts]
+            goals = list(dict.fromkeys(b["goals"]))
+            facts_k = list(dict.fromkeys(b["facts"] + [f for f in b["knowledge_facts"] if f not in b["facts"]]))
+            for g in goals:                                   # typical member, after knowledge aliases
+                a = _args(g)
+                if a and a[0] in categories and not any(_args(f)[:1] == [a[0]] for f in facts_k):
+                    facts_k.append(f"is({a[0]},{a[0]})")
+            constants = list(dict.fromkeys(constants + [x for atom in facts_k + goals for x in _args(atom)
+                                                        if not VARIABLE.match(x)]))
             rules_k = self._ground(b["rules"] + b["knowledge_rules"], constants) + self._containment_axioms(facts_k)
             known, reasoning = self._deduce(facts_k, rules_k, max_steps)
             verdicts = self._verdicts(known, goals)
