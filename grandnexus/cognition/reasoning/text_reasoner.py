@@ -27,7 +27,7 @@ from grandnexus.cognition.contracts import (
 )
 from grandnexus.cognition.perception.premise_extractor import PremiseExtractor
 
-ATOM = re.compile(r"^(not )?([^\W\d]\w*)\((\w+)(?:,(\w+))?\)$", re.UNICODE)
+ATOM = re.compile(r"^(not )?([^\W\d]\w*)\((\w+(?:,\w+){0,2})\)$", re.UNICODE)   # 1 to 3 arguments
 VARIABLE = re.compile(r"^[XYZ]$")
 QUANTITY_QUESTION = re.compile(r"\b(combien|how many|how much|quel(?:le)? est le nombre|what is the number)\b", re.I)
 DECIDED = ("oui", "non", "contradictoire")
@@ -40,7 +40,7 @@ def _negate(p: str) -> str:
 
 def _args(atom: str) -> List[str]:
     m = ATOM.match(atom.strip())
-    return [a for a in (m.group(3), m.group(4)) if a] if m else []
+    return m.group(3).split(",") if m else []
 
 
 
@@ -48,7 +48,7 @@ def _rename(atom: str, mapping: Dict[str, str]) -> str:
     m = ATOM.match(atom.strip()) if isinstance(atom, str) else None
     if not m:
         return atom
-    args = [mapping.get(a, a) for a in (m.group(3), m.group(4)) if a]
+    args = [mapping.get(a, a) for a in m.group(3).split(",")]
     return f"{m.group(1) or ''}{m.group(2)}({','.join(args)})"
 
 
@@ -58,8 +58,8 @@ def _alias_map(pair_atoms: List[str], constants: List[str], goals: List[str]) ->
     pairs = []
     for a in pair_atoms:
         m = ATOM.match(a.strip())
-        if m and not m.group(1) and m.group(2) == "same" and m.group(4):
-            pairs.append((m.group(3), m.group(4)))
+        if m and not m.group(1) and m.group(2) == "same" and len(m.group(3).split(",")) == 2:
+            pairs.append(tuple(m.group(3).split(",")))
     cs = set(constants)
     for c in constants:
         t = TYPICAL.match(c)
@@ -158,7 +158,7 @@ class TextReasoner(CognitiveModuleBase):
 
     def _from_grammar(self, text: str) -> Dict[str, Any]:
         ex = self.extractor.extract(text)
-        return {"parser": "grammar", "facts": list(ex.facts), "rules": list(ex.rules), "goals": list(ex.goals),
+        return {"text": text, "parser": "grammar", "facts": list(ex.facts), "rules": list(ex.rules), "goals": list(ex.goals),
                 "knowledge_facts": [], "knowledge_rules": [], "trace": list(ex.trace),
                 "unparsed": list(ex.unparsed), "llm": None}
 
@@ -171,7 +171,7 @@ class TextReasoner(CognitiveModuleBase):
                  + [f"knowledge| {cond(r)} => {r['then']}" for r in p["knowledge_rules"]]
                  + (["repaired | one corrective round was used"] if p.get("repaired") else []))
         use_k = getattr(self.translator, "use_knowledge", True)
-        return {"parser": "llm", "facts": p["facts"], "rules": p["rules"], "goals": p["goals"],
+        return {"text": text, "parser": "llm", "facts": p["facts"], "rules": p["rules"], "goals": p["goals"],
                 "knowledge_facts": p["knowledge_facts"] if use_k else [],
                 "knowledge_rules": p["knowledge_rules"] if use_k else [], "trace": trace,
                 "unparsed": [f"rejected: {r['reason']}" for r in p["rejected"]]
@@ -201,7 +201,7 @@ class TextReasoner(CognitiveModuleBase):
 
                 def apply(atom: str) -> str:
                     m = ATOM.match(atom.strip())
-                    args = [sub.get(a, a) for a in (m.group(3), m.group(4)) if a]
+                    args = [sub.get(a, a) for a in m.group(3).split(",")]
                     return f"{m.group(1) or ''}{m.group(2)}({','.join(args)})"
                 g_if = [apply(c) for c in conds]
                 if len(g_if) > 1 and len(set(g_if)) < len(g_if):
@@ -322,7 +322,10 @@ class TextReasoner(CognitiveModuleBase):
         else:
             known, verdicts = known_s, strict
         derived = [k for k, v in known.items() if v.get("from") != "premise"]
-        answer = verdicts[0]["answer"] if verdicts else ("faits enregistrés" if facts else "inconnu")
+        asked = "?" in str(b.get("text", ""))
+        if not verdicts and asked:
+            b["unparsed"] = list(b["unparsed"]) + ["question present but no goal could be formalised"]
+        answer = verdicts[0]["answer"] if verdicts else ("faits enregistrés" if facts and not asked else "inconnu")
         out = self._result(answer, verdicts, verdicts[0]["confidence"] if verdicts else 0.0,
                            {"facts": facts, "rules": [(r["if"], r["then"]) for r in strict_rules],
                             "goals": goals, "unparsed": b["unparsed"], "trace": b["trace"]},
@@ -369,9 +372,10 @@ class TextReasoner(CognitiveModuleBase):
     def _write_back(self, text: str, facts: List[str], out: Dict[str, Any]) -> None:
         for st in list(facts) + [d for d in out.get("derived", []) if d]:
             m = ATOM.match(st.strip())
-            if not m or not m.group(4):
-                continue
-            neg, pred, a, b = m.group(1), m.group(2), m.group(3), m.group(4)
+            if not m or len(m.group(3).split(",")) != 2:
+                continue                                   # the graph stores binary relations only
+            neg, pred = m.group(1), m.group(2)
+            a, b = m.group(3).split(",")
             try:
                 na, nb = self._node(a), self._node(b)
                 if na and nb:

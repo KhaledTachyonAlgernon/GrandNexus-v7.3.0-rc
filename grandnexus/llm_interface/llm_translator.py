@@ -205,7 +205,7 @@ NUMBER_WORDS = {
     "a dozen": 12, "une douzaine": 12, "twenty": 20, "vingt": 20, "half": 0.5, "moitié": 0.5,
 }
 
-ATOM_RE = re.compile(r"^(not )?[^\W\d][\w]*\((?:[\w]+)(?:,[\w]+)?\)$", re.UNICODE)
+ATOM_RE = re.compile(r"^(not )?[^\W\d][\w]*\((?:[\w]+)(?:,[\w]+){0,2}\)$", re.UNICODE)   # 1 to 3 arguments
 EXPR_RE = re.compile(r"^[0-9+\-*/(). ]+$")
 VAR_RE = re.compile(r"(?<=[(,])([XYZ])(?=[,)])")
 
