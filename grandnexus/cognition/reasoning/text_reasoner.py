@@ -253,11 +253,13 @@ class TextReasoner(CognitiveModuleBase):
                                             + [known["not " + c] for c in contradictions[:3]],
                                  "contradictions": contradictions})
                 continue
+            # convention (aligned with the reference engine nexus_logic): "oui" means the asked
+            # literal holds, even when it is negative ("is it true that the lamp is not on?" -> oui)
             pos, neg = g in known, _negate(g) in known
             if pos:
-                v, conf = ("oui" if not g.startswith("not ") else "non"), known[g]["confidence"]
+                v, conf = "oui", known[g]["confidence"]
             elif neg:
-                v, conf = ("non" if not g.startswith("not ") else "oui"), known[_negate(g)]["confidence"]
+                v, conf = "non", known[_negate(g)]["confidence"]
             else:
                 v, conf = "inconnu", 0.0
             verdicts.append({"goal": g, "answer": v, "confidence": conf,
