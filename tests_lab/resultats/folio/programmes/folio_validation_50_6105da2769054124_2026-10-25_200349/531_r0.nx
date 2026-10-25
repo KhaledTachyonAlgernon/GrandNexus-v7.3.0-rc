@@ -1,0 +1,9 @@
+netflix_show(stranger_things). @ "\"Stranger Things\" is a popular Netflix show."
+popular(stranger_things). @ "\"Stranger Things\" is a popular Netflix show."
+netflix_show(X) & popular(X) => binge_watches(karen, X). @ "If a Netflix show is popular, Karen will binge-watch it."
+netflix_show(X) & binge_watches(karen, X) => downloads(karen, X). @ "If and only if Karen binge-watches a Netflix show, she will download it."
+netflix_show(X) & downloads(karen, X) => binge_watches(karen, X). @ "If and only if Karen binge-watches a Netflix show, she will download it."
+not downloads(karen, black_mirror). @ "Karen does not download \"Black Mirror.\""
+netflix_show(black_mirror). @ "\"Black Mirror\" is a Netflix show."
+netflix_show(X) & binge_watches(karen, X) => shares_with(karen, X, lisa). @ "If Karen binge-watches a Netflix show, she will share it with Lisa."
+? popular(black_mirror).

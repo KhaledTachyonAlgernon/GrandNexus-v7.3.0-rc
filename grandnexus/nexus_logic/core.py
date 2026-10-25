@@ -31,7 +31,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Dict, Iterator, List, Optional, Sequence, Set, Tuple, Union
 
-ENGINE_VERSION = "ref-1.0"
+ENGINE_VERSION = "ref-1.2"  # 1.1: reductio ad absurdum ; 1.2: universal questions
 MAX_ARITY = 4  # relation ternaire + moment ; le carnet a perdu un item sur une limite à 2 puis 3
 
 LANGUAGE_SPEC = """\
@@ -45,6 +45,7 @@ rule      := literal { "&" literal } "=>" literal "."
 same      := "same(" const ", " const ")."    two names for one entity
 let       := "let " const " = " expr "."      expr: numbers, + - * / ( ), earlier let-constants
 question  := "? " literal { "&" literal } "."  exactly one per program; may contain a variable
+           | "? " literal { "&" literal } "=>" literal "."   universal question ("all/no X are Y")
 literal   := [ "not " ] atom
 atom      := pred [ "(" term { ", " term } ")" ]   0 to 4 terms; a bare word w means prop(w)
 term      := const | var | number
@@ -190,7 +191,8 @@ class Program:
     rules: List[Rule] = field(default_factory=list)
     sames: List[Tuple[str, str]] = field(default_factory=list)
     lets: Dict[str, Union[int, float]] = field(default_factory=dict)
-    questions: List[Tuple[Lit, ...]] = field(default_factory=list)       # conjonction de littéraux
+    questions: List[Tuple] = field(default_factory=list)                 # conjonction de littéraux, ou ("universal", i)
+    universal_questions: List["Rule"] = field(default_factory=list)       # ? body => head
     rejections: List[Rejection] = field(default_factory=list)
     anchors: Dict[str, str] = field(default_factory=dict)
     notes: List[str] = field(default_factory=list)                       # lignes "# cannot express"
@@ -274,7 +276,17 @@ def _parse_statement(prog: Program, seg: str, lineno: int, sid: str, src: Option
     body = line[:-1].strip()
     try:
         if body.startswith("?"):
-            prog.questions.append(tuple(parse_literal(c) for c in body[1:].split("&")))
+            q = body[1:]
+            if "=>" in q:                                     # universal question: ? body => head
+                lhs, rhs = q.split("=>", 1)
+                conds = tuple(parse_literal(c) for c in lhs.split("&"))
+                head = parse_literal(rhs)
+                if not head.vars() <= set().union(*(c.vars() for c in conds)):
+                    raise ValueError("universal question: every variable of the conclusion must appear in a condition")
+                prog.universal_questions.append(Rule(conds, head, sid))
+                prog.questions.append(("universal", len(prog.universal_questions) - 1))
+            else:
+                prog.questions.append(tuple(parse_literal(c) for c in q.split("&")))
             return
         if body.startswith("let "):
             mm = _LET_RE.match(body)
@@ -372,8 +384,10 @@ class Verdict:
 
 class Engine:
     def __init__(self, prog: Program, use_knowledge: bool = True, contrapositives: bool = True,
-                 merge_typical: bool = True, max_facts: int = 50_000) -> None:
+                 merge_typical: bool = True, max_facts: int = 50_000, reductio: bool = True,
+                 extra_facts: Optional[Sequence[Lit]] = None) -> None:
         self.prog, self.use_knowledge, self.merge_typical, self.max_facts = prog, use_knowledge, merge_typical, max_facts
+        self.reductio, self.extra_facts = reductio, list(extra_facts or [])
         self.uf = _UnionFind()
         self.kb: Set[Lit] = set()
         self.index: Dict[Tuple[bool, str, int], List[Lit]] = {}
@@ -396,6 +410,8 @@ class Engine:
             for l in r.body + (r.head,):
                 yield from l.atom.args
         for q in self.prog.questions:
+            if q and q[0] == "universal":
+                continue
             for l in q:
                 yield from l.atom.args
 
@@ -422,6 +438,8 @@ class Engine:
             c = self.canon(lit)
             self.facts0.append(c)
             self._add(c, None, (), sid)
+        for h in self.extra_facts:                       # hypotheses of a reductio trial
+            self._add(self.canon(h), None, (), "hypothesis")
         for r in self.prog.rules:
             if r.knowledge and not self.use_knowledge:
                 continue
@@ -519,6 +537,8 @@ class Engine:
             if not self.prog.questions:
                 return Verdict("inconnu", note="no question formalised")   # jamais « faits enregistrés »
             goal = self.prog.questions[0]
+        if goal and goal[0] == "universal":
+            return self._answer_universal(self.prog.universal_questions[goal[1]])
         gs = tuple(self.canon(l) for l in goal)
         if self.overflow:
             return Verdict("inconnu", note=f"fact limit {self.max_facts} reached")
@@ -538,7 +558,62 @@ class Engine:
         for l in gs:
             if l.flip() in self.kb or self._goal_directed(l.flip()):
                 return self._verdict("non", [l.flip()])
+        # Reductio (classical refutation, FOLIO run of 2026-10-25: 10 of 16 "non" items were missed).
+        # The knowledge base is consistent here. If assuming the goal makes it inconsistent, the
+        # goal is false; if assuming its negation does, the goal is true. Sound: the rules only
+        # derive classical consequences, so KB + g inconsistent means KB entails not g.
+        if self.reductio and len(gs) == 1:
+            g = gs[0]
+            for hyp, ans in ((g, "non"), (g.flip(), "oui")):
+                trial = Engine(self.prog, self.use_knowledge, True, self.merge_typical, self.max_facts,
+                               reductio=False, extra_facts=[hyp])
+                if trial.contradictions and not trial.overflow:
+                    c = trial.contradictions[0]
+                    used = (trial._used(c) | trial._used(c.flip())) - {"hypothesis"}
+                    return Verdict(ans, proof=[f"REDUCTIO: assume {hyp}"] + trial._proof(c) + trial._proof(c.flip()),
+                                   used=sorted(used), depends_on_knowledge=bool(used & trial.knowledge_sids),
+                                   note="by refutation (reductio ad absurdum)")
         return Verdict("inconnu")
+
+    def _answer_universal(self, q: Rule) -> Verdict:
+        """? body => head  ("all X are Y", "no X is Y" with a negated head).
+        non : a counterexample among the known constants (body derived, head refuted);
+        oui : universal introduction — fresh constants for the variables, body assumed, head derived;
+        inconnu otherwise. (FOLIO 2026-10-25: items 306 and 325 were universal negatives that the
+        translator could only approximate by an existential question, which produced two false "oui".)"""
+        if self.overflow:
+            return Verdict("inconnu", note=f"fact limit {self.max_facts} reached")
+        if self.contradictions:
+            return self.answer(())                      # reports "contradictoire" as usual
+        body = tuple(self.canon(b) for b in q.body)
+        head = self.canon(q.head)
+        for s in self._matches(body, {}):               # counterexample search
+            h = subst_lit(head, s)
+            if h.flip() in self.kb:
+                return self._verdict("non", [h.flip()] + [subst_lit(b, s) for b in body])
+            if self.reductio:
+                trial = Engine(self.prog, self.use_knowledge, True, self.merge_typical, self.max_facts,
+                               reductio=False, extra_facts=[h])
+                if trial.contradictions and not trial.overflow:
+                    return Verdict("non", proof=[f"COUNTEREXAMPLE {s}: assuming {h} is inconsistent"],
+                                   note="universal refuted by a counterexample (reductio)")
+        fresh = {v: f"fresh_{v.lower()}" for b in body for v in b.vars()}
+        hyp = [subst_lit(b, fresh) for b in body]
+        trial = Engine(self.prog, self.use_knowledge, True, self.merge_typical, self.max_facts,
+                       reductio=False, extra_facts=hyp)
+        target = subst_lit(head, fresh)
+        if target in trial.kb and not trial.contradictions:
+            used = trial._used(target) - {"hypothesis"}
+            return Verdict("oui", proof=[f"UNIVERSAL: for a fresh {fresh}, assume {' & '.join(str(h) for h in hyp)}"]
+                           + trial._proof(target), used=sorted(used),
+                           depends_on_knowledge=bool(used & trial.knowledge_sids), note="universal introduction")
+        if self.reductio:                                # head's negation inconsistent under the assumption
+            trial2 = Engine(self.prog, self.use_knowledge, True, self.merge_typical, self.max_facts,
+                            reductio=False, extra_facts=hyp + [target.flip()])
+            if trial2.contradictions and not trial2.overflow and not trial.contradictions:
+                return Verdict("oui", proof=[f"UNIVERSAL by refutation: assume {' & '.join(str(h) for h in hyp)} and {target.flip()}"],
+                               note="universal introduction (reductio)")
+        return Verdict("inconnu", note="universal question: no counterexample, no derivation")
 
     def answers(self) -> List[Verdict]:
         return [self.answer(q) for q in self.prog.questions] or [self.answer()]

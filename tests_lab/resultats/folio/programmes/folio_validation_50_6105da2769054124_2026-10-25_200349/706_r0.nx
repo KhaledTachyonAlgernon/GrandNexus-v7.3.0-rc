@@ -1,0 +1,4 @@
+fir_tree(V) => evergreen(V). @ "All fir trees are evergreens."
+object_of_worship(some_worship_1). @ "Some objects of worship are fir trees."
+fir_tree(some_worship_1). @ "Some objects of worship are fir trees."
+? evergreen(X) & not object_of_worship(X).

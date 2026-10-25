@@ -1,0 +1,7 @@
+business_organization(X) => legal_entity(X). @ "All business organizations are legal entities."
+company(X) => business_organization(X). @ "All companies are business organizations."
+private_company(X) => company(X). @ "All private companies are companies."
+legal_entity(X) => created_under_law(X). @ "All legal entities are created under law."
+legal_entity(X) => has_legal_obligations(X). @ "All legal entities have legal obligations."
+created_under_law(harvard_weekly_book_club) => not private_company(harvard_weekly_book_club). @ "If the Harvard Weekly Book Club is created under law, then it is not a private company."
+? has_legal_obligations(harvard_weekly_book_club).

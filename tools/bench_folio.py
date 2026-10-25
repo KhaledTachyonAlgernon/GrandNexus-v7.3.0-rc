@@ -92,6 +92,7 @@ def main() -> None:
     ap.add_argument("--model", default=None)
     ap.add_argument("--out", default=str(ROOT / "tests_lab" / "resultats"))
     ap.add_argument("--save-programs", action="store_true", help="écrit les programmes traduits (ils citent le texte)")
+    ap.add_argument("--strict", action="store_true", help="prédiction principale = verdict SANS connaissance de fond (FOLIO : prémisses seules)")
     a = ap.parse_args()
 
     items = load_items(a.split, a.jsonl)
@@ -131,7 +132,8 @@ def main() -> None:
                         row["pred"] = rng.choice(["oui", "non", "inconnu"])
                     elif m == "translator":
                         r = tr.answer(it["text"], it["query"])
-                        row.update(pred=r["verdict"], pred_strict=r["verdict_strict"], knowledge=r["depends_on_knowledge"],
+                        row.update(pred=r["verdict_strict"] if a.strict else r["verdict"], pred_full=r["verdict"],
+                                   pred_strict=r["verdict_strict"], knowledge=r["depends_on_knowledge"],
                                    rejections=len(r["rejections"]), corrective=r["corrective_rounds"], calls=r["calls"],
                                    tokens=r["tokens_in"] + r["tokens_out"], model=r["model"], ids=r["message_ids"])
                         if a.save_programs:

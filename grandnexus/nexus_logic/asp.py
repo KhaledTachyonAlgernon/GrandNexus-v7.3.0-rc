@@ -37,6 +37,8 @@ def clingo_verdict(prog: Program, use_knowledge: bool = True) -> Optional[str]:
         return None
     if not prog.questions:
         return "inconnu"
+    if prog.questions[0] and prog.questions[0][0] == "universal":
+        return None                                       # universal questions: reference engine only (documented)
     eng = Engine(prog, use_knowledge=use_knowledge)
     goal = [eng.canon(l) for l in prog.questions[0]]
     if any(l.vars() for l in goal):
@@ -45,14 +47,17 @@ def clingo_verdict(prog: Program, use_knowledge: bool = True) -> Optional[str]:
         text = to_asp(eng)
     except ValueError:
         return None
-    ctl = clingo.Control(["0"])
-    ctl.add("base", [], text)
-    ctl.ground([("base", [])])
-    models: list = []
-    res = ctl.solve(on_model=lambda m: models.append(set(m.symbols(atoms=True))))
-    if not res.satisfiable:
+    def solve(program: str):
+        ctl = clingo.Control(["0"], logger=lambda code, msg: None)   # silence "atom does not occur in any rule head"
+        ctl.add("base", [], program)
+        ctl.ground([("base", [])])
+        models: list = []
+        res = ctl.solve(on_model=lambda m: models.append(set(m.symbols(atoms=True))))
+        return res.satisfiable, (models[0] if models else set())
+
+    sat, atoms = solve(text)
+    if not sat:
         return "contradictoire"
-    atoms = models[0]
 
     def sym(l: Lit):
         return clingo.Function(l.atom.pred, [clingo.Number(a) if isinstance(a, int) else clingo.Function(a)
@@ -61,4 +66,8 @@ def clingo_verdict(prog: Program, use_knowledge: bool = True) -> Optional[str]:
         return "oui"
     if any(sym(l.flip()) in atoms for l in goal):
         return "non"
+    if len(goal) == 1:                                   # reductio, same test as the reference engine
+        for hyp, ans in ((goal[0], "non"), (goal[0].flip(), "oui")):
+            if not solve(text + "\n" + _lit(hyp) + ".")[0]:
+                return ans
     return "inconnu"

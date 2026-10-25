@@ -1,0 +1,6 @@
+capital_of(beijing, prc). @ "Beijing is the capital of the People's Republic of China."
+capital_of(beijing, prc). @ "Beijing is the capital city of the world's most populous nation."
+located_in(beijing, northern_china). @ "Beijing is located in Northern China."
+hosted(beijing, summer_olympics_2008). @ "Beijing hosted the 2008 Summer Olympics"
+hosted(beijing, summer_paralympics_2008). @ "2008 Summer Paralympics Games"
+? second_largest_city(beijing, prc).

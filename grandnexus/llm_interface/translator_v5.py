@@ -17,7 +17,7 @@ from typing import Any, Dict, List, Optional
 
 from grandnexus.nexus_logic import ENGINE_VERSION, LANGUAGE_SPEC, Engine, Program, parse
 
-PROMPT_VERSION = "v5"
+PROMPT_VERSION = "v5.1"  # 5.1: universal questions (FOLIO items 306/325)
 DEFAULT_MODEL = os.environ.get("GN_MODEL", "claude-sonnet-5-5")
 VERDICTS = ("oui", "non", "inconnu", "contradictoire")
 
@@ -47,6 +47,9 @@ CONVENTIONS
    ? has(john, apples, N).
 7. The question: exactly one line starting with "?". For "is it true that S" translate S itself.
    "A and B?" -> ? a(..) & b(..).
+   A universal statement to verify keeps its quantifier: "All X are Y" -> ? x(V) => y(V).
+   "No X is Y" / "X is never Y" / "X was not Y to any Z" -> ? x(V) => not y(V).
+   Never turn a universal or negative statement into an existential positive question.
 8. Anchoring: every statement taken from the text ends with @ "exact quote of the words that justify it"
    (copy the words exactly, no paraphrase). A statement you cannot anchor must not be written.
 9. Background knowledge (not in the text) is allowed ONLY if needed to answer, ONLY as lines starting

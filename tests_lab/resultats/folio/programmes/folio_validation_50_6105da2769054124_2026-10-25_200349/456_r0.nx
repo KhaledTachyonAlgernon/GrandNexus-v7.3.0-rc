@@ -1,0 +1,10 @@
+# four seasons listed
+season(spring). @ "Spring, Summer, Fall, and Winter"
+season(summer). @ "Spring, Summer, Fall, and Winter"
+season(fall). @ "Spring, Summer, Fall, and Winter"
+season(winter). @ "Spring, Summer, Fall, and Winter"
+wants_long_vacation(V) => favorite(V, summer). @ "All students who want to have a long vacation have summer as their favorite season."
+favorite(emma, summer). @ "Emma's favorite season is summer."
+# cannot express: "Mia's favorite season is not the same as Emma's."
+wants_long_vacation(james). @ "James wants to have a long vacation."
+? favorite(james, summer).

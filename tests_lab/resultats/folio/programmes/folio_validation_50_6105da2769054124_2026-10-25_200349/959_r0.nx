@@ -1,0 +1,10 @@
+spills(X) => not tidy(X). @ "If people spill a lot of food on their clothing, then they are not notably tidy."
+clumsy_foodie(X) & goes_out_frequently(X) => spills(X). @ "All clumsy foodies who go out frequently to find new food restaurants to try are people who spill a lot of food on their clothing."
+cleanly(X) => tidy(X). @ "If people are cleanly, then they are notably tidy."
+values_order(X) => cleanly(X). @ "If people value order and spotlessness, then they are cleanly."
+family_prioritizes(X) => values_order(X). @ "All people whose families prioritize order and spotlessness themselves value order and spotlessness."
+# cannot express: "Peter is either a person who spills a lot of food on his clothing and is cleanly, or a person who does not spill a lot of food on his clothing and is not cleanly"
+* clumsy_foodie(X) & goes_out_frequently(X) => cfg(X).
+* cfg(X) & not family_prioritizes(X) => either_one(X).
+* family_prioritizes(X) & not cfg(X) => either_one(X).
+? either_one(peter).

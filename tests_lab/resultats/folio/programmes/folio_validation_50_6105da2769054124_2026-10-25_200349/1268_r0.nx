@@ -1,0 +1,8 @@
+nice_to_animals(X) => not mean_to_animals(X). @ "No one nice to animals is also mean to animals."
+grumpy(some_grumpy_1). @ "Some grumpy people are mean to animals."
+person(some_grumpy_1). @ "Some grumpy people are mean to animals."
+mean_to_animals(some_grumpy_1). @ "Some grumpy people are mean to animals."
+animal_lover(X) => nice_to_animals(X). @ "All animal lovers are nice to animals."
+pet_owner(X) => animal_lover(X). @ "All pet owners love animals."
+pet_owner(tom). @ "Tom is a pet owner."
+? grumpy(tom) & person(tom).

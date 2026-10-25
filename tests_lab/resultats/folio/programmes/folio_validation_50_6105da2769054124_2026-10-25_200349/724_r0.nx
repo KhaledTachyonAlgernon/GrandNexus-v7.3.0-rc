@@ -1,0 +1,5 @@
+event(V) & not happy(V) => sad(V). @ "Events are either happy or sad."
+event(V) & not sad(V) => happy(V). @ "Events are either happy or sad."
+event(some_event_1). @ "At least one event is happy."
+happy(some_event_1). @ "At least one event is happy."
+? event(X) & not sad(X).

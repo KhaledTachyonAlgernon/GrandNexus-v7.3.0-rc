@@ -1,0 +1,10 @@
+same(ailton_silva, ailton). @ "Ailton Silva, born in 1995, is commonly known as Ailton"
+born_in(ailton_silva, 1995). @ "born in 1995"
+football_player(ailton). @ "Ailton is a football player"
+loaned_out_to(ailton, braga). @ "was loaned out to Braga"
+brazilian(ailton_silva). @ "Brazilian footballer"
+plays_for(ailton_silva, nautico). @ "plays for Náutico"
+football_club(nautico). @ "Náutico is a football club"
+football_club(braga). @ "along with Braga"
+football_club(fluminense). @ "Fluminense is a football club"
+? loaned_out_to(ailton, C) & football_club(C).

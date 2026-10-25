@@ -1,0 +1,4 @@
+politician(heinrich_schmidt). @ "Heinrich Schmidt was a German politician."
+member_of(heinrich_schmidt, nazi_reichstag). @ "Heinrich Schmidt was also a member of the Prussian State Parliament and the Nazi Reichstag."
+member_of(heinrich_schmidt, prussian_state_parliament). @ "Heinrich Schmidt was also a member of the Prussian State Parliament and the Nazi Reichstag."
+? politician(X) & member_of(X, nazi_reichstag).

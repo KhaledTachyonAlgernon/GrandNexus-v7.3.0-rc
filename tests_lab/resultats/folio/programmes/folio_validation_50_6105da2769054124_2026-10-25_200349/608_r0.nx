@@ -1,0 +1,11 @@
+romance_language(X) => indo_european_language(X). @ "All Romance languages are Indo-European languages."
+language_family(romance). @ "Romance languages are a language family."
+romance_language(X) => in_family(X, romance). @ "Romance languages are a language family."
+in_family(X, F) & in_family(Y, F) => related(X, Y). @ "All languages within a language family are related to each other."
+romance_language(french). @ "French and Spanish are both Romance languages."
+romance_language(spanish). @ "French and Spanish are both Romance languages."
+related(german, spanish). @ "German is related to Spanish."
+not related(basque, french). @ "Basque is not related to any other language."
+not related(basque, spanish). @ "Basque is not related to any other language."
+not related(basque, german). @ "Basque is not related to any other language."
+? romance_language(basque).

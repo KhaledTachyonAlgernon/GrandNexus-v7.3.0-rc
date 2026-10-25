@@ -1,0 +1,15 @@
+# Predicates: ranked_highly = ranked highly by the WTA, active = one of the most active players in major tennis
+# lost_iga = lost to Iga Swiatek at Roland Garros 2022, lost_nadal = lost to Rafael Nadal
+# player_rg, female_rg, male_rg = tennis player / female tennis player / male tennis player at Roland Garros 2022
+ranked_highly(X) => active(X). @ "If someone is ranked highly by the Women's Tennis Association, then they are one of the most active players in major tennis."
+lost_iga(X) => ranked_highly(X). @ "Everyone who lost to Iga Świątek at Roland Garros 2022 is ranked highly by the Women's Tennis Association."
+female_rg(X) => lost_iga(X). @ "All female tennis players at Roland Garros 2022 lost to Iga Świątek."
+# "either female or male" is a disjunction, expressed with negation as two rules
+player_rg(X) & not male_rg(X) => female_rg(X). @ "All tennis players at Roland Garros 2022 are either female or male."
+player_rg(X) & not female_rg(X) => male_rg(X). @ "All tennis players at Roland Garros 2022 are either female or male."
+male_rg(X) => lost_nadal(X). @ "All male tennis players at Roland Garros in 2022 lost to Rafael Nadal."
+ranked_highly(coco_gauff) => not male_rg(coco_gauff). @ "If Coco Gauff is ranked highly by the Women's Tennis Association or lost to Rafael Nadal, then Coco Gauff is not a male tennis player at Roland Garros 2022."
+lost_nadal(coco_gauff) => not male_rg(coco_gauff). @ "If Coco Gauff is ranked highly by the Women's Tennis Association or lost to Rafael Nadal, then Coco Gauff is not a male tennis player at Roland Garros 2022."
+player_rg(coco_gauff). @ "Coco Gauff is at Roland Garros 2022."
+lost_iga(X) & active(X) => iga_and_active(X). @ "a player who lost to Iga Świątek at Roland Garros 2022 and one of the most active players in major tennis"
+? not iga_and_active(coco_gauff).
