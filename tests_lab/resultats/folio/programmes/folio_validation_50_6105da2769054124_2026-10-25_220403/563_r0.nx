@@ -1,0 +1,4 @@
+human(V) => mammal(V). @ "Humans are mammals."
+mammal(V) => animal(V). @ "Mammals are animals."
+animal(some_animal_1). @ "Monkeypox virus can occur in certain animals."
+? animal(X).

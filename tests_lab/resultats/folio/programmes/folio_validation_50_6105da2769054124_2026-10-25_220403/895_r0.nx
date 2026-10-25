@@ -1,0 +1,10 @@
+# cannot express: "Everyone at the mixer is a Grand Slam champion or an Oscar-nominated actor."
+at_mixer(djokovic). @ "Djokovic is at the mixer"
+grand_slam_champion(V) & at_mixer(V) => professional_tennis_player(V). @ "Every Grand Slam champion at the mixer is a professional tennis player."
+oscar_nominated_actor(V) & at_mixer(V) => celebrity(V). @ "All Oscar-nominated actors at the mixer are celebrities."
+professional_tennis_player(V) & at_mixer(V) => athlete(V). @ "All professional tennis players at the mixer are athletes."
+celebrity(V) & at_mixer(V) => well_paid(V). @ "If a person at the mixer is a celebrity, then they are well paid."
+athlete(V) & at_mixer(V) => famous(V). @ "If a person at the mixer is an athlete, then they are famous."
+well_paid(V) & at_mixer(V) => lives_in_tax_haven(V). @ "All well-paid people at the mixer live in tax havens."
+athlete(djokovic) & famous(djokovic) => well_paid(djokovic). @ "if Djokovic is a famous athlete, then Djokovic is well-paid"
+? not lives_in_tax_haven(djokovic).

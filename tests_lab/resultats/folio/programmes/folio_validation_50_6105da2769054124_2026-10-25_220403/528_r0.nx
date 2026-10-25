@@ -1,0 +1,6 @@
+shooter(windy). @ "Windy's shooting"
+shooter(P) & not jumps_when_shooting(P) => can_block(michael, P). @ "Michael can block any shooting from a person as long as the person does not jump when shooting"
+shooter(P) & not can_block(michael, P) => jumps_when_shooting(P). @ "Michael can block any shooting from a person as long as the person does not jump when shooting"
+not can_block(michael, windy). @ "Michael cannot block Windy's shooting"
+shooter(P) & jumps_when_shooting(P) => great_shooter(P). @ "Every shooter who can jump when shooting is a great shooter"
+? great_shooter(windy).

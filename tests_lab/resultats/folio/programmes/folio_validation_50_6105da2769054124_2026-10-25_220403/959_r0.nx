@@ -1,0 +1,13 @@
+spills_food(X) => not tidy(X). @ "If people spill a lot of food on their clothing, then they are not notably tidy."
+clumsy_foodie(X) & goes_out_often(X) => spills_food(X). @ "All clumsy foodies who go out frequently to find new food restaurants to try are people who spill a lot of food on their clothing."
+cleanly(X) => tidy(X). @ "If people are cleanly, then they are notably tidy."
+values_order(X) => cleanly(X). @ "If people value order and spotlessness, then they are cleanly."
+family_prioritizes_order(X) => values_order(X). @ "All people whose families prioritize order and spotlessness themselves value order and spotlessness."
+spills_food(peter) => cleanly(peter). @ "Peter is either a person who spills a lot of food on his clothing and is cleanly, or a person who does not spill a lot of food on his clothing and is not cleanly"
+cleanly(peter) => spills_food(peter). @ "Peter is either a person who spills a lot of food on his clothing and is cleanly, or a person who does not spill a lot of food on his clothing and is not cleanly"
+not spills_food(peter) => not cleanly(peter). @ "Peter is either a person who spills a lot of food on his clothing and is cleanly, or a person who does not spill a lot of food on his clothing and is not cleanly"
+not cleanly(peter) => not spills_food(peter). @ "Peter is either a person who spills a lot of food on his clothing and is cleanly, or a person who does not spill a lot of food on his clothing and is not cleanly"
+clumsy_foodie(peter) & goes_out_often(peter) & not family_prioritizes_order(peter) => either_holds. @ "Peter is either a  clumsy foodie who goes out frequently to find new food restaurants to try or he is someone whose family prioritizes order and spotlessness."
+family_prioritizes_order(peter) & not clumsy_foodie(peter) => either_holds. @ "Peter is either a  clumsy foodie who goes out frequently to find new food restaurants to try or he is someone whose family prioritizes order and spotlessness."
+family_prioritizes_order(peter) & not goes_out_often(peter) => either_holds. @ "Peter is either a  clumsy foodie who goes out frequently to find new food restaurants to try or he is someone whose family prioritizes order and spotlessness."
+? either_holds.

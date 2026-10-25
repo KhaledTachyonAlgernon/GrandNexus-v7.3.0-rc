@@ -1,0 +1,8 @@
+library(X) => not cs(X). @ "None of the students who currently work in the library are from the computer science department."
+part_time(X) => library(X). @ "All of the students with part-time jobs offered by the university currently work in the library."
+database(X) => cs(X). @ "All of the students who are taking the database course are from the computer science department."
+prof_david(X) => database(X). @ "All of the students taking a class with Professor David are taking the database course."
+lab(X) => prof_david(X). @ "All students working in the lab are taking a class with Professor David."
+lab(james). @ "James is a student working in the lab."
+# cannot express: "James doesn't work in the lab or have a part-time job offered by the university."
+? database(james).

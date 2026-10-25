@@ -1,0 +1,6 @@
+event(e1). @ "At least one event is happy"
+happy(e1). @ "At least one event is happy"
+event(V) & not happy(V) => sad(V). @ "Events are either happy or sad"
+event(V) & not sad(V) => happy(V). @ "Events are either happy or sad"
+event(V) & happy(V) => not sad(V). @ "Events are either happy or sad"
+? event(V) => sad(V).

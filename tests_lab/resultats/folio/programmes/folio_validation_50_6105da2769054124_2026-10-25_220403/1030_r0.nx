@@ -1,0 +1,10 @@
+ranked_highly(X) => active_player(X). @ "If someone is ranked highly by the Women's Tennis Association, then they are one of the most active players in major tennis."
+lost_to(X, iga_swiatek) => ranked_highly(X). @ "Everyone who lost to Iga Świątek at Roland Garros 2022 is ranked highly by the Women's Tennis Association."
+female(X) & player_rg22(X) => lost_to(X, iga_swiatek). @ "All female tennis players at Roland Garros 2022 lost to Iga Świątek."
+player_rg22(X) & not female(X) => male(X). @ "All tennis players at Roland Garros 2022 are either female or male."
+player_rg22(X) & not male(X) => female(X). @ "All tennis players at Roland Garros 2022 are either female or male."
+male(X) & player_rg22(X) => lost_to(X, rafael_nadal). @ "All male tennis players at Roland Garros in 2022 lost to Rafael Nadal."
+ranked_highly(coco_gauff) => not male(coco_gauff). @ "If Coco Gauff is ranked highly by the Women's Tennis Association or lost to Rafael Nadal, then Coco Gauff is not a male tennis player at Roland Garros 2022."
+lost_to(coco_gauff, rafael_nadal) => not male(coco_gauff). @ "If Coco Gauff is ranked highly by the Women's Tennis Association or lost to Rafael Nadal, then Coco Gauff is not a male tennis player at Roland Garros 2022."
+player_rg22(coco_gauff). @ "Coco Gauff is at Roland Garros 2022."
+? lost_to(coco_gauff, rafael_nadal).

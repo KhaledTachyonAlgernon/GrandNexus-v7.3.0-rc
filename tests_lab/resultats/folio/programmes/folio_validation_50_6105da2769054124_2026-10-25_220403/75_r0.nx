@@ -1,0 +1,10 @@
+# "Some mammals have teeth": existential, fresh constant
+mammal(some_mammal_1). @ "Some mammals have teeth"
+has_teeth(some_mammal_1). @ "Some mammals have teeth"
+# "Platypuses have no teeth"
+platypus(V) => not has_teeth(V). @ "Platypuses have no teeth"
+# "Platypuses are mammals"
+platypus(V) => mammal(V). @ "Platypuses are mammals"
+# "Humans have teeth"
+human(V) => has_teeth(V). @ "Humans have teeth"
+? platypus(V) => reptile(V).

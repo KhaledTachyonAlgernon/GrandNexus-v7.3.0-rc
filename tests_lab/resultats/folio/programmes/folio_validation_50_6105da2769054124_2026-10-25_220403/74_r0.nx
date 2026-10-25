@@ -1,0 +1,3 @@
+mammal(platypus). @ "Platypuses are mammals."
+not has_teeth(platypus). @ "Platypuses have no teeth."
+? mammal(platypus) & not has_teeth(platypus).

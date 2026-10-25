@@ -1,0 +1,8 @@
+same(ailton, ailton_silva). @ "is commonly known as Ailton"
+football_player(ailton). @ "Ailton is a football player"
+loaned_out(ailton, braga). @ "was loaned out to Braga"
+plays_for(ailton_silva, nautico). @ "plays for Náutico"
+football_club(nautico). @ "Náutico is a football club along with Braga"
+football_club(braga). @ "Náutico is a football club along with Braga"
+football_club(fluminense). @ "Fluminense is a football club"
+? football_club(C) => not loaned_out(ailton, C).

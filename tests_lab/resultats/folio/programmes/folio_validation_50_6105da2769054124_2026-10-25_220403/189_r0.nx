@@ -1,0 +1,4 @@
+novel(family_history). @ "Family History is a novel written in 2003."
+written_by(family_history, dani_shapiro). @ "Family History is written by Dani Shapiro."
+novel(B) & written_by(B, P) => novel_writer(P). @ "If a book is a novel and it is written by a person, then the person is a novel writer."
+? novel_writer(dani_shapiro).

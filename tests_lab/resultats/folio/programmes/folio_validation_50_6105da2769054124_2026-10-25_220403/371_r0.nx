@@ -1,0 +1,7 @@
+# cannot express: "in New Mexico or Texas"
+mountain_range(picuris_mountains). @ "The Picuris Mountains are a mountain range"
+visited(juan_de_onate, picuris_mountains). @ "Juan de Onate visited the Picuris Mountains"
+mine_in(harding_pegmatite_mine, picuris_mountains). @ "The Harding Pegmatite Mine, located in the Picuris Mountains"
+donated(harding_pegmatite_mine). @ "was donated"
+mountain_range(R) & mine_in(M, R) & donated(M) => not in(R, texas). @ "There are no mountain ranges in texas that have mines that have been donated."
+? visited(juan_de_onate, R) & mountain_range(R) & in(R, texas).
