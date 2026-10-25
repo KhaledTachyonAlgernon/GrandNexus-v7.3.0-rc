@@ -1,22 +1,41 @@
-# GrandNexus 6.5 (réparation de la 6.4 + couche du 15/05)
+# GrandNexus v6.8.1
 
-## Colab
-```python
-# optionnel (débloque 8 modules du 15/05, voir les 3 niveaux dans le fichier) :
-# !pip install -q -r /content/GrandNexus/requirements-extra.txt
-!unzip -q -o GrandNexus_v6.5.zip -d /content
-%cd /content/GrandNexus
-!python tools/smoke_test.py              # imports module par module (bugs vs dépendances absentes)
-!python tools/integration_test.py        # démarrage + capacités
-!python tools/lab_reasoning.py           # voie perception→raisonnement vs témoins + orchestrateur
-!python tools/layer_runtime_test.py 3    # tout le système vivant sur un NexusCore démarré
+Modular cognitive architecture (Python). This archive is a complete, self-contained snapshot:
+no notebook chain, no `%%writefile`, no update to graft.
+
+## Quick start (Colab or any Python 3.10+)
+```bash
+unzip GrandNexus_v6.8.1_complet.zip -d /content      # -> /content/GrandNexus
+pip install -q -r /content/GrandNexus/requirements.txt
 ```
 ```python
 import sys; sys.path.insert(0, "/content/GrandNexus")
 from grandnexus.boot import boot
-gn = boot(); gn.print_report()
-print(gn.modules()["text_reasoner"].answer("Tous les hommes sont mortels. Socrate est un homme. Socrate est-il mortel ?")["answer"])
-print(gn.orchestrator.process_input("No reptiles are mammals. A snake is a reptile. Is a snake a mammal?")["output"][0])
+gn = boot(llm="auto")          # Claude translator if ANTHROPIC_API_KEY is set (env var or Colab Secrets), else grammar only
+gn.print_report()
+tr = gn.modules()["text_reasoner"]
+print(tr.answer("All men are mortal. Socrates is a man. Is Socrates mortal?")["answer"])
 gn.shutdown()
 ```
-Historique : `!git log --oneline` · Résultats et décisions : `CARNET_DE_BORD.md`.
+Modes: laboratory (default, deterministic, nothing runs in the background) or live (`boot(start_core=True)` / `gn.start()`).
+
+## What is where
+| Path | Content |
+|---|---|
+| `grandnexus/` | the package (core, memories, cognition, graph, LLM interface, 15/05 layer) |
+| `grandnexus/boot.py` | assembles and wires the whole system |
+| `grandnexus/cognition/reasoning/text_reasoner.py` | text -> premises -> deduction -> verdict |
+| `grandnexus/llm_interface/llm_translator.py` | Claude as an anchored translator (prompt versions v1-v4) |
+| `tools/banc_de_test_v2.py` | test bench: freezes a test set, measures 4 modes, never prints item texts |
+| `tools/smoke_test.py`, `tools/lab_*.py` | import test, labs (controls, layer oracles) |
+| `tests_lab/test_*.py` | offline tests (no API) |
+| `CARNET_DE_BORD.md` | logbook: every hypothesis -> result -> decision |
+| `archive/` | original 15/05 and 29/05 sources (untouched) |
+| `.git` | full history: every repair is one commit (`git log --oneline`) |
+
+## Checks
+```bash
+cd /content/GrandNexus
+python tools/smoke_test.py
+for t in tests_lab/test_*.py; do python $t; done
+```
