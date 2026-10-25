@@ -1,6 +1,14 @@
 # ═══ Banc de test GrandNexus v2 — autonome, sans Gemini. N'affiche JAMAIS le texte des items. ═══
 import os, sys, json, glob, time, hashlib, subprocess, collections, logging
-WORK = globals().get('WORK') or sorted({os.path.dirname(os.path.dirname(p)) for p in glob.glob('/content/**/grandnexus/boot.py', recursive=True)}, key=len)[0]
+def _sous_content(motif):
+    """glob récursif dans /content SANS descendre dans le Drive monté (peut être immense)."""
+    out = []
+    for racine, dossiers, _ in os.walk('/content'):
+        if racine == '/content':
+            dossiers[:] = [d for d in dossiers if d not in ('drive', 'sample_data')]
+        out += glob.glob(os.path.join(racine, motif))
+    return out
+WORK = globals().get('WORK') or sorted({os.path.dirname(os.path.dirname(p)) for p in _sous_content('grandnexus/boot.py')}, key=len)[0]
 if not os.environ.get('ANTHROPIC_API_KEY'):
     from google.colab import userdata
     os.environ['ANTHROPIC_API_KEY'] = userdata.get('ANTHROPIC_API_KEY')
@@ -25,7 +33,7 @@ def empreinte_items(items):
 def temoins():
     """Tous les témoins figés présents dans /content : fichier, empreinte du fichier, empreinte du contenu."""
     out = []
-    for p in sorted(glob.glob('/content/**/tests_lab/*.json', recursive=True)):
+    for p in sorted(_sous_content('tests_lab/*.json')):
         blob = open(p, encoding='utf-8').read()
         try:
             d = json.loads(blob)
