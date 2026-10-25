@@ -70,15 +70,16 @@ def normalise(ans) -> str:
 
 def metrics(rows: list[dict], key: str = "pred") -> dict:
     n = len(rows) or 1
-    acc = sum(r[key] == r["expected"] for r in rows)
+    g = lambda r: r.get(key, "erreur")          # a row that errored has no pred_strict (fix 6.9.2)
+    acc = sum(g(r) == r["expected"] for r in rows)
     return {"acc": acc, "n": len(rows), "pct": round(100 * acc / n, 1),
-            "false_oui": sum(r[key] == "oui" and r["expected"] != "oui" for r in rows),
-            "false_non": sum(r[key] == "non" and r["expected"] != "non" for r in rows),
-            "inventions": sum(r[key] in ("oui", "non") and r["expected"] == "inconnu" for r in rows),
-            "inconnu": sum(r[key] == "inconnu" for r in rows),
-            "contradictoire": sum(r[key] == "contradictoire" for r in rows),
-            "erreurs": sum(r[key] == "erreur" for r in rows),
-            "confusion": {f"{e}->{p}": c for (e, p), c in sorted(Counter((r["expected"], r[key]) for r in rows).items())}}
+            "false_oui": sum(g(r) == "oui" and r["expected"] != "oui" for r in rows),
+            "false_non": sum(g(r) == "non" and r["expected"] != "non" for r in rows),
+            "inventions": sum(g(r) in ("oui", "non") and r["expected"] == "inconnu" for r in rows),
+            "inconnu": sum(g(r) == "inconnu" for r in rows),
+            "contradictoire": sum(g(r) == "contradictoire" for r in rows),
+            "erreurs": sum(g(r) == "erreur" for r in rows),
+            "confusion": {f"{e}->{p}": c for (e, p), c in sorted(Counter((r["expected"], g(r)) for r in rows).items())}}
 
 
 def main() -> None:
@@ -147,7 +148,14 @@ def main() -> None:
                         r = gn_reasoner.answer(it["text"] + "\n" + as_question(it["query"]))
                         row["pred"] = normalise(r.get("answer", "") if isinstance(r, dict) else r)
                 except Exception as e:  # noqa: BLE001 — on note et on continue
-                    row.update(pred="erreur", error=f"{type(e).__name__}: {str(e)[:120]}")
+                    row.update(pred="erreur", error=f"{type(e).__name__}: {str(e)[:160]}")
+                    n_err = sum(1 for r in rows[m] if r.get("pred") == "erreur") + 1
+                    if n_err <= 3:
+                        print(f"  !! {m} item {it['id']} : {row['error']}")
+                    if n_err == 3 and len(rows[m]) == 2 and m in API_MODES:
+                        print(f"  !! {m} : les 3 premiers appels ont échoué -> arrêt (clé API ? paquet anthropic ? réseau ?)")
+                        rows[m].append(row)
+                        break
                 rows[m].append(row)
             print(f"  {m} run {run}: {metrics([r for r in rows[m] if r['run'] == run])['pct']}%")
 
@@ -168,6 +176,10 @@ def main() -> None:
         summary["modes"][m] = {"runs": per_run, "stable_items": sum(len(s) == 1 for s in by_item.values()),
                                "calls": sum(r.get("calls", 0) for r in rs), "tokens": sum(r.get("tokens", 0) for r in rs)}
 
+    for m in modes:
+        errs = Counter(r.get("error", "") for r in rows[m] if r.get("pred") == "erreur")
+        for msg, c in errs.most_common(3):
+            print(f"erreurs {m} ({c}x) : {msg}")
     base = max(summary["modes"][b]["runs"][0]["pct"] for b in ("toujours_inconnu", "majorite", "hasard"))
     print(f"\nmeilleur témoin trivial : {base}%")
     for m in modes:
