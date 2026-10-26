@@ -1,0 +1,12 @@
+# cannot express: "Employees have lunch either in the company building or at home." (as a disjunction); the rule below is an approximation that the text only implies
+employee(X) & schedule_meeting(X) => at_building(X). @ "All employees who schedule a meeting with their customers will go to the company building today."
+lunch_building(X) => schedule_meeting(X). @ "Everyone who has lunch in the company building schedules meetings with their customers."
+employee(X) & not lunch_building(X) => lunch_home(X). @ "Employees have lunch either in the company building or at home."
+lunch_home(X) => remote(X). @ "If an employee has lunch at home, they are working remotely from home."
+employee(X) & abroad(X) => remote(X). @ "All employees who are in other countries work remotely from home."
+manager(X) => not remote(X). @ "No managers work remotely from home."
+at_building(james) => manager(james). @ "James will appear in the company today if and only if he is a manager."
+manager(james) => at_building(james). @ "James will appear in the company today if and only if he is a manager."
+* manager(X) => manager_or_abroad(X).
+* abroad(X) => manager_or_abroad(X).
+? manager_or_abroad(james) => not remote(james).

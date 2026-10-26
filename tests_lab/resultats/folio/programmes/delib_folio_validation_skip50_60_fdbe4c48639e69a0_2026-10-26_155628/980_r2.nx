@@ -1,0 +1,10 @@
+student_job(V) => needs_money(V). @ "If people at Mary's school work in student jobs on campus, then they need to earn money to help pay for their college tuition."
+orders_takeout(V) => student_job(V). @ "If people at Mary's school order takeout frequently in college, then they work in student jobs on campus."
+# cannot express: "People at Mary's school order takeout frequently in college or enjoy the dining hall meals and recipes."
+enjoys_dining(V) => not picky(V). @ "If people at Mary's school enjoy the dining hall meals and recipes, then they are not picky eaters."
+enjoys_dining(V) => spends_time_dining(V). @ "If people at Mary's school enjoy the dining hall meals and recipes, then they spend a lot of their time eating and catching up with friends in the campus dining halls."
+at_school(hannah). @ "Hannah is at Mary's school."
+student_job(hannah). @ "Hannah works in student jobs on campus"
+needs_money(hannah) => not picky(hannah). @ "if she needs to earn money to help pay for her college tuition, then she is neither picky nor needs to earn money to help pay for her college tuition"
+needs_money(hannah) => not needs_money(hannah). @ "if she needs to earn money to help pay for her college tuition, then she is neither picky nor needs to earn money to help pay for her college tuition"
+? at_school(hannah) & not picky(hannah) & spends_time_dining(hannah).

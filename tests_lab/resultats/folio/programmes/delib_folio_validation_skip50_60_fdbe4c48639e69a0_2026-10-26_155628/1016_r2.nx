@@ -1,0 +1,17 @@
+# predicates: in_club, performs (performs in school talent shows often), engaged (attends and is very engaged with school events), inactive (inactive and disinterested member), chaperones (chaperones high school dances), student (student who attends the school), wishes (young child or teenager who wishes to further academic career)
+in_club(X) & performs(X) => engaged(X). @ "People in this club who perform in school talent shows often attend and are very engaged with school events."
+in_club(X) & not performs(X) => inactive(X). @ "People in this club either perform in school talent shows often or are inactive and disinterested community members."
+in_club(X) & not inactive(X) => performs(X). @ "People in this club either perform in school talent shows often or are inactive and disinterested community members."
+in_club(X) & performs(X) => not inactive(X). @ "People in this club either perform in school talent shows often or are inactive and disinterested community members."
+in_club(X) & chaperones(X) => not student(X). @ "People in this club who chaperone high school dances are not students who attend the school."
+in_club(X) & inactive(X) => chaperones(X). @ "All people in this club who are inactive and disinterested members of their community chaperone high school dances."
+in_club(X) & wishes(X) => student(X). @ "All young children and teenagers in this club who wish to further their academic careers and educational opportunities are students who attend the school."
+in_club(bonnie). @ "Bonnie is in this club"
+engaged(bonnie) => student(bonnie). @ "she either both attends and is very engaged with school events and is a student who attends the school or is not someone who both attends and is very engaged with school events and is not a student who attends the school"
+student(bonnie) => engaged(bonnie). @ "she either both attends and is very engaged with school events and is a student who attends the school or is not someone who both attends and is very engaged with school events and is not a student who attends the school"
+not engaged(bonnie) => not student(bonnie). @ "she either both attends and is very engaged with school events and is a student who attends the school or is not someone who both attends and is very engaged with school events and is not a student who attends the school"
+not student(bonnie) => not engaged(bonnie). @ "she either both attends and is very engaged with school events and is a student who attends the school or is not someone who both attends and is very engaged with school events and is not a student who attends the school"
+chaperones(bonnie) => cond(bonnie). @ "Bonnie either chaperones high school dances"
+not chaperones(bonnie) & performs(bonnie) => cond(bonnie). @ "if she does not, she performs in school talent shows often"
+wishes(bonnie) & inactive(bonnie) => both(bonnie). @ "Bonnie is both a young child or teenager who wishes to further her academic career and educational opportunities and an inactive and disinterested member of the community"
+? cond(bonnie) => both(bonnie).

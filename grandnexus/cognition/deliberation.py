@@ -28,7 +28,7 @@ from typing import Any, Dict, List, Optional, Sequence
 
 from grandnexus.llm_interface.translator_v5 import (SYSTEM_TRANSLATE, Translator, _user,
                                                     extract_program)
-from grandnexus.nexus_logic import Engine, parse
+from grandnexus.nexus_logic import decide, parse
 
 DECIDED = ("oui", "non", "contradictoire")
 
@@ -70,7 +70,7 @@ class Reading:
 
 def _verdict(program: str, text: str) -> Reading:
     prog = parse(program, source_text=text, require_anchor=True)
-    v = Engine(prog, use_knowledge=False).answer()
+    v = decide(prog, use_knowledge=False)
     return Reading("", program, v.answer, prog.n_statements, len(prog.rejections),
                    program.count("# cannot express"), 0, v.proof)
 

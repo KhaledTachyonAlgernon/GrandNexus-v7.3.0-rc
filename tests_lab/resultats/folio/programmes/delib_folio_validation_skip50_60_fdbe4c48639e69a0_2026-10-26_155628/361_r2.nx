@@ -1,0 +1,6 @@
+british_sitcom(badults). @ "Badults is a British Sitcom series"
+member_of(pappys_member_1, pappys). @ "starring members of Pappy's"
+starred_in(pappys_member_1, badults). @ "starring members of Pappy's"
+piloted_on(badults, bbc_three). @ "Badults was piloted in July 2013 on BBC Three"
+* starred_in(P, S) & piloted_on(S, C) => starred_piloting_on(P, C).
+? member_of(V, pappys) => not starred_piloting_on(V, bbc_three).

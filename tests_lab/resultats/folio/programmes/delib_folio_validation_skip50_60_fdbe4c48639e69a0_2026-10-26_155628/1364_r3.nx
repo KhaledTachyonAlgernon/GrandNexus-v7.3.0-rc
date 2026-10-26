@@ -1,0 +1,14 @@
+rabbit(V) & spotted(V) => cute(V). @ "All rabbits that can be spotted near the campus are cute."
+turtle(some_turtle_1). @ "Some turtles can be spotted near the campus."
+spotted(some_turtle_1). @ "Some turtles can be spotted near the campus."
+# cannot express exactly: "The only animals that can be spotted near the campus are rabbits and squirrels." (a disjunction). Approximated as: spotted and not a squirrel => rabbit; "animal" is dropped because Rockie is not stated to be one.
+spotted(V) & not squirrel(V) => rabbit(V). @ "The only animals that can be spotted near the campus are rabbits and squirrels."
+skittish(V) => not calm(V). @ "If something is skittish, then it is not calm."
+squirrel(V) & spotted(V) => skittish(V). @ "All the squirrels that can be spotted near the campus are skittish."
+spotted(rockie). @ "Rockie can be spotted near the campus"
+calm(rockie). @ "it is calm"
+# cannot express: "If Rockie is not both a turtle and a squirrel" (the antecedent is dropped)
+# the disjunction "cute or skittish" is expressed with a helper predicate (definitional background knowledge)
+* cute(V) => cute_or_skittish(V).
+* skittish(V) => cute_or_skittish(V).
+? cute_or_skittish(rockie).

@@ -1,0 +1,8 @@
+can_register(X) => can_participate(X). @ "Everyone who can register to vote in the United States can participate in the 2024 United States presidential election."
+us_citizen(X) => can_register(X). @ "If someone has United States citizenship, then they can register to vote in the United States."
+us_citizen(X) => not taiwanese_citizen(X). @ "A person either has United States citizenship or Taiwanese citizenship."
+taiwanese_citizen(X) => not us_citizen(X). @ "A person either has United States citizenship or Taiwanese citizenship."
+russian_official(X) => not taiwanese_citizen(X). @ "No Russian Federation officials hold Taiwanese citizenship."
+not taiwanese_citizen(vladimir). @ "Vladimir neither holds Taiwanese citizenship"
+not gazprom_manager(vladimir). @ "nor is he a manager at Gazprom"
+? russian_official(vladimir).

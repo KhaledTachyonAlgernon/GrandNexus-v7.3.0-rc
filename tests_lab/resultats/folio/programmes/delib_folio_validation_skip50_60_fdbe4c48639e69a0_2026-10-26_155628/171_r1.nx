@@ -1,0 +1,3 @@
+book(walden). @ "Harry read the book “Walden” by Henry Thoreau."
+book(V) => contains(V, knowledge). @ "Books contain tons of knowledge."
+? contains(walden, knowledge).

@@ -1,0 +1,6 @@
+transport_multiple(X) => not one_seater(X). @ "If something can transport multiple passengers, then they are not one-seaters."
+tesla_model_3(X) => transport_multiple(X). @ "All Tesla Model 3 can transport multiple passengers."
+single_seat_ev(X) => one_seater(X). @ "All single-seat electric cars are one-seaters."
+solo_ev(X) => single_seat_ev(X). @ "All Solo EV cars are single-seat electric cars."
+# cannot express: "If John's car is not a Tesla Model 3, then John's car is not a Tesla Model 3 or a single-seat electric car."
+? tesla_model_3(john_car).

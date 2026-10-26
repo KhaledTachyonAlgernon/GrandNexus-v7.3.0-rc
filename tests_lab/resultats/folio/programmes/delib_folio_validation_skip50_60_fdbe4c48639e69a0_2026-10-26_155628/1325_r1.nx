@@ -1,0 +1,9 @@
+animal(X) & bark(X) => not likes(jane, X). @ "Jane does not like any animals that bark."
+dog(X) => animal(X). @ "All dogs are animals that bark."
+dog(X) => bark(X). @ "All dogs are animals that bark."
+animal(X) & jump(X) => likes(jane, X). @ "Jane likes all animals that jump."
+animal(X) & has_legs(X) => jump(X). @ "If an animal has legs, then it jumps."
+animal(X) & terricolous(X) => has_legs(X). @ "If an animal is terricolous, then it has legs."
+animal(kiki). @ "KiKi is an animal."
+# cannot express: "If KiKi neither jumps nor has legs, then KiKi is terricolous or has legs."
+? dog(kiki) & bark(kiki).

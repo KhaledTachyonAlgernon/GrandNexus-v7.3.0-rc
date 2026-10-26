@@ -1,0 +1,12 @@
+# the text never says James is an employee, so no employee fact is written
+employee(X) & schedule_meeting(X) => go_building(X). @ "All employees who schedule a meeting with their customers will go to the company building today."
+lunch_building(X) => schedule_meeting(X). @ "Everyone who has lunch in the company building schedules meetings with their customers."
+employee(X) & not lunch_building(X) => lunch_home(X). @ "Employees have lunch either in the company building or at home."
+lunch_home(X) => remote(X). @ "If an employee has lunch at home, they are working remotely from home."
+employee(X) & other_country(X) => remote(X). @ "All employees who are in other countries work remotely from home."
+manager(X) => not remote(X). @ "No managers work remotely from home."
+appear(james) => manager(james). @ "James will appear in the company today if and only if he is a manager."
+manager(james) => appear(james). @ "James will appear in the company today if and only if he is a manager."
+# cannot express: "If James is either a manager or in other countries,  then James does not either has lunch at home or work remotely from home."
+# the question below is a simplified reading of the second sentence, since disjunctions and conjoined conclusions are not expressible
+? remote(james) => not manager(james).

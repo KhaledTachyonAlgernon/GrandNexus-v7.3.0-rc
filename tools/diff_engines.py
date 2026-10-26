@@ -17,7 +17,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from grandnexus.nexus_logic import Engine, parse, Lit           # noqa: E402
+from grandnexus.nexus_logic import Engine, decide, parse, Lit   # noqa: E402
 from grandnexus.nexus_logic.asp import clingo_verdict            # noqa: E402
 
 _VARS = ("X", "Y", "Z")
@@ -46,8 +46,8 @@ def home_verdict(program_text: str) -> str | None:
     from grandnexus.cognition.reasoning.text_reasoner import TextReasoner, _args
     prog = parse(program_text)
     if not prog.questions or prog.questions[0][0] == "universal" or any(l.vars() for l in prog.questions[0]) \
-            or len(prog.questions[0]) != 1:
-        return None
+            or len(prog.questions[0]) != 1 or prog.disjunctions or prog.drules:
+        return None                                   # the home engine has no disjunction
     ref = Engine(prog)                       # for same()/typical_/let canonicalisation only
     uf = ref.uf
     for lit, _, _ in prog.facts:
@@ -82,7 +82,7 @@ def main() -> None:
     for f in files:
         text = f.read_text(encoding="utf-8")
         prog = parse(text)
-        v = Engine(prog).answer()
+        v = decide(prog)
         asp, home = clingo_verdict(prog), home_verdict(text)
         flags = []
         if asp is not None and asp != v.answer:

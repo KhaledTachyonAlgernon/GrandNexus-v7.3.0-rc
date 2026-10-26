@@ -31,7 +31,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Dict, Iterator, List, Optional, Sequence, Set, Tuple, Union
 
-ENGINE_VERSION = "ref-1.2"  # 1.1: reductio ad absurdum ; 1.2: universal questions
+ENGINE_VERSION = "ref-2.0"  # 1.1: reductio ; 1.2: universal questions ; 2.0: disjunctions (case split)
 MAX_ARITY = 4  # relation ternaire + moment ; le carnet a perdu un item sur une limite à 2 puis 3
 
 LANGUAGE_SPEC = """\
@@ -40,8 +40,10 @@ line      := [ "*" ] statement [ @ "span" ]   "*" = background knowledge (not in
                                               span = exact quote of the text words justifying the statement
 statement := fact | rule | same | let | question
 fact      := literal "."
+           | literal "|" literal { "|" literal } "."   disjunction: at least one of them holds
 rule      := literal { "&" literal } "=>" literal "."
              every variable of the conclusion must appear in a condition
+           | literal { "&" literal } "=>" literal "|" literal { "|" literal } "."   disjunctive conclusion
 same      := "same(" const ", " const ")."    two names for one entity
 let       := "let " const " = " expr "."      expr: numbers, + - * / ( ), earlier let-constants
 question  := "? " literal { "&" literal } "."  exactly one per program; may contain a variable
@@ -105,6 +107,22 @@ class Rule:
 
     def __str__(self) -> str:
         return " & ".join(str(b) for b in self.body) + " => " + str(self.head)
+
+
+@dataclass(frozen=True)
+class DRule:
+    """Rule with a disjunctive conclusion: body => h1 | h2 | ... (case split at solving time)."""
+    body: Tuple[Lit, ...]
+    heads: Tuple[Lit, ...]
+    sid: str
+    knowledge: bool = False
+
+    def is_safe(self) -> bool:
+        bv = set().union(*(b.vars() for b in self.body))
+        return all(h.vars() <= bv for h in self.heads)
+
+    def __str__(self) -> str:
+        return " & ".join(str(b) for b in self.body) + " => " + " | ".join(str(h) for h in self.heads)
 
 
 def subst_lit(lit: Lit, s: Dict[str, Term]) -> Lit:
@@ -193,13 +211,15 @@ class Program:
     lets: Dict[str, Union[int, float]] = field(default_factory=dict)
     questions: List[Tuple] = field(default_factory=list)                 # conjonction de littéraux, ou ("universal", i)
     universal_questions: List["Rule"] = field(default_factory=list)       # ? body => head
+    disjunctions: List[Tuple[Tuple[Lit, ...], str, bool]] = field(default_factory=list)   # a | b.  (ground)
+    drules: List["DRule"] = field(default_factory=list)                   # body => a | b
     rejections: List[Rejection] = field(default_factory=list)
     anchors: Dict[str, str] = field(default_factory=dict)
     notes: List[str] = field(default_factory=list)                       # lignes "# cannot express"
 
     @property
     def n_statements(self) -> int:
-        return len(self.facts) + len(self.rules) + len(self.sames) + len(self.lets)
+        return len(self.facts) + len(self.rules) + len(self.sames) + len(self.lets) + len(self.disjunctions) + len(self.drules)
 
 
 def _norm(s: str) -> str:
@@ -311,6 +331,13 @@ def _parse_statement(prog: Program, seg: str, lineno: int, sid: str, src: Option
         if "=>" in body:
             lhs, rhs = body.split("=>", 1)
             conds = tuple(parse_literal(c) for c in lhs.split("&"))
+            if "|" in rhs:                                    # disjunctive conclusion
+                heads = tuple(parse_literal(h) for h in rhs.split("|"))
+                drule = DRule(conds, heads, sid, knowledge)
+                if not drule.is_safe():
+                    raise ValueError("unsafe rule: every variable of the conclusion must appear in a condition (R37)")
+                prog.drules.append(drule)
+                return
             head = parse_literal(rhs)
             if head in conds:
                 raise ValueError("rule concludes one of its own conditions")
@@ -318,6 +345,11 @@ def _parse_statement(prog: Program, seg: str, lineno: int, sid: str, src: Option
             if not rule.is_safe():
                 raise ValueError("unsafe rule: every variable of the conclusion must appear in a condition (R37)")
             prog.rules.append(rule)
+        elif "|" in body:                                     # ground disjunction
+            lits = tuple(parse_literal(x) for x in body.split("|"))
+            if any(l.vars() for l in lits):
+                raise ValueError("disjunction with a variable: use constants, or a rule with a disjunctive conclusion")
+            prog.disjunctions.append((lits, sid, knowledge))
         else:
             lit = parse_literal(body)
             if lit.vars():
@@ -401,6 +433,37 @@ class Engine:
         self._build(contrapositives)
         self._chase()
         self.contradictions: List[Lit] = sorted((l for l in self.kb if not l.neg and l.flip() in self.kb), key=str)
+        self.pending: List[Tuple[Tuple[Lit, ...], str]] = []       # ground disjunctions not yet decided
+        self.refuted_disjunction: Optional[Tuple[Lit, ...]] = None  # a disjunction with every disjunct refuted
+        self._collect_disjunctions()
+
+    @property
+    def inconsistent(self) -> bool:
+        return bool(self.contradictions) or self.refuted_disjunction is not None
+
+    def _collect_disjunctions(self) -> None:
+        cands: List[Tuple[Tuple[Lit, ...], str]] = []
+        for lits, sid, kn in self.prog.disjunctions:
+            if kn and not self.use_knowledge:
+                continue
+            cands.append((tuple(self.canon(l) for l in lits), sid))
+        for r in self.prog.drules:
+            if r.knowledge and not self.use_knowledge:
+                continue
+            body = tuple(self.canon(b) for b in r.body)
+            for sub in self._matches(body, {}):
+                cands.append((tuple(subst_lit(self.canon(h), sub) for h in r.heads), r.sid))
+        seen = set()
+        for lits, sid in cands:
+            if lits in seen:
+                continue
+            seen.add(lits)
+            if any(l in self.kb for l in lits):
+                continue                                           # already satisfied
+            if all(l.flip() in self.kb for l in lits):
+                self.refuted_disjunction = lits                    # branch inconsistent
+                return
+            self.pending.append((lits, sid))
 
     # --- construction
     def _all_terms(self) -> Iterator[Term]:
@@ -542,6 +605,11 @@ class Engine:
         gs = tuple(self.canon(l) for l in goal)
         if self.overflow:
             return Verdict("inconnu", note=f"fact limit {self.max_facts} reached")
+        if self.refuted_disjunction is not None and not self.contradictions:
+            d = self.refuted_disjunction
+            return Verdict("contradictoire", contradictions=[" | ".join(str(l) for l in d)],
+                           proof=[f"CONTRADICTION: every disjunct of {' | '.join(str(l) for l in d)} is refuted"]
+                           + sum((self._proof(l.flip()) for l in d), []))
         if self.contradictions:
             c = self.contradictions[0]
             used = self._used(c) | self._used(c.flip())
@@ -566,9 +634,12 @@ class Engine:
             g = gs[0]
             for hyp, ans in ((g, "non"), (g.flip(), "oui")):
                 trial = Engine(self.prog, self.use_knowledge, True, self.merge_typical, self.max_facts,
-                               reductio=False, extra_facts=[hyp])
-                if trial.contradictions and not trial.overflow:
-                    c = trial.contradictions[0]
+                               reductio=False, extra_facts=self.extra_facts + [hyp])
+                if trial.inconsistent and not trial.overflow:
+                    c = trial.contradictions[0] if trial.contradictions else None
+                    if c is None:                               # a disjunction with every disjunct refuted
+                        return Verdict(ans, proof=[f"REDUCTIO: assume {hyp}: a disjunction has all its disjuncts refuted"],
+                                       note="by refutation (reductio ad absurdum)")
                     used = (trial._used(c) | trial._used(c.flip())) - {"hypothesis"}
                     return Verdict(ans, proof=[f"REDUCTIO: assume {hyp}"] + trial._proof(c) + trial._proof(c.flip()),
                                    used=sorted(used), depends_on_knowledge=bool(used & trial.knowledge_sids),
@@ -593,14 +664,14 @@ class Engine:
                 return self._verdict("non", [h.flip()] + [subst_lit(b, s) for b in body])
             if self.reductio:
                 trial = Engine(self.prog, self.use_knowledge, True, self.merge_typical, self.max_facts,
-                               reductio=False, extra_facts=[h])
-                if trial.contradictions and not trial.overflow:
+                               reductio=False, extra_facts=self.extra_facts + [h])
+                if trial.inconsistent and not trial.overflow:
                     return Verdict("non", proof=[f"COUNTEREXAMPLE {s}: assuming {h} is inconsistent"],
                                    note="universal refuted by a counterexample (reductio)")
         fresh = {v: f"fresh_{v.lower()}" for b in body for v in b.vars()}
         hyp = [subst_lit(b, fresh) for b in body]
         trial = Engine(self.prog, self.use_knowledge, True, self.merge_typical, self.max_facts,
-                       reductio=False, extra_facts=hyp)
+                       reductio=False, extra_facts=self.extra_facts + hyp)
         target = subst_lit(head, fresh)
         if target in trial.kb and not trial.contradictions:
             used = trial._used(target) - {"hypothesis"}
@@ -609,8 +680,8 @@ class Engine:
                            depends_on_knowledge=bool(used & trial.knowledge_sids), note="universal introduction")
         if self.reductio:                                # head's negation inconsistent under the assumption
             trial2 = Engine(self.prog, self.use_knowledge, True, self.merge_typical, self.max_facts,
-                            reductio=False, extra_facts=hyp + [target.flip()])
-            if trial2.contradictions and not trial2.overflow and not trial.contradictions:
+                            reductio=False, extra_facts=self.extra_facts + hyp + [target.flip()])
+            if trial2.inconsistent and not trial2.overflow and not trial.inconsistent:
                 return Verdict("oui", proof=[f"UNIVERSAL by refutation: assume {' & '.join(str(h) for h in hyp)} and {target.flip()}"],
                                note="universal introduction (reductio)")
         return Verdict("inconnu", note="universal question: no counterexample, no derivation")
@@ -619,6 +690,50 @@ class Engine:
         return [self.answer(q) for q in self.prog.questions] or [self.answer()]
 
 
+MAX_BRANCHES = 256
+
+
+def leaves(prog: Program, use_knowledge: bool = True, extra: Optional[List[Lit]] = None,
+           budget: Optional[List[int]] = None, **kw) -> List[Engine]:
+    """Case split on the pending disjunctions: every consistent complete branch (a 'leaf')."""
+    budget = budget if budget is not None else [MAX_BRANCHES]
+    eng = Engine(prog, use_knowledge=use_knowledge, extra_facts=extra or [], **kw)
+    if eng.inconsistent or eng.overflow:
+        return []
+    if not eng.pending:
+        return [eng]
+    lits, _ = eng.pending[0]
+    out: List[Engine] = []
+    for l in lits:
+        budget[0] -= 1
+        if budget[0] < 0:
+            raise RuntimeError("too many disjunction branches")
+        out += leaves(prog, use_knowledge, (extra or []) + [l], budget, **kw)
+    return out
+
+
+def decide(prog: Program, use_knowledge: bool = True, **kw) -> Verdict:
+    """Entailment under all case splits: a verdict holds only if every consistent branch gives it.
+    Without disjunctions this is exactly Engine(prog).answer()."""
+    if not prog.disjunctions and not prog.drules:
+        return Engine(prog, use_knowledge=use_knowledge, **kw).answer()
+    try:
+        ls = leaves(prog, use_knowledge, **kw)
+    except RuntimeError as e:
+        return Verdict("inconnu", note=str(e))
+    if not ls:
+        root = Engine(prog, use_knowledge=use_knowledge, **kw)
+        v = root.answer()
+        return v if v.answer == "contradictoire" else Verdict("contradictoire", note="every disjunction branch is inconsistent")
+    vs = [leaf.answer() for leaf in ls]
+    answers = {v.answer for v in vs}
+    if len(answers) == 1:
+        v = vs[0]
+        v.note = (v.note + " | " if v.note else "") + f"holds in all {len(ls)} disjunction branches"
+        return v
+    return Verdict("inconnu", note=f"disjunction: {len(ls)} branches disagree ({', '.join(sorted(answers))})")
+
+
 def run(program_text: str, source_text: Optional[str] = None, **engine_kw) -> Tuple[Program, Verdict]:
     prog = parse(program_text, source_text=source_text)
-    return prog, Engine(prog, **engine_kw).answer()
+    return prog, decide(prog, **engine_kw)

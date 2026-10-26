@@ -1,0 +1,8 @@
+pro_bb(some_p_1). @ "Some professional basketball players are not American nationals."
+not american(some_p_1). @ "Some professional basketball players are not American nationals."
+pro_bb(X) => jump_shot(X). @ "All professional basketball players can do jump shots."
+jump_shot(X) => leaps(X). @ "If someone can jump shots, they leap straight into the air."
+leaps(X) => leg_muscles(X). @ "If someone leaps straight into the air, they activate their leg muscles."
+not leg_muscles(yuri). @ "Yuri does not activate his leg muscles."
+* american_pro_bb(X) => pro_bb(X).
+? not leaps(yuri) => american_pro_bb(yuri).

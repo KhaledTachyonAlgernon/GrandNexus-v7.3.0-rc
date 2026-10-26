@@ -1,0 +1,10 @@
+cat(fluffy). @ "Fluffy is Tom's cat"
+owns(tom, fluffy). @ "Fluffy is Tom's cat"
+cat(X) => pet(X). @ "Cats are pets"
+managed_building(olive_garden). @ "The Olive Garden is a managed building"
+managed_building(some_building_1). @ "Pets are allowed in some managed buildings"
+allows_pets(some_building_1). @ "Pets are allowed in some managed buildings"
+managed_building(B) & allows_pets(B) => pet_friendly(B). @ "If a managed building allows pets"
+pet_friendly(B) & person(P) & pet(A) => allowed_move_in(P, A, B). @ "then people are allowed to move in with a pet"
+# cannot express: "Tom will rent an apartment in a managed building if he is allowed to move in with Fluffy, and the security deposit is no more than $1500."
+? allowed_move_in(tom, fluffy, olive_garden).

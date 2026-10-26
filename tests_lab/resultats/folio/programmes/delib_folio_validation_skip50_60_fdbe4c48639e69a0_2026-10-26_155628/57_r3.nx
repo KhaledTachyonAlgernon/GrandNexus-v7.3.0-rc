@@ -1,0 +1,6 @@
+japanese_game_company(creator_zelda). @ "A Japanese game company created the game the Legend of Zelda."
+created(creator_zelda, zelda). @ "A Japanese game company created the game the Legend of Zelda."
+on_top10(G) & game(G) => made_by_japanese_company(G). @ "All games on the Top 10 list are made by Japanese game companies."
+sold_more_than_one_million(G) => on_top10(G). @ "If a game sells more than one million copies, then it will be included in the Top 10 list."
+sold_more_than_one_million(zelda). @ "The Legend of Zelda sold more than one million copies."
+? on_top10(zelda).

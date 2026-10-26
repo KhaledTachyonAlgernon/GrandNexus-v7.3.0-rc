@@ -1,0 +1,10 @@
+# cannot express: "The only animals that can be spotted near the campus are rabbits and squirrels." (disjunction in the conclusion)
+rabbit(V) & near_campus(V) => cute(V). @ "All rabbits that can be spotted near the campus are cute."
+turtle(some_turtle_1). @ "Some turtles can be spotted near the campus."
+near_campus(some_turtle_1). @ "Some turtles can be spotted near the campus."
+skittish(V) => not calm(V). @ "If something is skittish, then it is not calm."
+squirrel(V) & near_campus(V) => skittish(V). @ "All the squirrels that can be spotted near the campus are skittish."
+near_campus(rockie). @ "Rockie can be spotted near the campus"
+calm(rockie). @ "it is calm"
+# cannot express: "If Rockie is not both a turtle and a squirrel, then Rockie is either cute or skittish." (conditional with a disjunctive conclusion)
+? cute(rockie).

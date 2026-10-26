@@ -1,0 +1,8 @@
+learning_type(supervised). @ "supervised learning"
+learning_type(unsupervised). @ "unsupervised learning"
+learning_type(reinforcement). @ "reinforcement learning"
+not requires_labeled(unsupervised). @ "Unsupervised learning algorithms do not require labeled data."
+not used_to_train(reinforcement, summarizer). @ "Reinforcement learning is not used to train the state-of-the-art text summarization model."
+used_to_train(A, summarizer) => requires_labeled(A). @ "The Machine Learning algorithm for training text summarization models requires labeled data."
+# cannot express: "Machine Learning algorithms can be categorized as supervised learning, unsupervised learning, and reinforcement learning."
+? used_to_train(supervised, summarizer).

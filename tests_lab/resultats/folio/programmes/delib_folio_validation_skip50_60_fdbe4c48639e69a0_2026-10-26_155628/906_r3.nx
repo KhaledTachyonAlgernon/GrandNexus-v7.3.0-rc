@@ -1,0 +1,7 @@
+digital_media(V) => not analog(V). @ "No digital media are analog."
+printed_text(V) => analog_media(V). @ "Every printed text is analog media."
+streaming_service(V) => digital_media(V). @ "All streaming services are digital media."
+hardcover_book(V) => printed_text(V). @ "If an object is a hardcover book, then it is printed text."
+streaming_service(book_1984) => hardcover_book(book_1984). @ "If 1984 is a streaming service, then 1984 is a hardcover book."
+* analog_media(V) => analog(V).
+? not streaming_service(book_1984).

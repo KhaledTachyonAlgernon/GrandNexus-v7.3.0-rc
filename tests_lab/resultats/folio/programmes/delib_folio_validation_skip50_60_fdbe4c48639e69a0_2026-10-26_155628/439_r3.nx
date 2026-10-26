@@ -1,0 +1,11 @@
+named_after(barutin_cove, barutin). @ "Barutin Cove is a cove named after the Bulgarian settlement of Barutin."
+located_in(barutin_cove, snow_island). @ "Barutin Cove is on the southwest coast of Snow Island."
+island(snow_island). @ "Snow Island"
+island(greenwich_island). @ "Greenwich Island"
+island(deception_island). @ "Deception Island"
+located_in(snow_island, south_shetland_islands). @ "Snow Island, Greenwich Island, and Deception Island are located in the South Shetland Islands."
+located_in(greenwich_island, south_shetland_islands). @ "Snow Island, Greenwich Island, and Deception Island are located in the South Shetland Islands."
+located_in(deception_island, south_shetland_islands). @ "Snow Island, Greenwich Island, and Deception Island are located in the South Shetland Islands."
+located_in(antarctica, south_shetland_islands). @ "Antarctica is located on the South Shetland Islands."
+located_in(A, B) & located_in(B, C) => located_in(A, C). @ "If place A is located in place B and place B is located in place C, then place A is located in place C."
+? island(V) & located_in(V, antarctica) => named_after(barutin_cove, V).

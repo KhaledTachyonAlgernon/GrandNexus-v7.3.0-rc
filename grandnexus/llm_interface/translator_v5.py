@@ -15,9 +15,9 @@ from dataclasses import dataclass
 from types import SimpleNamespace
 from typing import Any, Dict, List, Optional
 
-from grandnexus.nexus_logic import ENGINE_VERSION, LANGUAGE_SPEC, Engine, Program, parse
+from grandnexus.nexus_logic import ENGINE_VERSION, LANGUAGE_SPEC, Program, decide, parse
 
-PROMPT_VERSION = "v5.1"  # 5.1: universal questions (FOLIO items 306/325)
+PROMPT_VERSION = "v5.2"  # 5.1: universal questions ; 5.2: disjunctions (a | b, x(V) => y(V) | z(V))
 DEFAULT_MODEL = os.environ.get("GN_MODEL", "claude-sonnet-5-5")
 VERDICTS = ("oui", "non", "inconnu", "contradictoire")
 
@@ -36,6 +36,9 @@ CONVENTIONS
    "some X are Y"  ->  a fresh constant: x(some_x_1). y(some_x_1).   (never a rule)
    "only X are Y"  ->  y(V) => x(V).     "X if and only if Y"  ->  two rules.
    "if A and B then C"  ->  a(..) & b(..) => c(..).  Up to 3 conditions; split longer rules.
+   "A or B" / "either A or B (or both)"  ->  a(..) | b(..).      "all X are Y or Z"  ->  x(V) => y(V) | z(V).
+   "either A or B but not both"  ->  a | b.  a => not b.  b => not a.
+   "neither A nor B"  ->  not a.  not b.     "A unless B"  ->  not b => a.
    Every variable of a conclusion must appear in a condition. Transitivity needs two conditions:
    in(X, Y) & in(Y, Z) => in(X, Z).
 3. Negation: not tall(john).   "A does not B"  ->  not b(a).
@@ -152,8 +155,8 @@ class Translator:
         n0 = len(self.receipts)
         t = self.translate(text, query)
         prog: Program = t["parsed"]
-        full = Engine(prog, use_knowledge=True).answer()
-        strict = Engine(prog, use_knowledge=False).answer()
+        full = decide(prog, use_knowledge=True)
+        strict = decide(prog, use_knowledge=False)
         return {"answer": full.short(), "answer_strict": strict.short(),
                 "verdict": full.answer, "verdict_strict": strict.answer,
                 "depends_on_knowledge": full.depends_on_knowledge, "bindings": full.bindings,

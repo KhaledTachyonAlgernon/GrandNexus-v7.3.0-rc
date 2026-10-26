@@ -1,0 +1,5 @@
+british_sitcom(badults). @ "Badults is a British Sitcom series"
+series(badults). @ "Badults is a British Sitcom series"
+working_title(badults, the_secret_dude_society). @ "was used for Badults"
+script_editor(andrew_collins, badults). @ "Andrew Collins was the script editor for Badults."
+? series(S) & working_title(S, the_secret_dude_society) & script_editor(andrew_collins, S).

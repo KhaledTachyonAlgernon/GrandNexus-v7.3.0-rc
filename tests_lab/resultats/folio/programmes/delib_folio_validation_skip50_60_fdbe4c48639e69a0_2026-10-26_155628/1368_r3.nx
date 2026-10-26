@@ -1,0 +1,11 @@
+vertebrate(X) => backbone(X). @ "All vertebrate animals have a backbone."
+backbone(X) => mating(X). @ "All animals with backbones reproduce by male-and-female mating."
+bee(X) => not mating(X). @ "All bees do not reproduce by male-and-female mating."
+queen_bee(X) => bee(X). @ "All queen bees are bees."
+bee(harry). @ "Harry is a bee."
+animal(X) & not vertebrate(X) => invertebrate(X). @ "Animals are either invertebrates or vertebrates."
+animal(X) & not invertebrate(X) => vertebrate(X). @ "Animals are either invertebrates or vertebrates."
+* bee(X) => animal(X).
+* not mating(X) => not backbone(X).
+* not backbone(X) => not vertebrate(X).
+? not invertebrate(harry) & not queen_bee(harry).

@@ -1,0 +1,10 @@
+# cannot express: "When the Monkeypox virus occurs in a being, it may get Monkeypox."
+# cannot express: "Monkeypox virus can occur in certain animals."
+human(V) => mammal(V). @ "Humans are mammals."
+mammal(V) => animal(V). @ "Mammals are animals."
+symptom(monkeypox, fever). @ "Symptoms of Monkeypox include fever, headache, muscle pains, and tiredness."
+symptom(monkeypox, headache). @ "Symptoms of Monkeypox include fever, headache, muscle pains, and tiredness."
+symptom(monkeypox, muscle_pains). @ "Symptoms of Monkeypox include fever, headache, muscle pains, and tiredness."
+symptom(monkeypox, tiredness). @ "Symptoms of Monkeypox include fever, headache, muscle pains, and tiredness."
+person(X) & gets_flu(X) => tired(X). @ "People feel tired when they get the flu."
+? person(V) => not gets_flu(V).

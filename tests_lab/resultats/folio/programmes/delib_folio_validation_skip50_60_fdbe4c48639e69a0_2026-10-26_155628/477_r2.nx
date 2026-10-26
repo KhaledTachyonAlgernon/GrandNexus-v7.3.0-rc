@@ -1,0 +1,14 @@
+cat(fluffy). @ "Fluffy is Tom's cat"
+owns(tom, fluffy). @ "Fluffy is Tom's cat"
+cat(X) => pet(X). @ "Cats are pets"
+managed_building(some_b_1). @ "Pets are allowed in some managed buildings"
+allows_pets(some_b_1). @ "Pets are allowed in some managed buildings"
+managed_building(olive_garden). @ "The Olive Garden is a managed building"
+let n2000 = 2000.
+let n1500 = 1500.
+rent(olive_garden, n2000). @ "The monthly rent at the Olive Garden is $2000"
+more_than(n2000, n1500). @ "$2000 is more than $1500"
+owns(P, A) & pet(A) & allows_pets(B) => allowed_move_in(P, A, B). @ "If a managed building allows pets, then people are allowed to move in with a pet."
+# cannot express: "The security deposit can be either equal to the monthly rent at a managed building or more."
+# cannot express: "Tom will rent an apartment in a managed building if he is allowed to move in with Fluffy, and the security deposit is no more than $1500."
+? allowed_move_in(tom, fluffy, olive_garden).

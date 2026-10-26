@@ -1,0 +1,5071 @@
+{
+ "summary": {
+  "set": "delib_folio_validation_skip50_60_fdbe4c48639e69a0_2026-10-26_155628",
+  "sha": "fdbe4c48639e69a0",
+  "n": 60,
+  "readers": "3",
+  "model": "claude-sonnet-5-5",
+  "prompt_version": "v5.1",
+  "engine_version": "ref-1.2",
+  "calls": 368,
+  "tokens": 857040,
+  "stats": {
+   "unanimous": 56,
+   "first_two_agree": 57,
+   "reflections": 4,
+   "rejections": 32,
+   "cannot_express": 60
+  },
+  "modes": {
+   "single": {
+    "acc": 34,
+    "n": 60,
+    "pct": 56.7,
+    "false_oui": 0,
+    "false_non": 0,
+    "inventions": 0,
+    "inconnu": 39,
+    "contradictoire": 2,
+    "erreurs": 0,
+    "confusion": {
+     "inconnu->contradictoire": 1,
+     "inconnu->inconnu": 15,
+     "non->inconnu": 14,
+     "non->non": 6,
+     "oui->contradictoire": 1,
+     "oui->inconnu": 10,
+     "oui->oui": 13
+    }
+   },
+   "random": {
+    "acc": 35,
+    "n": 60,
+    "pct": 58.3,
+    "false_oui": 0,
+    "false_non": 0,
+    "inventions": 0,
+    "inconnu": 38,
+    "contradictoire": 2,
+    "erreurs": 0,
+    "confusion": {
+     "inconnu->contradictoire": 1,
+     "inconnu->inconnu": 15,
+     "non->inconnu": 13,
+     "non->non": 7,
+     "oui->contradictoire": 1,
+     "oui->inconnu": 10,
+     "oui->oui": 13
+    }
+   },
+   "vote": {
+    "acc": 34,
+    "n": 60,
+    "pct": 56.7,
+    "false_oui": 0,
+    "false_non": 0,
+    "inventions": 0,
+    "inconnu": 39,
+    "contradictoire": 2,
+    "erreurs": 0,
+    "confusion": {
+     "inconnu->contradictoire": 1,
+     "inconnu->inconnu": 15,
+     "non->inconnu": 14,
+     "non->non": 6,
+     "oui->contradictoire": 1,
+     "oui->inconnu": 10,
+     "oui->oui": 13
+    }
+   },
+   "vote_confidence": {
+    "acc": 34,
+    "n": 60,
+    "pct": 56.7,
+    "false_oui": 0,
+    "false_non": 0,
+    "inventions": 0,
+    "inconnu": 39,
+    "contradictoire": 2,
+    "erreurs": 0,
+    "confusion": {
+     "inconnu->contradictoire": 1,
+     "inconnu->inconnu": 15,
+     "non->inconnu": 14,
+     "non->non": 6,
+     "oui->contradictoire": 1,
+     "oui->inconnu": 10,
+     "oui->oui": 13
+    }
+   },
+   "adaptive": {
+    "acc": 34,
+    "n": 60,
+    "pct": 56.7,
+    "false_oui": 0,
+    "false_non": 0,
+    "inventions": 0,
+    "inconnu": 39,
+    "contradictoire": 2,
+    "erreurs": 0,
+    "confusion": {
+     "inconnu->contradictoire": 1,
+     "inconnu->inconnu": 15,
+     "non->inconnu": 14,
+     "non->non": 6,
+     "oui->contradictoire": 1,
+     "oui->inconnu": 10,
+     "oui->oui": 13
+    }
+   },
+   "reflective": {
+    "acc": 34,
+    "n": 60,
+    "pct": 56.7,
+    "false_oui": 0,
+    "false_non": 0,
+    "inventions": 0,
+    "inconnu": 39,
+    "contradictoire": 2,
+    "erreurs": 0,
+    "confusion": {
+     "inconnu->contradictoire": 1,
+     "inconnu->inconnu": 15,
+     "non->inconnu": 14,
+     "non->non": 6,
+     "oui->contradictoire": 1,
+     "oui->inconnu": 10,
+     "oui->oui": 13
+    }
+   },
+   "unanimity": {
+    "acc": 33,
+    "n": 60,
+    "pct": 55.0,
+    "false_oui": 0,
+    "false_non": 0,
+    "inventions": 0,
+    "inconnu": 40,
+    "contradictoire": 2,
+    "erreurs": 0,
+    "confusion": {
+     "inconnu->contradictoire": 1,
+     "inconnu->inconnu": 15,
+     "non->inconnu": 14,
+     "non->non": 6,
+     "oui->contradictoire": 1,
+     "oui->inconnu": 11,
+     "oui->oui": 12
+    }
+   },
+   "direct": {
+    "acc": 50,
+    "n": 60,
+    "pct": 83.3,
+    "false_oui": 3,
+    "false_non": 1,
+    "inventions": 3,
+    "inconnu": 16,
+    "contradictoire": 2,
+    "erreurs": 0,
+    "confusion": {
+     "inconnu->contradictoire": 1,
+     "inconnu->inconnu": 12,
+     "inconnu->non": 1,
+     "inconnu->oui": 2,
+     "non->inconnu": 3,
+     "non->non": 16,
+     "non->oui": 1,
+     "oui->contradictoire": 1,
+     "oui->inconnu": 1,
+     "oui->oui": 22
+    }
+   }
+  }
+ },
+ "rows": {
+  "single": [
+   {
+    "id": "980",
+    "expected": "oui",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1316",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "441",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1270",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1034",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1413",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1410",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "477",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "623",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1368",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "965",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "360",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1015",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "0",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1210",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "388",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "148",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "57",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "564",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "240",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "703",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "530",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "457",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1302",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1324",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "290",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1016",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "619",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "786",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1029",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "478",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "245",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "59",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "439",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "929",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "562",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "700",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "809",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "529",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1272",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "4",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1367",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "578",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "610",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "979",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1032",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1269",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1325",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "618",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "191",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "665",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1033",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "906",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "171",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "361",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "173",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "305",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "440",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1364",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1317",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   }
+  ],
+  "random": [
+   {
+    "id": "980",
+    "expected": "oui",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1316",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "441",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1270",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1034",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1413",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1410",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "477",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "623",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1368",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "965",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "360",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1015",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "0",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1210",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "388",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "148",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "57",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "564",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "240",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "703",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "530",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "457",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1302",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1324",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "290",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1016",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "619",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "786",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1029",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "478",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "245",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "59",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "439",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "929",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "562",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "700",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "809",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "529",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1272",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "4",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1367",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "578",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "610",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "979",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1032",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1269",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1325",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "618",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "191",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "665",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1033",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "906",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "171",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "361",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "173",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "305",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "440",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1364",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1317",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   }
+  ],
+  "vote": [
+   {
+    "id": "980",
+    "expected": "oui",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1316",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "441",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1270",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1034",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1413",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1410",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "477",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "623",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1368",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "965",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "360",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1015",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "0",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1210",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "388",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "148",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "57",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "564",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "240",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "703",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "530",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "457",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1302",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1324",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "290",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1016",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "619",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "786",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1029",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "478",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "245",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "59",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "439",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "929",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "562",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "700",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "809",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "529",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1272",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "4",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1367",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "578",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "610",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "979",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1032",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1269",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1325",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "618",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "191",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "665",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1033",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "906",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "171",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "361",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "173",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "305",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "440",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1364",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1317",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   }
+  ],
+  "vote_confidence": [
+   {
+    "id": "980",
+    "expected": "oui",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1316",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "441",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1270",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1034",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1413",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1410",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "477",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "623",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1368",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "965",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "360",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1015",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "0",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1210",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "388",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "148",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "57",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "564",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "240",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "703",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "530",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "457",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1302",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1324",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "290",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1016",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "619",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "786",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1029",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "478",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "245",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "59",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "439",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "929",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "562",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "700",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "809",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "529",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1272",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "4",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1367",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "578",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "610",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "979",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1032",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1269",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1325",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "618",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "191",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "665",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1033",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "906",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "171",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "361",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "173",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "305",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "440",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1364",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1317",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   }
+  ],
+  "adaptive": [
+   {
+    "id": "980",
+    "expected": "oui",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1316",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "441",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1270",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1034",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1413",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1410",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "477",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "623",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1368",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "965",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "360",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1015",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "0",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1210",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "388",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "148",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "57",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "564",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "240",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "703",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "530",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "457",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1302",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1324",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "290",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1016",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "619",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "786",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1029",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "478",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "245",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "59",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "439",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "929",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "562",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "700",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "809",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "529",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1272",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "4",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1367",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "578",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "610",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "979",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1032",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1269",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1325",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "618",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "191",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "665",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1033",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "906",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "171",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "361",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "173",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "305",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "440",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1364",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1317",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   }
+  ],
+  "reflective": [
+   {
+    "id": "980",
+    "expected": "oui",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1316",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "441",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1270",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1034",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1413",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1410",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "477",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "623",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1368",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "965",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "360",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1015",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "0",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1210",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "388",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "148",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "57",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "564",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "240",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "703",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "530",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "457",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1302",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1324",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "290",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1016",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "619",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "786",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1029",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "478",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "245",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "59",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "439",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "929",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "562",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "700",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "809",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "529",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1272",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "4",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1367",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "578",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "610",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "979",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1032",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1269",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1325",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "618",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "191",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "665",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1033",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "906",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "171",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "361",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "173",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "305",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "440",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1364",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1317",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   }
+  ],
+  "unanimity": [
+   {
+    "id": "980",
+    "expected": "oui",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1316",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "441",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1270",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1034",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1413",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1410",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "477",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "623",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1368",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "965",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "360",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1015",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "0",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1210",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "388",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "148",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "57",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "564",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "240",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "703",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "530",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "457",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1302",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1324",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "290",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1016",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "619",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "786",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1029",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "478",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "245",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "59",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "439",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "929",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "562",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "700",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "809",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "529",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1272",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "4",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1367",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "578",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "610",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "979",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1032",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1269",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1325",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "618",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "191",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "665",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1033",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "906",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "171",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "361",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "173",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "305",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "440",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1364",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1317",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   }
+  ],
+  "direct": [
+   {
+    "id": "980",
+    "expected": "oui",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1316",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "441",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1270",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1034",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1413",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1410",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "477",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "623",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1368",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "965",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "360",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1015",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "0",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1210",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "388",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "148",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "57",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "564",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "240",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "703",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "530",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "457",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1302",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1324",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "290",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1016",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "619",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "786",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1029",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "478",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "245",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "59",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "439",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "929",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "562",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "700",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "809",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "529",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1272",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "4",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1367",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "578",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "610",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "979",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "contradictoire"
+   },
+   {
+    "id": "1032",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1269",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1325",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "618",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "191",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "665",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1033",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "906",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "171",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "361",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "173",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "305",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "440",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1364",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1317",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   }
+  ],
+  "toujours_inconnu": [
+   {
+    "id": "980",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1316",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "441",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1270",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1034",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1413",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1410",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "477",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "623",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1368",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "965",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "360",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1015",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "0",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1210",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "388",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "148",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "57",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "564",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "240",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "703",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "530",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "457",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1302",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1324",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "290",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1016",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "619",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "786",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1029",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "478",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "245",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "59",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "439",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "929",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "562",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "700",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "809",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "529",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1272",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "4",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1367",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "578",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "610",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "979",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1032",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1269",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1325",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "618",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "191",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "665",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1033",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "906",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "171",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "361",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "173",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "305",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "440",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1364",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1317",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   }
+  ],
+  "majorite": [
+   {
+    "id": "980",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1316",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "441",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1270",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1034",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1413",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1410",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "477",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "623",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1368",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "965",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "360",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1015",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "0",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1210",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "388",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "148",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "57",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "564",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "240",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "703",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "530",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "457",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1302",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1324",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "290",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1016",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "619",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "786",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1029",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "478",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "245",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "59",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "439",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "929",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "562",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "700",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "809",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "529",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1272",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "4",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1367",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "578",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "610",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "979",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1032",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1269",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1325",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "618",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "191",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "665",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1033",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "906",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "171",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "361",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "173",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "305",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "440",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1364",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1317",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   }
+  ],
+  "hasard": [
+   {
+    "id": "980",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1316",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "441",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1270",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1034",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1413",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1410",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "477",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "623",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1368",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "965",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "360",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1015",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "0",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1210",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "388",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "148",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "57",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "564",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "240",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "703",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "530",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "457",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1302",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1324",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "290",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1016",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "619",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "786",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1029",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "478",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "245",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "59",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "439",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "929",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "562",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "700",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "809",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "529",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1272",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "4",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1367",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "578",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "610",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "979",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1032",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1269",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1325",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "618",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "191",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "665",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1033",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "906",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "171",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "361",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "173",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "305",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "440",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1364",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1317",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   }
+  ]
+ },
+ "detail": [
+  {
+   "id": "980",
+   "expected": "oui",
+   "verdicts": [
+    "contradictoire",
+    "contradictoire",
+    "contradictoire"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "1316",
+   "expected": "non",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "441",
+   "expected": "non",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "1270",
+   "expected": "non",
+   "verdicts": [
+    "inconnu",
+    "non",
+    "inconnu"
+   ],
+   "reflection": "inconnu",
+   "confidences": [
+    0.9,
+    0.8,
+    0.9
+   ]
+  },
+  {
+   "id": "1034",
+   "expected": "non",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    1.0,
+    0.9
+   ]
+  },
+  {
+   "id": "1413",
+   "expected": "oui",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.5,
+    0.8,
+    0.6
+   ]
+  },
+  {
+   "id": "1410",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.8,
+    0.9
+   ]
+  },
+  {
+   "id": "477",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.8,
+    0.7,
+    0.8
+   ]
+  },
+  {
+   "id": "623",
+   "expected": "non",
+   "verdicts": [
+    "non",
+    "non",
+    "non"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.8,
+    0.8,
+    0.8
+   ]
+  },
+  {
+   "id": "1368",
+   "expected": "non",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "965",
+   "expected": "non",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "360",
+   "expected": "oui",
+   "verdicts": [
+    "oui",
+    "oui",
+    "oui"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "1015",
+   "expected": "oui",
+   "verdicts": [
+    "inconnu",
+    "oui",
+    "inconnu"
+   ],
+   "reflection": "inconnu",
+   "confidences": [
+    0.6,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "0",
+   "expected": "oui",
+   "verdicts": [
+    "oui",
+    "oui",
+    "oui"
+   ],
+   "reflection": null,
+   "confidences": [
+    1.0,
+    0.9,
+    1.0
+   ]
+  },
+  {
+   "id": "1210",
+   "expected": "oui",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "oui"
+   ],
+   "reflection": "inconnu",
+   "confidences": [
+    0.8,
+    0.7,
+    0.8
+   ]
+  },
+  {
+   "id": "388",
+   "expected": "oui",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.8,
+    0.8
+   ]
+  },
+  {
+   "id": "148",
+   "expected": "non",
+   "verdicts": [
+    "non",
+    "non",
+    "non"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "57",
+   "expected": "oui",
+   "verdicts": [
+    "oui",
+    "oui",
+    "oui"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "564",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.6,
+    0.8
+   ]
+  },
+  {
+   "id": "240",
+   "expected": "oui",
+   "verdicts": [
+    "oui",
+    "oui",
+    "oui"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "703",
+   "expected": "non",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "530",
+   "expected": "oui",
+   "verdicts": [
+    "oui",
+    "oui",
+    "oui"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "457",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "1302",
+   "expected": "oui",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.75,
+    0.75,
+    1.0
+   ]
+  },
+  {
+   "id": "1324",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.35
+   ]
+  },
+  {
+   "id": "290",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "1016",
+   "expected": "non",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.8,
+    0.45,
+    0.45
+   ]
+  },
+  {
+   "id": "619",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "786",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "1029",
+   "expected": "oui",
+   "verdicts": [
+    "oui",
+    "oui",
+    "oui"
+   ],
+   "reflection": null,
+   "confidences": [
+    1.0,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "478",
+   "expected": "oui",
+   "verdicts": [
+    "oui",
+    "oui",
+    "oui"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "245",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "59",
+   "expected": "non",
+   "verdicts": [
+    "non",
+    "non",
+    "non"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "439",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "929",
+   "expected": "non",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    1.0,
+    0.9,
+    0.8
+   ]
+  },
+  {
+   "id": "562",
+   "expected": "non",
+   "verdicts": [
+    "non",
+    "non",
+    "non"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    1.0
+   ]
+  },
+  {
+   "id": "700",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "809",
+   "expected": "non",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.8,
+    0.8,
+    0.9
+   ]
+  },
+  {
+   "id": "529",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "1272",
+   "expected": "non",
+   "verdicts": [
+    "non",
+    "non",
+    "non"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    1.0
+   ]
+  },
+  {
+   "id": "4",
+   "expected": "non",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.65,
+    0.65,
+    0.7
+   ]
+  },
+  {
+   "id": "1367",
+   "expected": "oui",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "578",
+   "expected": "oui",
+   "verdicts": [
+    "oui",
+    "oui",
+    "oui"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "610",
+   "expected": "oui",
+   "verdicts": [
+    "oui",
+    "oui",
+    "oui"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "979",
+   "expected": "inconnu",
+   "verdicts": [
+    "contradictoire",
+    "contradictoire",
+    "contradictoire"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.8,
+    0.9
+   ]
+  },
+  {
+   "id": "1032",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    1.0,
+    0.9,
+    1.0
+   ]
+  },
+  {
+   "id": "1269",
+   "expected": "oui",
+   "verdicts": [
+    "oui",
+    "inconnu",
+    "oui"
+   ],
+   "reflection": "oui",
+   "confidences": [
+    0.9,
+    0.9,
+    1.0
+   ]
+  },
+  {
+   "id": "1325",
+   "expected": "non",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.8,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "618",
+   "expected": "oui",
+   "verdicts": [
+    "oui",
+    "oui",
+    "oui"
+   ],
+   "reflection": null,
+   "confidences": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "191",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "665",
+   "expected": "oui",
+   "verdicts": [
+    "oui",
+    "oui",
+    "oui"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "1033",
+   "expected": "oui",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.8,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "906",
+   "expected": "oui",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "171",
+   "expected": "oui",
+   "verdicts": [
+    "oui",
+    "oui",
+    "oui"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "361",
+   "expected": "non",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "173",
+   "expected": "inconnu",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "305",
+   "expected": "non",
+   "verdicts": [
+    "non",
+    "non",
+    "non"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "440",
+   "expected": "oui",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  },
+  {
+   "id": "1364",
+   "expected": "oui",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.8,
+    0.8,
+    0.7
+   ]
+  },
+  {
+   "id": "1317",
+   "expected": "non",
+   "verdicts": [
+    "inconnu",
+    "inconnu",
+    "inconnu"
+   ],
+   "reflection": null,
+   "confidences": [
+    0.9,
+    0.9,
+    0.9
+   ]
+  }
+ ]
+}

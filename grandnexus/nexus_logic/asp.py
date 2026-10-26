@@ -21,8 +21,16 @@ def _lit(l: Lit) -> str:
 def to_asp(eng: Engine) -> str:
     lines: List[str] = [_lit(f) + "." for f in eng.facts0]
     lines += [f"{_lit(r.head)} :- {', '.join(_lit(b) for b in r.body)}." for r in eng.rules]
+    dis = [(tuple(eng.canon(l) for l in lits), kn) for lits, _, kn in eng.prog.disjunctions
+           if eng.use_knowledge or not kn]
+    lines += [" ; ".join(_lit(l) for l in lits) + "." for lits, _ in dis]        # disjunctive facts
+    drs = [r for r in eng.prog.drules if eng.use_knowledge or not r.knowledge]
+    lines += [f"{' ; '.join(_lit(eng.canon(h)) for h in r.heads)} :- {', '.join(_lit(eng.canon(b)) for b in r.body)}."
+              for r in drs]                                                       # disjunctive rules
     sigs = {(l.atom.pred, len(l.atom.args)) for l in eng.facts0}
     sigs |= {(l.atom.pred, len(l.atom.args)) for r in eng.rules for l in r.body + (r.head,)}
+    sigs |= {(l.atom.pred, len(l.atom.args)) for lits, _ in dis for l in lits}
+    sigs |= {(l.atom.pred, len(l.atom.args)) for r in drs for l in r.body + r.heads}
     for pred, ar in sorted(sigs):                      # p et -p ensemble => aucun modèle => contradictoire
         vs = ",".join(f"V{i}" for i in range(ar))
         lines.append(f":- {pred}({vs}), -{pred}({vs}).")
@@ -53,11 +61,12 @@ def clingo_verdict(prog: Program, use_knowledge: bool = True) -> Optional[str]:
         ctl.ground([("base", [])])
         models: list = []
         res = ctl.solve(on_model=lambda m: models.append(set(m.symbols(atoms=True))))
-        return res.satisfiable, (models[0] if models else set())
+        return res.satisfiable, models
 
-    sat, atoms = solve(text)
+    sat, models = solve(text)
     if not sat:
         return "contradictoire"
+    atoms = set.intersection(*models) if models else set()        # cautious: true in every answer set
 
     def sym(l: Lit):
         return clingo.Function(l.atom.pred, [clingo.Number(a) if isinstance(a, int) else clingo.Function(a)

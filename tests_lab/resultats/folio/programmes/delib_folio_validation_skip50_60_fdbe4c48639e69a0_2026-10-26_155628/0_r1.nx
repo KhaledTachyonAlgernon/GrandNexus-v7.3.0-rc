@@ -1,0 +1,11 @@
+# The text lists six types, so a wild turkey that is none of the first five must be the sixth. A single disjunction rule is not expressible, so I chain rules with at most 3 conditions each.
+wild_turkey(X) & not eastern(X) & not osceola(X) => not_eastern_osceola(X). @ "There are six types of wild turkeys: Eastern wild turkey, Osceola wild turkey, Gould’s wild turkey, Merriam’s wild turkey, Rio Grande wild turkey, and Ocellated wild turkey."
+not_eastern_osceola(X) & not gould(X) & not merriam(X) => not_first_four(X). @ "There are six types of wild turkeys: Eastern wild turkey, Osceola wild turkey, Gould’s wild turkey, Merriam’s wild turkey, Rio Grande wild turkey, and Ocellated wild turkey."
+not_first_four(X) & not rio_grande(X) => ocellated(X). @ "There are six types of wild turkeys: Eastern wild turkey, Osceola wild turkey, Gould’s wild turkey, Merriam’s wild turkey, Rio Grande wild turkey, and Ocellated wild turkey."
+not eastern(tom). @ "Tom is not an Eastern wild turkey."
+not osceola(tom). @ "Tom is not an Osceola wild turkey."
+not gould(tom). @ "Tom is not a Gould's wild turkey."
+not merriam(tom). @ "Tom is neither a Merriam's wild turkey nor a Rio Grande wild turkey."
+not rio_grande(tom). @ "Tom is neither a Merriam's wild turkey nor a Rio Grande wild turkey."
+wild_turkey(tom). @ "Tom is a wild turkey."
+? ocellated(tom).

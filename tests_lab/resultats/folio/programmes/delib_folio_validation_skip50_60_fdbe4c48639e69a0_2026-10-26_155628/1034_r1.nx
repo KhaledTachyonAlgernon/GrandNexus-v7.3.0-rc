@@ -1,0 +1,8 @@
+deadly_disease(X) => low_survival(X). @ "If something is a deadly disease, then it comes with a low survival rate."
+severe_cancer(X) => deadly_disease(X). @ "Severe cancers are deadly diseases."
+bile_duct_cancer(X) => severe_cancer(X). @ "Bile duct cancer is a severe form cancer."
+cholangiocarcinoma(X) => bile_duct_cancer(X). @ "All Cholangiocarcinoma is bile duct cancer."
+mild_flu(X) => low_survival(X). @ "Mild flu comes with a low survival rate."
+bile_duct_cancer(colorectal_cancer) => not low_survival(colorectal_cancer). @ "Colorectal cancer is not both a bile duct cancer and with a low survival rate."
+# cannot express: "it is a kind of mild flu or a kind of bile duct cancer, or all of the above" (disjunction); since cholangiocarcinoma implies bile duct cancer, the statement reduces to the conjunction below
+? cholangiocarcinoma(colorectal_cancer) & bile_duct_cancer(colorectal_cancer).
