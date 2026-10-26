@@ -88,6 +88,7 @@ def main() -> None:
     ap.add_argument("--jsonl", help="jeu local : FOLIO jsonl ou {id,text,query,expected}")
     ap.add_argument("--n", type=int, default=0, help="sous-échantillon (0 = tout), tiré avec --seed")
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--skip", type=int, default=0, help="saute les N premiers items du tirage (ex. --skip 50 = les items jamais vus)")
     ap.add_argument("--runs", type=int, default=1, help="passages par mode API (stabilité)")
     ap.add_argument("--modes", default="translator,direct")
     ap.add_argument("--model", default=None)
@@ -97,9 +98,11 @@ def main() -> None:
     a = ap.parse_args()
 
     items = load_items(a.split, a.jsonl)
-    if a.n and a.n < len(items):
+    if a.n or a.skip:
         random.Random(a.seed).shuffle(items)
-        items = items[: a.n]
+        items = items[a.skip:]
+        if a.n:
+            items = items[: a.n]
     sha = freeze(items)
     name = f"{'local' if a.jsonl else 'folio_' + a.split}_{len(items)}_{sha}_{time.strftime('%Y-%m-%d_%H%M%S')}"
     print(f"[{name}] {len(items)} items figés, sha {sha}, labels {dict(Counter(i['expected'] for i in items))}")
