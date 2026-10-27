@@ -31,23 +31,25 @@ import re
 from dataclasses import dataclass, field
 from typing import Dict, Iterator, List, Optional, Sequence, Set, Tuple, Union
 
-ENGINE_VERSION = "ref-2.0"  # 1.1: reductio ; 1.2: universal questions ; 2.0: disjunctions (case split)
+ENGINE_VERSION = "ref-2.1"  # 1.1: reductio ; 1.2: universal questions ; 2.0: disjunctions ; 2.1: disjunctive questions
 MAX_ARITY = 4  # relation ternaire + moment ; le carnet a perdu un item sur une limite à 2 puis 3
 
 LANGUAGE_SPEC = """\
 program   := { line }                         one statement per line; a line ends with "."
 line      := [ "*" ] statement [ @ "span" ]   "*" = background knowledge (not in the text)
                                               span = exact quote of the text words justifying the statement
-statement := fact | rule | same | let | question
+statement := fact, disjunction, rule, drule, same, let, or question
 fact      := literal "."
-           | literal "|" literal { "|" literal } "."   disjunction: at least one of them holds
-rule      := literal { "&" literal } "=>" literal "."
+disjunction := literal " | " literal { " | " literal } "."     at least one of them holds (A or B)
+rule      := literal { " & " literal } " => " literal "."
              every variable of the conclusion must appear in a condition
-           | literal { "&" literal } "=>" literal "|" literal { "|" literal } "."   disjunctive conclusion
+drule     := literal { " & " literal } " => " literal " | " literal { " | " literal } "."
+             disjunctive conclusion: "all X are Y or Z"  ->  x(V) => y(V) | z(V).
 same      := "same(" const ", " const ")."    two names for one entity
 let       := "let " const " = " expr "."      expr: numbers, + - * / ( ), earlier let-constants
-question  := "? " literal { "&" literal } "."  exactly one per program; may contain a variable
-           | "? " literal { "&" literal } "=>" literal "."   universal question ("all/no X are Y")
+question  := "? " literal { " & " literal } "."           exactly one per program; may contain a variable
+             "? " literal { " | " literal } "."           disjunctive question ("is A or B true?")
+             "? " literal { " & " literal } " => " literal "."   universal question ("all/no X are Y")
 literal   := [ "not " ] atom
 atom      := pred [ "(" term { ", " term } ")" ]   0 to 4 terms; a bare word w means prop(w)
 term      := const | var | number
@@ -297,6 +299,10 @@ def _parse_statement(prog: Program, seg: str, lineno: int, sid: str, src: Option
     try:
         if body.startswith("?"):
             q = body[1:]
+            if "|" in q and "=>" not in q:                    # disjunctive question: ? a | b
+                lits = tuple(parse_literal(c) for c in q.split("|"))
+                prog.questions.append(("disjunctive", lits))
+                return
             if "=>" in q:                                     # universal question: ? body => head
                 lhs, rhs = q.split("=>", 1)
                 conds = tuple(parse_literal(c) for c in lhs.split("&"))
@@ -475,7 +481,7 @@ class Engine:
         for q in self.prog.questions:
             if q and q[0] == "universal":
                 continue
-            for l in q:
+            for l in (q[1] if q and q[0] == "disjunctive" else q):
                 yield from l.atom.args
 
     def canon(self, lit: Lit) -> Lit:
@@ -602,6 +608,8 @@ class Engine:
             goal = self.prog.questions[0]
         if goal and goal[0] == "universal":
             return self._answer_universal(self.prog.universal_questions[goal[1]])
+        if goal and goal[0] == "disjunctive":
+            return self._answer_disjunctive(tuple(self.canon(l) for l in goal[1]))
         gs = tuple(self.canon(l) for l in goal)
         if self.overflow:
             return Verdict("inconnu", note=f"fact limit {self.max_facts} reached")
@@ -644,6 +652,28 @@ class Engine:
                     return Verdict(ans, proof=[f"REDUCTIO: assume {hyp}"] + trial._proof(c) + trial._proof(c.flip()),
                                    used=sorted(used), depends_on_knowledge=bool(used & trial.knowledge_sids),
                                    note="by refutation (reductio ad absurdum)")
+        return Verdict("inconnu")
+
+    def _answer_disjunctive(self, lits: Tuple[Lit, ...]) -> Verdict:
+        """? a | b : oui if some disjunct is derived (or assuming all their negations is inconsistent);
+        non if every disjunct is refuted; inconnu otherwise."""
+        if self.overflow:
+            return Verdict("inconnu", note=f"fact limit {self.max_facts} reached")
+        if self.inconsistent:
+            return self.answer(())
+        if any(l.vars() for l in lits):
+            return Verdict("inconnu", note="disjunctive question with a variable: not supported")
+        for l in lits:
+            if l in self.kb or self._goal_directed(l):
+                return self._verdict("oui", [l])
+        if all(l.flip() in self.kb for l in lits):
+            return self._verdict("non", [l.flip() for l in lits])
+        if self.reductio:
+            trial = Engine(self.prog, self.use_knowledge, True, self.merge_typical, self.max_facts,
+                           reductio=False, extra_facts=self.extra_facts + [l.flip() for l in lits])
+            if trial.inconsistent and not trial.overflow:
+                return Verdict("oui", proof=[f"REDUCTIO: assuming {' and '.join(str(l.flip()) for l in lits)} is inconsistent"],
+                               note="by refutation (reductio ad absurdum)")
         return Verdict("inconnu")
 
     def _answer_universal(self, q: Rule) -> Verdict:

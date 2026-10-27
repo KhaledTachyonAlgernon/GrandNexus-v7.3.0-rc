@@ -45,8 +45,8 @@ def clingo_verdict(prog: Program, use_knowledge: bool = True) -> Optional[str]:
         return None
     if not prog.questions:
         return "inconnu"
-    if prog.questions[0] and prog.questions[0][0] == "universal":
-        return None                                       # universal questions: reference engine only (documented)
+    if prog.questions[0] and prog.questions[0][0] in ("universal", "disjunctive"):
+        return None                                       # universal / disjunctive questions: reference engine only
     eng = Engine(prog, use_knowledge=use_knowledge)
     goal = [eng.canon(l) for l in prog.questions[0]]
     if any(l.vars() for l in goal):

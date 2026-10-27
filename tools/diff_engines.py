@@ -45,7 +45,7 @@ def home_verdict(program_text: str) -> str | None:
     from grandnexus.cognition.reasoning.reasoning_core import ReasoningCore
     from grandnexus.cognition.reasoning.text_reasoner import TextReasoner, _args
     prog = parse(program_text)
-    if not prog.questions or prog.questions[0][0] == "universal" or any(l.vars() for l in prog.questions[0]) \
+    if not prog.questions or prog.questions[0][0] in ("universal", "disjunctive") or any(l.vars() for l in prog.questions[0]) \
             or len(prog.questions[0]) != 1 or prog.disjunctions or prog.drules:
         return None                                   # the home engine has no disjunction
     ref = Engine(prog)                       # for same()/typical_/let canonicalisation only

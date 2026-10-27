@@ -17,7 +17,7 @@ from typing import Any, Dict, List, Optional
 
 from grandnexus.nexus_logic import ENGINE_VERSION, LANGUAGE_SPEC, Program, decide, parse
 
-PROMPT_VERSION = "v5.2"  # 5.1: universal questions ; 5.2: disjunctions (a | b, x(V) => y(V) | z(V))
+PROMPT_VERSION = "v5.3"  # 5.1: universal questions ; 5.2: disjunctions ; 5.3: explicit disjunction example, disjunctive questions
 DEFAULT_MODEL = os.environ.get("GN_MODEL", "claude-sonnet-5-5")
 VERDICTS = ("oui", "non", "inconnu", "contradictoire")
 
@@ -36,9 +36,18 @@ CONVENTIONS
    "some X are Y"  ->  a fresh constant: x(some_x_1). y(some_x_1).   (never a rule)
    "only X are Y"  ->  y(V) => x(V).     "X if and only if Y"  ->  two rules.
    "if A and B then C"  ->  a(..) & b(..) => c(..).  Up to 3 conditions; split longer rules.
+   DISJUNCTION is supported: never write "# cannot express" for an "or" sentence.
    "A or B" / "either A or B (or both)"  ->  a(..) | b(..).      "all X are Y or Z"  ->  x(V) => y(V) | z(V).
    "either A or B but not both"  ->  a | b.  a => not b.  b => not a.
    "neither A nor B"  ->  not a.  not b.     "A unless B"  ->  not b => a.
+   "A does not do B or C"  ->  not b(a).  not c(a).      a question "is A or B?"  ->  ? a(..) | b(..).
+   Example — text: "Every pet is a cat or a dog. Rex is a pet. Rex is not a cat." question: "Is Rex a dog?"
+   ```nx
+   pet(V) => cat(V) | dog(V). @ "Every pet is a cat or a dog"
+   pet(rex). @ "Rex is a pet"
+   not cat(rex). @ "Rex is not a cat"
+   ? dog(rex).
+   ```
    Every variable of a conclusion must appear in a condition. Transitivity needs two conditions:
    in(X, Y) & in(Y, Z) => in(X, Z).
 3. Negation: not tall(john).   "A does not B"  ->  not b(a).
