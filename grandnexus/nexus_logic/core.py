@@ -31,7 +31,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Dict, Iterator, List, Optional, Sequence, Set, Tuple, Union
 
-ENGINE_VERSION = "ref-2.1"  # 1.1: reductio ; 1.2: universal questions ; 2.0: disjunctions ; 2.1: disjunctive questions
+ENGINE_VERSION = "ref-2.2"  # 1.1: reductio ; 1.2: universal questions ; 2.0: disjunctions ; 2.2: formula questions by refutation
 MAX_ARITY = 4  # relation ternaire + moment ; le carnet a perdu un item sur une limite à 2 puis 3
 
 LANGUAGE_SPEC = """\
@@ -47,9 +47,10 @@ drule     := literal { " & " literal } " => " literal " | " literal { " | " lite
              disjunctive conclusion: "all X are Y or Z"  ->  x(V) => y(V) | z(V).
 same      := "same(" const ", " const ")."    two names for one entity
 let       := "let " const " = " expr "."      expr: numbers, + - * / ( ), earlier let-constants
-question  := "? " literal { " & " literal } "."           exactly one per program; may contain a variable
-             "? " literal { " | " literal } "."           disjunctive question ("is A or B true?")
+question  := "? " formula "."                              exactly one per program
              "? " literal { " & " literal } " => " literal "."   universal question ("all/no X are Y")
+formula   := literal | "not (" formula ")" | "(" formula ")" | formula " & " formula | formula " | " formula
+             e.g.  ? (a(x) & b(x)) | (not a(x) & not b(x)).     a single literal may carry a variable: ? has(john, apples, N).
 literal   := [ "not " ] atom
 atom      := pred [ "(" term { ", " term } ")" ]   0 to 4 terms; a bare word w means prop(w)
 term      := const | var | number
@@ -183,6 +184,105 @@ def safe_eval(expr: str, env: Dict[str, Union[int, float]]) -> Union[int, float]
         raise ValueError(f"bad expression: {e}") from None
 
 
+# ----------------------------------------------------------------------------- formules (questions composées)
+_TOK = re.compile(r"\s*(not\b|&|\||\(|\)|[a-z][a-z0-9_]*(?:\([^()]*\))?)\s*")
+
+
+def _has_grouping(q: str) -> bool:
+    """True if the question uses parentheses for grouping (not only inside atoms)."""
+    return bool(re.search(r"(^|[\s&|(])\(", q.strip()))
+
+
+def _tokens(q: str) -> List[str]:
+    out, i, q = [], 0, q.strip()
+    while i < len(q):
+        m = _TOK.match(q, i)
+        if not m or m.end() == i:
+            raise ValueError(f"bad formula near '{q[i:i + 15]}'")
+        out.append(m.group(1))
+        i = m.end()
+    return out
+
+
+def parse_formula(q: str):
+    """Formula AST: Lit | ("not", f) | ("and", f, g) | ("or", f, g)."""
+    toks, pos = _tokens(q), [0]
+
+    def peek():
+        return toks[pos[0]] if pos[0] < len(toks) else None
+
+    def take(t=None):
+        tok = peek()
+        if tok is None or (t is not None and tok != t):
+            raise ValueError(f"bad formula: expected {t or 'token'}")
+        pos[0] += 1
+        return tok
+
+    def expr():
+        f = term()
+        while peek() == "|":
+            take(); f = ("or", f, term())
+        return f
+
+    def term():
+        f = factor()
+        while peek() == "&":
+            take(); f = ("and", f, factor())
+        return f
+
+    def factor():
+        tok = peek()
+        if tok == "not":
+            take()
+            if peek() == "(":
+                return ("not", factor())
+            return parse_literal("not " + take())
+        if tok == "(":
+            take(); f = expr(); take(")"); return f
+        return parse_literal(take())
+    f = expr()
+    if pos[0] != len(toks):
+        raise ValueError("bad formula: trailing tokens")
+    return f
+
+
+def _formula_vars(f) -> Set[str]:
+    if isinstance(f, Lit):
+        return f.vars()
+    return set().union(*(_formula_vars(x) for x in f[1:]))
+
+
+def _map_formula(f, fn):
+    if isinstance(f, Lit):
+        return fn(f)
+    return (f[0],) + tuple(_map_formula(x, fn) for x in f[1:])
+
+
+def _nnf(f, neg: bool = False):
+    if isinstance(f, Lit):
+        return f.flip() if neg else f
+    op = f[0]
+    if op == "not":
+        return _nnf(f[1], not neg)
+    if op == "and":
+        return ("or" if neg else "and", _nnf(f[1], neg), _nnf(f[2], neg))
+    return ("and" if neg else "or", _nnf(f[1], neg), _nnf(f[2], neg))
+
+
+def cnf(f, negate: bool = False) -> List[Tuple[Lit, ...]]:
+    """Clauses (disjunctions of literals) equivalent to f (or to not f)."""
+    def go(g) -> List[Tuple[Lit, ...]]:
+        if isinstance(g, Lit):
+            return [(g,)]
+        if g[0] == "and":
+            return go(g[1]) + go(g[2])
+        a, b = go(g[1]), go(g[2])
+        if len(a) * len(b) > 4096:
+            raise ValueError("formula too large")
+        return [tuple(dict.fromkeys(x + y)) for x in a for y in b]
+    return go(_nnf(f, negate))
+
+
 # ----------------------------------------------------------------------------- analyseur
 _IDENT = r"[a-z][a-z0-9_]*"
 _VAR = r"[A-Z][A-Za-z0-9_]*"
@@ -299,9 +399,14 @@ def _parse_statement(prog: Program, seg: str, lineno: int, sid: str, src: Option
     try:
         if body.startswith("?"):
             q = body[1:]
-            if "|" in q and "=>" not in q:                    # disjunctive question: ? a | b
-                lits = tuple(parse_literal(c) for c in q.split("|"))
-                prog.questions.append(("disjunctive", lits))
+            if "=>" not in q and ("|" in q or "(" in q.replace("(", "", 0) and _has_grouping(q) or "&" in q):
+                f = parse_formula(q)
+                if _formula_vars(f):
+                    if "&" in q and "|" not in q and not _has_grouping(q):   # conjunction with variables: bindings
+                        prog.questions.append(tuple(parse_literal(c) for c in q.split("&")))
+                        return
+                    raise ValueError("a compound question must be ground (no variable)")
+                prog.questions.append(("formula", f))
                 return
             if "=>" in q:                                     # universal question: ? body => head
                 lhs, rhs = q.split("=>", 1)
@@ -423,9 +528,11 @@ class Verdict:
 class Engine:
     def __init__(self, prog: Program, use_knowledge: bool = True, contrapositives: bool = True,
                  merge_typical: bool = True, max_facts: int = 50_000, reductio: bool = True,
-                 extra_facts: Optional[Sequence[Lit]] = None) -> None:
+                 extra_facts: Optional[Sequence[Lit]] = None,
+                 extra_clauses: Optional[Sequence[Tuple[Lit, ...]]] = None) -> None:
         self.prog, self.use_knowledge, self.merge_typical, self.max_facts = prog, use_knowledge, merge_typical, max_facts
         self.reductio, self.extra_facts = reductio, list(extra_facts or [])
+        self.extra_clauses = list(extra_clauses or [])        # hypothetical disjunctions (refutation of a formula)
         self.uf = _UnionFind()
         self.kb: Set[Lit] = set()
         self.index: Dict[Tuple[bool, str, int], List[Lit]] = {}
@@ -448,7 +555,7 @@ class Engine:
         return bool(self.contradictions) or self.refuted_disjunction is not None
 
     def _collect_disjunctions(self) -> None:
-        cands: List[Tuple[Tuple[Lit, ...], str]] = []
+        cands: List[Tuple[Tuple[Lit, ...], str]] = [(tuple(self.canon(l) for l in c), "hypothesis") for c in self.extra_clauses]
         for lits, sid, kn in self.prog.disjunctions:
             if kn and not self.use_knowledge:
                 continue
@@ -479,7 +586,7 @@ class Engine:
             for l in r.body + (r.head,):
                 yield from l.atom.args
         for q in self.prog.questions:
-            if q and q[0] == "universal":
+            if q and q[0] in ("universal", "formula"):
                 continue
             for l in (q[1] if q and q[0] == "disjunctive" else q):
                 yield from l.atom.args
@@ -610,6 +717,8 @@ class Engine:
             return self._answer_universal(self.prog.universal_questions[goal[1]])
         if goal and goal[0] == "disjunctive":
             return self._answer_disjunctive(tuple(self.canon(l) for l in goal[1]))
+        if goal and goal[0] == "formula":
+            return Verdict("inconnu", note="formula questions are decided by decide()")
         gs = tuple(self.canon(l) for l in goal)
         if self.overflow:
             return Verdict("inconnu", note=f"fact limit {self.max_facts} reached")
@@ -724,10 +833,10 @@ MAX_BRANCHES = 256
 
 
 def leaves(prog: Program, use_knowledge: bool = True, extra: Optional[List[Lit]] = None,
-           budget: Optional[List[int]] = None, **kw) -> List[Engine]:
+           budget: Optional[List[int]] = None, extra_clauses: Optional[List[Tuple[Lit, ...]]] = None, **kw) -> List[Engine]:
     """Case split on the pending disjunctions: every consistent complete branch (a 'leaf')."""
     budget = budget if budget is not None else [MAX_BRANCHES]
-    eng = Engine(prog, use_knowledge=use_knowledge, extra_facts=extra or [], **kw)
+    eng = Engine(prog, use_knowledge=use_knowledge, extra_facts=extra or [], extra_clauses=extra_clauses or [], **kw)
     if eng.inconsistent or eng.overflow:
         return []
     if not eng.pending:
@@ -738,13 +847,39 @@ def leaves(prog: Program, use_knowledge: bool = True, extra: Optional[List[Lit]]
         budget[0] -= 1
         if budget[0] < 0:
             raise RuntimeError("too many disjunction branches")
-        out += leaves(prog, use_knowledge, (extra or []) + [l], budget, **kw)
+        out += leaves(prog, use_knowledge, (extra or []) + [l], budget, extra_clauses, **kw)
     return out
+
+
+def _unsat(prog: Program, use_knowledge: bool, clauses: List[Tuple[Lit, ...]], **kw) -> bool:
+    units = [c[0] for c in clauses if len(c) == 1]
+    multi = [c for c in clauses if len(c) > 1]
+    try:
+        return not leaves(prog, use_knowledge, units, None, multi, reductio=False, **kw)
+    except RuntimeError:
+        return False
+
+
+def decide_formula(prog: Program, f, use_knowledge: bool = True, **kw) -> Verdict:
+    """Entailment of a ground propositional formula by refutation:
+    oui if KB + not f is inconsistent in every branch, non if KB + f is, contradictoire if KB itself is."""
+    kw.pop("reductio", None)
+    if _unsat(prog, use_knowledge, [], **kw):
+        return Verdict("contradictoire", note="the premises are inconsistent")
+    neg_unsat = _unsat(prog, use_knowledge, cnf(f, negate=True), **kw)
+    pos_unsat = _unsat(prog, use_knowledge, cnf(f), **kw)
+    if neg_unsat and not pos_unsat:
+        return Verdict("oui", note="formula entailed (refutation of its negation)")
+    if pos_unsat and not neg_unsat:
+        return Verdict("non", note="formula refuted (assuming it is inconsistent)")
+    return Verdict("inconnu")
 
 
 def decide(prog: Program, use_knowledge: bool = True, **kw) -> Verdict:
     """Entailment under all case splits: a verdict holds only if every consistent branch gives it.
     Without disjunctions this is exactly Engine(prog).answer()."""
+    if prog.questions and prog.questions[0] and prog.questions[0][0] == "formula":
+        return decide_formula(prog, prog.questions[0][1], use_knowledge, **kw)
     if not prog.disjunctions and not prog.drules:
         return Engine(prog, use_knowledge=use_knowledge, **kw).answer()
     try:

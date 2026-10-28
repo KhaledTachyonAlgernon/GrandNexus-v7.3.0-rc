@@ -1,0 +1,4 @@
+romance_language(V) => indo_european_language(V). @ "All Romance languages are Indo-European languages"
+romance_language(french). @ "French and Spanish are both Romance languages"
+romance_language(spanish). @ "French and Spanish are both Romance languages"
+? indo_european_language(french).

@@ -1,0 +1,8 @@
+mountain_range(picuris). @ "The Picuris Mountains are a mountain range"
+in_nm(picuris) | in_tx(picuris). @ "in New Mexico or Texas"
+visited(juan_de_onate, picuris). @ "Juan de Onate visited the Picuris Mountains"
+mine(harding). @ "The Harding Pegmatite Mine"
+located_in(harding, picuris). @ "located in the Picuris Mountains"
+donated(harding). @ "was donated"
+mountain_range(R) & located_in(M, R) & donated(M) => not in_tx(R). @ "There are no mountain ranges in texas that have mines that have been donated."
+? located_in(harding, R) & mountain_range(R) => not in_nm(R).

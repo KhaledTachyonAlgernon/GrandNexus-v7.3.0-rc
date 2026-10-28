@@ -1,0 +1,3 @@
+stable(diamond_mine). @ "Diamond Mine is a professional wrestling stable formed in WWE"
+leads(roderick_strong, diamond_mine). @ "Roderick Strong leads Diamond Mine"
+? leads(roderick_strong, S) & stable(S).

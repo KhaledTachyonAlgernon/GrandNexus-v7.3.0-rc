@@ -1,0 +1,5 @@
+let gre_cost = 205.
+cost(gre_test, gre_cost). @ "It costs $205 to take the GRE test"
+cheaper(gre_cost, 300). @ "which is cheaper than $300"
+* cheaper(X, Y) => below(X, Y).
+? below(gre_cost, 300).

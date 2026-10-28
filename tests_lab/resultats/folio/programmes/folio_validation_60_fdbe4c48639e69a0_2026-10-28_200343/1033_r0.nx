@@ -1,0 +1,8 @@
+deadly_disease(V) => low_survival(V). @ "If something is a deadly disease, then it comes with a low survival rate."
+severe_cancer(V) => deadly_disease(V). @ "Severe cancers are deadly diseases."
+bile_duct_cancer(V) => severe_cancer(V). @ "Bile duct cancer is a severe form cancer."
+cholangiocarcinoma(V) => bile_duct_cancer(V). @ "All Cholangiocarcinoma is bile duct cancer."
+low_survival(mild_flu). @ "Mild flu comes with a low survival rate."
+bile_duct_cancer(colorectal_cancer) => not low_survival(colorectal_cancer). @ "Colorectal cancer is not both a bile duct cancer and with a low survival rate."
+# The question's disjunctive antecedent cannot be written. Both branches lead to bile_duct_cancer(colorectal_cancer), since cholangiocarcinoma implies it, so I use that single case as the antecedent.
+? bile_duct_cancer(colorectal_cancer) => mild_flu(colorectal_cancer).

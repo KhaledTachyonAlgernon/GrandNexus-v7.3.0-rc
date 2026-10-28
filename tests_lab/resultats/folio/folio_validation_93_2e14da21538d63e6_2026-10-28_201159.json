@@ -1,0 +1,4559 @@
+{
+ "summary": {
+  "set": "folio_validation_93_2e14da21538d63e6_2026-10-28_201159",
+  "sha": "2e14da21538d63e6",
+  "n": 93,
+  "runs": 1,
+  "model": "claude-sonnet-5-5",
+  "prompt_version": "v5.3",
+  "engine_version": "ref-2.1",
+  "modes": {
+   "translator": {
+    "runs": {
+     "0": {
+      "acc": 66,
+      "n": 93,
+      "pct": 71.0,
+      "false_oui": 1,
+      "false_non": 0,
+      "inventions": 1,
+      "inconnu": 56,
+      "contradictoire": 3,
+      "erreurs": 0,
+      "confusion": {
+       "inconnu->inconnu": 33,
+       "inconnu->oui": 1,
+       "non->contradictoire": 2,
+       "non->inconnu": 8,
+       "non->non": 16,
+       "oui->contradictoire": 1,
+       "oui->inconnu": 15,
+       "oui->oui": 17
+      },
+      "strict": {
+       "acc": 66,
+       "n": 93,
+       "pct": 71.0,
+       "false_oui": 1,
+       "false_non": 0,
+       "inventions": 1,
+       "inconnu": 56,
+       "contradictoire": 3,
+       "erreurs": 0,
+       "confusion": {
+        "inconnu->inconnu": 33,
+        "inconnu->oui": 1,
+        "non->contradictoire": 2,
+        "non->inconnu": 8,
+        "non->non": 16,
+        "oui->contradictoire": 1,
+        "oui->inconnu": 15,
+        "oui->oui": 17
+       }
+      },
+      "depends_on_knowledge": 3,
+      "rejections": 0
+     }
+    },
+    "stable_items": 93,
+    "calls": 100,
+    "tokens": 282466
+   },
+   "direct": {
+    "runs": {
+     "0": {
+      "acc": 82,
+      "n": 93,
+      "pct": 88.2,
+      "false_oui": 2,
+      "false_non": 2,
+      "inventions": 3,
+      "inconnu": 36,
+      "contradictoire": 2,
+      "erreurs": 0,
+      "confusion": {
+       "inconnu->inconnu": 31,
+       "inconnu->non": 2,
+       "inconnu->oui": 1,
+       "non->contradictoire": 1,
+       "non->inconnu": 2,
+       "non->non": 22,
+       "non->oui": 1,
+       "oui->contradictoire": 1,
+       "oui->inconnu": 3,
+       "oui->oui": 29
+      }
+     }
+    },
+    "stable_items": 93,
+    "calls": 93,
+    "tokens": 36970
+   },
+   "toujours_inconnu": {
+    "runs": {
+     "0": {
+      "acc": 34,
+      "n": 93,
+      "pct": 36.6,
+      "false_oui": 0,
+      "false_non": 0,
+      "inventions": 0,
+      "inconnu": 93,
+      "contradictoire": 0,
+      "erreurs": 0,
+      "confusion": {
+       "inconnu->inconnu": 34,
+       "non->inconnu": 26,
+       "oui->inconnu": 33
+      }
+     }
+    },
+    "stable_items": 93,
+    "calls": 0,
+    "tokens": 0
+   },
+   "majorite": {
+    "runs": {
+     "0": {
+      "acc": 34,
+      "n": 93,
+      "pct": 36.6,
+      "false_oui": 0,
+      "false_non": 0,
+      "inventions": 0,
+      "inconnu": 93,
+      "contradictoire": 0,
+      "erreurs": 0,
+      "confusion": {
+       "inconnu->inconnu": 34,
+       "non->inconnu": 26,
+       "oui->inconnu": 33
+      }
+     }
+    },
+    "stable_items": 93,
+    "calls": 0,
+    "tokens": 0
+   },
+   "hasard": {
+    "runs": {
+     "0": {
+      "acc": 29,
+      "n": 93,
+      "pct": 31.2,
+      "false_oui": 18,
+      "false_non": 25,
+      "inventions": 21,
+      "inconnu": 34,
+      "contradictoire": 0,
+      "erreurs": 0,
+      "confusion": {
+       "inconnu->inconnu": 13,
+       "inconnu->non": 12,
+       "inconnu->oui": 9,
+       "non->inconnu": 9,
+       "non->non": 8,
+       "non->oui": 9,
+       "oui->inconnu": 12,
+       "oui->non": 13,
+       "oui->oui": 8
+      }
+     }
+    },
+    "stable_items": 93,
+    "calls": 0,
+    "tokens": 0
+   }
+  }
+ },
+ "rows": {
+  "translator": [
+   {
+    "id": "934",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2458,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVF9P6q5gc34mdP7f5jp"
+    ]
+   },
+   {
+    "id": "688",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3479,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVF9WpveNd1sFX3wBrhC"
+    ]
+   },
+   {
+    "id": "2",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2631,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFAAHgEgGmh6AspTJmR"
+    ]
+   },
+   {
+    "id": "565",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2448,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFAPKWTX6ZLjF6kxMRy"
+    ]
+   },
+   {
+    "id": "548",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2701,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFAXSvDVHEm3VGDhRr5"
+    ]
+   },
+   {
+    "id": "289",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2299,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFAp6HHF1kawx84rDcj"
+    ]
+   },
+   {
+    "id": "943",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3152,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFAvhtRBhcfj9EHSzqL"
+    ]
+   },
+   {
+    "id": "805",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2453,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFBMjJBP7VS9zanEUf6"
+    ]
+   },
+   {
+    "id": "1209",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3013,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFBVkzEX2v2YKzP1wqk"
+    ]
+   },
+   {
+    "id": "323",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2231,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFBsce4bKyoq6CmD3Lf"
+    ]
+   },
+   {
+    "id": "561",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "oui",
+    "pred_strict": "inconnu",
+    "knowledge": true,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2350,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFBwT4ikWWPGZxVdR4C"
+    ]
+   },
+   {
+    "id": "190",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2498,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFC28rNYmDfFVnDteGB"
+    ]
+   },
+   {
+    "id": "847",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3191,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFCE7SAvUevNyASQ1eT"
+    ]
+   },
+   {
+    "id": "442",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2461,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFCinbXP815hvX7zGyk"
+    ]
+   },
+   {
+    "id": "893",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2782,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFCxTct8jPtaHcXmH6r"
+    ]
+   },
+   {
+    "id": "389",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3140,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFDDzFxjt45mKdH86u4"
+    ]
+   },
+   {
+    "id": "928",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3115,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFDfqHBNpkArAawWpHp"
+    ]
+   },
+   {
+    "id": "308",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2597,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFE7YbMwz6d3irBQHdb"
+    ]
+   },
+   {
+    "id": "803",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3050,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFEJJk5ymVFEfAHBBua"
+    ]
+   },
+   {
+    "id": "736",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2207,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFEfPGBoWGoApzDm9xC"
+    ]
+   },
+   {
+    "id": "253",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2437,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFEkCj5mp1hQo6jLM3Q"
+    ]
+   },
+   {
+    "id": "804",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3076,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFEtmvkcKJv6ZuTMN9J"
+    ]
+   },
+   {
+    "id": "964",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2788,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFFJg6n6PgGYBjv9hQk"
+    ]
+   },
+   {
+    "id": "894",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2772,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFFeG4sxFuiyXjxb6wS"
+    ]
+   },
+   {
+    "id": "254",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2441,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFFqcT5Q8NV2Qve2kv1"
+    ]
+   },
+   {
+    "id": "307",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2418,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFFxE4E7v9j6VtxZcxq"
+    ]
+   },
+   {
+    "id": "1301",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 1,
+    "calls": 2,
+    "tokens": 6439,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFG8pYch6FoPT8NdFfG",
+     "msg_011CgVFGRozbMTEU4FcTqndo"
+    ]
+   },
+   {
+    "id": "1349",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2549,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFGsUqojwkjHuLqadja"
+    ]
+   },
+   {
+    "id": "1326",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2966,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFH2MtQqQmQfmoZyWPM"
+    ]
+   },
+   {
+    "id": "808",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2775,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFHNaoK3Q8514YGiHMt"
+    ]
+   },
+   {
+    "id": "1365",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3922,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFHgAUdLKGC42xLM4Ng"
+    ]
+   },
+   {
+    "id": "324",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2331,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFJbD6shdgoCeWhuwcJ"
+    ]
+   },
+   {
+    "id": "527",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 1,
+    "calls": 2,
+    "tokens": 6413,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFJjbPTFSujC3fX34Ac",
+     "msg_011CgVFKCjXLauBWxXCY49RK"
+    ]
+   },
+   {
+    "id": "1327",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2657,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFKaVTn9ybwrsi4Me9E"
+    ]
+   },
+   {
+    "id": "621",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3017,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFKmXVMNagsceG9CZLw"
+    ]
+   },
+   {
+    "id": "549",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2391,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFLE89mUvnadpeJcxVc"
+    ]
+   },
+   {
+    "id": "242",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2324,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFLRV1fotp23gkQBxYp"
+    ]
+   },
+   {
+    "id": "1411",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3171,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFLZzjU476wiRivnRmn"
+    ]
+   },
+   {
+    "id": "904",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2364,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFM25djQWi6kGiWWNz9"
+    ]
+   },
+   {
+    "id": "1361",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3238,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFM83Z5mngjKhj9pjaj"
+    ]
+   },
+   {
+    "id": "754",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 1,
+    "calls": 2,
+    "tokens": 7676,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFMfBJwU1nYbMzExJWC",
+     "msg_011CgVFNRWYz722CiV8ykYw8"
+    ]
+   },
+   {
+    "id": "1271",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2376,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFP8LyDF5iaFEbRRQ5b"
+    ]
+   },
+   {
+    "id": "756",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2613,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFPJg5H8exzLpY3rtvV"
+    ]
+   },
+   {
+    "id": "1350",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2570,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFPWHKfDY7aWPvwdbmX"
+    ]
+   },
+   {
+    "id": "1014",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3465,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFPhfvne7Y9rw4pzDhV"
+    ]
+   },
+   {
+    "id": "1012",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3099,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFQGRfa9ocMtYj9Gh7e"
+    ]
+   },
+   {
+    "id": "532",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 1,
+    "calls": 2,
+    "tokens": 6001,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFQeN21imJRrRG6yhDe",
+     "msg_011CgVFQpBdUD9r3p6HR9mzn"
+    ]
+   },
+   {
+    "id": "1208",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2955,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFR75sMU1WtmshGba5d"
+    ]
+   },
+   {
+    "id": "1328",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2757,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFRRok8yau4eLnAWJxy"
+    ]
+   },
+   {
+    "id": "726",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2192,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFRdJZEuXBFx54JmShn"
+    ]
+   },
+   {
+    "id": "304",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2446,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFRhXZEH878AwSor5mJ"
+    ]
+   },
+   {
+    "id": "76",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2350,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFRrFv4drJCBzrk4bGH"
+    ]
+   },
+   {
+    "id": "372",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3151,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFS1AD7EREnqdznbJ2k"
+    ]
+   },
+   {
+    "id": "411",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2539,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFSV6UJ3wGN3MFgJz9W"
+    ]
+   },
+   {
+    "id": "1329",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 1,
+    "calls": 2,
+    "tokens": 7192,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFSfx5bN8fmFMm7JUs4",
+     "msg_011CgVFTDX7rACECJGKoSEq9"
+    ]
+   },
+   {
+    "id": "609",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2969,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFTdaErdqvo8Bg4JTw3"
+    ]
+   },
+   {
+    "id": "802",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2852,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFU7PZaFnPzDe8u27A3"
+    ]
+   },
+   {
+    "id": "1244",
+    "expected": "non",
+    "run": 0,
+    "pred": "contradictoire",
+    "pred_full": "contradictoire",
+    "pred_strict": "contradictoire",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2894,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFUQfNwCbcLtEsK5cu3"
+    ]
+   },
+   {
+    "id": "807",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2447,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFUkMYXHNwHDkTPHkLm"
+    ]
+   },
+   {
+    "id": "370",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3075,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFUtesGDriE8W97MpLZ"
+    ]
+   },
+   {
+    "id": "546",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2395,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFVKRP5kwf2iRfCu1p7"
+    ]
+   },
+   {
+    "id": "149",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "oui",
+    "pred_strict": "inconnu",
+    "knowledge": true,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2732,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFVWB3RPyBDMVjLoLAi"
+    ]
+   },
+   {
+    "id": "134",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 1,
+    "calls": 2,
+    "tokens": 5971,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFVrzgikrFwFKoYCvkB",
+     "msg_011CgVFWJB18W3tWaV2qBH3C"
+    ]
+   },
+   {
+    "id": "739",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2349,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFWSdkiKi8pUmJoR7AA"
+    ]
+   },
+   {
+    "id": "755",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2631,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFWbckPBzQWCbkTLzq2"
+    ]
+   },
+   {
+    "id": "147",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2280,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFWnTc9zkDK9B9D3UZe"
+    ]
+   },
+   {
+    "id": "1363",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3205,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFWtGbuBV9SX95pbFuK"
+    ]
+   },
+   {
+    "id": "658",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2338,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFXPZyrbnvt6CeTqmgg"
+    ]
+   },
+   {
+    "id": "806",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2455,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFXWmpQUsEicXpNPq83"
+    ]
+   },
+   {
+    "id": "622",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2433,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFXekJ5zKdCK7zLU8of"
+    ]
+   },
+   {
+    "id": "966",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3881,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFXqCM2KcaRDwpJH56k"
+    ]
+   },
+   {
+    "id": "443",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2536,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFYoebivi7cfgJ8ef46"
+    ]
+   },
+   {
+    "id": "580",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2296,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFZ3J94reunbowXzYi2"
+    ]
+   },
+   {
+    "id": "1273",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2700,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFZAn6MnphuM1oCEfgS"
+    ]
+   },
+   {
+    "id": "1246",
+    "expected": "oui",
+    "run": 0,
+    "pred": "contradictoire",
+    "pred_full": "contradictoire",
+    "pred_strict": "contradictoire",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3080,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFZRoEJTa9zqX8jajRL"
+    ]
+   },
+   {
+    "id": "657",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2781,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFZte1VbtzBwi11PeeD"
+    ]
+   },
+   {
+    "id": "1314",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "oui",
+    "pred_strict": "inconnu",
+    "knowledge": true,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3155,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFa8K31up3mTaXXdX3u"
+    ]
+   },
+   {
+    "id": "821",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3553,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFaoSGBwDjfNijdaWCL"
+    ]
+   },
+   {
+    "id": "291",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2795,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFbbJHBLgtdaDKXcsGY"
+    ]
+   },
+   {
+    "id": "848",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3028,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFbxU1ZauAYe6Wm3Y61"
+    ]
+   },
+   {
+    "id": "241",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2664,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFcMpSP1Ay79JxtVr4H"
+    ]
+   },
+   {
+    "id": "243",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "pred_full": "oui",
+    "pred_strict": "oui",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2418,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFcffjX49JTxUo1Pxwa"
+    ]
+   },
+   {
+    "id": "547",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2385,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFcoBgqiBXyW4HqN93v"
+    ]
+   },
+   {
+    "id": "787",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2505,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFcwTWtuURvcwtEq3dN"
+    ]
+   },
+   {
+    "id": "981",
+    "expected": "non",
+    "run": 0,
+    "pred": "contradictoire",
+    "pred_full": "contradictoire",
+    "pred_strict": "contradictoire",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 1,
+    "calls": 2,
+    "tokens": 7535,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFd4yT6QKa575PzombS",
+     "msg_011CgVFdq8YGChr81PLG2SmU"
+    ]
+   },
+   {
+    "id": "1013",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3019,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFeVHi8B8oW7m9TUoAh"
+    ]
+   },
+   {
+    "id": "1348",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2568,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFetSkPerSMJxnioaP4"
+    ]
+   },
+   {
+    "id": "849",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3070,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFf5SJ2HgW37vhCkirB"
+    ]
+   },
+   {
+    "id": "664",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2496,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFfU5own1A27tY5ah4g"
+    ]
+   },
+   {
+    "id": "1",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "pred_full": "non",
+    "pred_strict": "non",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2632,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFfczqEN8RsjmCEgm7S"
+    ]
+   },
+   {
+    "id": "958",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 3170,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFfrqY2YsQ8AQbVKTwW"
+    ]
+   },
+   {
+    "id": "412",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2628,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFgLhqF7Z8ju7FNyPT6"
+    ]
+   },
+   {
+    "id": "1366",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "pred_full": "inconnu",
+    "pred_strict": "inconnu",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "tokens": 2418,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFgW5dvsoc9rLnb1Qab"
+    ]
+   }
+  ],
+  "direct": [
+   {
+    "id": "934",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 388,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFgdTeS6xNhRNGfZ96f"
+    ]
+   },
+   {
+    "id": "688",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 442,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFgoAo972vQRZzS2dvp"
+    ]
+   },
+   {
+    "id": "2",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 306,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFgwj1AGM53464B37Pm"
+    ]
+   },
+   {
+    "id": "565",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 247,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFh2RmKAZsdkavg2ySc"
+    ]
+   },
+   {
+    "id": "548",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 318,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFh7fnBCFfyRHjFx1vC"
+    ]
+   },
+   {
+    "id": "289",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 224,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFhD3F8wXfJVqksTFsV"
+    ]
+   },
+   {
+    "id": "943",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 520,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFhJVfCUQn1hqGjg9AP"
+    ]
+   },
+   {
+    "id": "805",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 489,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFhUrzX3J8ksdZnkddi"
+    ]
+   },
+   {
+    "id": "1209",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 576,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFheM18ULiVtV8Xv1zL"
+    ]
+   },
+   {
+    "id": "323",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 192,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFhsm9xxFw1BrQW7QWy"
+    ]
+   },
+   {
+    "id": "561",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 267,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFhxXu8cJBzJZZJa51W"
+    ]
+   },
+   {
+    "id": "190",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 255,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFi3U42JHKXBB3hbkRD"
+    ]
+   },
+   {
+    "id": "847",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 548,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFiDBSxjNZeYPMWqtBs"
+    ]
+   },
+   {
+    "id": "442",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 215,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFiQijr3wbUHpmGkQGC"
+    ]
+   },
+   {
+    "id": "893",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 521,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFiXdU8j5QWXaDmBHEp"
+    ]
+   },
+   {
+    "id": "389",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 715,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFif5BviSZ7BYDHtZHs"
+    ]
+   },
+   {
+    "id": "928",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 586,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFj2FuorPDaK8asmPPd"
+    ]
+   },
+   {
+    "id": "308",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 282,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFjEPREDAjxagfqNWYo"
+    ]
+   },
+   {
+    "id": "803",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 487,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFjP3ZRTYwzZpoaAe47"
+    ]
+   },
+   {
+    "id": "736",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 185,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFjZ7JGpso2pxFV6bYo"
+    ]
+   },
+   {
+    "id": "253",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 246,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFjgaWVTrQrx5GRtbbf"
+    ]
+   },
+   {
+    "id": "804",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 504,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFjqw5JLbkhyQZPMvTj"
+    ]
+   },
+   {
+    "id": "964",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 396,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFk6jKKqhMqzmt9t3Rn"
+    ]
+   },
+   {
+    "id": "894",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 455,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFkG4dz7nctjEqJjXmF"
+    ]
+   },
+   {
+    "id": "254",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 305,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFkQmGbCvE2Mqw2wV1L"
+    ]
+   },
+   {
+    "id": "307",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 233,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFkVAC6ZBm7PicECfci"
+    ]
+   },
+   {
+    "id": "1301",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 444,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFkb6NndTsQs3f2ZMzX"
+    ]
+   },
+   {
+    "id": "1349",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 492,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFkioj1brhc95oYnT2S"
+    ]
+   },
+   {
+    "id": "1326",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 546,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFku9645r2BiqAgxumc"
+    ]
+   },
+   {
+    "id": "808",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 394,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFm7CcjyduA8EiQFCpZ"
+    ]
+   },
+   {
+    "id": "1365",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 775,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFmEvDQ1DuzBe8wfm7P"
+    ]
+   },
+   {
+    "id": "324",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 204,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFmZVAX4TLKqLYwDg8p"
+    ]
+   },
+   {
+    "id": "527",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 444,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFmeWo1vzfLutobGsPC"
+    ]
+   },
+   {
+    "id": "1327",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 409,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFmrEEpAcPp17THaeu9"
+    ]
+   },
+   {
+    "id": "621",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 459,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFmy6yhZR9hUgj7D6uo"
+    ]
+   },
+   {
+    "id": "549",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 350,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFnCKDvbo4wufYZh3r3"
+    ]
+   },
+   {
+    "id": "242",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 196,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFnMUdvrF7pbXAV6uxc"
+    ]
+   },
+   {
+    "id": "1411",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 435,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFnQu1Z7jEUcd35yNNg"
+    ]
+   },
+   {
+    "id": "904",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 375,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFnZ49etvep8zaMeuqh"
+    ]
+   },
+   {
+    "id": "1361",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 810,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFng4bEz53wUXb2N7C1"
+    ]
+   },
+   {
+    "id": "754",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 453,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFo42SJQsbQVcJcWrmp"
+    ]
+   },
+   {
+    "id": "1271",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 316,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFoBX8bxy1jbK89twRD"
+    ]
+   },
+   {
+    "id": "756",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 402,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFoM37g5pExosTuPwVe"
+    ]
+   },
+   {
+    "id": "1350",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 443,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFoVAmYMXuVTg6cLoiA"
+    ]
+   },
+   {
+    "id": "1014",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 573,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFoeLgMRUEvimGdJFfT"
+    ]
+   },
+   {
+    "id": "1012",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 586,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFoqPwP8Lq5MCxU8Fi2"
+    ]
+   },
+   {
+    "id": "532",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 387,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFp3iMNfrrLVCJs54kT"
+    ]
+   },
+   {
+    "id": "1208",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 535,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFpBDJWfuR7P6yu92nN"
+    ]
+   },
+   {
+    "id": "1328",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 612,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFpRQq3dDju5eAvnptf"
+    ]
+   },
+   {
+    "id": "726",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 148,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFpgRTn4w1YQdaFKy9k"
+    ]
+   },
+   {
+    "id": "304",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 285,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFpph4PKfP2SaqjE8nx"
+    ]
+   },
+   {
+    "id": "76",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 232,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFpv5VoGZpTYWQCq1mb"
+    ]
+   },
+   {
+    "id": "372",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 372,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFq2FaRbMR2WtDV4VWQ"
+    ]
+   },
+   {
+    "id": "411",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 301,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFq8iWv8m7xBTWN1KMn"
+    ]
+   },
+   {
+    "id": "1329",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 701,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFqBPzW6HBmYDXmS9hv"
+    ]
+   },
+   {
+    "id": "609",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 346,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFqSEyEaJo57uDNY98d"
+    ]
+   },
+   {
+    "id": "802",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 258,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFqYsaKVZN5F8maFrNv"
+    ]
+   },
+   {
+    "id": "1244",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 705,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFqgzUuWfUvVjvNwzvG"
+    ]
+   },
+   {
+    "id": "807",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 365,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFr1u296jz2aTuHe814"
+    ]
+   },
+   {
+    "id": "370",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 362,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFr99qZiSNPQPsJgw1Y"
+    ]
+   },
+   {
+    "id": "546",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 215,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFrFpfs3YVTDYbkm1zQ"
+    ]
+   },
+   {
+    "id": "149",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 188,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFrLJJNEtdaTsDB7Uv5"
+    ]
+   },
+   {
+    "id": "134",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 354,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFrRSsJu3y55kgaoGZL"
+    ]
+   },
+   {
+    "id": "739",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 143,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFrcFWL7K1R57tC62dT"
+    ]
+   },
+   {
+    "id": "755",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 381,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFrfiroGFME8Eahw7pS"
+    ]
+   },
+   {
+    "id": "147",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 182,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFro2ejfSCUgqAUqgWi"
+    ]
+   },
+   {
+    "id": "1363",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 503,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFrqzyq2z5f7BLHEMjo"
+    ]
+   },
+   {
+    "id": "658",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 280,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFs4Sqa6CM5TV7eNhi8"
+    ]
+   },
+   {
+    "id": "806",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 447,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFs7Ni562S71RNNtNo3"
+    ]
+   },
+   {
+    "id": "622",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 243,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFsFPfQwFRCg79jxkMH"
+    ]
+   },
+   {
+    "id": "966",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 517,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFsKUU7Qo5HaMGeLtrR"
+    ]
+   },
+   {
+    "id": "443",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 214,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFsYdzRiNWjBPD156gm"
+    ]
+   },
+   {
+    "id": "580",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 268,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFsi5GVZ9m2xMaMYvNQ"
+    ]
+   },
+   {
+    "id": "1273",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 443,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFst8kNH2jo6EsmyfLx"
+    ]
+   },
+   {
+    "id": "1246",
+    "expected": "oui",
+    "run": 0,
+    "pred": "contradictoire",
+    "calls": 1,
+    "tokens": 456,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFt3Sbu3beHWVUTLCZc"
+    ]
+   },
+   {
+    "id": "657",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 444,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFtDNPQTivnnG1KU95v"
+    ]
+   },
+   {
+    "id": "1314",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 302,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFtNJuwqcLt5Bqs8Xdq"
+    ]
+   },
+   {
+    "id": "821",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 495,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFtVWjrbrDJyjYDYKdj"
+    ]
+   },
+   {
+    "id": "291",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 237,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFtiGTQrtAPoJohgzQi"
+    ]
+   },
+   {
+    "id": "848",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 469,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFtkzRXF9MfkCrFMqkB"
+    ]
+   },
+   {
+    "id": "241",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 201,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFtvGXKCPA9r5wjT8xF"
+    ]
+   },
+   {
+    "id": "243",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 244,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFtxtHSBp9s4Er9A39J"
+    ]
+   },
+   {
+    "id": "547",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 409,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFu1v6KFPoaq1qWX2B9"
+    ]
+   },
+   {
+    "id": "787",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 255,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFuGfNHTL8TUef8EAP7"
+    ]
+   },
+   {
+    "id": "981",
+    "expected": "non",
+    "run": 0,
+    "pred": "contradictoire",
+    "calls": 1,
+    "tokens": 1035,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFuNJw7ktSqDJe7Frrx"
+    ]
+   },
+   {
+    "id": "1013",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 546,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFukcNFfugV2yKbG3eu"
+    ]
+   },
+   {
+    "id": "1348",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 495,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFuwLJ8dDLdJk2y3aaV"
+    ]
+   },
+   {
+    "id": "849",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui",
+    "calls": 1,
+    "tokens": 598,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFv8xnbETPfraiYTEUK"
+    ]
+   },
+   {
+    "id": "664",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 316,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFvLCiScBtuopPTwLNS"
+    ]
+   },
+   {
+    "id": "1",
+    "expected": "non",
+    "run": 0,
+    "pred": "non",
+    "calls": 1,
+    "tokens": 307,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFvPxgwYhdrJ145n8yV"
+    ]
+   },
+   {
+    "id": "958",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 549,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFvT8gSmxzMp46fx29J"
+    ]
+   },
+   {
+    "id": "412",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 395,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFvdWm9z2ZX8BuokXJh"
+    ]
+   },
+   {
+    "id": "1366",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu",
+    "calls": 1,
+    "tokens": 222,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgVFviPTBy2KgAJWWb4S6"
+    ]
+   }
+  ],
+  "toujours_inconnu": [
+   {
+    "id": "934",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "688",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "2",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "565",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "548",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "289",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "943",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "805",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1209",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "323",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "561",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "190",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "847",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "442",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "893",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "389",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "928",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "308",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "803",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "736",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "253",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "804",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "964",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "894",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "254",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "307",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1301",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1349",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1326",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "808",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1365",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "324",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "527",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1327",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "621",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "549",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "242",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1411",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "904",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1361",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "754",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1271",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "756",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1350",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1014",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1012",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "532",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1208",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1328",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "726",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "304",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "76",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "372",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "411",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1329",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "609",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "802",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1244",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "807",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "370",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "546",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "149",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "134",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "739",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "755",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "147",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1363",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "658",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "806",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "622",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "966",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "443",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "580",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1273",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1246",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "657",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1314",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "821",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "291",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "848",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "241",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "243",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "547",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "787",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "981",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1013",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1348",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "849",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "664",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "958",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "412",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1366",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   }
+  ],
+  "majorite": [
+   {
+    "id": "934",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "688",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "2",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "565",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "548",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "289",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "943",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "805",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1209",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "323",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "561",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "190",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "847",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "442",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "893",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "389",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "928",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "308",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "803",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "736",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "253",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "804",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "964",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "894",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "254",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "307",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1301",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1349",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1326",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "808",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1365",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "324",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "527",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1327",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "621",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "549",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "242",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1411",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "904",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1361",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "754",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1271",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "756",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1350",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1014",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1012",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "532",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1208",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1328",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "726",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "304",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "76",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "372",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "411",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1329",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "609",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "802",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1244",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "807",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "370",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "546",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "149",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "134",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "739",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "755",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "147",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1363",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "658",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "806",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "622",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "966",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "443",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "580",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1273",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1246",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "657",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1314",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "821",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "291",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "848",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "241",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "243",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "547",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "787",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "981",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1013",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1348",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "849",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "664",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "958",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "412",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1366",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   }
+  ],
+  "hasard": [
+   {
+    "id": "934",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "688",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "2",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "565",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "548",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "289",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "943",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "805",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1209",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "323",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "561",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "190",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "847",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "442",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "893",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "389",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "928",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "308",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "803",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "736",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "253",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "804",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "964",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "894",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "254",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "307",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1301",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1349",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1326",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "808",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1365",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "324",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "527",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1327",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "621",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "549",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "242",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1411",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "904",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1361",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "754",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1271",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "756",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1350",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1014",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1012",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "532",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1208",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1328",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "726",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "304",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "76",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "372",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "411",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1329",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "609",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "802",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1244",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "807",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "370",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "546",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "149",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "134",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "739",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "755",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "147",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1363",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "658",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "806",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "622",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "966",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "443",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "580",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1273",
+    "expected": "oui",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1246",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "657",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1314",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "821",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "291",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "848",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "241",
+    "expected": "non",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "243",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "547",
+    "expected": "non",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "787",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "981",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1013",
+    "expected": "oui",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "1348",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "849",
+    "expected": "oui",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "664",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "oui"
+   },
+   {
+    "id": "1",
+    "expected": "non",
+    "run": 0,
+    "pred": "inconnu"
+   },
+   {
+    "id": "958",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "412",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "non"
+   },
+   {
+    "id": "1366",
+    "expected": "inconnu",
+    "run": 0,
+    "pred": "inconnu"
+   }
+  ]
+ }
+}

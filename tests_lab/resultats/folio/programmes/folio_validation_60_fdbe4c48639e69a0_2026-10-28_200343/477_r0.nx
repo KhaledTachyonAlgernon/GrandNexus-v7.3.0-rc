@@ -1,0 +1,10 @@
+managed_building(some_b_1). @ "Pets are allowed in some managed buildings"
+allows_pets(some_b_1). @ "Pets are allowed in some managed buildings"
+cat(fluffy). @ "Fluffy is Tom's cat"
+owner(tom, fluffy). @ "Fluffy is Tom's cat"
+cat(V) => pet(V). @ "Cats are pets"
+managed_building(olive_garden). @ "The Olive Garden is a managed building"
+monthly_rent(olive_garden, 2000). @ "The monthly rent at the Olive Garden is $2000"
+more_than(2000, 1500). @ "$2000 is more than $1500"
+owner(X, P) & pet(P) & managed_building(B) & allows_pets(B) => allowed_move_in(X, P, B). @ "If a managed building allows pets, then people are allowed to move in with a pet"
+? allowed_move_in(tom, fluffy, olive_garden).

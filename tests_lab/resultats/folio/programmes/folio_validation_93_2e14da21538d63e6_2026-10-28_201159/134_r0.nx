@@ -1,0 +1,11 @@
+artificial_selection(breeding_back). @ "Breeding back is a form of artificial selection"
+bred_back(heck_cattle). @ "Heck cattle were bred back in the 1920s"
+resemble(heck_cattle, aurochs). @ "to resemble the aurochs"
+animal(heck_cattle). @ "Heck cattle are animals"
+animal(aurochs). @ "Aurochs are animals"
+animal(some_animal_1). @ "Some animals to be bred back"
+bred_back(some_animal_1). @ "Some animals to be bred back"
+animal(some_extinct_1). @ "extinct animals"
+extinct(some_extinct_1). @ "extinct animals"
+resemble(some_animal_1, some_extinct_1). @ "resemble extinct animals"
+? extinct(aurochs).

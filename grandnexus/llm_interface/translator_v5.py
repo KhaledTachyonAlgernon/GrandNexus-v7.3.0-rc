@@ -17,7 +17,7 @@ from typing import Any, Dict, List, Optional
 
 from grandnexus.nexus_logic import ENGINE_VERSION, LANGUAGE_SPEC, Program, decide, parse
 
-PROMPT_VERSION = "v5.3"  # 5.1: universal questions ; 5.2: disjunctions ; 5.3: explicit disjunction example, disjunctive questions
+PROMPT_VERSION = "v5.4"  # 5.3: disjunction example ; 5.4: compound questions as formulas, "doesn't B or C" convention
 DEFAULT_MODEL = os.environ.get("GN_MODEL", "claude-sonnet-5-5")
 VERDICTS = ("oui", "non", "inconnu", "contradictoire")
 
@@ -40,7 +40,11 @@ CONVENTIONS
    "A or B" / "either A or B (or both)"  ->  a(..) | b(..).      "all X are Y or Z"  ->  x(V) => y(V) | z(V).
    "either A or B but not both"  ->  a | b.  a => not b.  b => not a.
    "neither A nor B"  ->  not a.  not b.     "A unless B"  ->  not b => a.
-   "A does not do B or C"  ->  not b(a).  not c(a).      a question "is A or B?"  ->  ? a(..) | b(..).
+   "A doesn't B or C"  ->  not b(a) | not c(a).   (FOLIO convention: at least one of the two is false)
+   "neither B nor C"  ->  not b(a).  not c(a).   "if P then neither B nor C"  ->  p(a) => not b(a).  p(a) => not c(a).
+   a compound question is written as a formula: "is A and B?"  ->  ? a(..) & b(..).
+   "either (A and B) or (neither A nor B)"  ->  ? (a(..) & b(..)) | (not a(..) & not b(..)).
+   Never define a helper predicate for a compound question: write the formula.
    Example — text: "Every pet is a cat or a dog. Rex is a pet. Rex is not a cat." question: "Is Rex a dog?"
    ```nx
    pet(V) => cat(V) | dog(V). @ "Every pet is a cat or a dog"

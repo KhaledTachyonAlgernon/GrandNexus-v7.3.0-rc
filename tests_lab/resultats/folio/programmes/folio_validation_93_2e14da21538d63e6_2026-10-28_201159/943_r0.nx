@@ -1,0 +1,8 @@
+eats_salad(V) => conscious(V). @ "All people who eat salads regularly are very conscious about their health and eating habits."
+home(V) => eats_salad(V). @ "All people who grew up in health-conscious childhood homes eat salads regularly."
+fulfills(V) => home(V). @ "All people who fulfill their daily nutritional intakes grew up in health-conscious childhood homes."
+disregard(V) => not conscious(V). @ "All people who disregard their physical well-being are not very conscious about their health and eating habits."
+gym(V) => fulfills(V). @ "If people visit the gym at least once a day, then they always fulfill their daily nutritional intakes."
+home(taylor) => disregard(taylor). @ "Taylor either grew up in a health-conscious childhood home and disregard her physical well-being, or she did neither."
+disregard(taylor) => home(taylor). @ "Taylor either grew up in a health-conscious childhood home and disregard her physical well-being, or she did neither."
+? not home(taylor) & not gym(taylor).

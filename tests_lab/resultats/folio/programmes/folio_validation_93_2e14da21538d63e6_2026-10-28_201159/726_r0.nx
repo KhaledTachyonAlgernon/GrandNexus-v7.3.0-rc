@@ -1,0 +1,3 @@
+square(V) => four_sided(V). @ "All squares are four-sided"
+four_sided(V) => shape(V). @ "All four-sided things are shapes"
+? square(V) => shape(V).

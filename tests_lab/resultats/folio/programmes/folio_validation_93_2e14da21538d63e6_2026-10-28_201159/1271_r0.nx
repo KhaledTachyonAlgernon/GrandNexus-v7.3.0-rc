@@ -1,0 +1,7 @@
+brown_swiss_cattle(V) => cow(V). @ "All Brown Swiss cattle are cows"
+brown_swiss_cattle(some_pet_1). @ "Some pets are Brown Swiss Cattle"
+pet(some_pet_1). @ "Some pets are Brown Swiss Cattle"
+cow(V) => domesticated_animal(V). @ "All cows are domesticated animals"
+alligator(V) => not domesticated_animal(V). @ "Alligators are not domesticated animals"
+alligator(ted). @ "Ted is an alligator"
+? pet(ted).

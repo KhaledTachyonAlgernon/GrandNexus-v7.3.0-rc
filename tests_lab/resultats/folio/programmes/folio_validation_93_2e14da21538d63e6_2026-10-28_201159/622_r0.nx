@@ -1,0 +1,6 @@
+music_piece(symphony_no_9). @ "Symphony No. 9 is a music piece"
+wrote(beethoven, symphony_no_9). @ "Beethoven wrote Symphony No. 9"
+premiered(vienna_music_society, symphony_no_9). @ "Vienna Music Society premiered Symphony No. 9"
+orchestra(vienna_music_society). @ "Vienna Music Society is an orchestra"
+leads(beethoven, vienna_music_society). @ "Beethoven leads the Vienna Music Society"
+? orchestra(X) & premiered(X, Y) & music_piece(Y).

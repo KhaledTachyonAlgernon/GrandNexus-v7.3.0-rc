@@ -1,0 +1,9 @@
+pro_player(some_p_1). @ "Some professional basketball players"
+not american(some_p_1). @ "are not American nationals"
+pro_player(V) => jump_shots(V). @ "All professional basketball players can do jump shots."
+jump_shots(V) => leaps(V). @ "If someone can jump shots, they leap straight into the air."
+leaps(V) => legs(V). @ "If someone leaps straight into the air, they activate their leg muscles."
+not legs(yuri). @ "Yuri does not activate his leg muscles."
+* american(V) & pro_player(V) => american_pro(V).
+* not pro_player(V) => not american_pro(V).
+? not leaps(yuri) => american_pro(yuri).

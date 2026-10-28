@@ -1,0 +1,4 @@
+human(V) => mammal(V). @ "Humans are mammals"
+mammal(V) => animal(V). @ "Mammals are animals"
+gets_flu(V) => tired(V). @ "People feel tired when they get the flu"
+? person(V) => not gets_flu(V).

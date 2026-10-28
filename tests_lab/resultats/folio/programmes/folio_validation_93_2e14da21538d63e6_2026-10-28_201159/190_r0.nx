@@ -1,0 +1,9 @@
+not novel(podcast). @ "A podcast is not a novel."
+podcast(family_secrets). @ "Dani Shapiro created a podcast called Family Secrets."
+podcast(V) => not novel(V). @ "A podcast is not a novel."
+novel(family_history). @ "Family History is a novel written in 2003."
+written_by(family_history, dani_shapiro). @ "Family History is written by Dani Shapiro."
+novel(B) & written_by(B, P) => novel_writer(P). @ "If a book is a novel and it is written by a person, then the person is a novel writer."
+american(dani_shapiro). @ "Dani Shapiro is an American writer."
+writer(dani_shapiro). @ "Dani Shapiro is an American writer."
+? novel(family_secrets).
