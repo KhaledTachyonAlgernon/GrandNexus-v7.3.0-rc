@@ -1,0 +1,6 @@
+mammal(some_mammal_1). @ "Some mammals have teeth."
+has_teeth(some_mammal_1). @ "Some mammals have teeth."
+not has_teeth(platypus). @ "Platypuses have no teeth."
+mammal(platypus). @ "Platypuses are mammals."
+has_teeth(human). @ "Humans have teeth."
+? mammal(platypus) & not has_teeth(platypus).

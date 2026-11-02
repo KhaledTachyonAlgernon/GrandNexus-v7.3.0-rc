@@ -1,0 +1,2 @@
+residential_college_at(pierson_college, yale). @ "Pierson College"
+? residential_college_at(pierson_college, yale).

@@ -1,0 +1,3 @@
+podcast(V) => not novel(V). @ "A podcast is not a novel."
+podcast(family_secrets). @ "Dani Shapiro created a podcast called Family Secrets."
+? novel(family_secrets).

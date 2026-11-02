@@ -1,0 +1,6 @@
+istanbul_plate(V) => begins34(V). @ "All vehicle registration plates in Istanbul begin with the number 34."
+not begins34(V) => not istanbul_plate(V). @ "Plates that do not begin with the number 34 are not from Istanbul."
+istanbul_plate(joe_plate). @ "Joe's vehicle registration plate is from Istanbul."
+begins35(tom_plate). @ "Tom's license plate begins with the number 35."
+begins35(V) => not begins34(V). @ "If a license plate begins with the number 35, then it does not begin with the number 34."
+? istanbul_plate(tom_plate).

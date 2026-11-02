@@ -1,0 +1,4 @@
+sporting_event(summer_olympics). @ "The summer Olympic games is a sporting event"
+same(last_summer_olympics, tokyo). @ "The last summer Olympic games was in Tokyo"
+won_most_medals(united_states, tokyo). @ "The United States won the most medals in Tokyo"
+? won_most_medals(united_states, last_summer_olympics).

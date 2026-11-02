@@ -1,0 +1,4 @@
+orchestra(vienna_music_society). @ "Vienna Music Society is an orchestra"
+leads(beethoven, vienna_music_society). @ "Beethoven leads the Vienna Music Society"
+orchestra(O) & leads(X, O) => conductor(X). @ "Orchestras are led by conductors"
+? not conductor(beethoven).

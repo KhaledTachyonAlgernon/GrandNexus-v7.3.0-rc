@@ -37,7 +37,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Dict, Iterator, List, Optional, Sequence, Set, Tuple, Union
 
-ENGINE_VERSION = "ref-2.2"  # 1.1: reductio ; 1.2: universal questions ; 2.0: disjunctions ; 2.2: formula questions by refutation
+ENGINE_VERSION = "ref-2.3"  # 2.2: formula questions by refutation ; 2.3: literal questions complete w.r.t. the case split
 MAX_ARITY = 4  # ternary relation + moment; the logbook lost an item on a limit of 2, then 3 arguments
 
 # verdict tokens (English since v7.1.0; frozen test sets written with the French labels are mapped at load time)
@@ -898,7 +898,7 @@ def decide(prog: Program, use_knowledge: bool = True, **kw) -> Verdict:
     if prog.questions and prog.questions[0] and prog.questions[0][0] == "formula":
         return decide_formula(prog, prog.questions[0][1], use_knowledge, **kw)
     if not prog.disjunctions and not prog.drules:
-        return Engine(prog, use_knowledge=use_knowledge, **kw).answer()
+        return Engine(prog, use_knowledge=use_knowledge, **kw).answer()   # no disjunction anywhere: single engine
     try:
         ls = leaves(prog, use_knowledge, **kw)
     except RuntimeError as e:
@@ -909,10 +909,24 @@ def decide(prog: Program, use_knowledge: bool = True, **kw) -> Verdict:
         return v if v.answer == "contradictory" else Verdict("contradictory", note="every disjunction branch is inconsistent")
     vs = [leaf.answer() for leaf in ls]
     answers = {v.answer for v in vs}
-    if len(answers) == 1:
+    if len(answers) == 1 and vs[0].answer != "unknown":
         v = vs[0]
         v.note = (v.note + " | " if v.note else "") + f"holds in all {len(ls)} disjunction branches"
         return v
+    # ref-2.3: a ground literal (or conjunction) left "unknown" by the branches is decided by refutation with the
+    # full case split, including the disjunctions that the hypothesis itself triggers (FOLIO 203x3, 2026-11-02:
+    # clingo answered 11 programs the reference engine left unknown, e.g. a hypothesis whose disjunctive
+    # consequences all lead to a contradiction)
+    q = prog.questions[0] if prog.questions else None
+    if q and q[0] not in ("universal", "disjunctive", "formula") and not any(l.vars() for l in q):
+        f = q[0]
+        for l in q[1:]:
+            f = ("and", f, l)
+        v = decide_formula(prog, f, use_knowledge, **kw)
+        if v.answer != "unknown":
+            return v
+    if len(answers) == 1:
+        return vs[0]
     return Verdict("unknown", note=f"disjunction: {len(ls)} branches disagree ({', '.join(sorted(answers))})")
 
 

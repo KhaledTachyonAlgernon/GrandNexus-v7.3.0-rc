@@ -1,0 +1,4 @@
+flies_to(susan, lga). @ "Susan flies to LGA airport."
+flies_from(john, lga). @ "John flies from LGA airport."
+flies_from(P, A) => not flies_to(P, A). @ "The departure and arrival can not be at the same airport."
+? flies_to(john, lga).

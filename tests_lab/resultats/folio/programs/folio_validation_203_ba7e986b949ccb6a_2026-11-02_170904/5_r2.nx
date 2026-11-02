@@ -1,0 +1,11 @@
+city(billings). @ "Billings is a city"
+in_state(billings, montana). @ "Billings is a city in the state of Montana"
+in_state(butte, montana). @ "The state of Montana includes the cities of Butte, Helena, and Missoula"
+in_state(helena, montana). @ "The state of Montana includes the cities of Butte, Helena, and Missoula"
+in_state(missoula, montana). @ "The state of Montana includes the cities of Butte, Helena, and Missoula"
+share_state(white_sulphur_springs, butte). @ "White Sulphur Springs and Butte are cities in the same state in U.S."
+not in_state(st_pierre, montana). @ "The city of St Pierre is not in the state of Montana"
+located_in(X, butte) => not located_in(X, st_pierre). @ "Any city in Butte is not in St Pierre"
+# cannot express: "A city can only be in one state in U.S.  except for Bristol, Texarkana, Texhoma and Union City."
+* in_state(X, S) & in_state(Y, S) => share_state(X, Y).
+? share_state(st_pierre, bismarck).

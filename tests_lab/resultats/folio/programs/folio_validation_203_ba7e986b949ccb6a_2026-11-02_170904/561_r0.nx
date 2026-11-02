@@ -1,0 +1,5 @@
+let gre_cost = 205.
+let limit = 300.
+cost(gre_test, gre_cost). @ "It costs $205 to take the GRE test"
+below_300(gre_test). @ "which is cheaper than $300"
+? below_300(gre_test).

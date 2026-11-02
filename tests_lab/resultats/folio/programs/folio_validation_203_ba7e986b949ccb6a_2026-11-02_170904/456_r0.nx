@@ -1,0 +1,6 @@
+# seasons: spring, summer, fall, winter
+favorite(emma, summer). @ "Emma's favorite season is summer."
+not favorite(mia, summer). @ "Mia's favorite season is not the same as Emma's."
+wants_long_vacation(V) => favorite(V, summer). @ "All students who want to have a long vacation have summer as their favorite season."
+wants_long_vacation(james). @ "James wants to have a long vacation."
+? favorite(james, summer).

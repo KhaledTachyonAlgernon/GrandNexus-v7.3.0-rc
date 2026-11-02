@@ -1,0 +1,9 @@
+winner(du_maurier_1992, steinhauer). @ "The winner of the 1992 du Maurier Classic was Steinhauer."
+participated(steinhauer, du_maurier_1992). @ "Steinhauer participated in the 1992 du Maurier Classic."
+six_way_tie(tie_1). @ "One six-way tie was on the leaderboard"
+in_tie(person_1, tie_1). @ "one person in the six-way tie was from Belgium"
+from(person_1, belgium). @ "one person in the six-way tie was from Belgium"
+from(descampe, belgium). @ "Descampe is from Belgium"
+on_leaderboard(descampe, du_maurier_1992). @ "is on the leaderboard of the 1992 du Maurier Classic"
+on_leaderboard(P, du_maurier_1992) => participated(P, du_maurier_1992). @ "All people on the leaderboard of the 1992 du Maurier Classic participated in the 1992 du Maurier Classic."
+? in_tie(descampe, tie_1).

@@ -1,0 +1,8 @@
+growth_stock(V) => bought_for_appreciation(V). @ "All growth stocks are bought to earn profits from rapid price appreciation."
+bought_for_appreciation(V) => not suitable_retirement(V). @ "If the stock price is bought to earn profits from rapid price appreciation, then it is not suitable for a retirement fund."
+growth_stock(some_stock_1). @ "Some stocks are growth stocks."
+stock(some_stock_1). @ "Some stocks are growth stocks."
+mature_stock(V) => suitable_retirement(V). @ "All mature stocks are suitable for a retirement fund."
+mature_stock(ko). @ "KO is a mature stock."
+* mature_stock(V) => stock(V).
+? stock(ko).

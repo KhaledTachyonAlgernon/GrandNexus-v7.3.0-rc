@@ -1,0 +1,8 @@
+wild_turkey(V) => eastern(V) | osceola(V) | goulds(V) | merriams(V) | rio_grande(V) | ocellated(V). @ "There are six types of wild turkeys: Eastern wild turkey, Osceola wild turkey, Gould’s wild turkey, Merriam’s wild turkey, Rio Grande wild turkey, and Ocellated wild turkey."
+not eastern(tom). @ "Tom is not an Eastern wild turkey."
+not osceola(tom). @ "Tom is not an Osceola wild turkey."
+not goulds(tom). @ "Tom is not a Gould's wild turkey."
+not merriams(tom). @ "Tom is neither a Merriam's wild turkey nor a Rio Grande wild turkey."
+not rio_grande(tom). @ "Tom is neither a Merriam's wild turkey nor a Rio Grande wild turkey."
+wild_turkey(tom). @ "Tom is a wild turkey."
+? wild_turkey(joey).

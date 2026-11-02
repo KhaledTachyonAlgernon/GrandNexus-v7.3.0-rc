@@ -1,0 +1,8 @@
+superhero_movie(adventures). @ "The Surprising Adventures of Sir Digby Chicken Caesar is a superhero movie."
+superhero_movie(M) & in_movie(G, M) & good_guy(G) => wins(G). @ "In superhero movies, the good guys always win."
+fights(digby, nemesis_of_digby). @ "Sir Digby fights his nemesis."
+superhero_movie(M) & named_after(M, C) => good_guy(C). @ "If a superhero movie is named after a character, that character is a good guy."
+named_after(adventures, digby). @ "The Surprising Adventures of Sir Digby Chicken Caesar is named after Sir Digby."
+fights(X, Y) & wins(X) => not wins(Y). @ "If somebody wins a fight, the person they are fighting does not win."
+superhero_movie(M) & named_after(M, C) => in_movie(C, M). @ "If a superhero movie is named after a character, that character is in the movie."
+? not wins(nemesis_of_digby).

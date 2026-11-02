@@ -1,0 +1,8 @@
+make_plans(V) => engaged(V). @ "All people who make wedding plans are people who are engaged."
+invites(V) => make_plans(V). @ "All people who invite others to come to their ceremony make wedding plans."
+well_attended(V) => invites(V). @ "Anyone who has a well-attended wedding invites others to come to their ceremony."
+well_attended(some_person_1). @ "Some people that have well-attended weddings have larger families."
+larger_family(some_person_1). @ "Some people that have well-attended weddings have larger families."
+engaged(john) => not invites(john) | not make_plans(john). @ "If John is engaged, then John does not invite friends to their ceremony and make wedding plans."
+larger_family(john) => well_attended(john) | invites(john). @ "If John has a larger family, then either John has a well-attended wedding or invites friends to their ceremony."
+? engaged(john).

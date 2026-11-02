@@ -1,0 +1,12 @@
+# "Dani Shapiro was born in Boston" is not derivable from the text
+american_city(boston). @ "Boston is an American city"
+american(dani_shapiro). @ "Dani Shapiro is an American writer"
+writer(dani_shapiro). @ "Dani Shapiro is an American writer"
+written_by(family_history, dani_shapiro). @ "Family History is written by Dani Shapiro"
+novel(family_history). @ "Family History is a novel written in 2003"
+podcast(family_secrets). @ "Dani Shapiro created a podcast called Family Secrets"
+created(dani_shapiro, family_secrets). @ "Dani Shapiro created a podcast called Family Secrets"
+podcast(V) => not novel(V). @ "A podcast is not a novel"
+born_in(P, C) & american_city(C) => american(P). @ "If a person is born in American City, the person is American"
+novel(B) & written_by(B, P) => novel_writer(P). @ "If a book is a novel and it is written by a person, then the person is a novel writer"
+? born_in(dani_shapiro, boston).

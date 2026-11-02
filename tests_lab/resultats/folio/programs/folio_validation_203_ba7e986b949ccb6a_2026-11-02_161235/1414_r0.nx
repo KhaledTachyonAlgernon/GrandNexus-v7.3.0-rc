@@ -1,0 +1,12 @@
+register_us(V) => participate_2024(V). @ "Everyone who can register to vote in the United States can participate in the 2024 United States presidential election."
+citizen_us(V) => register_us(V). @ "If someone has United States citizenship, then they can register to vote in the United States."
+person(V) => citizen_us(V) | citizen_tw(V). @ "A person either has United States citizenship or Taiwanese citizenship."
+person(V) & citizen_us(V) => not citizen_tw(V). @ "A person either has United States citizenship or Taiwanese citizenship."
+person(V) & citizen_tw(V) => not citizen_us(V). @ "A person either has United States citizenship or Taiwanese citizenship."
+russian_official(V) => not citizen_tw(V). @ "No Russian Federation officials hold Taiwanese citizenship."
+person(vladimir). @ "Vladimir neither holds Taiwanese citizenship"
+not citizen_tw(vladimir). @ "Vladimir neither holds Taiwanese citizenship"
+not manager_gazprom(vladimir). @ "nor is he a manager at Gazprom"
+person(ekaterina). @ "Ekaterina she can register to vote in the United States"
+register_us(ekaterina) | russian_official(ekaterina). @ "Ekaterina she can register to vote in the United States, or she is a Russian federation official."
+? not (register_us(ekaterina) & participate_2024(vladimir)).

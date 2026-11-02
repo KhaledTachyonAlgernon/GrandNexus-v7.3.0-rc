@@ -1,0 +1,10 @@
+man(michael). @ "Michael is a man"
+man(peter). @ "Peter is a man"
+in_class(michael, mclass). @ "Michael is a man who is taller than everyone else in his class"
+classmate(X, michael) => taller(michael, X). @ "taller than everyone else in his class"
+taller(peter, michael). @ "Peter is a man who is taller than Michael"
+taller(X, Y) & taller(Y, Z) => taller(X, Z). @ "If person x is taller than person y, and person y is taller than person z, then x is taller than z"
+man(X) & man(Y) & taller(X, Y) => can_block(X, Y). @ "If a man is taller than another man, the taller one can block the other's shooting."
+not can_block(michael, windy). @ "Michael cannot block Windy's shooting."
+* taller(X, Y) => not taller(Y, X).
+? in_class(X, mclass) & man(X) & taller(X, peter).

@@ -1,0 +1,8 @@
+appropriate_all_ages(F) => children_can_watch_unguided(F). @ "If a film is appropriate for people of all ages, then children can watch it without guidance from parents."
+excessive_content(F) => not children_can_watch_unguided(F). @ "If a film contains excessive erotic and violent content, children cannot watch it without guidance from their parents."
+rated_ga(F) => appropriate_all_ages(F). @ "If a film is rated General Audience, then it is appropriate for people of all ages."
+family_animated(F) => rated_ga(F). @ "All family-friendly animated films are rated General Audience."
+frozen(F) => family_animated(F). @ "All movies in the Frozen series are family-friendly animated films."
+film(hachi). @ "“Hachi: A dog’s Tale” is a film."
+family_animated(hachi) | appropriate_all_ages(hachi). @ "“Hachi: A dog’s Tale”  is either a family-friendly animated film or is appropriate for people of all ages."
+? (excessive_content(hachi) & frozen(hachi)) | (not excessive_content(hachi) & not frozen(hachi)).

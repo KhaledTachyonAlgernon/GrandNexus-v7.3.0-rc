@@ -1,0 +1,5 @@
+affection(some_affection_1). @ "Some affection is love."
+love(some_affection_1). @ "Some affection is love."
+love(some_love_1). @ "Some love is positive."
+positive(some_love_1). @ "Some love is positive."
+? affection(X) & positive(X).

@@ -1,0 +1,9 @@
+alien(V) => extraterrestrial(V). @ "All aliens are extraterrestrials."
+from_mars(V) => alien(V). @ "If someone is from Mars, then they are an alien."
+extraterrestrial(V) => not human(V). @ "No extraterrestrials are human."
+highly_intelligent(V) & from_earth(V) => human(V). @ "All highly intelligent beings from Earth are humans."
+highly_intelligent(marvin). @ "Marvin is a highly intelligent being."
+from_earth(marvin) => from_mars(marvin). @ "Marvin is either from Earth and from Mars, or he is from neither."
+from_mars(marvin) => from_earth(marvin). @ "Marvin is either from Earth and from Mars, or he is from neither."
+not from_earth(marvin) => extraterrestrial(marvin). @ "If Marvin is not from Earth, then Marvin is an extraterrestrial."
+? not from_mars(marvin) => human(marvin).

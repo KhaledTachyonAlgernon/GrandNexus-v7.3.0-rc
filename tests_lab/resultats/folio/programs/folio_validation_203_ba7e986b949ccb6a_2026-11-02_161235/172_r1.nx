@@ -1,0 +1,6 @@
+# "Books contain tons of knowledge" is not needed to derive the answer, so it is not encoded.
+reads(P, B) => gains_knowledge(P). @ "When a person reads a book, that person gains knowledge."
+gains_knowledge(P) => smarter(P). @ "If a person gains knowledge, they become smarter."
+book(walden). @ "the book “Walden”"
+reads(harry, walden). @ "Harry read the book “Walden” by Henry Thoreau."
+? smarter(harry).

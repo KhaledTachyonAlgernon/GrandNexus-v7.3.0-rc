@@ -1,0 +1,4 @@
+cat(V) => mammal(V). @ "All cats are mammals."
+pet(some_pet_1). @ "Some pets are not mammals."
+not mammal(some_pet_1). @ "Some pets are not mammals."
+? pet(V) => not cat(V).

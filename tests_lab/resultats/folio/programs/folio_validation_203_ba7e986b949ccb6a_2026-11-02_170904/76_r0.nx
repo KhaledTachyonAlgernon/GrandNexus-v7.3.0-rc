@@ -1,0 +1,3 @@
+mammal(some_mammal_1). @ "Some mammals have teeth"
+has_teeth(some_mammal_1). @ "Some mammals have teeth"
+has_teeth(V) => not false_placeholder(V). @ "Some mammals have teeth"

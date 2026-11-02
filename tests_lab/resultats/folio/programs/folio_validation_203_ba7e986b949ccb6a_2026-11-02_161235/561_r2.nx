@@ -1,0 +1,6 @@
+let cost = 205.
+let limit = 300.
+costs(gre_test, cost). @ "It costs $205 to take the GRE test"
+cheaper(gre_test, limit). @ "which is cheaper than $300"
+cheaper(gre_test, limit) => below(gre_test, limit). @ "which is cheaper than $300"
+? below(gre_test, limit).

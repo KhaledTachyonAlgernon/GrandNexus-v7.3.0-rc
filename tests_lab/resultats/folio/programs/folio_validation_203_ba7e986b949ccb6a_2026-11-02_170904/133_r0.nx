@@ -1,0 +1,4 @@
+heck_cattle(heck_1). @ "Heck cattle are animals"
+heck_cattle(V) => bred_back(V). @ "Heck cattle were bred back in the 1920s"
+bred_back(V) => artificially_selected(V). @ "Breeding back is a form of artificial selection"
+? heck_cattle(heck_1) & artificially_selected(heck_1).

@@ -1,0 +1,8 @@
+listed_yelp(V) => not many_negative(V). @ "If a restaurant is listed in Yelp’s recommendations, then the restaurant has not received many negative reviews."
+rating_gt4(V) => listed_yelp(V). @ "All restaurants with a rating greater than four are listed in Yelp’s recommendations."
+restaurant(some_r_1). @ "Some restaurants that do not provide take-out service receive many negative reviews."
+not takeout(some_r_1). @ "Some restaurants that do not provide take-out service receive many negative reviews."
+many_negative(some_r_1). @ "Some restaurants that do not provide take-out service receive many negative reviews."
+popular_local(V) => rating_gt4(V). @ "All restaurants that are popular among local residents have ratings greater than four."
+rating_gt4(hamden_subway) | popular_local(hamden_subway). @ "The Hamden Plaza Subway store has a rating greater than four, or it is popular among local residents."
+? takeout(hamden_subway) | not many_negative(hamden_subway).

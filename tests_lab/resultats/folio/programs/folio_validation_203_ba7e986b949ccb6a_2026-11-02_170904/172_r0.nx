@@ -1,0 +1,5 @@
+reads(P, B) & book(B) => gains_knowledge(P). @ "When a person reads a book, that person gains knowledge."
+gains_knowledge(P) => smarter(P). @ "If a person gains knowledge, they become smarter."
+reads(harry, walden). @ "Harry read the book “Walden” by Henry Thoreau."
+book(walden). @ "Harry read the book “Walden” by Henry Thoreau."
+? smarter(harry).

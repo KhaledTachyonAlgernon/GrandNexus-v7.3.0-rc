@@ -1,0 +1,4 @@
+likes_music(george) => wants_to_compose(george). @ "If George likes music, he wants to compose."
+has_access(george, program) => can_compose(george). @ "If George has access to a program, he can compose."
+can_compose(george) & wants_to_compose(george) => will_compose(george). @ "If George can compose and wants to compose, he will compose."
+? not will_compose(george) => not can_compose(george).

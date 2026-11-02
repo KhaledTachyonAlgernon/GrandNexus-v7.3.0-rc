@@ -1,0 +1,4 @@
+managed_building(olive_garden). @ "The Olive Garden is a managed building."
+monthly_rent(olive_garden, 2000). @ "The monthly rent at the Olive Garden is $2000."
+managed_building(B) & monthly_rent(B, R) => deposit_at_least(B, R). @ "The security deposit can be either equal to the monthly rent at a managed building or more."
+? deposit_at_least(olive_garden, 2000).

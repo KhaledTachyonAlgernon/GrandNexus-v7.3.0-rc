@@ -1,0 +1,5 @@
+striker(robert_lewandowski). @ "Robert Lewandowski is a striker."
+striker(V) => soccer_player(V). @ "Strikers are soccer players."
+left(robert_lewandowski, bayern_munchen). @ "Robert Lewandowski left Bayern Munchen."
+left(P, T) => not plays_for(P, T). @ "If a player leaves a team they no longer play for that team."
+? plays_for(robert_lewandowski, bayern_munchen).

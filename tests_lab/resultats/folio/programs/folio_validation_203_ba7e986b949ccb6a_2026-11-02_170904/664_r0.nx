@@ -1,0 +1,5 @@
+private(yale_university). @ "Yale University is a private Ivy League research university"
+ivy_league(yale_university). @ "Yale University is a private Ivy League research university"
+research_university(yale_university). @ "Yale University is a private Ivy League research university"
+moved_to(yale_university, new_haven, y1716). @ "Yale University moved to New Haven in 1716"
+? largest_endowment(yale_university).

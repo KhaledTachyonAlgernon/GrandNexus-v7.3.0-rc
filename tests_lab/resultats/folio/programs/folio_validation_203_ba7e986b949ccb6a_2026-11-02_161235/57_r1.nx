@@ -1,0 +1,4 @@
+sells_over_million(zelda). @ "The Legend of Zelda sold more than one million copies."
+sells_over_million(G) => top10(G). @ "If a game sells more than one million copies, then it will be included in the Top 10 list."
+top10(G) => made_by_japanese_company(G). @ "All games on the Top 10 list are made by Japanese game companies."
+? top10(zelda).

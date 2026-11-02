@@ -1,0 +1,13 @@
+let rent = 2000.
+let limit = 1500.
+managed_building(some_building_1). @ "Pets are allowed in some managed buildings."
+allows_pets(some_building_1). @ "Pets are allowed in some managed buildings."
+cat(fluffy). @ "Fluffy is Tom's cat."
+owner(tom, fluffy). @ "Fluffy is Tom's cat."
+cat(V) => pet(V). @ "Cats are pets."
+managed_building(olive_garden). @ "The Olive Garden is a managed building."
+monthly_rent(olive_garden, rent). @ "The monthly rent at the Olive Garden is $2000."
+more_than(rent, limit). @ "$2000 is more than $1500."
+managed_building(B) & allows_pets(B) & pet(P) => allowed_with(P, B). @ "If a managed building allows pets, then people are allowed to move in with a pet."
+managed_building(B) & allowed_with(fluffy, B) & deposit_at_most(B, limit) => rents(tom, B). @ "Tom will rent an apartment in a managed building if he is allowed to move in with Fluffy, and the security deposit is no more than $1500."
+? rents(tom, olive_garden).

@@ -1,0 +1,3 @@
+german(heinrich_schmidt). @ "Heinrich Schmidt was a German politician"
+politician(heinrich_schmidt). @ "Heinrich Schmidt was a German politician"
+? german(heinrich_schmidt) | russian(heinrich_schmidt).

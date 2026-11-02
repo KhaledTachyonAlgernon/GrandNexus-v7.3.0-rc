@@ -1,0 +1,6 @@
+publishing_house(new_vessel_press). @ "New Vessel Press is a publishing house"
+published_by(V, new_vessel_press) => in_english(V). @ "All of New Vessel Press's published books are in English."
+published_by(neapolitan_chronicles, new_vessel_press). @ "Neapolitan Chronicles is a book published by New Vessel Press."
+translated_from(neapolitan_chronicles, italian). @ "Neapolitan Chronicles was translated from Italian."
+published_by(palace_of_flies, new_vessel_press). @ "Palace of Flies is a book published by New Vessel Press."
+? translated_from(palace_of_flies, italian).

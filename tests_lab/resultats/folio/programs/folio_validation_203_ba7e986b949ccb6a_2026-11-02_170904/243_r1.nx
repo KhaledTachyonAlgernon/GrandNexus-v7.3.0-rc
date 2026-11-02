@@ -1,0 +1,4 @@
+published_by(V, new_vessel_press) => english(V). @ "All of New Vessel Press's published books are in English."
+published_by(neapolitan_chronicles, new_vessel_press). @ "Neapolitan Chronicles is a book published by New Vessel Press."
+book(neapolitan_chronicles). @ "Neapolitan Chronicles is a book"
+? english(neapolitan_chronicles).

@@ -1,0 +1,8 @@
+spills(V) => not tidy(V). @ "If people spill a lot of food on their clothing, then they are not notably tidy."
+clumsy_foodie(V) => spills(V). @ "All clumsy foodies who go out frequently to find new food restaurants to try are people who spill a lot of food on their clothing."
+cleanly(V) => tidy(V). @ "If people are cleanly, then they are notably tidy."
+values_order(V) => cleanly(V). @ "If people value order and spotlessness, then they are cleanly."
+family_order(V) => values_order(V). @ "All people whose families prioritize order and spotlessness themselves value order and spotlessness."
+spills(peter) => cleanly(peter). @ "Peter is either a person who spills a lot of food on his clothing and is cleanly, or a person who does not spill a lot of food on his clothing and is not cleanly"
+cleanly(peter) => spills(peter). @ "Peter is either a person who spills a lot of food on his clothing and is cleanly, or a person who does not spill a lot of food on his clothing and is not cleanly"
+? (clumsy_foodie(peter) & family_order(peter)) | (not clumsy_foodie(peter) & not family_order(peter)).

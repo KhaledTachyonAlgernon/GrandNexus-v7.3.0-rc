@@ -1,0 +1,9 @@
+in_club(V) & performs(V) => engaged(V). @ "People in this club who perform in school talent shows often attend and are very engaged with school events."
+in_club(V) => performs(V) | inactive(V). @ "People in this club either perform in school talent shows often or are inactive and disinterested community members."
+in_club(V) & chaperones(V) => not student(V). @ "People in this club who chaperone high school dances are not students who attend the school."
+in_club(V) & inactive(V) => chaperones(V). @ "All people in this club who are inactive and disinterested members of their community chaperone high school dances."
+in_club(V) & young_wish(V) => student(V). @ "All young children and teenagers in this club who wish to further their academic careers and educational opportunities are students who attend the school."
+in_club(bonnie). @ "Bonnie is in this club"
+engaged(bonnie) | not student(bonnie). @ "Bonnie is in this club and she either both attends and is very engaged with school events and is a student who attends the school or is not someone who both attends and is very engaged with school events and is not a student who attends the school."
+not engaged(bonnie) | student(bonnie). @ "Bonnie is in this club and she either both attends and is very engaged with school events and is a student who attends the school or is not someone who both attends and is very engaged with school events and is not a student who attends the school."
+? (not chaperones(bonnie) & not performs(bonnie)) | (young_wish(bonnie) & inactive(bonnie)).

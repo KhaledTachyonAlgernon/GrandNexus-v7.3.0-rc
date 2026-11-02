@@ -1,0 +1,7 @@
+suck(plunger). @ "Plungers suck."
+suck(vacuum). @ "Vacuums suck."
+suck(vampire). @ "Vampires suck."
+vacuum(space). @ "Space is a vacuum."
+household_appliance(duster). @ "A duster is a household appliance"
+not suck(duster). @ "doesn't suck"
+? household_appliance(V) => suck(V).

@@ -1,0 +1,3 @@
+sells_over_million(zelda). @ "The Legend of Zelda sold more than one million copies"
+sells_over_million(V) => top10(V). @ "If a game sells more than one million copies, then it will be included in the Top 10 list"
+? top10(zelda).

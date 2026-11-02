@@ -1,0 +1,5 @@
+symptom_of(fever, monkeypox). @ "Symptoms of Monkeypox include fever, headache, muscle pains, and tiredness"
+symptom_of(headache, monkeypox). @ "Symptoms of Monkeypox include fever, headache, muscle pains, and tiredness"
+symptom_of(muscle_pains, monkeypox). @ "Symptoms of Monkeypox include fever, headache, muscle pains, and tiredness"
+symptom_of(tiredness, monkeypox). @ "Symptoms of Monkeypox include fever, headache, muscle pains, and tiredness"
+? symptom_of(coughing, monkeypox).

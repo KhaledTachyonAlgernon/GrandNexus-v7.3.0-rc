@@ -1,0 +1,7 @@
+single_parent_family(tom). @ "Tom lives in a single-parent family."
+few_resources(tom). @ "Tom has few resources available to them."
+applying_gre(tom). @ "Tom is applying to take the GRE test."
+single_parent_family(V) => economic_hardship(V). @ "Those living in single-parent families or having few resources available to them can prove economic hardship."
+few_resources(V) => economic_hardship(V). @ "Those living in single-parent families or having few resources available to them can prove economic hardship."
+applying_gre(V) & economic_hardship(V) => financial_aid(ets, V). @ "ETS provides financial aid to those GRE applicants who prove economic hardship."
+? applying_gre(V) => not financial_aid(ets, V).

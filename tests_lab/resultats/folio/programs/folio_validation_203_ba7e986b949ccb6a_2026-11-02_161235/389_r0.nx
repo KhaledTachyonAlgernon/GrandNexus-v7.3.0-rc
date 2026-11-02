@@ -1,0 +1,4 @@
+not requires_labeled(unsupervised_learning). @ "Unsupervised learning algorithms do not require labeled data."
+not used_to_train(reinforcement_learning, ts_model). @ "Reinforcement learning is not used to train the state-of-the-art text summarization model."
+used_to_train(A, ts_model) => requires_labeled(A). @ "The Machine Learning algorithm for training text summarization models requires labeled data."
+? used_to_train(unsupervised_learning, ts_model).

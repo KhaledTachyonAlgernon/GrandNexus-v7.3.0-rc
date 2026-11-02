@@ -1,0 +1,8 @@
+work_library(V) => not cs_dept(V). @ "None of the students who currently work in the library are from the computer science department."
+parttime_job(V) => work_library(V). @ "All of the students with part-time jobs offered by the university currently work in the library."
+database_course(V) => cs_dept(V). @ "All of the students who are taking the database course are from the computer science department."
+class_david(V) => database_course(V). @ "All of the students taking a class with Professor David are taking the database course."
+lab(V) => class_david(V). @ "All students working in the lab are taking a class with Professor David."
+lab(james). @ "James is a student working in the lab."
+not lab(james) | not parttime_job(james). @ "James doesn't work in the lab or have a part-time job offered by the university."
+? (database_course(james) | parttime_job(james)) & (not database_course(james) | not parttime_job(james)).

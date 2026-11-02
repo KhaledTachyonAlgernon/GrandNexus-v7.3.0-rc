@@ -1,0 +1,9 @@
+employee(V) & schedules_meeting(V) => at_building(V). @ "All employees who schedule a meeting with their customers will go to the company building today."
+lunch_building(V) => schedules_meeting(V). @ "Everyone who has lunch in the company building schedules meetings with their customers."
+employee(V) => lunch_building(V) | lunch_home(V). @ "Employees have lunch either in the company building or at home."
+employee(V) & lunch_home(V) => remote(V). @ "If an employee has lunch at home, they are working remotely from home."
+employee(V) & other_country(V) => remote(V). @ "All employees who are in other countries work remotely from home."
+manager(V) => not remote(V). @ "No managers work remotely from home."
+appears(james) => manager(james). @ "James will appear in the company today if and only if he is a manager."
+manager(james) => appears(james). @ "James will appear in the company today if and only if he is a manager."
+? lunch_building(james).

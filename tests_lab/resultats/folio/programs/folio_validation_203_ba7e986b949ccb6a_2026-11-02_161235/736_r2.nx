@@ -1,0 +1,4 @@
+hawk(V) => not swims(V). @ "A hawk never swims"
+bird(some_bird_1). @ "Some birds are hawks"
+hawk(some_bird_1). @ "Some birds are hawks"
+? bird(V) => swims(V).

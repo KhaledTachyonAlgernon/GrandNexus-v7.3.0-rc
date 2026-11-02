@@ -1,0 +1,9 @@
+city(billings). @ "Billings is a city"
+in_state(billings, montana). @ "in the state of Montana"
+city(butte). @ "the cities of Butte, Helena, and Missoula"
+city(helena). @ "the cities of Butte, Helena, and Missoula"
+city(missoula). @ "the cities of Butte, Helena, and Missoula"
+in_state(butte, montana). @ "The state of Montana includes the cities of Butte, Helena, and Missoula"
+in_state(helena, montana). @ "The state of Montana includes the cities of Butte, Helena, and Missoula"
+in_state(missoula, montana). @ "The state of Montana includes the cities of Butte, Helena, and Missoula"
+? in_state(missoula, montana).

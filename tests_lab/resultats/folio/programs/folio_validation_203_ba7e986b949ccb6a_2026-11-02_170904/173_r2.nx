@@ -1,0 +1,7 @@
+book(B) => contains_knowledge(B). @ "Books contain tons of knowledge"
+person(V) & book(B) & reads(V, B) => gains_knowledge(V). @ "When a person reads a book, that person gains knowledge"
+person(V) & gains_knowledge(V) => smarter(V). @ "If a person gains knowledge, they become smarter"
+person(harry). @ "Harry read the book"
+book(walden). @ "the book “Walden”"
+reads(harry, walden). @ "Harry read the book"
+? person(V) & smarter(V) => gains_knowledge(V).

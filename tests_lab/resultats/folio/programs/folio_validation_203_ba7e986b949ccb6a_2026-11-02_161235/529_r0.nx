@@ -1,0 +1,10 @@
+man(michael). @ "Michael is a man"
+man(peter). @ "Peter is a man"
+man(X) & man(Y) & taller(X, Y) => can_block(X, Y). @ "If a man is taller than another man, the taller one can block the other's shooting."
+classmate(michael, X) => taller(michael, X). @ "taller than everyone else in his class"
+taller(X, Y) & taller(Y, Z) => taller(X, Z). @ "If person x is taller than person y, and person y is taller than person z, then x is taller than z"
+taller(peter, michael). @ "Peter is a man who is taller than Michael."
+person(P) & not jumps_when_shooting(P) => can_block(michael, P). @ "Michael can block any shooting from a person as long as the person does not jump when shooting."
+not can_block(michael, windy). @ "Michael cannot block Windy's shooting."
+jumps_when_shooting(X) => great_shooter(X). @ "Every shooter who can jump when shooting is a great shooter."
+? can_block(peter, windy).

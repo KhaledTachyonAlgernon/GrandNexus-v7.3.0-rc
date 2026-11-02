@@ -1,0 +1,8 @@
+hydrocarbon(V) => organic_compound(V). @ "All hydrocarbons are organic compounds"
+alkane(V) => hydrocarbon(V). @ "All alkanes are hydrocarbons"
+organic_compound(V) => chemical_compound(V). @ "All organic compounds are chemical compounds"
+organic_compound(V) => contains_carbon(V). @ "All organic compounds contain carbon"
+chemical_compound(V) => not contains_only_one_element(V). @ "No chemical compounds contain only one element"
+chemical_compound(mixture) => contains_only_one_element(mixture). @ "The mixture either both is a chemical compound and contains only one element, or neither."
+contains_only_one_element(mixture) => chemical_compound(mixture). @ "The mixture either both is a chemical compound and contains only one element, or neither."
+? alkane(mixture) & contains_carbon(mixture).

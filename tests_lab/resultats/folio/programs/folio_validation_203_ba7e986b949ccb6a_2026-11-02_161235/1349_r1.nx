@@ -1,0 +1,9 @@
+pet(V) & mammal(V) => animal(V). @ "All of Peter's pets that are mammals are also animals."
+monkey(V) => mammal(V). @ "All monkeys are mammals."
+pet(V) => monkey(V) | bird(V). @ "Peter's pets are all either monkeys or birds."
+pet(V) & bird(V) => can_fly(V). @ "Peter's birds can fly."
+animal(V) & pet(V) => can_breathe(V). @ "All animals that are Peter's pets can breathe."
+pet(V) & can_fly(V) => has_wings(V). @ "If Peter's pet can fly, then it has wings."
+pet(rock). @ "Rock is Peter's pet."
+can_fly(rock) | bird(rock) | not can_breathe(rock). @ "Rock can fly, or Rock is a bird, or Rock cannot breathe."
+? has_wings(rock).

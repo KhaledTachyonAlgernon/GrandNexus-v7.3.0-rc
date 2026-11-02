@@ -1,0 +1,6 @@
+winner(steinhauer, dumaurier1992). @ "The winner of the 1992 du Maurier Classic was Steinhauer."
+participated(steinhauer, dumaurier1992). @ "Steinhauer participated in the 1992 du Maurier Classic."
+from(descampe, belgium). @ "Descampe is from Belgium"
+on_leaderboard(descampe, dumaurier1992). @ "is on the leaderboard of the 1992 du Maurier Classic"
+on_leaderboard(P, dumaurier1992) => participated(P, dumaurier1992). @ "All people on the leaderboard of the 1992 du Maurier Classic participated in the 1992 du Maurier Classic."
+? not winner(steinhauer, dumaurier1992).

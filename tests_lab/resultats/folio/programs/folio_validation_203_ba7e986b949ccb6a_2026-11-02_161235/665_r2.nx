@@ -1,0 +1,2 @@
+residential_college_at(pierson_college, yale). @ "A list of residential colleges at Yale: Benjamin Franklin College, Berkeley College, Branford College, Davenport College, Ezra Stiles College, Grace Hopper College, Jonathan Edwards College, Morse College, Pauli Murray College, Pierson College"
+? residential_college_at(pierson_college, yale).

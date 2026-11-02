@@ -1,0 +1,8 @@
+born_multiple(V) => spend_time(V). @ "People who are born in a multiple birth with siblings spend a lot of time hanging out with and playing with their siblings."
+siblings_together(V) => born_multiple(V). @ "If people have siblings who were born together, then they were born in a multiple birth."
+complain_siblings(V) => siblings_together(V). @ "If people complain often about annoying siblings, then they have siblings who were born together."
+live_home(V) => not live_strangers(V). @ "If people live at home, then they do not live with strangers."
+spend_time(V) => live_home(V). @ "If people spend a lot of time hanging out with and playing with their siblings, then they often live at home."
+born_multiple(luke) => live_strangers(luke). @ "Luke either is a baby born in a multiple birth and live with strangers"
+live_strangers(luke) => born_multiple(luke). @ "or is not a baby born in a multiple birth and does not live with strangers"
+? spend_time(luke).

@@ -1,0 +1,3 @@
+human(V) => mortal(V). @ "All humans are mortal"
+greek(V) => human(V). @ "All Greeks are humans"
+? greek(X) & mortal(X).

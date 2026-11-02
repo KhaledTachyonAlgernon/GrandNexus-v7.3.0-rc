@@ -1,0 +1,6 @@
+trained_with_ml(sota_model). @ "The state-of-the-art text summarization model is trained with machine learning algorithms."
+trained_with_ml(M) => used(supervised, M) | used(unsupervised, M) | used(reinforcement, M). @ "Machine Learning algorithms can be categorized as supervised learning, unsupervised learning, and reinforcement learning."
+not requires_labeled(unsupervised). @ "Unsupervised learning algorithms do not require labeled data."
+not used(reinforcement, sota_model). @ "Reinforcement learning is not used to train the state-of-the-art text summarization model."
+used(A, sota_model) => requires_labeled(A). @ "The Machine Learning algorithm for training text summarization models requires labeled data."
+? used(supervised, sota_model).

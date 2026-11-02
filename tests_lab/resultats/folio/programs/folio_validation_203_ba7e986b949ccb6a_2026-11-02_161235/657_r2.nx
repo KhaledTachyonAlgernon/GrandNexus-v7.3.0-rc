@@ -1,0 +1,5 @@
+hosted(beijing, summer_olympics_2008). @ "Beijing hosted the 2008 Summer Olympics"
+hosted(beijing, summer_paralympics_2008). @ "2008 Summer Paralympics Games"
+hosted(beijing, summer_olympics). @ "Beijing has hosted the Summer and Winter Olympics"
+hosted(beijing, winter_olympics). @ "Beijing has hosted the Summer and Winter Olympics"
+? hosted(beijing, summer_olympics_2008) & hosted(beijing, winter_olympics).

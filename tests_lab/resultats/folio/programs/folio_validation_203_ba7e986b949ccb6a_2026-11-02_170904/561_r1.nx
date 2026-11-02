@@ -1,0 +1,4 @@
+let gre_cost = 205.
+let limit = 300.
+cost(gre_test, gre_cost). @ "It costs $205 to take the GRE test"
+? cost(gre_test, C) & less(C, limit).

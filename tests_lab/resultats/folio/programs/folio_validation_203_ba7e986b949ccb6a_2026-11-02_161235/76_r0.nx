@@ -1,0 +1,6 @@
+mammal(some_mammal_1). @ "Some mammals have teeth."
+has_teeth(some_mammal_1). @ "Some mammals have teeth."
+platypus(V) => not has_teeth(V). @ "Platypuses have no teeth."
+platypus(V) => mammal(V). @ "Platypuses are mammals."
+human(V) => has_teeth(V). @ "Humans have teeth."
+? human(V) => mammal(V).

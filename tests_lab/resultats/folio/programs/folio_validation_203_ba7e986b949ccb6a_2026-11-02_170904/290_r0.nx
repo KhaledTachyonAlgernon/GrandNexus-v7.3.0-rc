@@ -1,0 +1,7 @@
+stable(diamond_mine). @ "Diamond Mine is a professional wrestling stable formed in WWE"
+leads(roderick_strong, diamond_mine). @ "Roderick Strong leads Diamond Mine"
+includes(diamond_mine, creed_brothers). @ "Diamond Mine includes the Creed Brothers"
+includes(diamond_mine, ivy_nile). @ "Diamond Mine includes the Creed Brothers and Ivy Nile"
+feud(imperium, diamond_mine). @ "Imperium has a feud with Diamond Mine"
+* leads(X, G) & includes(G, M) => leads(X, M).
+? leads(roderick_strong, creed_brothers).

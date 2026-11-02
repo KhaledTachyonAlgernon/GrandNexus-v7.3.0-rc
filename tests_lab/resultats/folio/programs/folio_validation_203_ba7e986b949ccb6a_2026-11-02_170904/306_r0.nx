@@ -1,0 +1,7 @@
+same(ailton_silva, ailton). @ "Ailton Silva, born in 1995, is commonly known as Ailton."
+football_player(ailton). @ "Ailton is a football player who was loaned out to Braga."
+loaned_to(ailton, braga). @ "was loaned out to Braga"
+football_club(nautico). @ "Náutico is a football club"
+football_club(braga). @ "Náutico is a football club along with Braga."
+football_club(fluminense). @ "Fluminense is a football club."
+? loaned_to(ailton, C) & football_club(C).

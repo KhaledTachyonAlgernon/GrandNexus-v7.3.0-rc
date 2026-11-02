@@ -1,0 +1,6 @@
+baked_sweet(V) => not spicy(V). @ "No baked sweets are spicy."
+cupcake(V) => baked_sweet(V). @ "All cupcakes are baked sweets."
+mala_hotpot(V) => spicy(V). @ "All mala hotpots are spicy."
+baked_by_melissa_product(V) => cupcake(V). @ "All products from Baked by Melissa are cupcakes."
+spicy(dried_thai_chilies) | mala_hotpot(dried_thai_chilies) | not baked_sweet(dried_thai_chilies). @ "Dried Thai chilies are spicy or mala hotpots or not baked sweets."
+? cupcake(dried_thai_chilies) & baked_by_melissa_product(dried_thai_chilies).

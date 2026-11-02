@@ -1,0 +1,7 @@
+nlp_task(V) => language_generation(V) | language_understanding(V). @ "A natural language processing task can be categorized as either a language generation task or a language understanding task."
+nlp_task(V) & language_generation(V) => not language_understanding(V). @ "categorized as either a language generation task or a language understanding task"
+nlp_task(V) & language_understanding(V) => not language_generation(V). @ "categorized as either a language generation task or a language understanding task"
+nlp_task(V) & text_sequence_output(V) => language_generation(V). @ "If the output of a natural language processing task is a text sequence, then it is a language generation task."
+nlp_task(machine_translation). @ "Machine translation is a natural language processing task."
+text_sequence_output(machine_translation). @ "The output of machine translation is a text sequence."
+? language_understanding(machine_translation).

@@ -1,0 +1,3 @@
+human(V) => mammal(V). @ "Humans are mammals."
+mammal(V) => animal(V). @ "Mammals are animals."
+? animal(V).

@@ -1,0 +1,6 @@
+ml_algorithm(V) => supervised(V) | unsupervised(V) | reinforcement(V). @ "Machine Learning algorithms can be categorized as supervised learning, unsupervised learning, and reinforcement learning."
+unsupervised(V) => not requires_labeled(V). @ "Unsupervised learning algorithms do not require labeled data."
+ml_algorithm(ts_alg). @ "The Machine Learning algorithm for training text summarization models"
+requires_labeled(ts_alg). @ "requires labeled data"
+not reinforcement(ts_alg). @ "Reinforcement learning is not used to train the state-of-the-art text summarization model."
+? supervised(ts_alg).

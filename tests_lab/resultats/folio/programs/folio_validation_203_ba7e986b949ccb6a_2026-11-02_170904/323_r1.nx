@@ -1,0 +1,5 @@
+german(heinrich_schmidt). @ "Heinrich Schmidt was a German politician"
+politician(heinrich_schmidt). @ "Heinrich Schmidt was a German politician"
+member(heinrich_schmidt, prussian_state_parliament). @ "member of the Prussian State Parliament"
+member(heinrich_schmidt, nazi_reichstag). @ "the Nazi Reichstag"
+? german(heinrich_schmidt) | russian(heinrich_schmidt).

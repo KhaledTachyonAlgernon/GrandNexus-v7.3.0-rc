@@ -1,0 +1,5 @@
+# favorite(person, season)
+want_long_vacation(V) => favorite(V, summer). @ "All students who want to have a long vacation have summer as their favorite season."
+favorite(emma, summer). @ "Emma's favorite season is summer."
+want_long_vacation(james). @ "James wants to have a long vacation."
+? favorite(james, summer).

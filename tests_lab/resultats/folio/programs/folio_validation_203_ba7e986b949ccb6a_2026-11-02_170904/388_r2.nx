@@ -1,0 +1,6 @@
+# Sentence 1 and 3: the model is trained with ML algorithms, which are of three categories
+used_to_train(supervised_learning, sota_summarizer) | used_to_train(unsupervised_learning, sota_summarizer) | used_to_train(reinforcement_learning, sota_summarizer). @ "The state-of-the-art text summarization model is trained with machine learning algorithms."
+not requires_labeled_data(unsupervised_learning). @ "Unsupervised learning algorithms do not require labeled data."
+not used_to_train(reinforcement_learning, sota_summarizer). @ "Reinforcement learning is not used to train the state-of-the-art text summarization model."
+used_to_train(A, sota_summarizer) => requires_labeled_data(A). @ "The Machine Learning algorithm for training text summarization models requires labeled data."
+? used_to_train(supervised_learning, sota_summarizer).

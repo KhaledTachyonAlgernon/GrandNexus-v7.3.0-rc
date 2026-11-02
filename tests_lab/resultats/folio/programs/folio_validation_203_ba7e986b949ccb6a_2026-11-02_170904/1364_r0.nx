@@ -1,0 +1,9 @@
+rabbit(V) & near_campus(V) => cute(V). @ "All rabbits that can be spotted near the campus are cute."
+turtle(some_turtle_1). @ "Some turtles can be spotted near the campus."
+near_campus(some_turtle_1). @ "Some turtles can be spotted near the campus."
+near_campus(V) => rabbit(V) | squirrel(V). @ "The only animals that can be spotted near the campus are rabbits and squirrels."
+skittish(V) => not calm(V). @ "If something is skittish, then it is not calm."
+squirrel(V) & near_campus(V) => skittish(V). @ "All the squirrels that can be spotted near the campus are skittish."
+near_campus(rockie). @ "Rockie can be spotted near the campus"
+calm(rockie). @ "it is calm"
+? (turtle(rockie) & squirrel(rockie)) | (cute(rockie) | skittish(rockie)).
