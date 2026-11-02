@@ -1,0 +1,177 @@
+#!/usr/bin/env python
+"""
+The loop that learns - does experience improve the reading on NEW items, without any hand-written rule?
+
+Phase 1, experience (a pool the test never sees): read each item; when the strict verdict is wrong, the reader
+is told only "wrong, expected X" and re-reads its own program; the correction is kept ONLY if the engine then
+reaches the expected verdict (a verified experience). This is the loop: read -> verdict -> feedback ->
+reflection -> memory.
+
+Phase 2, test (a disjoint set, never seen): every item is read under three conditions, from the same memory:
+  none      no memory                      (= the current system)
+  random    k experiences drawn at random  (control: is it the RELEVANCE of experience that helps?)
+  learned   the k most similar experiences (the learning loop)
+
+Criteria, fixed before measuring (logbook 52): learned > none AND learned > random on strict accuracy,
+with asserted errors (false yes / no / contradictory) not above none. Trivial controls are printed as usual.
+No item text is printed; the memory is saved as JSON (it quotes the experience texts), the results as JSON.
+
+  python tools/bench_learning.py --exp-n 150 --exp-seed 3 --test-n 100 --test-seed 4
+  python tools/bench_learning.py --memory tests_lab/resultats/learning/<memory>.json --test-n 100 --test-seed 4   # reuse a memory
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import pathlib
+import random
+import sys
+import time
+from collections import Counter
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+
+from bench_folio import freeze, load_items, metrics                                   # noqa: E402
+from grandnexus.cognition.experience import (Experience, ExperienceMemory,            # noqa: E402
+                                             examples_block, statements_diff)
+from grandnexus.nexus_logic import ENGINE_VERSION                                     # noqa: E402
+from grandnexus.llm_interface.translator_v5 import PROMPT_VERSION, Translator          # noqa: E402
+
+CONDITIONS = ("none", "random", "learned")
+
+
+def draw(split: str, seed: int, n: int, exclude: set) -> list:
+    items = [it for it in load_items(split, None) if it["id"] not in exclude]
+    random.Random(seed).shuffle(items)
+    return items[:n] if n else items
+
+
+def experience_phase(tr: Translator, items: list, memory: ExperienceMemory, store_correct: bool) -> dict:
+    st = Counter()
+    for k, it in enumerate(items, 1):
+        try:
+            r = tr.answer(it["text"], it["query"])
+        except Exception as e:  # noqa: BLE001
+            st["errors"] += 1
+            print(f"  !! item {it['id']}: {type(e).__name__}: {str(e)[:120]}")
+            continue
+        st["read"] += 1
+        if r["verdict_strict"] == it["expected"]:
+            st["right_first"] += 1
+            if store_correct:
+                memory.add(Experience(it["text"], it["query"], r["program"], it["expected"], source_id=it["id"]))
+            continue
+        st["wrong_first"] += 1
+        try:
+            c = tr.reflect_correction(it["text"], it["query"], r["program"], r["verdict_strict"], it["expected"])
+        except Exception as e:  # noqa: BLE001
+            st["errors"] += 1
+            print(f"  !! reflection {it['id']}: {type(e).__name__}: {str(e)[:120]}")
+            continue
+        if c["verdict_strict"] == it["expected"] and not c["rejections"]:
+            st["verified"] += 1
+            memory.add(Experience(it["text"], it["query"], c["program"], it["expected"], r["verdict_strict"],
+                                  statements_diff(r["program"], c["program"]), it["id"]))
+        else:
+            st["unverified"] += 1
+        if k % 10 == 0:
+            print(f"  experience {k}/{len(items)}: wrong {st['wrong_first']}, verified corrections {st['verified']}")
+    return dict(st)
+
+
+def main(argv=None, client=None) -> dict:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--split", default="train")
+    ap.add_argument("--jsonl")
+    ap.add_argument("--exp-n", type=int, default=150)
+    ap.add_argument("--exp-seed", type=int, default=3)
+    ap.add_argument("--test-n", type=int, default=100)
+    ap.add_argument("--test-seed", type=int, default=4)
+    ap.add_argument("--k", type=int, default=3, help="experiences shown per reading")
+    ap.add_argument("--memory", help="reuse a saved memory (skips the experience phase)")
+    ap.add_argument("--store-correct", action="store_true", help="also store first-try correct readings (positive experiences)")
+    ap.add_argument("--conditions", default=",".join(CONDITIONS))
+    ap.add_argument("--model", default="claude-sonnet-5-5")
+    ap.add_argument("--out", default=str(ROOT / "tests_lab" / "resultats" / "learning"))
+    a = ap.parse_args(argv)
+
+    outdir = pathlib.Path(a.out)
+    outdir.mkdir(parents=True, exist_ok=True)
+    tr = Translator(client=client, model=a.model) if client is not None else Translator(model=a.model)
+    stamp = time.strftime("%Y-%m-%d_%H%M%S")
+
+    if a.jsonl:
+        pool = [json.loads(l) for l in open(a.jsonl, encoding="utf-8") if l.strip()]
+        random.Random(a.exp_seed).shuffle(pool)
+        exp_items, test_items = pool[: a.exp_n], pool[a.exp_n: a.exp_n + a.test_n]
+    else:
+        exp_items = draw(a.split, a.exp_seed, a.exp_n, set())
+        test_items = draw(a.split, a.test_seed, a.test_n, {it["id"] for it in exp_items})
+    assert not ({it["id"] for it in exp_items} & {it["id"] for it in test_items}), "experience and test sets overlap"
+    exp_sha, test_sha = freeze(exp_items), freeze(test_items)
+    print(f"experience pool: {len(exp_items)} items (sha {exp_sha}) | test set: {len(test_items)} items (sha {test_sha}), "
+          f"labels {dict(Counter(i['expected'] for i in test_items))}")
+
+    if a.memory:
+        memory = ExperienceMemory.load(a.memory, seed=a.test_seed)
+        exp_stats = {"loaded": len(memory.entries)}
+        print(f"memory loaded: {len(memory.entries)} experiences")
+    else:
+        memory = ExperienceMemory(seed=a.test_seed)
+        exp_stats = experience_phase(tr, exp_items, memory, a.store_correct)
+        mem_path = outdir / f"memory_{a.split}_exp{len(exp_items)}_{exp_sha}_{stamp}.json"
+        memory.save(str(mem_path))
+        print(f"experience: {exp_stats} | memory: {len(memory.entries)} experiences -> {mem_path}")
+
+    conditions = [c for c in a.conditions.split(",") if c]
+    rows = {c: [] for c in conditions}
+    rows.update({"always_unknown": [], "majority": [], "random_label": []})
+    majority = Counter(i["expected"] for i in test_items).most_common(1)[0][0]
+    rng = random.Random(a.test_seed)
+    hits = Counter()
+    for k, it in enumerate(test_items, 1):
+        base = {"id": it["id"], "expected": it["expected"], "run": 0}
+        for c in conditions:
+            try:
+                ex = [] if c == "none" else memory.retrieve(it["text"], it["query"], a.k, "random" if c == "random" else "similar")
+                hits[c] += len(ex)
+                r = tr.answer(it["text"], it["query"], examples_block(ex))
+                rows[c].append({**base, "pred": r["verdict_strict"], "pred_full": r["verdict"], "n_examples": len(ex),
+                                "rejections": len(r["rejections"]), "calls": r["calls"], "tokens": r["tokens_in"] + r["tokens_out"]})
+            except Exception as e:  # noqa: BLE001
+                rows[c].append({**base, "pred": "erreur", "error": f"{type(e).__name__}: {str(e)[:120]}"})
+        rows["always_unknown"].append({**base, "pred": "unknown"})
+        rows["majority"].append({**base, "pred": majority})
+        rows["random_label"].append({**base, "pred": rng.choice(["yes", "no", "unknown"])})
+        if k % 10 == 0:
+            print(f"  test {k}/{len(test_items)}")
+
+    summary = {"experience_sha": exp_sha, "test_sha": test_sha, "n_exp": len(exp_items), "n_test": len(test_items), "k": a.k,
+               "memory_size": len(memory.entries), "experience": exp_stats, "model": a.model, "prompt_version": PROMPT_VERSION,
+               "engine_version": ENGINE_VERSION, "modes": {}}
+    base_pct = max(metrics(rows[b])["pct"] for b in ("always_unknown", "majority", "random_label"))
+    print(f"\nbest trivial control: {base_pct}%")
+    for c in conditions:
+        mt = metrics(rows[c])
+        summary["modes"][c] = mt
+        print(f"{c:8} {mt['acc']:>3}/{mt['n']} = {mt['pct']:5}% | false yes {mt['false_yes']} | false no {mt['false_no']} "
+              f"| false contradictory {mt['false_contradictory']} | inventions {mt['inventions']} | unknown {mt['unknown']} "
+              f"| examples shown {hits[c]} | calls {sum(r.get('calls', 0) for r in rows[c])} | tokens {sum(r.get('tokens', 0) for r in rows[c])}")
+    if all(c in summary["modes"] for c in CONDITIONS):
+        m = summary["modes"]
+        asserted = lambda x: m[x]["false_yes"] + m[x]["false_no"] + m[x]["false_contradictory"]
+        ok = (m["learned"]["acc"] > m["none"]["acc"] and m["learned"]["acc"] > m["random"]["acc"] and asserted("learned") <= asserted("none"))
+        print(f"\nCRITERIA (fixed before measuring): learned > none and learned > random on accuracy, asserted errors not above none -> "
+              f"{'PASS' if ok else 'FAIL'} (learned {m['learned']['acc']}, none {m['none']['acc']}, random {m['random']['acc']}; "
+              f"asserted errors learned {asserted('learned')}, none {asserted('none')})")
+        summary["criteria_pass"] = ok
+    out = outdir / f"learning_{a.split}_test{len(test_items)}_{test_sha}_{stamp}.json"
+    out.write_text(json.dumps({"summary": summary, "rows": rows}, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"written: {out}")
+    return summary
+
+
+if __name__ == "__main__":
+    main()
