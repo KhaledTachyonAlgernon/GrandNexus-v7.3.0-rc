@@ -56,7 +56,7 @@ def run(gn, dataset, title, seed=0):
     rand_scores = []
     dataset = [(q, normalise_label(g)) for q, g in dataset]
     for q, gold in dataset:
-        got = tr.answer(q, write_back=False)["answer"]
+        got = tr.answer(q, mode="grammar", write_back=False)["answer"]   # grammar lab: never the LLM pathway
         score["pathway"] += got == gold
         score["always-yes"] += gold == "yes"
         score["old pathway"] += old_route(gn, q) == gold
