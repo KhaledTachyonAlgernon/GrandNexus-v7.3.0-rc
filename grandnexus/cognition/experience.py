@@ -81,6 +81,23 @@ class ExperienceMemory:
         scored.sort(reverse=True)
         return [self.entries[i] for s, i in scored[:k] if s > 0]
 
+    def central(self, k: int = 3) -> List[Experience]:
+        """The k experiences most similar to all the others (medoids): a static, automatically chosen set,
+        shown to every reading. Control: if static == learned, retrieval by relevance adds nothing."""
+        if not self.entries:
+            return []
+        n = len(self._vecs)
+        score = []
+        for i, v in enumerate(self._vecs):
+            tot = sum(sum(v.get(t, 0.0) * w.get(t, 0.0) for t in v) for j, w in enumerate(self._vecs) if j != i)
+            score.append((tot / max(1, n - 1), i))
+        score.sort(reverse=True)
+        return [self.entries[i] for _, i in score[:k]]
+
+    @property
+    def known_ids(self) -> set:
+        return {e.source_id for e in self.entries if e.source_id}
+
     # ---- persistence
     def save(self, path: str) -> None:
         with open(path, "w", encoding="utf-8") as f:
