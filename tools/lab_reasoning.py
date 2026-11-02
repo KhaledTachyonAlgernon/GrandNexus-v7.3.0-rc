@@ -52,7 +52,7 @@ def old_route(gn, q):
 def run(gn, dataset, title, seed=0):
     rnd = random.Random(seed)
     tr = gn.modules()["text_reasoner"]
-    rows, score = [], {"voie": 0, "always-yes": 0, "old pathway": 0}
+    rows, score = [], {"pathway": 0, "always-yes": 0, "old pathway": 0}
     rand_scores = []
     dataset = [(q, normalise_label(g)) for q, g in dataset]
     for q, gold in dataset:
@@ -66,7 +66,7 @@ def run(gn, dataset, title, seed=0):
     print(f"\n== {title} ({len(dataset)} questions)")
     for ok, q, gold, got in rows:
         print(f"  {'✓' if ok else '✗'} {q[:70]:72} expected={gold:14} got={got}")
-    print(f"  perception→reasoning pathway : {score['voie']}/{len(dataset)}")
+    print(f"  perception→reasoning pathway : {score['pathway']}/{len(dataset)}")
     print(f"  control always-yes          : {score['always-yes']}/{len(dataset)}")
     print(f"  random control (200 tirages)  : {statistics.mean(rand_scores):.1f}/{len(dataset)}")
     print(f"  old pathway (solve_problem): {score['old pathway']}/{len(dataset)}")
@@ -91,9 +91,9 @@ if __name__ == "__main__":
             print(f"  {'✓' if got == gold else '✗'} {q[:60]:62} expected={gold:14} got={got}")
         print(f"  orchestrator: {ok}/{len(IN_GRAMMAR)} | answers from another question : {contaminated} | "
               f"{(time.time() - t0) / len(IN_GRAMMAR):.2f}s per question")
-    c1 = s1["voie"] >= 10
-    c2 = s1["voie"] > max(s1["always-yes"], r1, s1["old pathway"])
+    c1 = s1["pathway"] >= 10
+    c2 = s1["pathway"] > max(s1["always-yes"], r1, s1["old pathway"])
     print(f"\nC1 (≥10/12) : {'PASS' if c1 else 'FAIL'} | C2 (> controls) : {'PASS' if c2 else 'FAIL'} | "
-          f"C3 dev : {s2['voie']}/{len(GENERALISATION)} | C4 frozen control set : {s3['voie']}/{len(HOLDOUT)} "
+          f"C3 dev : {s2['pathway']}/{len(GENERALISATION)} | C4 frozen control set : {s3['pathway']}/{len(HOLDOUT)} "
           f"(always-yes {s3['always-yes']}, random {r3:.1f})")
     gn.shutdown()
