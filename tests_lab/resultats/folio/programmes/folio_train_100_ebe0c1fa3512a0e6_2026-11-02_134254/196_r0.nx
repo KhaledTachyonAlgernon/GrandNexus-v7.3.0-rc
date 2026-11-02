@@ -1,0 +1,11 @@
+summer_olympics(olympics1996). @ "held the 1996 Summer Olympics"
+holds(atlanta, olympics1996). @ "Atlanta in the United States held the 1996 Summer Olympics"
+* holds(C, O) => located_in(O, C).
+in_state(atlanta, georgia). @ "Atlanta is in Georgia"
+us_city(atlanta). @ "Atlanta is a US city"
+in_state(C, S) & located_in(O, C) => located_in(O, S). @ "If a city is in a state, and a Summer Olympics is in this city, then the Summer Olympics is in this state"
+in_state(C, S) & state_in(S, united_states) => us_city(C). @ "If a city is in a state in the US, the city is a US city"
+holds(C, O) & summer_olympics(O) & us_city(C) => located_in(O, united_states). @ "If a city holds a Summer Olympics, and the city is a US city, then the Summer Olympics will be in the US"
+state_in(california, united_states). @ "California is a state in the United States"
+in_state(los_angeles, california). @ "Los Angeles is a city in California"
+? not located_in(olympics1996, georgia).

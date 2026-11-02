@@ -1,0 +1,7 @@
+biodegradable(V) => environment_friendly(V). @ "All biodegradable things are environment-friendly."
+woodware(V) => biodegradable(V). @ "All woodware is biodegradable."
+paper(V) => woodware(V). @ "All paper is woodware."
+good(V) => not bad(V). @ "Nothing is a good thing and also a bad thing."
+environment_friendly(V) => good(V). @ "All environment-friendly things are good."
+paper(worksheet) | environment_friendly(worksheet). @ "A worksheet is either paper or environment-friendly."
+? not biodegradable(worksheet).

@@ -1,0 +1,10 @@
+scottish(brian_winter). @ "Brian Winter is a Scottish football referee"
+football_referee(brian_winter). @ "Brian Winter is a Scottish football referee"
+retired(brian_winter). @ "Brian Winter retired in 2012"
+referee_observer(brian_winter). @ "Brian Winter was appointed as a referee observer after his retirement"
+football_referee(some_referee_1). @ "Some football referees become referee observers"
+referee_observer(some_referee_1). @ "Some football referees become referee observers"
+son(andy_winter, brian_winter). @ "The son of Brian Winter, Andy Winter"
+football_player(andy_winter). @ "Andy Winter, is a football player"
+plays_for(andy_winter, hamilton_academical). @ "plays for Hamilton Academical"
+? retired(brian_winter).

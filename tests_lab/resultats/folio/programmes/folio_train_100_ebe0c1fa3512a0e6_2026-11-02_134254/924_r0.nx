@@ -1,0 +1,10 @@
+disposable(V) => single_use(V). @ "All disposables are designed to be used only once."
+in_house(some_item_1). @ "Some items used in Tom's house are eco-friendly."
+eco_friendly(some_item_1). @ "Some items used in Tom's house are eco-friendly."
+in_house(V) => disposable(V) | reusable(V). @ "Every item used in Tom's house is either disposable or reusable."
+metal(V) => not plastic(V). @ "If something is made from metal, then it is not made from plastic."
+reusable(V) & in_house(V) => metal(V). @ "All reusable items used in Tom's house are made from metal."
+in_house(chopsticks). @ "The chopsticks used in Tom's house"
+metal(chopsticks) | not plastic(chopsticks). @ "either made from metals and plastics, or that they are neither made from metals nor plastics"
+not metal(chopsticks) | plastic(chopsticks). @ "either made from metals and plastics, or that they are neither made from metals nor plastics"
+? eco_friendly(chopsticks).

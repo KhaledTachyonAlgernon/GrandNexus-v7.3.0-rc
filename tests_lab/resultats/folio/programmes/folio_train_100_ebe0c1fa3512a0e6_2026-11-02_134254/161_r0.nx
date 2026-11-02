@@ -1,0 +1,8 @@
+roundel(V) => rounded(V). @ "A roundel is a rounded artillery fortification"
+roundel(V) => artillery_fortification(V). @ "A roundel is a rounded artillery fortification"
+roundel(V) => not higher_than_adjacent_walls(V). @ "A roundel is not higher than adjacent walls"
+artillery_fortification(V) => cannon_deployable(V). @ "Cannons can be deployed on artillery fortifications"
+roundel(V) => oldest_artillery_fortification(V). @ "Roundels are the oldest artillery fortifications"
+oldest_artillery_fortification(V) => artillery_fortification(V). @ "Roundels are the oldest artillery fortifications"
+battery_tower(V) => artillery_fortification(V). @ "Battery towers are artillery fortifications"
+? roundel(V) => cannon_deployable(V).

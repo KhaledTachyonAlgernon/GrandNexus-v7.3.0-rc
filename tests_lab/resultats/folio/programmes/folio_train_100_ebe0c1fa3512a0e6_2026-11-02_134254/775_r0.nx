@@ -1,0 +1,7 @@
+russian_bank_card(V) => not applepay(V). @ "No payment cards issued by Russian banks can be used with ApplePay."
+mir_card(V) => russian_bank_card(V). @ "All MIR payment cards are issued by Russian banks."
+international_card(some_card_1). @ "Some international payment cards can be used with ApplePay."
+applepay(some_card_1). @ "Some international payment cards can be used with ApplePay."
+social_payment_card(V) => mir_card(V). @ "Social payments in Russia can only be transferred to MIR payment cards."
+applepay(boa_card). @ "Bank of America payment cards can be used with ApplePay."
+? international_card(boa_card) & social_payment_card(boa_card) => international_card(boa_card).

@@ -1,0 +1,11 @@
+at_night(V) => puzzles(V) | bad_chess(V). @ "Everyone at 'Board Game night' is interested in puzzles, or they are bad at chess, or both."
+at_night(V) & bad_chess(V) => not plays_chess(V). @ "If a person at 'Board Game night' is bad at chess, then they don't play a lot of chess."
+at_night(some_person_1). @ "There is a person at 'Board Game night'"
+planner(some_person_1) | creative(some_person_1). @ "who is either a planner or a creative person"
+planner(some_person_1) => not creative(some_person_1). @ "either a planner or a creative person"
+creative(some_person_1) => not planner(some_person_1). @ "either a planner or a creative person"
+at_night(erica). @ "Erica is at 'Board Game night,'"
+plays_chess(erica). @ "she is someone who plays a lot of chess"
+not bad_chess(erica) & not creative(erica) => planner(erica) | not creative(erica). @ "If Erica is neither bad at chess nor creative, then Erica is either someone who plans and is creative, or she is neither of these things."
+not bad_chess(erica) & not creative(erica) => creative(erica) | not planner(erica). @ "If Erica is neither bad at chess nor creative, then Erica is either someone who plans and is creative, or she is neither of these things."
+? puzzles(erica) & creative(erica).

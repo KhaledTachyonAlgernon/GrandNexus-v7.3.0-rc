@@ -1,0 +1,7 @@
+holding_company(koei_tecmo). @ "Koei Tecmo is a Japanese video game and anime holding company"
+holding_company(V) => holds_several_companies(V). @ "Holding companies hold several companies"
+disbanded_in(tecmo, japan). @ "Tecmo was disbanded in Japan"
+survived(koei). @ "Koei survived"
+renamed(koei). @ "renamed"
+video_game_holding_company(V) => holding_company(V). @ "Video game holding companies are holding companies"
+? holds(tecmo, C).

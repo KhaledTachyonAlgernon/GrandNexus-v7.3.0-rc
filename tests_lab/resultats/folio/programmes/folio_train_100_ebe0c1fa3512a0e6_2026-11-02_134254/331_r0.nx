@@ -1,0 +1,7 @@
+national_park_vietnam(phuoc_binh). @ "Phuoc Binh national park is a national park in Vietnam."
+national_park_vietnam(V) => nature_reserve(V). @ "Any national park in Vietnam is classified as a nature reserve."
+national_park_vietnam(some_park_1). @ "There is a national park in Vietnam classified as a UNESCO World Heritage Site."
+unesco_site(some_park_1). @ "classified as a UNESCO World Heritage Site"
+national_park_vietnam(V) => managed_by_ministry(V) | managed_by_committee(V). @ "All national parks in Vietnam are either managed by the Ministry of Agriculture or managed by the People's Committee."
+not managed_by_ministry(phuoc_binh). @ "Phuoc Binh is not managed by the Ministry of Agriculture."
+? unesco_site(phuoc_binh).

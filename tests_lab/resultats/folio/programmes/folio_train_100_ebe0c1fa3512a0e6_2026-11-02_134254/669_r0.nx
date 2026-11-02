@@ -1,0 +1,6 @@
+# The text says P values are thresholds for belief, not metrics of effect.
+# The question claims P value represents selection intensity (an effect metric).
+threshold_for_belief(p_value). @ "P values are thresholds for belief"
+not metric_of_effect(p_value). @ "not metrics of effect"
+* selection_intensity_measure(X) => metric_of_effect(X).
+? selection_intensity_measure(p_value).

@@ -1,0 +1,9 @@
+scottish_team(st_johnstone). @ "St Johnstone is a Scottish team."
+part_of(st_johnstone, scottish_premiership). @ "St Johnstone is part of the Scottish Premiership league."
+part_of(T, L) => joined(T, L). @ "If a team is part of the league, it has joined the league."
+team(st_johnstone). @ "St Johnstone and Minsk are different teams."
+team(minsk). @ "St Johnstone and Minsk are different teams."
+different(st_johnstone, minsk). @ "St Johnstone and Minsk are different teams."
+team(X) & team(Y) & different(X, Y) => won_against(X, Y) | won_against(Y, X). @ "For two teams, either one team wins, or the other team wins."
+won_against(minsk, st_johnstone). @ "Minsk won against St Johnstone."
+? joined(minsk, scottish_premiership).

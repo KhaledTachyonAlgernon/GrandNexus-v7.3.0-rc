@@ -1,0 +1,7 @@
+born_in(ralph_hammerthaler, wasserburg_am_inn). @ "Ralph Hammerthaler was born in Wasserburg am Inn."
+in(wasserburg_am_inn, germany). @ "Wasserburg am Inn is in Germany."
+in(germany, europe). @ "Germany is in Europe."
+german(ralph_hammerthaler). @ "Ralph Hammerthaler is a German writer."
+writer(ralph_hammerthaler). @ "Ralph Hammerthaler is a German writer."
+born_in_year(ralph_hammerthaler, 1965). @ "Ralph Hammerthaler was born in 1965."
+? lives_in(ralph_hammerthaler, germany).

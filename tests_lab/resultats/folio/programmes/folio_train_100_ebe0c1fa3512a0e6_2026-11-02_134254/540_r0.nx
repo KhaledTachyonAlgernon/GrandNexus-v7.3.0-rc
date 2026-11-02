@@ -1,0 +1,9 @@
+goals_regular(T1, F, N) & goals_regular(T2, F, N) => tie_regular(T1, T2, F). @ "If two soccer teams score the same number of goals in one UCL final during the regular time"
+tie_regular(T1, T2, F) => extra_time(T1, T2, F). @ "they need to play for the extra time"
+goals_extra(T1, F, N) & goals_extra(T2, F, N) => tie_extra(T1, T2, F). @ "score the same number of goals in one UCL final during both regular and extra time"
+tie_regular(T1, T2, F) & tie_extra(T1, T2, F) => penalty(T1, T2, F). @ "they need to play the penalty shoot-out"
+goals_regular(real_madrid, ucl_2016, 1). @ "Real Madrid and Atlético Madrid both scored one goal in the 2016 UCL final during the regular time"
+goals_regular(atletico_madrid, ucl_2016, 1). @ "Real Madrid and Atlético Madrid both scored one goal in the 2016 UCL final during the regular time"
+goals_extra(real_madrid, ucl_2016, 0). @ "Real Madrid and Atlético Madrid both scored zero goals in the 2016 UCL final during the extra time"
+goals_extra(atletico_madrid, ucl_2016, 0). @ "Real Madrid and Atlético Madrid both scored zero goals in the 2016 UCL final during the extra time"
+? penalty(real_madrid, atletico_madrid, ucl_2016).

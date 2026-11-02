@@ -1,0 +1,8 @@
+works(V) & spa(V) => not miserly(V). @ "People who work at Jess's company and go to the spa frequently are not people who are miserly and need to save a large portion of their income."
+works(V) => miserly(V) | spender(V). @ "People who work at Jess's company are either miserly and need to save a large portion of their income, or frivolously spend a lot of money."
+works(V) & spender(V) => values(V). @ "If people who work at Jess's company frivolously spend a lot of money when they go out, then they value quality manufacturing and luxury items."
+works(V) & values(V) => shops(V). @ "If people who work at Jess's company value quality manufacturing and luxury items, then they enjoy shopping for materialistic items in their free time."
+works(thomas). @ "Thomas works at Jess's company."
+not miserly(thomas) => not values(thomas). @ "If Thomas is not miserly and needs to save a large portion of his income, then Thomas does not value quality manufacturing and luxury items."
+values(thomas) | not miserly(thomas). @ "Thomas values quality manufacturing and luxury items or he is not miserly."
+? shops(thomas) | spa(thomas).

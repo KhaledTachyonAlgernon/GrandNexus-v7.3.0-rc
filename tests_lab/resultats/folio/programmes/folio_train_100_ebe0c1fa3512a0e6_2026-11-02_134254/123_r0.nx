@@ -1,0 +1,12 @@
+pop_rock_band(imagine_dragons). @ "Imagine Dragons are an American pop-rock band"
+american(imagine_dragons). @ "Imagine Dragons are an American pop-rock band"
+lead_singer_of(dan, imagine_dragons). @ "The lead singer of Imagine Dragons is Dan"
+songwriter(dan). @ "Dan is also a songwriter"
+lead_singer_of(X, B) => singer(X). @ "All lead singers are singers"
+singer(V) => musician(V). @ "All singers are musicians"
+single_of(demons, imagine_dragons). @ "Demons is one of the most popular singles of Imagine Dragons"
+popular(demons). @ "Demons is one of the most popular singles of Imagine Dragons"
+single_of(some_single_1, imagine_dragons). @ "Some singles of Imagine Dragons"
+on_billboard_hot_100(some_single_1). @ "have been on Billboard Hot 100"
+* pop_rock_band(X) => rock_band(X).
+? rock_band(imagine_dragons) & lead_singer_of(dan, imagine_dragons) & songwriter(dan).

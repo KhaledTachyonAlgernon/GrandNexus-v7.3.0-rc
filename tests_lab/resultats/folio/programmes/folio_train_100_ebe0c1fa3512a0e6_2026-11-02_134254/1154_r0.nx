@@ -1,0 +1,8 @@
+top3(G) => multiplatform(G). @ "If a game is one of the top-3 best selling video-games, then it is multiplatform."
+sold_over_100m(G) => top3(G). @ "If a game has sold more than 100 million copies, then it is one of the top-3 best-selling video games."
+supports_windows(some_game_1). @ "Some games that support Windows are developed by Nintendo."
+developed_by(some_game_1, nintendo). @ "Some games that support Windows are developed by Nintendo."
+multiplatform(G) => wide_range(G). @ "All multiplatform games can be played on a wide range of devices."
+not developed_by(pokemon_diamond, nintendo). @ "Pokemon Diamond version is neither developed by Nintendo nor can be played on a wide range of devices."
+not wide_range(pokemon_diamond). @ "Pokemon Diamond version is neither developed by Nintendo nor can be played on a wide range of devices."
+? not (supports_windows(pokemon_diamond) | sold_over_100m(pokemon_diamond)) | (multiplatform(pokemon_diamond) & top3(pokemon_diamond)) | (not multiplatform(pokemon_diamond) & not top3(pokemon_diamond)).

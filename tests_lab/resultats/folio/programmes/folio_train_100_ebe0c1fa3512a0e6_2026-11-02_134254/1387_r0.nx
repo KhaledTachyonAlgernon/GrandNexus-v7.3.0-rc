@@ -1,0 +1,10 @@
+social_media_app(V) & chat_features(V) => software(V). @ "All social media applications containing chat features are software."
+social_media_app(V) & allows_messaging(V) => chat_features(V). @ "All social media applications that allow users to send messages to each other have chat features."
+social_media_app(V) => chat_features(V) | video_features(V). @ "All social media applications have chat features or video features."
+social_media_app(V) & video_features(V) => allows_video_upload(V). @ "All social media applications that have video features allow users to upload videos."
+software(V) & social_media_app(V) => computer_program(V). @ "All software that is social media applications are computer programs."
+social_media_app(V) & high_engagement(V) => addictive(V). @ "All social media applications that have high engagement metrics are addictive."
+social_media_app(V) & addictive(V) => not ideal_for_preteens(V). @ "If a social media application is addictive, then it is not ideal for preteens."
+social_media_app(tiktok). @ "TikTok is a social media application"
+not ideal_for_preteens(tiktok). @ "it is not ideal for preteens"
+? not chat_features(tiktok) | not computer_program(tiktok).

@@ -1,0 +1,8 @@
+same(islip_speedway, islip). @ "Islip is either demolished or still being used"
+same(islip_speedway, smallest_race_track). @ "Islip Speedway is the smallest race track"
+speedway(islip_speedway). @ "Islip Speedway"
+demolition_derby_at(smallest_race_track). @ "There was a demolition derby on the smallest race track"
+demolished(islip) | in_use(islip). @ "Islip is either demolished or still being used"
+speedway(V) & in_use(V) => races_held(V). @ "Speedways that are still being used have races held at them"
+not races_held(islip). @ "Islip doesn't have races held at it"
+? demolition_derby_at(islip_speedway) & demolished(islip_speedway).

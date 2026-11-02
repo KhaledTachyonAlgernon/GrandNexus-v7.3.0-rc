@@ -1,0 +1,9 @@
+british(william_dickinson). @ "William Dickinson was a British politician"
+politician(william_dickinson). @ "William Dickinson was a British politician"
+sat_in(william_dickinson, house_of_commons). @ "who sat in the House of Commons"
+attended(william_dickinson, westminster_school). @ "William Dickinson attended Westminster school for high school"
+attended(william_dickinson, university_of_edinburgh). @ "then the University of Edinburgh"
+located_in(university_of_edinburgh, united_kingdom). @ "The University of Edinburgh is a university located in the United Kingdom"
+supported(william_dickinson, portland_whigs). @ "William Dickinson supported the Portland Whigs"
+supported(X, portland_whigs) => not seat_in_parliament(X). @ "People who supported the Portland Whigs did not get a seat in the Parliament"
+? not seat_in_parliament(william_dickinson).

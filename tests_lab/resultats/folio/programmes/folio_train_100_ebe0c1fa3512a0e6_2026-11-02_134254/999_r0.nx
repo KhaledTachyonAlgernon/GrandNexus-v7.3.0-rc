@@ -1,0 +1,8 @@
+neighbor(peter). @ "Peter, Michael's neighbor"
+neighbor(V) & grows_vegetables(V) => ample_space(V). @ "All of Michael's neighbors who grow their own fresh vegetables in their home gardens also have ample space."
+neighbor(V) & young_professional(V) & large_city(V) => not ample_space(V). @ "All of Michael's neighbors who are young working professionals and live in large cities, do not have ample space."
+neighbor(V) & orders_takeout(V) => grows_vegetables(V). @ "All of Michael's neighbors who order takeout from delivery services often grow their own fresh vegetables in their home garden."
+neighbor(V) & enjoys_restaurants(V) => orders_takeout(V). @ "All of Michael's neighbors who enjoy going out often to restaurants with friends order takeout from delivery services often."
+neighbor(V) & touts_homegrown(V) => enjoys_restaurants(V). @ "All of Michael's neighbors who regularly tout the benefits of homegrown and homecooked meals over fast food enjoy going out often to restaurants with friends."
+grows_vegetables(peter) | touts_homegrown(peter). @ "grows his own fresh vegetables in his home garden, or regularly touts the benefits of homegrown and homecooked meals over fast food, or both"
+? enjoys_restaurants(peter).

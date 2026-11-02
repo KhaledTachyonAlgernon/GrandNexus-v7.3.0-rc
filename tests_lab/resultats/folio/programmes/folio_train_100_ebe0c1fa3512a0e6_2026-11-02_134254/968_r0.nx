@@ -1,0 +1,9 @@
+neighbor(V) & visits_coffee(V) => addicted(V). @ "If people in this neighborhood visit a coffee shop regularly, then they are addicted to coffee."
+neighbor(V) => visits_coffee(V) | takeout(V). @ "People in this neighborhood visit a coffee shop regularly or order takeout at least once a day."
+neighbor(V) & cooks_home(V) => takeout(V). @ "If people in this neighborhood make a lot of their own food at home using recipes and online guides, then they order takeout at least once a day."
+neighbor(V) & owns_both(V) => not takeout(V). @ "If people in this neighborhood own at least one coffeemaker and one blender in their home, then they do not order takeout at least once a day."
+neighbor(V) & busy(V) => cooks_home(V). @ "All people in this neighborhood who lead very busy lives that include 12-hour work hours make a lot of their own food at home using recipes and online guides."
+neighbor(sam). @ "Sam is living in this neighborhood"
+addicted(sam) => busy(sam). @ "he is either addicted to coffee or other caffeinated drinks and leads a very busy life that include 12-hour work hours, or is not addicted to coffee and does not lead a very busy life that include 12-hour work hours"
+busy(sam) => addicted(sam). @ "he is either addicted to coffee or other caffeinated drinks and leads a very busy life that include 12-hour work hours, or is not addicted to coffee and does not lead a very busy life that include 12-hour work hours"
+? neighbor(sam) & owns_both(sam).

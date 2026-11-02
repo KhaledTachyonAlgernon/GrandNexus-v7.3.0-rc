@@ -1,0 +1,8 @@
+competitive_sport(greyhound_racing). @ "Greyhound racing is a competitive sport"
+involves(greyhound_racing, coursing). @ "Greyhound racing involves coursing"
+competitive_sport(some_sport_1). @ "Some competitive sports where spectators bet on things are banned"
+banned(some_sport_1). @ "Some competitive sports where spectators bet on things are banned"
+bet_on(coursing, hare_betting). @ "Coursing involves spectators betting on a hare being pursued by greyhounds"
+small_game(hare_betting). @ "Spectators betting on a hare is a small game"
+competitive_sport(S) & bet_on(S, G) & small_game(G) => banned(S). @ "If a competitive sport involves spectators betting on small games, then it is banned"
+? not banned(coursing).

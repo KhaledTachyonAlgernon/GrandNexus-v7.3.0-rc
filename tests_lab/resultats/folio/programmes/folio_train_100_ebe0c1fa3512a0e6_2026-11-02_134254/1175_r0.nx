@@ -1,0 +1,11 @@
+# monitor(m1) stands for the "some LG monitor with a type-c port"
+monitor(some_monitor_1). @ "Some monitors made by LG have a type-c port."
+made_by_lg(some_monitor_1). @ "Some monitors made by LG have a type-c port."
+type_c(some_monitor_1). @ "Some monitors made by LG have a type-c port."
+monitor(V) & type_c(V) => not before_2010(V). @ "Monitors that have a type-c port were not made before 2010."
+monitor(V) & in_library(V) => before_2010(V). @ "All monitors in the library are made before 2010."
+monitor(l2021). @ "The L-2021 monitor"
+in_library(l2021) | type_c(l2021). @ "The L-2021 monitor is either used in the library or has a type-c port."
+before_2010(l2021) => made_by_lg(l2021). @ "The L-2021 monitor is either both produced before 2010 and made by LG, or neither is true."
+made_by_lg(l2021) => before_2010(l2021). @ "The L-2021 monitor is either both produced before 2010 and made by LG, or neither is true."
+? (type_c(l2021) & not made_by_lg(l2021)) | (not type_c(l2021) & made_by_lg(l2021)).

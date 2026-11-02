@@ -1,0 +1,10 @@
+shoe(V) => not food(V). @ "Shoes are not food"
+slipper(V) => shoe(V). @ "All slippers are shoes"
+donated(V) => clothes(V) | food(V). @ "Any object donated to the homeless charity is either clothes or food"
+wearable(V) => not edible(V). @ "Wearable things are not edible"
+clothes(V) => wearable(V). @ "All clothes are wearable"
+donated(watch). @ "The watch is donated to the homeless charify"
+# The conditional says the watch is both edible and clothing, or neither, which is equivalent to edible <=> clothes
+edible(watch) => clothes(watch). @ "If the watch is not both edible and a piece of clothing, then the watch is either both edible and a piece of clothing or the watch is neither of them"
+clothes(watch) => edible(watch). @ "If the watch is not both edible and a piece of clothing, then the watch is either both edible and a piece of clothing or the watch is neither of them"
+? not edible(watch) & not slipper(watch).

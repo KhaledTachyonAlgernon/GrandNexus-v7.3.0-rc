@@ -1,0 +1,5 @@
+unincorporated_community(ordinary). @ "Ordinary is an unincorporated community"
+located_in(ordinary, elliot_county). @ "Located within Elliot County, Ordinary"
+on_route(ordinary, kentucky_route_32). @ "Ordinary is on Kentucky Route 32"
+northwest_of(ordinary, sandy_hook). @ "Ordinary is located northwest of Sandy Hook"
+? unincorporated_community(X) & located_in(X, elliot_county).

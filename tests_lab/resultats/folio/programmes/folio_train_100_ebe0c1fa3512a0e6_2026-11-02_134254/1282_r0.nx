@@ -1,0 +1,8 @@
+lazy(V) => unproductive(V). @ "Anything lazy is unproductive."
+unproductive(V) => not energetic(V). @ "No one unproductive is energetic."
+sloth(V) => lazy(V). @ "If something is a sloth, then it is lazy."
+animal(some_animal_1). @ "Some animals are sloths."
+sloth(some_animal_1). @ "Some animals are sloths."
+not energetic(sid). @ "Sid is neither an energetic person nor a sloth."
+not sloth(sid). @ "Sid is neither an energetic person nor a sloth."
+? not ((animal(sid) | unproductive(sid)) & energetic(sid)).

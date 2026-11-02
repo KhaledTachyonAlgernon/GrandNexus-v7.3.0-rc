@@ -1,0 +1,8 @@
+police_procedural_series(di_ray). @ "DI Ray is a police procedural television series"
+television_series(di_ray). @ "DI Ray is a police procedural television series"
+created(maya_sondhi, di_ray). @ "DI Ray was created and written by Maya Sondhi"
+wrote(maya_sondhi, di_ray). @ "DI Ray was created and written by Maya Sondhi"
+produced(jed_mercurio, di_ray). @ "DI Ray was produced by Jed Mercurio"
+british(maya_sondhi). @ "Maya Sondhi and Jed Mercurio are both British"
+british(jed_mercurio). @ "Maya Sondhi and Jed Mercurio are both British"
+? british(X) & television_series(S) & produced(X, S).

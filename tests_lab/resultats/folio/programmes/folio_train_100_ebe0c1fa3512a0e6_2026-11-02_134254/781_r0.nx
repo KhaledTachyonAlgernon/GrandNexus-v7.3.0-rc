@@ -1,0 +1,7 @@
+apply_schengen(some_applicant_1). @ "Some of those who apply for a Schengen visa get it."
+get_schengen(some_applicant_1). @ "Some of those who apply for a Schengen visa get it."
+apply_schengen(V) => need_guarantees(V). @ "To apply for a Schengen Visa, you need to provide financial guarantees."
+need_guarantees(V) => request_docs(V). @ "If you need to provide financial guarantees, you must request documents from the bank."
+request_docs(V) => not close_account(V). @ "Do not close your bank account if you request documents from the bank."
+close_account(philip). @ "Philip closed his bank account."
+? request_docs(philip) | get_schengen(philip) | not apply_schengen(philip).

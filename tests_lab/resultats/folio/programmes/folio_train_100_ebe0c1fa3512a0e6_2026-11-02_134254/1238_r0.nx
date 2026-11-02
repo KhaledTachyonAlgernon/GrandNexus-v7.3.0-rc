@@ -1,0 +1,10 @@
+in_new_haven(V) => not higher_400(V). @ "There are no buildings in New Haven higher than 400 meters."
+managed_yale(V) => in_new_haven(V). @ "All buildings managed by Yale Housing are in New Haven."
+manhattan_skyscraper(V) => higher_400(V). @ "All Manhattan skyscrapers are higher than 400 meters."
+owned_bloomberg(V) => in_manhattan(V). @ "All buildings owned by Bloomberg are in Manhattan."
+bloomberg_logo(V) => owned_bloomberg(V). @ "All buildings with the Bloomberg logo are buildings owned by Bloomberg."
+not in_new_haven(tower_a). @ "Tower A is neither a building in New Haven nor a skyscraper in Manhattan."
+not manhattan_skyscraper(tower_a). @ "Tower A is neither a building in New Haven nor a skyscraper in Manhattan."
+manhattan_skyscraper(tower_b). @ "Tower B is a skyscraper building in Manhattan"
+bloomberg_logo(tower_b). @ "with a Bloomberg logo"
+? not bloomberg_logo(tower_a) & not managed_yale(tower_a).

@@ -1,0 +1,9 @@
+dormitory(V) => on_campus(V). @ "All Yale dormitories are located on the Yale campus"
+yale_building(V) & managed_by_housing(V) => dormitory(V). @ "All Yale buildings managed by Yale Housing are dormitories"
+yale_building(V) & operated_by_housing_staff(V) => managed_by_housing(V). @ "All Yale buildings operated by Yale Housing staff are managed by Yale Housing"
+yale_building(V) & open_to_students(V) => not built_before_1701(V). @ "None of the Yale buildings open to students were built before 1701"
+yale_building(V) & on_campus(V) => open_to_students(V). @ "All Yale buildings located on the Yale campus are open to students"
+yale_staff_building(harkness) | on_york_street(harkness). @ "Harkness is either a Yale building operated by Yale Housing staff, or it is located on York Street"
+yale_staff_building(V) => yale_building(V). @ "a Yale building operated by Yale Housing staff"
+yale_staff_building(V) => operated_by_housing_staff(V). @ "a Yale building operated by Yale Housing staff"
+? built_before_1701(harkness).

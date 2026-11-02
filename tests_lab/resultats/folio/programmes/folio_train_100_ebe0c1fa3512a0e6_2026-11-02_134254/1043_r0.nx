@@ -1,0 +1,8 @@
+disease(V) => affects_females(V) | affects_males(V). @ "A diseases affect females or males."
+in_women(V) => not prostate_cancer(V). @ "No women have prostate cancer."
+cancer(V) => prostate_cancer(V) | non_prostate_cancer(V). @ "A cancer is either prostate cancer or non-prostate cancer."
+prostate_cancer(V) => not non_prostate_cancer(V). @ "A cancer is either prostate cancer or non-prostate cancer."
+cancer(V) => not without_mutations(V). @ "No type of cancer is without mutations."
+non_prostate_cancer(V) => cancer(V). @ "All non-prostate cancers are a type of cancer."
+cancer(adenocarcinoma) => in_women(adenocarcinoma) | without_mutations(adenocarcinoma). @ "If adenocarcinoma is a type of cancer or without mutations or both, then adenocarcinoma is in women or without mutations or both."
+? not (in_women(adenocarcinoma) | without_mutations(adenocarcinoma)) | (without_mutations(adenocarcinoma) & non_prostate_cancer(adenocarcinoma)).

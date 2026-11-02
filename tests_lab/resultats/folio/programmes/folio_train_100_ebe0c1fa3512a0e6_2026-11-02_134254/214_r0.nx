@@ -1,0 +1,10 @@
+greek(herodicus). @ "Herodicus was a Greek physician, dietician, sophist, and gymnast."
+physician(herodicus). @ "Herodicus was a Greek physician, dietician, sophist, and gymnast."
+dietician(herodicus). @ "Herodicus was a Greek physician, dietician, sophist, and gymnast."
+sophist(herodicus). @ "Herodicus was a Greek physician, dietician, sophist, and gymnast."
+gymnast(herodicus). @ "Herodicus was a Greek physician, dietician, sophist, and gymnast."
+born_in(herodicus, selymbria). @ "Herodicus was born in the city of Selymbria."
+colony_of(selymbria, megara). @ "Selymbria is a colony of the city-state Megara."
+tutor_of(herodicus, hippocrates). @ "One of the tutors of Hippocrates was Herodicus."
+recommended(herodicus, massages). @ "Massages were recommended by Herodicus."
+? tutor_of(hippocrates, herodicus).

@@ -1,0 +1,7 @@
+# "only Boeing and Airbus are major manufacturers": major_manufacturer(V) => boeing or airbus
+major_manufacturer(V) => same_as_boeing(V) | same_as_airbus(V). @ "The world's only major large passenger aircraft manufacturers are Boeing and Airbus."
+major_manufacturer(boeing). @ "The world's only major large passenger aircraft manufacturers are Boeing and Airbus."
+major_manufacturer(airbus). @ "The world's only major large passenger aircraft manufacturers are Boeing and Airbus."
+american_airlines_plane(V) => from_major_manufacturer(V). @ "All American Airlines planes are from the world's major large passenger aircraft manufacturers."
+more_revenue(airbus, boeing, last_year). @ "Airbus made more revenue than Boeing last year."
+? spacex_commercial_aircraft(some_x_1).

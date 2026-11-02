@@ -1,0 +1,6 @@
+nintendo_released(V) => not supports_ps4(V). @ "No video games released by Nintendo support the PS4 platform."
+pokemon_series(V) => nintendo_released(V). @ "All video games in the Pokemon series are released by Nintendo."
+fifa_series(V) => supports_ps4(V). @ "All video games in the FIFA series support the PS4 platform."
+simulates_soccer(V) => fifa_series(V). @ "All video games that allow users to simulate playing online soccer using licensed players are in the FIFA series."
+pokemon_series(be_lionel) | simulates_soccer(be_lionel). @ "The video game named “Be Lionel” is in the Pokemon series, or it allows users to simulate playing online soccer games using licensed players."
+? (fifa_series(be_lionel) & supports_ps4(be_lionel)) | (not fifa_series(be_lionel) & not supports_ps4(be_lionel)).

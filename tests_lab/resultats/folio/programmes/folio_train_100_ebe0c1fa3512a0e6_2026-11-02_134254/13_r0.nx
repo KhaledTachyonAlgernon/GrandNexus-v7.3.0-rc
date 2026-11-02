@@ -1,0 +1,12 @@
+superhero(peter) | civilian(peter). @ "Peter Parker is either a superhero or a civilian."
+destroyer(hulk). @ "The Hulk is a destroyer."
+angry(hulk) => wakes_up(hulk). @ "The Hulk wakes up when he is angry."
+wakes_up(hulk) => breaks_bridge(hulk). @ "If the Hulk wakes up, then he will break a bridge."
+god(thor). @ "Thor is a god."
+happy(thor) => breaks_bridge(thor). @ "Thor will break a bridge when he is happy."
+god(V) => not destroyer(V). @ "A god is not a destroyer."
+superhero(peter) => wears_uniform(peter). @ "Peter Parker wears a uniform when he is a superhero."
+destroyer(V) & breaks_bridge(V) => not civilian(peter). @ "Peter Parker is not a civilian if a destroyer is breaking a bridge."
+happy(thor) => angry(hulk). @ "If Thor is happy, the Hulk is angry."
+* breaks_bridge(X) => bridge_broken.
+? not happy(thor) => not bridge_broken.

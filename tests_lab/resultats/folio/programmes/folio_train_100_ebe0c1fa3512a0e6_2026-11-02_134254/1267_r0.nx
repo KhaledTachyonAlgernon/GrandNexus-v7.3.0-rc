@@ -1,0 +1,6 @@
+tiger(V) => cat(V). @ "All tigers are cats"
+cat(V) => not dog(V). @ "No cats are dogs"
+bengal_tiger(V) => tiger(V). @ "All Bengal tigers are tigers"
+husky(V) => dog(V). @ "All huskies are dogs"
+bengal_tiger(fido) | cat(fido). @ "Fido is either a Bengal tiger or a cat"
+? not dog(fido) & not husky(fido).

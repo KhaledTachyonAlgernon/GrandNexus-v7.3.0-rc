@@ -1,0 +1,7 @@
+athlete(V) => exercises(V). @ "No athletes never exercise"
+professional_basketball_player(V) => athlete(V). @ "All professional basketball players are athletes"
+nba_player(V) => professional_basketball_player(V). @ "All NBA players are professional basketball players"
+knicks_player(V) => nba_player(V). @ "All Knicks players are NBA players"
+professional_basketball_player(john) | exercises(john). @ "Either John is a professional basketball player and he never exercises, or he is not a professional basketball player and he sometimes exercises"
+not exercises(john) | not professional_basketball_player(john). @ "Either John is a professional basketball player and he never exercises, or he is not a professional basketball player and he sometimes exercises"
+? knicks_player(jim).

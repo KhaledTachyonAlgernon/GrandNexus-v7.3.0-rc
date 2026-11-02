@@ -1,0 +1,7 @@
+owns(adam, cars). @ "Adam owns cars"
+car(fav_car). @ "Adam has a favorite car"
+favorite(adam, fav_car). @ "Adam has a favorite car"
+owns(adam, fav_car). @ "Among the cars he owns, Adam's favorite car"
+european(fav_car). @ "Adam's favorite car is European"
+broke(adam, fav_car). @ "Adam broke his favorite car"
+? owns(adam, J) & japanese(J).

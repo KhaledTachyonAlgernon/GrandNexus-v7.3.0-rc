@@ -1,0 +1,3 @@
+bulbophyllum(bulbophyllum_attenuatum). @ "Bulbophyllum attenuatum is in the genus Bulbophyllum"
+bulbophyllum(V) => orchid(V). @ "All Bulbophyllum are orchids"
+? not orchid(bulbophyllum_attenuatum).

@@ -1,0 +1,6 @@
+company(carrozzeria_colli). @ "Carrozzeria Colli is a Milanese coachbuilder company"
+first_automobile_of(V, carrozzeria_colli) => racing_car(V). @ "The first automobiles built by Carrozzeria Colli were racing cars."
+racing_car(some_car_1). @ "Some racing cars built by Carrozzeria Colli"
+built_by(some_car_1, carrozzeria_colli). @ "Some racing cars built by Carrozzeria Colli"
+uses_fiat_1100(some_car_1). @ "used Fiat 1100 mechanicals and chassis"
+? first_automobile_of(V, carrozzeria_colli) => uses_fiat_1100(V).

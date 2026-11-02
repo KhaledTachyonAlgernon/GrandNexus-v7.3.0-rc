@@ -1,0 +1,6 @@
+trains_olympic_sport(V) & goes_to_olympics(V) => olympian(V). @ "An Olympian is a person who trains for an Olympic sport and goes to the Olympics"
+trains_olympic_sport(carlos_reyes). @ "Carlos Reyes trains for an Olympic sport"
+goes_to_olympics(carlos_reyes). @ "Carlos Reyes went to the Olympics"
+welterweight(carlos_reyes). @ "Carlos Reyes is a welterweight"
+heavy_weight(V) => not welterweight(V). @ "Heavy weights are not welterweights"
+? olympian(carlos_reyes).

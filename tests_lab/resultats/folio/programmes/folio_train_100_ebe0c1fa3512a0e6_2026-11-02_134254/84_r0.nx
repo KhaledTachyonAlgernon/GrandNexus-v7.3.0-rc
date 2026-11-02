@@ -1,0 +1,5 @@
+village(gasteren). @ "Gasteren is a village"
+located_in(gasteren, drenthe). @ "located in the province of Drenthe"
+dutch_province(drenthe). @ "Drenthe is a Dutch province"
+city(V) => not village(V). @ "No cities are villages"
+? city(gasteren).

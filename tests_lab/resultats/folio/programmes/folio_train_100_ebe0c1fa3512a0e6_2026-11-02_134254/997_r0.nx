@@ -1,0 +1,8 @@
+straight_line(V) => linear(V). @ "All functions that represent straight lines on the coordinate plane are linear functions."
+linear(V) => not nonconvex(V). @ "No linear functions are non-convex functions."
+function(V) => nonconvex(V) | convex(V). @ "A function is either a non-convex fuction or a convex function."
+quasiconvex(V) => real_valued(V). @ "All quasi-convex functions are real-valued functions."
+convex(V) => quasiconvex(V). @ "All convex functions are quasi-convex functions."
+function(max_qc). @ "The maximum of quasiconvex functions is a function."
+straight_line(max_qc) | convex(max_qc) | not nonconvex(max_qc). @ "The maximum of quasiconvex functions is a function that represents straight lines on the coordinate plane or it is a convex function or it is not a non-convex function."
+? not real_valued(max_qc).

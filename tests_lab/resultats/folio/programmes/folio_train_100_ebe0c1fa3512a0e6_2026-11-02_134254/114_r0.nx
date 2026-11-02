@@ -1,0 +1,9 @@
+song(your_woman). @ "is a song by the British one-person band White Town"
+made_by(your_woman, white_town). @ "a song by the British one-person band White Town"
+peaked_no1(your_woman, uk_singles_chart). @ "song peaked at No. 1 on the UK Singles Chart"
+song(S) & peaked_no1(S, P) => extremely_popular(S). @ "If a song peaked at No.1 at a particular place, it was extremely popular."
+peaked_no1(your_woman, iceland). @ "peaked at No. 1 in Iceland, Israel, and Spain"
+peaked_no1(your_woman, israel). @ "peaked at No. 1 in Iceland, Israel, and Spain"
+peaked_no1(your_woman, spain). @ "peaked at No. 1 in Iceland, Israel, and Spain"
+* extremely_popular(X) => popular(X).
+? song(S) & made_by(S, white_town) => not popular(S).

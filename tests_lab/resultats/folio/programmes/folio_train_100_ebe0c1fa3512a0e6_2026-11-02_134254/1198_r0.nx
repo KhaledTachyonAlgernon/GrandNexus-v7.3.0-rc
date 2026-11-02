@@ -1,0 +1,8 @@
+at_conf(V) => investor(V) | entrepreneur(V). @ "Everyone at the business conference is either an investor or an entrepreneur."
+at_conf(V) & enjoys_starting_business(V) => not prefers_planned_economy(V). @ "None of those at the business conference who enjoy the opportunity of starting a business prefer a planned economy."
+at_conf(V) & entrepreneur(V) => enjoys_starting_business(V). @ "All entrepreneurs at the business conference enjoy the opportunity of starting a business."
+at_conf(V) & prefers_state_ownership(V) => prefers_planned_economy(V). @ "Everyone at the business conference who enjoys state ownership of means of production prefers a planned economy."
+at_conf(V) & ardent_communist(V) => prefers_state_ownership(V). @ "Everyone at the business conference who is an ardent communist prefers state ownership of the means of production."
+at_conf(ho). @ "Ho is at the business conference"
+prefers_state_ownership(ho). @ "prefers state ownership of the means of production"
+? investor(ho) | not ardent_communist(ho).

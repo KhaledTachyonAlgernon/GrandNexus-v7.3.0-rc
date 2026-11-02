@@ -1,0 +1,6 @@
+need_large_territory(V) => travel_far(V). @ "Animals who need large territory travel far."
+eats_a_lot(V) => need_large_territory(V). @ "Every animal that eats a lot needs a large territory."
+big_animal(V) => eats_a_lot(V). @ "If something is a big animal, then it will eat a lot."
+bear(V) => big_animal(V). @ "Bears are big animals."
+big_animal(larry). @ "Larry is a big animal."
+? bear(larry).

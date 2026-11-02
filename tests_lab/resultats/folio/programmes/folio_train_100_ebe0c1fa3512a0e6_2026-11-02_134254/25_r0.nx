@@ -1,0 +1,5 @@
+novel(thick_as_thieves). @ "Thick as Thieves is a young adult fantasy novel"
+wrote(megan_whalen_turner, thick_as_thieves). @ "written by Megan Whalen Turner"
+published_by(thick_as_thieves, greenwillow_books). @ "Thick as Thieves was published by Greenwillow Books"
+published_by(B, C) & wrote(A, B) => worked_with(A, C). @ "If a book was published by a company, then the author of that book worked with the company that published the book."
+? worked_with(megan_whalen_turner, greenwillow_books).

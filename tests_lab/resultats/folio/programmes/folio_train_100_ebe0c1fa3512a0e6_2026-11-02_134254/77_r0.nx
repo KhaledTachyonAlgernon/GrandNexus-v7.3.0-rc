@@ -1,0 +1,6 @@
+district_of(xiufeng, guilin). @ "Xiufeng, Xiangshan, Diecai, Qixing are districts in the city of Guilin"
+district_of(xiangshan, guilin). @ "Xiufeng, Xiangshan, Diecai, Qixing are districts in the city of Guilin"
+district_of(diecai, guilin). @ "Xiufeng, Xiangshan, Diecai, Qixing are districts in the city of Guilin"
+district_of(qixing, guilin). @ "Xiufeng, Xiangshan, Diecai, Qixing are districts in the city of Guilin"
+not district_of(yangshuo, guilin). @ "Yangshuo is not a district in Guilin"
+? district_of(xiangshan, C) & district_of(diecai, C).

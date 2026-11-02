@@ -1,0 +1,5 @@
+football_club(rhos_aelwyd). @ "Rhos Aelwyd F.C. is a Welsh football club."
+located_in(rhos_aelwyd, ponciau). @ "the only football club located in Ponciau"
+won(team_a, premier_division, june_2005). @ "The Premier Division was won in June 2005 by a team from Ponciau."
+from(team_a, ponciau). @ "a team from Ponciau"
+? won(rhos_aelwyd, premier_division, june_2005).

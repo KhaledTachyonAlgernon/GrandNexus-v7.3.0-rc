@@ -1,0 +1,5 @@
+tablet_computer(wetab). @ "WeTab is a MeeGo-based tablet computer"
+announced_by(wetab, neofonie). @ "WeTab was announced by Neofonie"
+german(neofonie). @ "Neofonie is a German producer"
+producer(neofonie). @ "Neofonie is a German producer"
+? tablet_computer(X) & announced_by(X, Y) & german(Y) & producer(Y).

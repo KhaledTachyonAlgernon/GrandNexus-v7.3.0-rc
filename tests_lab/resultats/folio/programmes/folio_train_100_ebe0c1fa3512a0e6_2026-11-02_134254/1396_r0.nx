@@ -1,0 +1,8 @@
+grass(V) => not food(V). @ "Grass is not food"
+meadow(V) => grass(V). @ "All meadows are grass."
+edible(V) => food(V). @ "All edible things are food."
+fruit(V) => edible(V). @ "All fruits are edible."
+lemon(V) => fruit(V). @ "All lemons are fruit."
+grape(V) => not edible(V) | not lemon(V). @ "Grapes are not both edible and lemons."
+grass(bananas) | fruit(bananas). @ "Bananas are grasses or fruits."
+? not (lemon(bananas) & meadow(bananas)).

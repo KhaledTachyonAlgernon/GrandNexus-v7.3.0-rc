@@ -1,0 +1,11 @@
+hodophile(V) & enjoys_gelato(V) => enjoys_italy_vacation(V). @ "All hodophiles who enjoy eating gelato ice cream would enjoy a vacation to Italy."
+hodophile(V) => not resists_desserts(V). @ "No hodophiles can resist the hallmark delectable desserts famous in Italy."
+hodophile(V) => enjoys_gelato(V) | loves_travel(V). @ "Hodophiles enjoy eating gelato ice cream or love to travel and vacation often, or both."
+hodophile(V) & studies_abroad(V) => not regrets_college(V). @ "No hodophiles who study abroad in Europe regret their college experiences."
+hodophile(V) & loves_travel(V) => studies_abroad(V). @ "If hodophiles love to travel and vacation often, then they study abroad in Europe."
+hodophile(robert). @ "Robert is a hodophile"
+enjoys_gelato(robert) => loves_travel(robert). @ "he either enjoys eating gelato ice cream and loves to travel and vacation often"
+loves_travel(robert) => enjoys_gelato(robert). @ "he either enjoys eating gelato ice cream and loves to travel and vacation often"
+not enjoys_gelato(robert) => not loves_travel(robert). @ "or does not enjoy eating gelato ice cream and does not love to travel and vacation often"
+not loves_travel(robert) => not enjoys_gelato(robert). @ "or does not enjoy eating gelato ice cream and does not love to travel and vacation often"
+? (resists_desserts(robert) & regrets_college(robert)) | enjoys_gelato(robert) | enjoys_italy_vacation(robert).

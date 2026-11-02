@@ -1,0 +1,6 @@
+indie_pop_music(phoenix). @ "Phoneix's music is classified under the indie pop genre."
+band(phoenix). @ "Phoenix is a band from France."
+from_france(phoenix). @ "Phoenix is a band from France."
+band(V) & from_france(V) => writes_in_french(V) | writes_in_english(V). @ "French bands write songs in French or in English."
+not writes_in_french(phoenix). @ "Phoenix has no songs in French."
+? writes_in_french(phoenix).

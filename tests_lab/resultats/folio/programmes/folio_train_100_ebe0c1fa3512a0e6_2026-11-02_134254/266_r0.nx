@@ -1,0 +1,12 @@
+actor(daveed_diggs). @ "Daveed Diggs is an actor"
+film_producer(daveed_diggs). @ "film producer"
+musical(hamilton). @ "the musical Hamilton"
+on_broadway(hamilton). @ "on Broadway"
+roles_in(daveed_diggs, hamilton, 2). @ "played two roles in the musical Hamilton"
+actor(some_actor_1). @ "One of the actors from Hamilton"
+actor_from(some_actor_1, hamilton). @ "One of the actors from Hamilton"
+won(some_actor_1, best_actor_award). @ "won the best actor award"
+plays(V, thomas_jefferson) => won(V, best_actor_award). @ "The actor playing Thomas Jefferson won the best actor award"
+plays(daveed_diggs, thomas_jefferson). @ "Daveed Diggs played Thomas Jefferson"
+musical(V) & on_broadway(V) => not film(V). @ "Musicals on Broadway are not films"
+? awards_won(hamilton, 2).

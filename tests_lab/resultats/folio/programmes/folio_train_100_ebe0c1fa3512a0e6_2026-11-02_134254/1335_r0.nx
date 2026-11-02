@@ -1,0 +1,9 @@
+classroom_hh(V) & lecture(V) => booked_day(V). @ "All classrooms in William L. Harkness Hall that are used for lectures are booked during the day."
+classroom_hh(V) => not private_study(V). @ "None of the classrooms in William L. Harkness Hall are private study spots."
+classroom_hh(V) => lecture(V) | office_hours(V). @ "All classrooms in William L. Harkness Hall are used for lectures or used for office hours."
+classroom_hh(V) & booked_evening(V) => not free_night(V). @ "If a classroom in William L. Harkness Hall is booked in the evening, then it is not freely usable at night."
+classroom_hh(V) & office_hours(V) => booked_evening(V). @ "If a classroom in William L. Harkness Hall is used for office hours, then it is booked in the evening."
+classroom_hh(room116). @ "Room 116 is a classroom in William L. Harkness Hall"
+lecture(room116) | not office_hours(room116). @ "either both used for lecture and used for office hours or not used for either"
+not lecture(room116) | office_hours(room116). @ "either both used for lecture and used for office hours or not used for either"
+? (private_study(room116) & free_night(room116)) | lecture(room116) | booked_day(room116).

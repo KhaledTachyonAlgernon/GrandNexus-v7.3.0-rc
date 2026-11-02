@@ -1,0 +1,7 @@
+cancer(V) => has_mutations(V). @ "All cancers have mutations."
+has_mutations(V) => not treatable_home(V). @ "No mutations can be treated at home."
+colorectal_cancer(V) => cancer(V). @ "All colorectal cancers are cancers."
+cold(V) => treatable_home(V). @ "A cold can be treated at home."
+cold(arthritis) => has_mutations(arthritis). @ "Arthritis either is a cold and has mutations or neither is a cold nor has mutations."
+has_mutations(arthritis) => cold(arthritis). @ "Arthritis either is a cold and has mutations or neither is a cold nor has mutations."
+? treatable_home(arthritis).

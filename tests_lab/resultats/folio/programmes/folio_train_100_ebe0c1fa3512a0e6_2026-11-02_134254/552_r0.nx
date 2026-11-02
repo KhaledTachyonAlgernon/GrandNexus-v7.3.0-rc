@@ -1,0 +1,4 @@
+born_in(rosa, santiago). @ "Rosa was born in Santiago."
+capital_of(santiago, chile). @ "Santiago is the capital and largest city of Chile."
+largest_city_of(santiago, chile). @ "Santiago is the capital and largest city of Chile."
+? born_in(rosa, C) & largest_city_of(C, chile).

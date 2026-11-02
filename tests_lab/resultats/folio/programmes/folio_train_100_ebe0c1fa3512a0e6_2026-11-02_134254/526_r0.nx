@@ -1,0 +1,6 @@
+cargo_ship(brita). @ "Brita was a cargo ship"
+built_for(brita, norwegians). @ "built for Norwegians"
+impressed(brita, germany). @ "Brita was impressed into service by Germany"
+impressed(S, G) => seized(G, S). @ "Ships that have been impressed into service were seized by whoever impressed them into service"
+sold_to(brita, hong_kong). @ "The Britta was sold to Hong Kong"
+? seized(hong_kong, brita).

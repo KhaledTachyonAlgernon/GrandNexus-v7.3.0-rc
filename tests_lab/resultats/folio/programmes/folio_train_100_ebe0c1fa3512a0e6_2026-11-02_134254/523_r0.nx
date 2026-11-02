@@ -1,0 +1,8 @@
+american_superhero(V) => dc_universe(V) | marvel_universe(V). @ "American superheroes come from either the DC Universe or Marvel Universe."
+top_ten_favorite(captain_america). @ "Captain America is one of America's top-ten favorite superheroes"
+not dc_universe(captain_america). @ "Captain America does not come from the DC Universe."
+top_ten_favorite(V) => speaks_english(V). @ "America's top-ten favorite superheroes speak English."
+superhero(some_superhero_1). @ "Some superheroes speak both English and Spanish."
+speaks_english(some_superhero_1). @ "Some superheroes speak both English and Spanish."
+speaks_spanish(some_superhero_1). @ "Some superheroes speak both English and Spanish."
+? speaks_spanish(captain_america).

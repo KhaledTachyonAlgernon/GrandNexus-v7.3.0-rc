@@ -1,0 +1,13 @@
+chef(V) => cook(V). @ "Every chef can cook."
+person(some_person_1). @ "Some people who aren’t chefs can cook."
+not chef(some_person_1). @ "Some people who aren’t chefs can cook."
+cook(some_person_1). @ "Some people who aren’t chefs can cook."
+cook(V) => make_scrambled_eggs(V). @ "People who cook can make scrambled eggs and pasta."
+cook(V) => make_pasta(V). @ "People who cook can make scrambled eggs and pasta."
+make_cookies(V) & make_muffins(V) => baker(V). @ "If someone can make cookies and muffins, they are a baker."
+baker(V) & make_scrambled_eggs(V) => make_good_breakfast(V). @ "Bakers who can also make scrambled eggs can make a good breakfast."
+make_cookies(luke). @ "Luke can make cookies, scrambled eggs, and muffins"
+make_scrambled_eggs(luke). @ "Luke can make cookies, scrambled eggs, and muffins"
+make_muffins(luke). @ "Luke can make cookies, scrambled eggs, and muffins"
+not make_pasta(luke). @ "but not pasta"
+? make_good_breakfast(luke).

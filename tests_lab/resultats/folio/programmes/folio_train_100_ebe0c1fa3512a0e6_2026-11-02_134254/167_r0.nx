@@ -1,0 +1,7 @@
+leader_for_life(V) => has_power(V). @ "If a person is the leader of a country for life, that person has power."
+leader_for_life(V) => king(V) | queen(V). @ "Leaders of a country for life are either a king or a queen."
+queen(V) => female(V). @ "Queens are female."
+king(V) => male(V). @ "Kings are male."
+queen(elizabeth). @ "Elizabeth is a queen."
+leader_for_life(elizabeth). @ "Elizabeth is a leader of a country for life."
+? leader_for_life(elizabeth).

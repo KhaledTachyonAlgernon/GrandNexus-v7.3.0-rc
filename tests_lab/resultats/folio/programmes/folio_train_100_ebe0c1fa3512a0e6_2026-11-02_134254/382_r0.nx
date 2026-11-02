@@ -1,0 +1,10 @@
+won_turing_award(knuth). @ "The Turing Award has been awarded to Donald Knuth, Marvin Minsky, Richard Hamming, and John McCarthy."
+won_turing_award(minsky). @ "The Turing Award has been awarded to Donald Knuth, Marvin Minsky, Richard Hamming, and John McCarthy."
+won_turing_award(hamming). @ "The Turing Award has been awarded to Donald Knuth, Marvin Minsky, Richard Hamming, and John McCarthy."
+won_turing_award(mccarthy). @ "The Turing Award has been awarded to Donald Knuth, Marvin Minsky, Richard Hamming, and John McCarthy."
+contributed(knuth, analysis_of_algorithms). @ "Donald Knuth made contributions to the analysis of algorithms."
+contributed(minsky, artificial_intelligence). @ "Marvin Minsky is recognized for his contributions to the field of artificial intelligence."
+researched(hamming, numerical_methods). @ "Richard Hamming researched numerical methods."
+contributed(mccarthy, artificial_intelligence). @ "John McCarthy made contributions to the field of artificial intelligence."
+* contributed(X, artificial_intelligence) => worked_in(X, artificial_intelligence).
+? won_turing_award(minsky) & worked_in(minsky, artificial_intelligence) & won_turing_award(mccarthy) & worked_in(mccarthy, artificial_intelligence).

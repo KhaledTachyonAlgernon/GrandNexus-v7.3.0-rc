@@ -1,0 +1,8 @@
+rents(V) => spends_money(V). @ "Everyone who rents a car spends money."
+goes(sarah, vermont) => drives(sarah, vermont). @ "Whenever Sarah goes to Vermont, Sarah drives there."
+drives(P, X) & not owns_car(P) => borrows(P) | rents(P). @ "Someone who does not own a car to drive somewhere must either borrow a car or rent a car."
+not owns_car(sarah). @ "Sarah doesn’t own a car."
+camping(sarah, V) => not borrows(sarah). @ "Sarah never borrows a car to go camping."
+camping(sarah, vermont). @ "Sarah is going to go camping in Vermont."
+camping(P, X) => goes(P, X). @ "To go camping somewhere, you must go to that place."
+? spends_money(sarah).

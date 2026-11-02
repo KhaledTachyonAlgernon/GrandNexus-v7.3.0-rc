@@ -1,0 +1,5 @@
+same(fort_ticonderoga, fort_carillon). @ "Fort Ticonderoga is the current name for Fort Carillon"
+built(pierre_de_rigaud_de_vaudreuil, fort_carillon). @ "Pierre de Rigaud de Vaudreuil built Fort Carillon"
+located_in(fort_carillon, new_france). @ "Fort Carillon was located in New France"
+not located_in(new_france, europe). @ "New France is not in Europe"
+? located_in(fort_carillon, europe).

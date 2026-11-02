@@ -1,0 +1,2 @@
+tutor_of(herodicus, hippocrates). @ "One of the tutors of Hippocrates was Herodicus."
+? tutor_of(herodicus, hippocrates).

@@ -1,0 +1,11 @@
+uk_based(system7). @ "System 7 is a UK-based electronic dance music band"
+electronic_dance_music_band(system7). @ "System 7 is a UK-based electronic dance music band"
+formed(steve_hillage, system7). @ "Steve Hillage and Miquette Giraudy formed System 7"
+formed(miquette_giraudy, system7). @ "Steve Hillage and Miquette Giraudy formed System 7"
+former_member(steve_hillage, gong). @ "Steve Hillage and Miquette Giraudy are former members of the band Gong"
+former_member(miquette_giraudy, gong). @ "Steve Hillage and Miquette Giraudy are former members of the band Gong"
+band(gong). @ "the band Gong"
+electronic_dance_music_band(V) => band(V). @ "Electric dance music bands are bands"
+released(system7, club_singles). @ "System 7 has released several club singles"
+club_single(V) => not single(V). @ "Club singles are not singles"
+? not band(system7).

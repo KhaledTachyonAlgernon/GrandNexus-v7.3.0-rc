@@ -1,0 +1,8 @@
+friend(V) & practice_coding(V) => not studying_med(V). @ "If Robin's friends practice coding questions, then they are not studying to go to medical school to become a doctor."
+friend(V) & want_swe(V) => practice_coding(V). @ "If Robin's friends want to work in the software engineering industry, then they practice coding questions."
+friend(V) & enjoy_health(V) => studying_med(V). @ "If Robin's friends enjoy healthcare fields and want to help people with medical issues, then they are studying to go to medical school to become a doctor."
+friend(V) & parents_doctors(V) => enjoy_health(V). @ "If Robin's friends grew up with parents who worked as doctors, then they enjoy healthcare fields and want to help people with medical issues."
+friend(V) & study_hard(V) => parents_doctors(V). @ "If Robin's friends study hard, then they grew up with parents who worked as doctors."
+friend(mark). @ "Mark is Robin's friend."
+not enjoy_health(mark) & not parents_doctors(mark) => study_hard(mark) | parents_doctors(mark). @ "If Mark neither enjoys healthcare fields and wants to help people with medical issues nor grew up with parents who worked as doctors, then Mark is either a person who studies hard or grew up with parents who worked as doctors."
+? friend(mark) & not practice_coding(mark) & not want_swe(mark).

@@ -1,0 +1,7 @@
+in_love_city(V) => physical_touch(V) | words_of_affirmation(V). @ "In Love City, everyone considers physical touch or words of affirmation to be their most important love language."
+in_love_city(V) & physical_touch(V) => good_with_pets(V). @ "If someone in Love City considers physical touch as their most important love language, then they are good with pets."
+in_love_city(V) & good_with_pets(V) => not scared_of_animals(V). @ "If someone in Love City is good with pets, then they are not scared of animals."
+in_love_city(V) => scared_of_animals(V) | loves_animals(V). @ "In Love City, everyone is scared of animals, or loves animals, or both."
+in_love_city(adam). @ "Adam, who is in Love City"
+physical_touch(adam) | loves_animals(adam). @ "either values physical touch as his most important love language or loves animals"
+? not (physical_touch(adam) | good_with_pets(adam)) | words_of_affirmation(adam).

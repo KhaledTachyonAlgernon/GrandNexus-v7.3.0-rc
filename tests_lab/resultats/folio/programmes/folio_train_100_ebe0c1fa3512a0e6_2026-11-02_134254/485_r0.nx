@@ -1,0 +1,6 @@
+volunteer(V) => receives_intangible_benefits(V). @ "All volunteers receive intangible benefits for their work."
+volunteer(V) => works_regularly(V) | works_as_needed(V). @ "Volunteers work regularly or on an as-needed basis."
+volunteer(some_volunteer_1). @ "Some volunteers are trained."
+trained(some_volunteer_1). @ "Some volunteers are trained."
+volunteer(V) => works_in_groups(V) | works_individually(V). @ "Volunteers work in groups or individually."
+? volunteer(V) & disaster_response_participant(V) => receives_intangible_benefits(V).

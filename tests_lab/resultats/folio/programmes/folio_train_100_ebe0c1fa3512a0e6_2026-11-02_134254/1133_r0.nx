@@ -1,0 +1,7 @@
+trick_shot_artist(V) & yale_varsity(V) => not struggles_half_court(V). @ "No trick-shot artist in Yale's varsity team struggles with half court shots."
+yale_varsity(V) => struggles_half_court(V) | high_3p(V). @ "Everyone on Yale's varsity team is someone who struggles with half court shots or who successfully shoots a high percentage of 3-pointers."
+yale_varsity(V) & high_3p(V) => solid_2p(V). @ "Everyone on Yale's varsity team who successfully shoots a high percentage of 3-pointers is solid at shooting 2-pointers."
+yale_varsity(V) & solid_2p(V) => not bad_midrange(V). @ "No one on Yale's varsity team who is solid at shooting 2-pointers is bad at mid-range shots."
+yale_varsity(jack). @ "Jack is on Yale's varsity team"
+trick_shot_artist(jack) | high_3p(jack). @ "he is either a trick-shot artist or he successfully shoots a high percentage of 3-pointers"
+? struggles_half_court(jack).

@@ -1,0 +1,8 @@
+in_new_haven(V) => not high(V). @ "All buildings in New Haven are not high."
+managed_by_yale_housing(V) => in_new_haven(V). @ "All buildings managed by Yale Housing are located in New Haven."
+in_manhattan(V) => high(V). @ "All buildings in Manhattans are high."
+owned_by_bloomberg(V) => in_manhattan(V). @ "All buildings owned by Bloomberg are located in Manhattans."
+with_bloomberg_logo(V) => owned_by_bloomberg(V). @ "All buildings with the Bloomberg logo are owned by Bloomberg."
+managed_by_yale_housing(tower_a). @ "Tower A is managed by Yale Housing."
+with_bloomberg_logo(tower_b). @ "Tower B is with the Bloomberg logo."
+? in_new_haven(tower_b).

@@ -1,0 +1,6 @@
+mansion_house(V) => not in_urban_area(V). @ "There are no mansion houses in an urban area."
+skyscraper(V) => in_urban_area(V). @ "All skyscrapers are in urban areas."
+creepy_haunted_house(V) => mansion_house(V). @ "Every creepy haunted house is a mansion house."
+terrifying_halloween_building(V) => creepy_haunted_house(V). @ "Every terrifying building on Halloween is a creepy haunted house."
+creepy_haunted_house(lalaurie_house) | terrifying_halloween_building(lalaurie_house). @ "The LaLaurie House is a creepy haunted house or a terrifying building on Halloween."
+? (not skyscraper(lalaurie_house) & not creepy_haunted_house(lalaurie_house)) | not mansion_house(lalaurie_house).

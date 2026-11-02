@@ -1,0 +1,6 @@
+professional_tennis_umpire(V) => not professional_tennis_player(V). @ "No professional tennis umpires are professional tennis players."
+world_tour_player(V) => professional_tennis_player(V). @ "If you are a World Tour player, then you are a professional tennis player."
+grand_slam_champion(V) => world_tour_player(V). @ "All Grand Slam champions are World Tour players."
+grand_slam_umpire(V) => professional_tennis_umpire(V). @ "All Grand Slam umpires are professional tennis umpires."
+world_tour_player(nadal) | grand_slam_champion(nadal). @ "Nadal is a World Tour player or a Grand Slam champion"
+? not grand_slam_umpire(nadal) & not professional_tennis_umpire(nadal).

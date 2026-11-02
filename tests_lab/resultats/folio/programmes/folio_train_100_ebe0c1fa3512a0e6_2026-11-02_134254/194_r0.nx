@@ -1,0 +1,7 @@
+coaches(P, C) & football_club(C) => football_coach(P). @ "If a person coaches a football club, the person is a football coach."
+has_position(P, C, Y) & in_nfl(C, Y) => plays_in_nfl(P). @ "If a person has a position in a club in a year, and the club is in NFL in the same year, the person plays in NFL."
+football_club(minnesota_vikings). @ "Minnesota Vikings is a football club."
+coaches(dennis_green, minnesota_vikings). @ "Dennis Green coached Minnesota Vikings."
+in_nfl(minnesota_vikings, y1997). @ "Minnesota Vikings were in the National Football League in 1997."
+has_position(john_randle, minnesota_vikings, y1997). @ "John Randle was Minnesota Vikings defensive tackle in 1997."
+? played_for(cris_carter, minnesota_vikings).

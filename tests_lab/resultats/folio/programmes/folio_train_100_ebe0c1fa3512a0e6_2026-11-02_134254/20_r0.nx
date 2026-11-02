@@ -1,0 +1,6 @@
+czech(miroslav_venhoda). @ "Miroslav Venhoda was a Czech choral conductor"
+choral_conductor(miroslav_venhoda). @ "Miroslav Venhoda was a Czech choral conductor"
+choral_conductor(V) => musician(V). @ "Any choral conductor is a musician."
+musician(some_musician_1). @ "Some musicians love music."
+loves_music(some_musician_1). @ "Some musicians love music."
+? loves_music(miroslav_venhoda).

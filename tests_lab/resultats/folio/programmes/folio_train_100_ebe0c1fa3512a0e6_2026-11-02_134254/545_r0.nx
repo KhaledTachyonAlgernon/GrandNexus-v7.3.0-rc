@@ -1,0 +1,6 @@
+soccer_player(V) & two_yellow_cards(V, G) => ejected(V, G). @ "If a soccer player receives two yellow cards in one game, this player will be ejected from the rest of the game."
+soccer_player(V) & red_card(V, G) => ejected(V, G). @ "If a soccer player receives one red card in one game, this player will be ejected from the rest of the game."
+soccer_player(henry). @ "Henry is a soccer player."
+red_card(henry, game1). @ "Henry receives one yellow card and one red card"
+yellow_card(henry, game1). @ "Henry receives one yellow card and one red card"
+? not ejected(henry, game1).

@@ -1,0 +1,8 @@
+written_by(V, neil_gaiman) => sold_over_1000(V). @ "All books written by Neil Gaiman have sold more than one thousand copies"
+book(some_book_1). @ "Some books that have won Hugo Awards are written by Neil Gaiman"
+won_hugo(some_book_1). @ "Some books that have won Hugo Awards are written by Neil Gaiman"
+written_by(some_book_1, neil_gaiman). @ "Some books that have won Hugo Awards are written by Neil Gaiman"
+written_by(V, tolkien) => read(tomas, V). @ "Tomas has read all books written by Tolkien"
+read(tomas, hamlet) | sold_over_1000(hamlet). @ "Either Tomas has read Hamlet, or it has sold more than one thousand copies"
+sold_over_1000(hamlet) | written_by(hamlet, neil_gaiman). @ "Hamlet has either sold more than one thousand copies or it is written by Neil Gaiman"
+? won_hugo(hamlet) & written_by(hamlet, tolkien).

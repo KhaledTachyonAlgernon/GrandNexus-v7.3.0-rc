@@ -1,0 +1,7 @@
+plant(V) => not cute_animal(V). @ "If something is a plant, then it is not a cute animal."
+plant(V) => not cute_animal(V). @ "All plants are not cute animals."
+flower(V) => plant(V). @ "All flowers are plants."
+kitten(V) => cute_animal(V). @ "Every kitten is a cute animal."
+grown_in_garden(V) => flower(V). @ "If something is grown in a garden, then it is a flower."
+kitten(piper) | cute_animal(piper). @ "Piper is a kitten or a cute animal."
+? kitten(piper).

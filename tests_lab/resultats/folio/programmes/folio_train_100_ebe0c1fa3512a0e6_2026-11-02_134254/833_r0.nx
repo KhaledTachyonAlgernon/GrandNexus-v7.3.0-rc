@@ -1,0 +1,6 @@
+soccer_defender(V) => soccer_player(V). @ "All professional soccer defenders are professional soccer players."
+soccer_player(V) => not basketball_player(V). @ "No professional soccer players are professional basketball players."
+centerback(V) => soccer_defender(V). @ "All professional centerbacks are professional soccer defenders."
+nba_player(V) => basketball_player(V). @ "All NBA players are professional basketball players."
+nba_player(stephen_curry). @ "Stephen Curry is an NBA player."
+? not centerback(stephen_curry).

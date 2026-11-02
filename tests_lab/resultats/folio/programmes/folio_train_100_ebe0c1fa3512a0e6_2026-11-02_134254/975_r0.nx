@@ -1,0 +1,9 @@
+in_family(V) => kombucha(V) | cola_pepsi(V). @ "People in Franny's family drink kombucha every day or drink Coca-Cola or a Pepsi product."
+in_family(V) & cola_pepsi(V) => busy_parents(V). @ "If people in Franny's family drink Coca-Cola or a Pepsi product every day, then they grew up with extremely busy parents who did not have time to pack them lunch."
+in_family(V) & cola_pepsi(V) => dentist(V). @ "If people in Franny's family drink Coca-Cola or another Pepsi product every day, then they have to visit the dentist frequently."
+in_family(V) & busy_parents(V) => erratic(V). @ "If people in Franny's family grew up with extremely busy parents who did not have time to pack them lunch, then they have erratic and diverse eating habits."
+in_family(V) & erratic(V) => not consistent(V). @ "If people in Franny's family have erratic and diverse eating habits, then they do not have consistent everyday routines and like sticking to a solid schedule."
+in_family(damon). @ "Damon is in Franny's family."
+busy_parents(damon) => consistent(damon). @ "Damon either both grow up with extremely busy parents who did not have time to pack her lunch and have consistent everyday routines and like sticking to a solid schedule, or Damon did neither."
+consistent(damon) => busy_parents(damon). @ "Damon either both grow up with extremely busy parents who did not have time to pack her lunch and have consistent everyday routines and like sticking to a solid schedule, or Damon did neither."
+? not (in_family(damon) & (dentist(damon) | kombucha(damon))) | (dentist(damon) & cola_pepsi(damon)).

@@ -1,0 +1,10 @@
+# fruits: strawberry, orange, blueberry, grape, cherry
+fruit(strawberry). @ "strawberry"
+fruit(orange). @ "orange"
+fruit(blueberry). @ "blueberry"
+fruit(grape). @ "grape"
+fruit(cherry). @ "cherry"
+lowest_remaining(V) => most_popular(V). @ "If the fruit had the lowest remaining weight at the end of the party, then it means it was the most popular fruit."
+lowest_remaining(strawberry). @ "strawberries had the lowest remaining weight"
+fewer_leftover(blueberry, cherry). @ "the number of leftover blueberries was lower than that of cherries"
+? most_popular(cherry).

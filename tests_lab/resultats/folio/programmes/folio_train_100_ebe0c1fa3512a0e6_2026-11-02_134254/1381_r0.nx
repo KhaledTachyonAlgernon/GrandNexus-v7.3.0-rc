@@ -1,0 +1,8 @@
+phone(V) => thing(V). @ "All phones are things."
+cell_phone(V) => phone(V). @ "All cell phones are phones."
+iphone(V) => cell_phone(V). @ "All iPhones are cell phones."
+employee(V) => wage_earner(V). @ "All employees are wage earners."
+wage_earner(V) => human(V). @ "All wage earners are human."
+employee(jack) | wage_earner(jack). @ "Jack is either an employee or a wage earner."
+human(jack) | phone(jack). @ "Jack is either a human or a phone."
+? thing(jack).

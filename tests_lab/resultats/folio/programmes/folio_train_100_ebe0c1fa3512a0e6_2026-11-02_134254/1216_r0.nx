@@ -1,0 +1,10 @@
+company(V) => google_home(V). @ "All devices belonging to the company are connected to Google Home."
+logo(V) => company(V). @ "All devices with the company logo belong to the company."
+device(V) => logo(V) | employee(V). @ "Each device either has the company logo or belongs to employees."
+employee(V) => wifi(V). @ "All of the devices belonging to employees can be connected to the company's wifi."
+google_home(V) => managers(V). @ "All of the devices connected to Google Home are controlled by managers."
+wifi(V) => easy(V). @ "All of the devices that connect to the company's wifi are easy to operate."
+easy(V) => after_cto(V). @ "All of the devices that are easy to operate were produced after a new CTO is appointed."
+device(modelxx). @ "ModelXX was not produced after a new CTO was appointed."
+not after_cto(modelxx). @ "ModelXX was not produced after a new CTO was appointed."
+? after_cto(modelxx) | managers(modelxx).

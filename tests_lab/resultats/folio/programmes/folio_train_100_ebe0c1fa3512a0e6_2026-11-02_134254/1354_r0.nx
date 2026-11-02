@@ -1,0 +1,8 @@
+faculty(V) => professor(V). @ "All members of the university faculty are professors."
+principal_investigator(V) => faculty(V). @ "All principal investigators are members of the university faculty."
+professor(V) => not undergraduate(V). @ "No professor is also an undergraduate student."
+bachelor_student(V) => undergraduate(V). @ "Anyone pursuing a bachelor's degree is an undergraduate student."
+not bachelor_student(leon). @ "Leon is not pursuing a bachelor's degree"
+not principal_investigator(leon). @ "he is not a principal investigator"
+not bachelor_student(leon) => professor(leon). @ "If Leon is not pursuing a bachelor's degree, then he is a professor."
+? faculty(leon).

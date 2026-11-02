@@ -1,0 +1,9 @@
+student(V) & attend_person(V) => registered(V). @ "All students who attend in person have registered for the conference."
+student(V) => attend_person(V) | attend_remote(V). @ "Students either attend the conference in person or remotely."
+student(V) & from_china(V) => not attend_remote(V). @ "No students from China attend the conference remotely."
+attends(james). @ "James attends the conference"
+not attend_remote(james). @ "he does not attend the conference remotely"
+attends(jack). @ "Jack attends the conference"
+student(jack). @ "he is a student from China"
+from_china(jack). @ "he is a student from China"
+? attends(james) & not attend_person(james).
