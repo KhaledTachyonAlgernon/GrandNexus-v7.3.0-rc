@@ -1,0 +1,729 @@
+[
+ {
+  "text": "Researchers present their work at the conference or provide a tutorial session there.\nEveryone who presents their work at the conference will attend in person. \nEveryone providing a tutorial session at the conference will be invited to join the club. \nEveryone who attends the conference in person is provided with souvenirs. \nEveryone invited to join the club is provided with delicious meals. \nEveryone provided with delicious meals is happy to communicate with each other during the dinner. \nEveryone who is provided with delicious meals is invited to take a photo with the audience. \nIt is not true that James both attended the conference in person and was provided with souvenirs.",
+  "query": "James is invited to take a photo with the audience and is happy to communicate with other guests at the dinner.",
+  "program": "presents(james) | tutorial(james). @ \"Researchers present their work at the conference or provide a tutorial session there.\"\npresents(V) => attends(V). @ \"Everyone who presents their work at the conference will attend in person.\"\ntutorial(V) => invited_club(V). @ \"Everyone providing a tutorial session at the conference will be invited to join the club.\"\nattends(V) => souvenirs(V). @ \"Everyone who attends the conference in person is provided with souvenirs.\"\ninvited_club(V) => meals(V). @ \"Everyone invited to join the club is provided with delicious meals.\"\nmeals(V) => happy(V). @ \"Everyone provided with delicious meals is happy to communicate with each other during the dinner.\"\nmeals(V) => photo(V). @ \"Everyone who is provided with delicious meals is invited to take a photo with the audience.\"\nnot attends(james) | not souvenirs(james). @ \"It is not true that James both attended the conference in person and was provided with souvenirs.\"\n? photo(james) & happy(james).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "presents(james) | tutorial(james)."
+  ],
+  "source_id": "1255"
+ },
+ {
+  "text": "All imaginative processes that Dan knows are results of creative processes.\nAll science fiction that Dan knows comes from an imaginative process.\nEverthing that Dan knows comes from either science-fiction or realistic fiction.\nNo facts that Dan knows have proven to be false.\nDan knows that Dune is science fiction or has proven to be false.",
+  "query": "If Dune is did not come from imaginative process and is not science-fiction, then Dune is neither a result of creative processes nor came from an imaginative process.",
+  "program": "imaginative_process(V) & dan_knows(V) => creative_result(V). @ \"All imaginative processes that Dan knows are results of creative processes.\"\nsci_fi(V) & dan_knows(V) => from_imaginative(V). @ \"All science fiction that Dan knows comes from an imaginative process.\"\ndan_knows(V) => sci_fi(V) | realistic_fiction(V). @ \"Everthing that Dan knows comes from either science-fiction or realistic fiction.\"\ndan_knows(V) => not proven_false(V). @ \"No facts that Dan knows have proven to be false.\"\ndan_knows(dune). @ \"Dan knows that Dune is science fiction or has proven to be false.\"\nsci_fi(dune) | proven_false(dune). @ \"Dune is science fiction or has proven to be false\"\n? not (not from_imaginative(dune) & not sci_fi(dune)) | (not creative_result(dune) & not from_imaginative(dune)).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "dan_knows(V) => not proven_false(V)."
+  ],
+  "source_id": "1056"
+ },
+ {
+  "text": "No Boeing-737 plane has more than 300 seats. \nAll of the planes acquired by Delta in this batch are Boeing-737. \nPlanes either have more than 300 seats or have a capacity of 100 passengers. \nAll planes with a capacity of 100 passengers are scheduled for a short-distance flight. \nAll planes with a capacity of 100 passengers are produced before 2010. \nJake32 is either a Boeing-737 plane or a plane acquired by Delta in this batch.\nT10 is either both a Boeing-737 plane and acquired by Delta in this batch, or it is neither.",
+  "query": "Jake32 is produced before 2010 or scheduled for a short-distance flight.",
+  "program": "boeing737(V) => not more_than_300_seats(V). @ \"No Boeing-737 plane has more than 300 seats\"\ndelta_batch(V) => boeing737(V). @ \"All of the planes acquired by Delta in this batch are Boeing-737\"\nplane(V) => more_than_300_seats(V) | capacity_100(V). @ \"Planes either have more than 300 seats or have a capacity of 100 passengers\"\ncapacity_100(V) => short_flight(V). @ \"All planes with a capacity of 100 passengers are scheduled for a short-distance flight\"\ncapacity_100(V) => before_2010(V). @ \"All planes with a capacity of 100 passengers are produced before 2010\"\nplane(jake32). @ \"Jake32 is either a Boeing-737 plane or a plane acquired by Delta in this batch\"\nboeing737(jake32) | delta_batch(jake32). @ \"Jake32 is either a Boeing-737 plane or a plane acquired by Delta in this batch\"\n* boeing737(V) => plane(V).\n* delta_batch(V) => plane(V).\n? before_2010(jake32) | short_flight(jake32).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "plane(jake32)."
+  ],
+  "source_id": "1229"
+ },
+ {
+  "text": "The handbrake of a car is either up or down.\nThe handbrake is down when a car is parked.",
+  "query": "The handbrake is up when some cars are parked.",
+  "program": "car(V) => up(V) | down(V). @ \"The handbrake of a car is either up or down.\"\ncar(V) & up(V) => not down(V). @ \"The handbrake of a car is either up or down.\"\ncar(V) & down(V) => not up(V). @ \"The handbrake of a car is either up or down.\"\ncar(V) & parked(V) => down(V). @ \"The handbrake is down when a car is parked.\"\ncar(some_car_1). @ \"a car is parked\"\nparked(some_car_1). @ \"a car is parked\"\n? up(some_car_1).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "car(some_car_1).",
+   "parked(some_car_1).",
+   "? up(some_car_1)."
+  ],
+  "source_id": "742"
+ },
+ {
+  "text": "All pets are animals.\nPets can be either a dog or a cat.\nIf a person has a pet, they care for that pet. \nDogs and cats can be naughty. \nPets who are naughty are not liked as much. \nCharlie has a naughty pet dog named Leo. ",
+  "query": "Dogs are not always naughty.",
+  "program": "pet(V) => animal(V). @ \"All pets are animals.\"\npet(V) => dog(V) | cat(V). @ \"Pets can be either a dog or a cat.\"\nhas_pet(P, X) => cares_for(P, X). @ \"If a person has a pet, they care for that pet.\"\n# cannot express: \"Dogs and cats can be naughty.\"\npet(V) & naughty(V) => not liked_as_much(V). @ \"Pets who are naughty are not liked as much.\"\nhas_pet(charlie, leo). @ \"Charlie has a naughty pet dog named Leo.\"\npet(leo). @ \"Charlie has a naughty pet dog named Leo.\"\ndog(leo). @ \"Charlie has a naughty pet dog named Leo.\"\nnaughty(leo). @ \"Charlie has a naughty pet dog named Leo.\"\n? dog(V) => not naughty(V).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "? dog(V) => not naughty(V)."
+  ],
+  "source_id": "170"
+ },
+ {
+  "text": "All velvet-finish lipsticks in the Rouge Dior set, Lunar New Year Limited Edition are refillable.\nLipsticks in the Rouge Dior set, Lunar New Year Limited Edition have either a velvet-finish or a satin-finish.\nNo satin-finish lipsticks in the set do not have \"rosewood\" in its offical description. \nLipstcks in the Rouge Dior set, Lunar New Year Limited Edition either does not have \"rosewood\" in its offical description or it has \"rosewood\" in its official description. \nROUGE Dior Colored Lip Balm 999 is a lipstick in the set, and it either has \"rosewood\" in its official description or has a velvet finish.",
+  "query": "If ROUGE Dior Colored Lip Balm 999 is not both a velvet finish ipstick in the set and refillable, then it neither is refillable nor has \"rosewood\" in its official description.",
+  "program": "set_lipstick(V) & velvet(V) => refillable(V). @ \"All velvet-finish lipsticks in the Rouge Dior set, Lunar New Year Limited Edition are refillable.\"\nset_lipstick(V) => velvet(V) | satin(V). @ \"have either a velvet-finish or a satin-finish\"\nset_lipstick(V) & satin(V) => not rosewood(V). @ \"No satin-finish lipsticks in the set do not have\"\nset_lipstick(V) => not rosewood(V) | rosewood(V). @ \"either does not have\"\nset_lipstick(l999). @ \"ROUGE Dior Colored Lip Balm 999 is a lipstick in the set\"\nrosewood(l999) | velvet(l999). @ \"it either has\"\n? (velvet(l999) & set_lipstick(l999) & refillable(l999)) | (not refillable(l999) & not rosewood(l999)).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "set_lipstick(V) & satin(V) => not rosewood(V)."
+  ],
+  "source_id": "1071"
+ },
+ {
+  "text": "Maya would only play the violin if her fingers could never be injured. \nVolleyball players can injure their ankles, fingers, or shoulder.\nMaya is a volleyball player.",
+  "query": "Maya will not play the violin.",
+  "program": "plays_violin(maya) => not can_injure(maya, fingers). @ \"Maya would only play the violin if her fingers could never be injured\"\nvolleyball_player(V) => can_injure(V, ankles). @ \"Volleyball players can injure their ankles, fingers, or shoulder\"\nvolleyball_player(V) => can_injure(V, fingers). @ \"Volleyball players can injure their ankles, fingers, or shoulder\"\nvolleyball_player(V) => can_injure(V, shoulder). @ \"Volleyball players can injure their ankles, fingers, or shoulder\"\nvolleyball_player(maya). @ \"Maya is a volleyball player\"\n? not plays_violin(maya).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "plays_violin(maya) => not can_injure(maya, fingers)."
+  ],
+  "source_id": "620"
+ },
+ {
+  "text": "Customers choose a Prime Video plan or an HBO Max Plan, or both. \nAll customers who choose a Prime Video Plan are rewarded with a $30 gift card. \nThere are no customers who do not choose any plan. \nNone of the customers who are rewarded with a $30 gift card are older than 80.\nAll the customers are either older than 80 or between the ages of 60 and 80.\nJames is a customer who is not between the ages of 60 and 80. ",
+  "query": "James is a customer who chooses a Prime Video plan or does not choose any plans.",
+  "program": "customer(V) => prime(V) | hbo(V). @ \"Customers choose a Prime Video plan or an HBO Max Plan, or both.\"\nprime(V) => gift30(V). @ \"All customers who choose a Prime Video Plan are rewarded with a $30 gift card.\"\ngift30(V) => not older80(V). @ \"None of the customers who are rewarded with a $30 gift card are older than 80.\"\ncustomer(V) => older80(V) | between60_80(V). @ \"All the customers are either older than 80 or between the ages of 60 and 80.\"\ncustomer(james). @ \"James is a customer\"\nnot between60_80(james). @ \"not between the ages of 60 and 80\"\n? prime(james) | not prime(james) | not hbo(james).\n",
+  "expected": "yes",
+  "wrong_verdict": "no",
+  "changed": [
+   "? prime(james) | not prime(james) | not hbo(james)."
+  ],
+  "source_id": "1200"
+ },
+ {
+  "text": "All hodophiles who enjoy eating gelato ice cream would enjoy a vacation to Italy.\nNo hodophiles can resist the hallmark delectable desserts famous in Italy.\nHodophiles enjoy eating gelato ice cream or love to travel and vacation often, or both.\nNo hodophiles who study abroad in Europe regret their college experiences.\nIf hodophiles love to travel and vacation often, then they study abroad in Europe.\nRobert is a hodophile, and he either enjoys eating gelato ice cream and loves to travel and vacation often, or does not enjoy eating gelato ice cream and does not love to travel and vacation often.",
+  "query": "If Robert is not both a person who can resist the hallmark delectable desserts that are famous in Italy and regrets his college experiences, then Robert either enjoys eating gelato ice cream or would enjoy a vacation to Italy.",
+  "program": "hodophile(V) & enjoys_gelato(V) => enjoys_italy_vacation(V). @ \"All hodophiles who enjoy eating gelato ice cream would enjoy a vacation to Italy.\"\nhodophile(V) => not resists_desserts(V). @ \"No hodophiles can resist the hallmark delectable desserts famous in Italy.\"\nhodophile(V) => enjoys_gelato(V) | loves_travel(V). @ \"Hodophiles enjoy eating gelato ice cream or love to travel and vacation often, or both.\"\nhodophile(V) & studies_abroad(V) => not regrets_college(V). @ \"No hodophiles who study abroad in Europe regret their college experiences.\"\nhodophile(V) & loves_travel(V) => studies_abroad(V). @ \"If hodophiles love to travel and vacation often, then they study abroad in Europe.\"\nhodophile(robert). @ \"Robert is a hodophile\"\nenjoys_gelato(robert) => loves_travel(robert). @ \"he either enjoys eating gelato ice cream and loves to travel and vacation often, or does not enjoy eating gelato ice cream and does not love to travel and vacation often\"\nloves_travel(robert) => enjoys_gelato(robert). @ \"he either enjoys eating gelato ice cream and loves to travel and vacation often, or does not enjoy eating gelato ice cream and does not love to travel and vacation often\"\n? (resists_desserts(robert) & regrets_college(robert)) | ((enjoys_gelato(robert) | enjoys_italy_vacation(robert)) & not (enjoys_gelato(robert) & enjoys_italy_vacation(robert))).\n",
+  "expected": "no",
+  "wrong_verdict": "yes",
+  "changed": [
+   "? (resists_desserts(robert) & regrets_college(robert)) | ((enjoys_gelato(robert) | enjoys_italy_vacation(robert)) & not (enjoys_gelato(robert) & enjoys_italy_vacation(robert)))."
+  ],
+  "source_id": "995"
+ },
+ {
+  "text": "Camp Davern is a traditional summer camp for boys and girls.\nCamp Davern was established in the year 1946.\nCamp Davern was operated by the YMCA until the year 2015.\nCamp Davern is an old summer camp.",
+  "query": "One of Ontario's oldest summer camps is a traditional summer camp for boys and girls.",
+  "program": "summer_camp(camp_davern). @ \"Camp Davern is a traditional summer camp for boys and girls.\"\ntraditional(camp_davern). @ \"Camp Davern is a traditional summer camp for boys and girls.\"\nfor_boys_and_girls(camp_davern). @ \"Camp Davern is a traditional summer camp for boys and girls.\"\nestablished(camp_davern, 1946). @ \"Camp Davern was established in the year 1946.\"\noperated_by(camp_davern, ymca, 2015). @ \"Camp Davern was operated by the YMCA until the year 2015.\"\nold(camp_davern). @ \"Camp Davern is an old summer camp.\"\nsummer_camp(camp_davern). @ \"Camp Davern is an old summer camp.\"\n? old(camp_davern) & summer_camp(camp_davern) & traditional(camp_davern) & for_boys_and_girls(camp_davern).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "? old(camp_davern) & summer_camp(camp_davern) & traditional(camp_davern) & for_boys_and_girls(camp_davern)."
+  ],
+  "source_id": "225"
+ },
+ {
+  "text": "Catullus 4 is a poem written by the ancient Roman writer Catullus.\nCatullus 4 is a story about the retirement of a well-traveled ship.\nThere is a strong analogy of human aging in the poem Catullus 4.\nCatullus 4 is written in an unusual iambic trimeter to convey a sense of speed over the waves.",
+  "query": "Callus 4 is written in an unusual iambic trimeter to convey a strong analogy of human aging.",
+  "program": "poem(catullus_4). @ \"Catullus 4 is a poem\"\nwritten_by(catullus_4, catullus). @ \"written by the ancient Roman writer Catullus\"\nabout(catullus_4, ship_retirement). @ \"a story about the retirement of a well-traveled ship\"\nanalogy(catullus_4, human_aging). @ \"There is a strong analogy of human aging in the poem Catullus 4\"\nwritten_in(catullus_4, unusual_iambic_trimeter). @ \"Catullus 4 is written in an unusual iambic trimeter\"\nconveys(unusual_iambic_trimeter, speed_over_waves). @ \"to convey a sense of speed over the waves\"\n? written_in(catullus_4, unusual_iambic_trimeter) & analogy(catullus_4, human_aging).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "? written_in(catullus_4, unusual_iambic_trimeter) & analogy(catullus_4, human_aging)."
+  ],
+  "source_id": "429"
+ },
+ {
+  "text": "The PlayStation EyeToy is a camera accessory for the PlayStation 2 system. \nThe PlayStation Eye is a camera accessory for the PlayStation 3 system.\nThe PlayStation Camera is a camera accessory for the PlayStation 4 and the PlayStation 5 systems.\nCamera accessories for a system are compatible with that system.\nPlaystation 2, 3,4, and 5 are all different.\nOnly the PlayStation Camera camera system is compatible with different systems.",
+  "query": "The Playstation Eye is compatible with the PlayStation 2 and the PlayStation 3.",
+  "program": "camera_accessory_for(eyetoy, ps2). @ \"The PlayStation EyeToy is a camera accessory for the PlayStation 2 system.\"\ncamera_accessory_for(eye, ps3). @ \"The PlayStation Eye is a camera accessory for the PlayStation 3 system.\"\ncamera_accessory_for(camera, ps4). @ \"The PlayStation Camera is a camera accessory for the PlayStation 4\"\ncamera_accessory_for(camera, ps5). @ \"the PlayStation 5 systems\"\ncamera_accessory_for(A, S) => compatible(A, S). @ \"Camera accessories for a system are compatible with that system.\"\ndifferent(ps2, ps3). @ \"Playstation 2, 3,4, and 5 are all different.\"\ndifferent(ps2, ps4). @ \"Playstation 2, 3,4, and 5 are all different.\"\ndifferent(ps2, ps5). @ \"Playstation 2, 3,4, and 5 are all different.\"\ndifferent(ps3, ps4). @ \"Playstation 2, 3,4, and 5 are all different.\"\ndifferent(ps3, ps5). @ \"Playstation 2, 3,4, and 5 are all different.\"\ndifferent(ps4, ps5). @ \"Playstation 2, 3,4, and 5 are all different.\"\n* different(X, Y) => different(Y, X).\ncompatible(A, S1) & compatible(A, S2) & different(S1, S2) => ps_camera(A). @ \"Only the PlayStation Camera camera system is compatible with different systems.\"\nps_camera(camera). @ \"Only the PlayStation Camera camera system is compatible with different systems.\"\nnot ps_camera(eye). @ \"Only the PlayStation Camera camera system is compatible with different systems.\"\nnot ps_camera(eyetoy). @ \"Only the PlayStation Camera camera system is compatible with different systems.\"\n? compatible(eye, ps2) & compatible(eye, ps3).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "compatible(A, S1) & compatible(A, S2) & different(S1, S2) => ps_camera(A).",
+   "ps_camera(camera).",
+   "not ps_camera(eye).",
+   "not ps_camera(eyetoy)."
+  ],
+  "source_id": "566"
+ },
+ {
+  "text": "WeTab is a MeeGo-based tablet computer.\nWeTab was announced by Neofonie.\nNeofonie is a German producer.\nGermans live in Germany or abroad. ",
+  "query": "There is a tablet computer announced by a German producer.",
+  "program": "meego_based(wetab). @ \"WeTab is a MeeGo-based tablet computer\"\ntablet_computer(wetab). @ \"WeTab is a MeeGo-based tablet computer\"\nannounced_by(wetab, neofonie). @ \"WeTab was announced by Neofonie\"\ngerman(neofonie). @ \"Neofonie is a German producer\"\nproducer(neofonie). @ \"Neofonie is a German producer\"\n? tablet_computer(wetab) & announced_by(wetab, neofonie) & german(neofonie) & producer(neofonie).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "meego_based(wetab).",
+   "tablet_computer(wetab).",
+   "german(neofonie).",
+   "producer(neofonie).",
+   "? tablet_computer(wetab) & announced_by(wetab, neofonie) & german(neofonie) & producer(neofonie)."
+  ],
+  "source_id": "350"
+ },
+ {
+  "text": "Everything in Size Town is big or small.\nAll big things in Size Town are heavy.\nAll small things in Size Town are light.\nAll heavy things in Size Town are still.\nAll light things in Size Town are unstable.\nAll unstable things in Size Town are changing.\nAll unstable things in Size Town are unpredictable.\nThe bird is in Size Town and it is not both heavy and still.",
+  "query": "The bird is either unpredictable or changing.",
+  "program": "in_size_town(V) => big(V) | small(V). @ \"Everything in Size Town is big or small.\"\nbig(V) & in_size_town(V) => heavy(V). @ \"All big things in Size Town are heavy.\"\nsmall(V) & in_size_town(V) => light(V). @ \"All small things in Size Town are light.\"\nheavy(V) & in_size_town(V) => still(V). @ \"All heavy things in Size Town are still.\"\nlight(V) & in_size_town(V) => unstable(V). @ \"All light things in Size Town are unstable.\"\nunstable(V) & in_size_town(V) => changing(V). @ \"All unstable things in Size Town are changing.\"\nunstable(V) & in_size_town(V) => unpredictable(V). @ \"All unstable things in Size Town are unpredictable.\"\nin_size_town(bird). @ \"The bird is in Size Town\"\nnot heavy(bird) | not still(bird). @ \"it is not both heavy and still\"\n? (unpredictable(bird) & not changing(bird)) | (not unpredictable(bird) & changing(bird)).\n",
+  "expected": "no",
+  "wrong_verdict": "yes",
+  "changed": [
+   "? (unpredictable(bird) & not changing(bird)) | (not unpredictable(bird) & changing(bird))."
+  ],
+  "source_id": "1428"
+ },
+ {
+  "text": "If a person doesn't have enough money to buy a product, then that person can't buy it.\nMonitors are products.\n4k monitors are more expensive than 1080 monitors and 2k monitors.\nJohn is a person.\nJohn doesn't have enough money to buy a 2k monitor.",
+  "query": "John can't buy a 2k monitor.",
+  "program": "person(P) & product(X) & not enough_money(P, X) => not can_buy(P, X). @ \"If a person doesn't have enough money to buy a product, then that person can't buy it.\"\nmonitor(V) => product(V). @ \"Monitors are products.\"\nperson(john). @ \"John is a person.\"\nmonitor(m2k). @ \"a 2k monitor\"\nnot enough_money(john, m2k). @ \"John doesn't have enough money to buy a 2k monitor.\"\n? not can_buy(john, m2k).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "monitor(m2k)."
+  ],
+  "source_id": "538"
+ },
+ {
+  "text": "In Love City, everyone considers physical touch or words of affirmation to be their most important love language.\nIf someone in Love City considers physical touch as their most important love language, then they are good with pets.\nIf someone in Love City is good with pets, then they are not scared of animals.\nIn Love City, everyone is scared of animals, or loves animals, or both.\nAdam, who is in Love City, either values physical touch as his most important love language or loves animals.",
+  "query": "If Adam values physical touch as an especially important love language or is good with pets, then Adam values words of affirmation as an especially important love language.",
+  "program": "in_love_city(V) => physical_touch(V) | words(V). @ \"everyone considers physical touch or words of affirmation to be their most important love language\"\nin_love_city(V) & physical_touch(V) => good_with_pets(V). @ \"If someone in Love City considers physical touch as their most important love language, then they are good with pets.\"\nin_love_city(V) & good_with_pets(V) => not scared(V). @ \"If someone in Love City is good with pets, then they are not scared of animals.\"\nin_love_city(V) => scared(V) | loves_animals(V). @ \"everyone is scared of animals, or loves animals, or both\"\nin_love_city(adam). @ \"Adam, who is in Love City\"\nphysical_touch(adam) | loves_animals(adam). @ \"either values physical touch as his most important love language or loves animals\"\nphysical_touch(adam) => not loves_animals(adam). @ \"either values physical touch as his most important love language or loves animals\"\nloves_animals(adam) => not physical_touch(adam). @ \"either values physical touch as his most important love language or loves animals\"\n? not (physical_touch(adam) | good_with_pets(adam)) | words(adam).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "physical_touch(adam) => not loves_animals(adam).",
+   "loves_animals(adam) => not physical_touch(adam)."
+  ],
+  "source_id": "1094"
+ },
+ {
+  "text": "The Turing Award has been awarded to Donald Knuth, Marvin Minsky, Richard Hamming, and John McCarthy. \nDonald Knuth made contributions to the analysis of algorithms.\nMarvin Minsky is recognized for his contributions to the field of artificial intelligence.\nRichard Hamming researched numerical methods.\nJohn McCarthy made contributions to the field of artificial intelligence. ",
+  "query": "No Turing Award winners worked in the field of numerical methods.",
+  "program": "turing_winner(donald_knuth). @ \"The Turing Award has been awarded to Donald Knuth\"\nturing_winner(marvin_minsky). @ \"Marvin Minsky\"\nturing_winner(richard_hamming). @ \"Richard Hamming\"\nturing_winner(john_mccarthy). @ \"John McCarthy\"\ncontributed(donald_knuth, analysis_of_algorithms). @ \"Donald Knuth made contributions to the analysis of algorithms.\"\ncontributed(marvin_minsky, artificial_intelligence). @ \"Marvin Minsky is recognized for his contributions to the field of artificial intelligence.\"\nworked_in(richard_hamming, numerical_methods). @ \"Richard Hamming researched numerical methods.\"\ncontributed(john_mccarthy, artificial_intelligence). @ \"John McCarthy made contributions to the field of artificial intelligence.\"\n? turing_winner(V) => not worked_in(V, numerical_methods).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "worked_in(richard_hamming, numerical_methods)."
+  ],
+  "source_id": "385"
+ },
+ {
+  "text": "Evangelos Eleftheriou is a Greek electrical engineer.\nEvangelos Eleftheriou worked for IBM in Zurich.\nIf a company has employees working for them somewhere, then they have an office there.\nIBM is a company.",
+  "query": "No Greeks have worked for IBM.",
+  "program": "greek(evangelos_eleftheriou). @ \"Evangelos Eleftheriou is a Greek electrical engineer\"\nelectrical_engineer(evangelos_eleftheriou). @ \"Evangelos Eleftheriou is a Greek electrical engineer\"\nworked_for(evangelos_eleftheriou, ibm). @ \"Evangelos Eleftheriou worked for IBM in Zurich\"\nworked_in(evangelos_eleftheriou, ibm, zurich). @ \"Evangelos Eleftheriou worked for IBM in Zurich\"\nworked_in(P, C, L) => has_office(C, L). @ \"If a company has employees working for them somewhere, then they have an office there\"\ncompany(ibm). @ \"IBM is a company\"\n? greek(V) => not worked_for(V, ibm).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "worked_for(evangelos_eleftheriou, ibm).",
+   "worked_in(evangelos_eleftheriou, ibm, zurich).",
+   "worked_in(P, C, L) => has_office(C, L).",
+   "? greek(V) => not worked_for(V, ibm)."
+  ],
+  "source_id": "359"
+ },
+ {
+  "text": "No disposable products can help slow down global warming. \nAll eco-friendly brands can help slow down global warming. \nAll sustainable fashion brands are eco-friendly brands.\nAll fast fashion products are disposable products.\nIf Reformation is not helping slow down global warming, then Reformation is an eco-friendly brand or a sustainable fashion brand.",
+  "query": "If Reformation produces disposable products, then Reformation produces fast fashion products.",
+  "program": "disposable(V) => not help_slow_warming(V). @ \"No disposable products can help slow down global warming.\"\neco_friendly(V) => help_slow_warming(V). @ \"All eco-friendly brands can help slow down global warming.\"\nsustainable_fashion(V) => eco_friendly(V). @ \"All sustainable fashion brands are eco-friendly brands.\"\nfast_fashion(V) => disposable(V). @ \"All fast fashion products are disposable products.\"\nnot help_slow_warming(reformation) => eco_friendly(reformation) | sustainable_fashion(reformation). @ \"If Reformation is not helping slow down global warming, then Reformation is an eco-friendly brand or a sustainable fashion brand.\"\n? not disposable(reformation) | fast_fashion(reformation).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "? not disposable(reformation) | fast_fashion(reformation)."
+  ],
+  "source_id": "826"
+ },
+ {
+  "text": "People who work at Jess's company and go to the spa frequently are not people who are miserly and need to save a large portion of their income.\nPeople who work at Jess's company are either miserly and need to save a large portion of their income, or frivolously spend a lot of money.\nIf people who work at Jess's company frivolously spend a lot of money when they go out, then they value quality manufacturing and luxury items.\nIf people who work at Jess's company value quality manufacturing and luxury items, then they enjoy shopping for materialistic items in their free time.\nThomas works at Jess's company.\nIf Thomas is not miserly and needs to save a large portion of his income, then Thomas does not value quality manufacturing and luxury items.\nThomas values quality manufacturing and luxury items or he is not miserly.",
+  "query": "Thomas frivolously spends a lot of money.",
+  "program": "works(thomas). @ \"Thomas works at Jess's company.\"\nworks(V) & spa(V) => not miserly(V). @ \"People who work at Jess's company and go to the spa frequently are not people who are miserly and need to save a large portion of their income.\"\nworks(V) => miserly(V) | frivolous(V). @ \"People who work at Jess's company are either miserly and need to save a large portion of their income, or frivolously spend a lot of money.\"\nworks(V) & miserly(V) => not frivolous(V). @ \"People who work at Jess's company are either miserly and need to save a large portion of their income, or frivolously spend a lot of money.\"\nworks(V) & frivolous(V) => not miserly(V). @ \"People who work at Jess's company are either miserly and need to save a large portion of their income, or frivolously spend a lot of money.\"\nworks(V) & frivolous(V) => values(V). @ \"If people who work at Jess's company frivolously spend a lot of money when they go out, then they value quality manufacturing and luxury items.\"\nworks(V) & values(V) => shopping(V). @ \"If people who work at Jess's company value quality manufacturing and luxury items, then they enjoy shopping for materialistic items in their free time.\"\nnot miserly(thomas) => not values(thomas). @ \"If Thomas is not miserly and needs to save a large portion of his income, then Thomas does not value quality manufacturing and luxury items.\"\nvalues(thomas) | not miserly(thomas). @ \"Thomas values quality manufacturing and luxury items or he is not miserly.\"\n? frivolous(thomas).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "works(V) & miserly(V) => not frivolous(V).",
+   "works(V) & frivolous(V) => not miserly(V)."
+  ],
+  "source_id": "1023"
+ },
+ {
+  "text": "A neuroimaging technique is either an invasive neuroimaging technique or a noninvasive neuroimaging technique. \nAll noninvasive neuroimaging techniques provide a spatial resolution of brains.\nIf a technique provides a spatial resolution of brains, then it is a measurement of brain activity. \nAll measurements of brain activity are used by neuroscience researchers.\nFMRI is either a measurement of brain activity or a noninvasive neuroimaging technique.\nFMRI is a neuroimaging technique.",
+  "query": "FMRI is either an invasive neuroimaging technique or is used by neuroscience researchers.",
+  "program": "neuroimaging(V) => invasive(V) | noninvasive(V). @ \"A neuroimaging technique is either an invasive neuroimaging technique or a noninvasive neuroimaging technique.\"\ninvasive(V) => not noninvasive(V). @ \"A neuroimaging technique is either an invasive neuroimaging technique or a noninvasive neuroimaging technique.\"\nnoninvasive(V) => not invasive(V). @ \"A neuroimaging technique is either an invasive neuroimaging technique or a noninvasive neuroimaging technique.\"\nnoninvasive(V) => spatial_resolution(V). @ \"All noninvasive neuroimaging techniques provide a spatial resolution of brains.\"\nspatial_resolution(V) => brain_activity_measure(V). @ \"If a technique provides a spatial resolution of brains, then it is a measurement of brain activity.\"\nbrain_activity_measure(V) => used_by_researchers(V). @ \"All measurements of brain activity are used by neuroscience researchers.\"\nbrain_activity_measure(fmri) | noninvasive(fmri). @ \"FMRI is either a measurement of brain activity or a noninvasive neuroimaging technique.\"\nbrain_activity_measure(fmri) => not noninvasive(fmri). @ \"FMRI is either a measurement of brain activity or a noninvasive neuroimaging technique.\"\nnoninvasive(fmri) => not brain_activity_measure(fmri). @ \"FMRI is either a measurement of brain activity or a noninvasive neuroimaging technique.\"\nneuroimaging(fmri). @ \"FMRI is a neuroimaging technique.\"\n? (invasive(fmri) & not used_by_researchers(fmri)) | (not invasive(fmri) & used_by_researchers(fmri)).\n",
+  "expected": "no",
+  "wrong_verdict": "yes",
+  "changed": [
+   "invasive(V) => not noninvasive(V).",
+   "noninvasive(V) => not invasive(V).",
+   "brain_activity_measure(fmri) => not noninvasive(fmri).",
+   "noninvasive(fmri) => not brain_activity_measure(fmri).",
+   "? (invasive(fmri) & not used_by_researchers(fmri)) | (not invasive(fmri) & used_by_researchers(fmri))."
+  ],
+  "source_id": "1078"
+ },
+ {
+  "text": "The world's only major large passenger aircraft manufacturers are Boeing and Airbus.\nAll American Airlines planes are from the world's major large passenger aircraft manufacturers. \nAirbus made more revenue than Boeing last year.",
+  "query": "An American Airlines plane is either a Boeing or Airbus plane.",
+  "program": "aa_plane(V) => major_plane(V). @ \"All American Airlines planes are from the world's major large passenger aircraft manufacturers\"\nmajor_plane(V) => boeing_plane(V) | airbus_plane(V). @ \"The world's only major large passenger aircraft manufacturers are Boeing and Airbus\"\n? aa_plane(V) & not boeing_plane(V) => airbus_plane(V).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "? aa_plane(V) & not boeing_plane(V) => airbus_plane(V)."
+  ],
+  "source_id": "326"
+ },
+ {
+  "text": "Tipped employees are not entitled to be paid the federal minimum wage by their employees. \nIf a person is a white-collar worker, they are entitled to be paid the federal minimum wage by their employees. \nAll lawyers are white-collar workers.\nEvery advocate is a lawyer.\nMary is not a lawyer or a tipped employee.",
+  "query": "If Mary is either an advocate or a tipped employee, she is an advocate.",
+  "program": "tipped_employee(V) => not entitled_min_wage(V). @ \"Tipped employees are not entitled to be paid the federal minimum wage by their employees.\"\nwhite_collar(V) => entitled_min_wage(V). @ \"If a person is a white-collar worker, they are entitled to be paid the federal minimum wage by their employees.\"\nlawyer(V) => white_collar(V). @ \"All lawyers are white-collar workers.\"\nadvocate(V) => lawyer(V). @ \"Every advocate is a lawyer.\"\nnot lawyer(mary). @ \"Mary is not a lawyer or a tipped employee.\"\nnot tipped_employee(mary). @ \"Mary is not a lawyer or a tipped employee.\"\n? not (advocate(mary) | tipped_employee(mary)) | advocate(mary).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "not lawyer(mary).",
+   "not tipped_employee(mary)."
+  ],
+  "source_id": "769"
+ },
+ {
+  "text": "In Love City, everyone considers physical touch or words of affirmation to be their most important love language.\nIf someone in Love City considers physical touch as their most important love language, then they are good with pets.\nIf someone in Love City is good with pets, then they are not scared of animals.\nIn Love City, everyone is scared of animals, or loves animals, or both.\nAdam, who is in Love City, either values physical touch as his most important love language or loves animals.",
+  "query": "Adam considers words of affirmation to be the most important love language.",
+  "program": "in_love_city(V) => physical_touch(V) | words_of_affirmation(V). @ \"everyone considers physical touch or words of affirmation to be their most important love language\"\nin_love_city(V) & physical_touch(V) => good_with_pets(V). @ \"If someone in Love City considers physical touch as their most important love language, then they are good with pets.\"\nin_love_city(V) & good_with_pets(V) => not scared_of_animals(V). @ \"If someone in Love City is good with pets, then they are not scared of animals.\"\nin_love_city(V) => scared_of_animals(V) | loves_animals(V). @ \"In Love City, everyone is scared of animals, or loves animals, or both.\"\nin_love_city(adam). @ \"Adam, who is in Love City\"\nphysical_touch(adam) | loves_animals(adam). @ \"either values physical touch as his most important love language or loves animals\"\nphysical_touch(adam) => not loves_animals(adam). @ \"either values physical touch as his most important love language or loves animals\"\nloves_animals(adam) => not physical_touch(adam). @ \"either values physical touch as his most important love language or loves animals\"\n? words_of_affirmation(adam).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "physical_touch(adam) => not loves_animals(adam).",
+   "loves_animals(adam) => not physical_touch(adam)."
+  ],
+  "source_id": "1091"
+ },
+ {
+  "text": "If a person pays their taxes, then they contribute to the country. \nEveryone who works for a government department pays a tax on their salary. \nEveryone in the army is an employee of a government department.\nEveryone convicted of murder goes to prison. \nEveryone who has been to prison has a criminal record.\nJames was either once convicted of murder, or spent time in prison.\nJames either has a criminal record, or pays his taxes. ",
+  "query": "James contributes to the country and he serves in the army.",
+  "program": "pays_taxes(V) => contributes(V). @ \"If a person pays their taxes, then they contribute to the country.\"\nworks_gov_dept(V) => pays_taxes(V). @ \"Everyone who works for a government department pays a tax on their salary.\"\narmy(V) => works_gov_dept(V). @ \"Everyone in the army is an employee of a government department.\"\nconvicted_murder(V) => went_to_prison(V). @ \"Everyone convicted of murder goes to prison.\"\nwent_to_prison(V) => criminal_record(V). @ \"Everyone who has been to prison has a criminal record.\"\nconvicted_murder(james) | went_to_prison(james). @ \"James was either once convicted of murder, or spent time in prison.\"\nconvicted_murder(james) => not went_to_prison(james). @ \"James was either once convicted of murder, or spent time in prison.\"\nwent_to_prison(james) => not convicted_murder(james). @ \"James was either once convicted of murder, or spent time in prison.\"\ncriminal_record(james) | pays_taxes(james). @ \"James either has a criminal record, or pays his taxes.\"\ncriminal_record(james) => not pays_taxes(james). @ \"James either has a criminal record, or pays his taxes.\"\npays_taxes(james) => not criminal_record(james). @ \"James either has a criminal record, or pays his taxes.\"\n? contributes(james) & army(james).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "works_gov_dept(V) => pays_taxes(V).",
+   "convicted_murder(james) => not went_to_prison(james).",
+   "went_to_prison(james) => not convicted_murder(james).",
+   "criminal_record(james) => not pays_taxes(james).",
+   "pays_taxes(james) => not criminal_record(james)."
+  ],
+  "source_id": "1213"
+ },
+ {
+  "text": "Greyhound racing is a competitive sport where spectators bet on greyhounds.\nGreyhound racing involves coursing.\nSome competitive sports where spectators bet on things are banned.\nCoursing involves spectators betting on a hare being pursued by greyhounds.\nSpectators betting on a hare is a small game.\nIf a competitive sport involves spectators betting on small games, then it is banned.",
+  "query": "Greyhound racing is a competitive sport.",
+  "program": "competitive_sport(greyhound_racing). @ \"Greyhound racing is a competitive sport where spectators bet on greyhounds.\"\ninvolves(greyhound_racing, coursing). @ \"Greyhound racing involves coursing.\"\n? competitive_sport(greyhound_racing).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "involves(greyhound_racing, coursing).",
+   "? competitive_sport(greyhound_racing)."
+  ],
+  "source_id": "403"
+ },
+ {
+  "text": "Functional brainstems are necessary for breath control.\nAll humans that can swim can control their breath. \nHumans can swim or walk. \nHumans who can walk can stand on the ground by themselves. \nHumans whose brainstems are functional can control their balance.\nEvery human who can stand on the ground by themselves has functional leg muscles. \nGeorge and Archie are humans.\nGeorge can control his balance and can swim.\nArchie can walk if and only if he has functional brainstems.",
+  "query": "Archie cannot control his balance and doesn't have functional leg muscles.",
+  "program": "human(george). @ \"George and Archie are humans\"\nhuman(archie). @ \"George and Archie are humans\"\ncan_control_breath(V) => functional_brainstem(V). @ \"Functional brainstems are necessary for breath control.\"\nhuman(V) & can_swim(V) => can_control_breath(V). @ \"All humans that can swim can control their breath.\"\nhuman(V) => can_swim(V) | can_walk(V). @ \"Humans can swim or walk.\"\nhuman(V) & can_walk(V) => can_stand(V). @ \"Humans who can walk can stand on the ground by themselves.\"\nhuman(V) & functional_brainstem(V) => can_control_balance(V). @ \"Humans whose brainstems are functional can control their balance.\"\nhuman(V) & can_stand(V) => functional_leg_muscles(V). @ \"Every human who can stand on the ground by themselves has functional leg muscles.\"\ncan_control_balance(george). @ \"George can control his balance\"\ncan_swim(george). @ \"can swim\"\ncan_walk(archie) => functional_brainstem(archie). @ \"Archie can walk if and only if he has functional brainstems.\"\nfunctional_brainstem(archie) => can_walk(archie). @ \"Archie can walk if and only if he has functional brainstems.\"\n? not can_control_balance(archie) & not functional_leg_muscles(archie).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "can_control_breath(V) => functional_brainstem(V)."
+  ],
+  "source_id": "1309"
+ },
+ {
+  "text": "All students learning piano can strike the right notes. \nAll students who can strike the right note can get the rhythms right. \nIf a student can get the rhythms right, he will start working on coordination between the left and the right hands. \nSome students who start working on coordination between the left and the right hands become good at it, while other students find it challenging. \nIf John can strike the right notes, get the rhythms right, and is good at coordination between right and left hands, then he puts emotions into his playing. \nJohn is a student learning piano. \nJohn does not find coordination between the left and the right hands challenging. ",
+  "query": "John does not put emotions into his playing.",
+  "program": "piano_student(V) => strike_notes(V). @ \"All students learning piano can strike the right notes.\"\nstrike_notes(V) => rhythms(V). @ \"All students who can strike the right note can get the rhythms right.\"\nrhythms(V) => start_coord(V). @ \"If a student can get the rhythms right, he will start working on coordination between the left and the right hands.\"\nstart_coord(V) => good_coord(V) | challenging(V). @ \"Some students who start working on coordination between the left and the right hands become good at it, while other students find it challenging.\"\nstrike_notes(john) & rhythms(john) & good_coord(john) => emotions(john). @ \"If John can strike the right notes, get the rhythms right, and is good at coordination between right and left hands, then he puts emotions into his playing.\"\npiano_student(john). @ \"John is a student learning piano.\"\nnot challenging(john). @ \"John does not find coordination between the left and the right hands challenging.\"\n? not emotions(john).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "start_coord(V) => good_coord(V) | challenging(V)."
+  ],
+  "source_id": "684"
+ },
+ {
+  "text": "If people don't often clean their homes, then they do not have tidy houses.\nIf people don't prioritize cleaning, then they do not often clean their homes.\nIf people hire a maid or cleaning service, then they have tidy houses.\nIf people don't care about cleanliness, then they do not prioritize cleaning.\nEither Jack does hire a maid or cleaning service and does not often clean his home, or he does not hire a maid or cleaning service nor often clean his home.",
+  "query": "Jack has a tidy house.",
+  "program": "not often_clean(V) => not tidy_house(V). @ \"If people don't often clean their homes, then they do not have tidy houses.\"\nnot prioritize_cleaning(V) => not often_clean(V). @ \"If people don't prioritize cleaning, then they do not often clean their homes.\"\nhire_maid(V) => tidy_house(V). @ \"If people hire a maid or cleaning service, then they have tidy houses.\"\nnot care_cleanliness(V) => not prioritize_cleaning(V). @ \"If people don't care about cleanliness, then they do not prioritize cleaning.\"\n# Disjunction of (hire & not clean) and (not hire / not clean): at least one of \"not hire\" or \"not clean\" holds.\nnot hire_maid(jack) | not often_clean(jack). @ \"Either Jack does hire a maid or cleaning service and does not often clean his home, or he does not hire a maid or cleaning service nor often clean his home.\"\n? tidy_house(jack).\n",
+  "expected": "unknown",
+  "wrong_verdict": "no",
+  "changed": [
+   "not hire_maid(jack) | not often_clean(jack)."
+  ],
+  "source_id": "860"
+ },
+ {
+  "text": "No payment cards issued by Russian banks can be used with ApplePay.\nAll MIR payment cards are issued by Russian banks.\nSome international payment cards can be used with ApplePay.\nSocial payments in Russia can only be transferred to MIR payment cards.\nBank of America payment cards can be used with ApplePay.",
+  "query": "If Bank of America payment cards are international and can be used to transfer social payments in Russia, then they are international.",
+  "program": "issued_russian(V) => not applepay(V). @ \"No payment cards issued by Russian banks can be used with ApplePay.\"\nmir(V) => issued_russian(V). @ \"All MIR payment cards are issued by Russian banks.\"\ninternational(some_intl_1). @ \"Some international payment cards can be used with ApplePay.\"\napplepay(some_intl_1). @ \"Some international payment cards can be used with ApplePay.\"\nsocial_transfer(V) => mir(V). @ \"Social payments in Russia can only be transferred to MIR payment cards.\"\napplepay(boa_card). @ \"Bank of America payment cards can be used with ApplePay.\"\n? not (international(boa_card) & social_transfer(boa_card)) | international(boa_card).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "? not (international(boa_card) & social_transfer(boa_card)) | international(boa_card)."
+  ],
+  "source_id": "775"
+ },
+ {
+  "text": "The SAT test is wholly owned and developed by the College Board.\nThe SAT test is intended to assess students' readiness for college.\nThe SAT was originally designed not to be aligned with high school curricula. \nSeveral adjustments were made to the version of the SAT introduced in 2016 to align with the high school curriculum.",
+  "query": "The SAT test is owned by the College Board and other third parties.",
+  "program": "owned_by(sat, college_board). @ \"The SAT test is wholly owned and developed by the College Board\"\nnot owned_by(sat, third_parties). @ \"wholly owned\"\n? owned_by(sat, college_board) & owned_by(sat, third_parties).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "owned_by(sat, college_board).",
+   "not owned_by(sat, third_parties)."
+  ],
+  "source_id": "555"
+ },
+ {
+  "text": "Notable people with the given name include Dagfinn Aarskog, Dagfinn Bakke and Dagfinn Dahl.\nDagfinn Aarskog is a Norwegian physician.\nDagfinn Dahl is a Norwegian barrister.",
+  "query": "Dagfinn Aarskog is a notable person.",
+  "program": "notable_person(dagfinn_aarskog). @ \"Notable people with the given name include Dagfinn Aarskog\"\nnotable_person(dagfinn_bakke). @ \"Dagfinn Bakke\"\nnotable_person(dagfinn_dahl). @ \"Dagfinn Dahl\"\nnorwegian(dagfinn_aarskog). @ \"Dagfinn Aarskog is a Norwegian physician\"\nphysician(dagfinn_aarskog). @ \"Dagfinn Aarskog is a Norwegian physician\"\nnorwegian(dagfinn_dahl). @ \"Dagfinn Dahl is a Norwegian barrister\"\nbarrister(dagfinn_dahl). @ \"Dagfinn Dahl is a Norwegian barrister\"\n? notable_person(dagfinn_aarskog).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "notable_person(dagfinn_aarskog).",
+   "notable_person(dagfinn_bakke).",
+   "notable_person(dagfinn_dahl)."
+  ],
+  "source_id": "44"
+ },
+ {
+  "text": "Some monitors made by LG have a type-c port.\nMonitors that have a type-c port were not made before 2010.\nAll monitors in the library are made before 2010. \nThe L-2021 monitor is either used in the library or has a type-c port.\nThe L-2021 monitor is either both produced before 2010 and made by LG, or neither is true.",
+  "query": "If the monitor L-2021 is either produced by LG and produced before 2010 or neither produced by LG nor produced before 2010,  then L-2021 is either in the library or produced by LG.",
+  "program": "monitor(some_monitor_1). @ \"Some monitors made by LG\"\nlg(some_monitor_1). @ \"Some monitors made by LG\"\ntype_c(some_monitor_1). @ \"have a type-c port\"\ntype_c(V) => not before2010(V). @ \"Monitors that have a type-c port were not made before 2010\"\nin_library(V) => before2010(V). @ \"All monitors in the library are made before 2010\"\nin_library(l2021) | type_c(l2021). @ \"The L-2021 monitor is either used in the library or has a type-c port\"\nbefore2010(l2021) => lg(l2021). @ \"The L-2021 monitor is either both produced before 2010 and made by LG, or neither is true\"\nlg(l2021) => before2010(l2021). @ \"The L-2021 monitor is either both produced before 2010 and made by LG, or neither is true\"\n? not ((lg(l2021) & before2010(l2021)) | (not lg(l2021) & not before2010(l2021))) | ((in_library(l2021) | lg(l2021)) & not (in_library(l2021) & lg(l2021))).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "? not ((lg(l2021) & before2010(l2021)) | (not lg(l2021) & not before2010(l2021))) | ((in_library(l2021) | lg(l2021)) & not (in_library(l2021) & lg(l2021)))."
+  ],
+  "source_id": "1177"
+ },
+ {
+  "text": "All devices belonging to the company are connected to Google Home. \nAll devices with the company logo belong to the company. \nEach device either has the company logo or belongs to employees. \nAll of the devices belonging to employees can be connected to the company's wifi. \nAll of the devices connected to Google Home are controlled by managers. \nAll of the devices that connect to the company's wifi are easy to operate. \nAll of the devices that are easy to operate were produced after a new CTO is appointed. \nModelXX was not produced after a new CTO was appointed.",
+  "query": "ModelXX is either with the company logo or controlled by managers.",
+  "program": "company_device(V) => connected_google_home(V). @ \"All devices belonging to the company are connected to Google Home.\"\ncompany_logo(V) => company_device(V). @ \"All devices with the company logo belong to the company.\"\ndevice(V) => company_logo(V) | employee_device(V). @ \"Each device either has the company logo or belongs to employees.\"\nemployee_device(V) => company_wifi(V). @ \"All of the devices belonging to employees can be connected to the company's wifi.\"\nconnected_google_home(V) => managers_controlled(V). @ \"All of the devices connected to Google Home are controlled by managers.\"\ncompany_wifi(V) => easy_operate(V). @ \"All of the devices that connect to the company's wifi are easy to operate.\"\neasy_operate(V) => produced_after_cto(V). @ \"All of the devices that are easy to operate were produced after a new CTO is appointed.\"\ndevice(modelxx). @ \"ModelXX\"\nnot produced_after_cto(modelxx). @ \"ModelXX was not produced after a new CTO was appointed.\"\n? (company_logo(modelxx) & not managers_controlled(modelxx)) | (not company_logo(modelxx) & managers_controlled(modelxx)).\n",
+  "expected": "no",
+  "wrong_verdict": "yes",
+  "changed": [
+   "? (company_logo(modelxx) & not managers_controlled(modelxx)) | (not company_logo(modelxx) & managers_controlled(modelxx))."
+  ],
+  "source_id": "1218"
+ },
+ {
+  "text": "It is not true that some giant language models do not have good performance. \nAll language models with good performance are used by some researchers.\nIf a language model is used by some researchers, it is popular. \nIf BERT is a giant language model, then GPT-3 is also a giant language model. \nBERT is a giant language model. ",
+  "query": "GPT-3 is popular.",
+  "program": "language_model(V) & giant(V) => good_performance(V). @ \"It is not true that some giant language models do not have good performance.\"\nlanguage_model(V) & good_performance(V) => used_by_researchers(V). @ \"All language models with good performance are used by some researchers.\"\nlanguage_model(V) & used_by_researchers(V) => popular(V). @ \"If a language model is used by some researchers, it is popular.\"\nlanguage_model(bert) & giant(bert) => language_model(gpt3). @ \"If BERT is a giant language model, then GPT-3 is also a giant language model.\"\nlanguage_model(bert) & giant(bert) => giant(gpt3). @ \"If BERT is a giant language model, then GPT-3 is also a giant language model.\"\nlanguage_model(bert). @ \"BERT is a giant language model.\"\ngiant(bert). @ \"BERT is a giant language model.\"\n? popular(gpt3).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "language_model(V) & giant(V) => good_performance(V).",
+   "language_model(bert) & giant(bert) => language_model(gpt3).",
+   "language_model(bert) & giant(bert) => giant(gpt3).",
+   "language_model(bert).",
+   "giant(bert)."
+  ],
+  "source_id": "682"
+ },
+ {
+  "text": "Boves is a railway station located in France. \nThe preceding station of Boves is Longueau.\nThe preceding station of Dommartin is Boves.\nFrance is a European country.\nDommartin is situated on the Paris–Lille railway. \nAny two contiguous stations are on the same railway.\nBoves is served by regional TER Hauts-de-France trains.\nIf place A is located in place B and place B is located in place C, then place A is located in place C.\nIf place A precedes place B and place B precedes place C, then place A precedes place C.",
+  "query": "Longueau is situated on the Paris–Lille railway.",
+  "program": "located_in(boves, france). @ \"Boves is a railway station located in France.\"\nprecedes(longueau, boves). @ \"The preceding station of Boves is Longueau.\"\nprecedes(boves, dommartin). @ \"The preceding station of Dommartin is Boves.\"\ncontiguous(longueau, boves). @ \"The preceding station of Boves is Longueau.\"\ncontiguous(boves, dommartin). @ \"The preceding station of Dommartin is Boves.\"\neuropean_country(france). @ \"France is a European country.\"\non_railway(dommartin, paris_lille). @ \"Dommartin is situated on the Paris–Lille railway.\"\ncontiguous(A, B) & on_railway(B, R) => on_railway(A, R). @ \"Any two contiguous stations are on the same railway.\"\ncontiguous(A, B) & on_railway(A, R) => on_railway(B, R). @ \"Any two contiguous stations are on the same railway.\"\nserved_by(boves, ter_hauts_de_france). @ \"Boves is served by regional TER Hauts-de-France trains.\"\nlocated_in(A, B) & located_in(B, C) => located_in(A, C). @ \"If place A is located in place B and place B is located in place C, then place A is located in place C.\"\nprecedes(A, B) & precedes(B, C) => precedes(A, C). @ \"If place A precedes place B and place B precedes place C, then place A precedes place C.\"\n? on_railway(longueau, paris_lille).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "contiguous(longueau, boves).",
+   "contiguous(boves, dommartin)."
+  ],
+  "source_id": "14"
+ },
+ {
+  "text": "All books written by Neil Gaiman have sold more than one thousand copies.\nSome books that have won Hugo Awards are written by Neil Gaiman.\nTomas has read all books written by Tolkien. \nEither Tomas has read Hamlet, or it has sold more than one thousand copies.\nHamlet has either sold more than one thousand copies or it is written by Neil Gaiman.",
+  "query": "Hamlet has won a Hugo Award and is written by Tolkien.",
+  "program": "book_by_gaiman(V) => sold_over_1000(V). @ \"All books written by Neil Gaiman have sold more than one thousand copies.\"\nhugo_book(some_book_1). @ \"Some books that have won Hugo Awards are written by Neil Gaiman.\"\nbook_by_gaiman(some_book_1). @ \"Some books that have won Hugo Awards are written by Neil Gaiman.\"\nbook_by_tolkien(V) => read(tomas, V). @ \"Tomas has read all books written by Tolkien.\"\nread(tomas, hamlet) | sold_over_1000(hamlet). @ \"Either Tomas has read Hamlet, or it has sold more than one thousand copies.\"\nread(tomas, hamlet) => not sold_over_1000(hamlet). @ \"Either Tomas has read Hamlet, or it has sold more than one thousand copies.\"\nsold_over_1000(hamlet) => not read(tomas, hamlet). @ \"Either Tomas has read Hamlet, or it has sold more than one thousand copies.\"\nsold_over_1000(hamlet) | book_by_gaiman(hamlet). @ \"Hamlet has either sold more than one thousand copies or it is written by Neil Gaiman.\"\nsold_over_1000(hamlet) => not book_by_gaiman(hamlet). @ \"Hamlet has either sold more than one thousand copies or it is written by Neil Gaiman.\"\nbook_by_gaiman(hamlet) => not sold_over_1000(hamlet). @ \"Hamlet has either sold more than one thousand copies or it is written by Neil Gaiman.\"\n? hugo_book(hamlet) & book_by_tolkien(hamlet).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "read(tomas, hamlet) => not sold_over_1000(hamlet).",
+   "sold_over_1000(hamlet) => not read(tomas, hamlet).",
+   "sold_over_1000(hamlet) => not book_by_gaiman(hamlet).",
+   "book_by_gaiman(hamlet) => not sold_over_1000(hamlet)."
+  ],
+  "source_id": "1167"
+ },
+ {
+  "text": "Beasts of Prey is a fantasy novel or a science fiction novel, or both.\nScience fiction novels are not about mythological creatures\nBeasts of Prey Is about a creature known as the Shetani.\nShetanis are mythological.",
+  "query": "A shetani is either mythological or a creature.",
+  "program": "fantasy(beasts_of_prey) | scifi(beasts_of_prey). @ \"Beasts of Prey is a fantasy novel or a science fiction novel, or both.\"\nscifi(N) & about(N, C) => not mythological(C). @ \"Science fiction novels are not about mythological creatures\"\nabout(beasts_of_prey, shetani). @ \"Beasts of Prey Is about a creature known as the Shetani.\"\ncreature(shetani). @ \"a creature known as the Shetani\"\nmythological(shetani). @ \"Shetanis are mythological.\"\n? (mythological(shetani) | creature(shetani)) & not (mythological(shetani) & creature(shetani)).\n",
+  "expected": "no",
+  "wrong_verdict": "yes",
+  "changed": [
+   "? (mythological(shetani) | creature(shetani)) & not (mythological(shetani) & creature(shetani))."
+  ],
+  "source_id": "366"
+ },
+ {
+  "text": "A cat named Garfield, the main character of the film Garfield, is orange and fat and likes having lasagna. \nGarfield shares a home with Odie, another pet of Jon's. \nGarfield hates Odie.\nA pet who hates the pet with whom he shares the same owner is childish and possessive.",
+  "query": "The main character of the film Garfield is childish and possessive.",
+  "program": "cat(garfield). @ \"A cat named Garfield\"\nmain_character(garfield, film_garfield). @ \"the main character of the film Garfield\"\norange(garfield). @ \"is orange\"\nfat(garfield). @ \"fat\"\npet(garfield). @ \"another pet of Jon's\"\npet(odie). @ \"another pet of Jon's\"\npet_of(odie, jon). @ \"another pet of Jon's\"\npet_of(garfield, jon). @ \"another pet of Jon's\"\nhates(garfield, odie). @ \"Garfield hates Odie.\"\npet_of(X, O) & pet_of(Y, O) => same_owner(X, Y). @ \"the pet with whom he shares the same owner\"\npet(X) & pet(Y) & same_owner(X, Y) & hates(X, Y) => childish(X). @ \"A pet who hates the pet with whom he shares the same owner is childish and possessive.\"\npet(X) & pet(Y) & same_owner(X, Y) & hates(X, Y) => possessive(X). @ \"A pet who hates the pet with whom he shares the same owner is childish and possessive.\"\n? childish(garfield) & possessive(garfield).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "orange(garfield).",
+   "fat(garfield).",
+   "pet(garfield).",
+   "pet(odie).",
+   "pet(X) & pet(Y) & same_owner(X, Y) & hates(X, Y) => childish(X).",
+   "pet(X) & pet(Y) & same_owner(X, Y) & hates(X, Y) => possessive(X)."
+  ],
+  "source_id": "375"
+ },
+ {
+  "text": "All mind-reading is either brain reading or brain decoding. \nAll brain decoding that is mind-reading is extracting information from BOLD signals.\nNo studies that are mind-reading and extract information from BOLD signals are without statistical pattern analysis. \nWriting a novel is without statistical pattern analysis.\nIf multivoxel (pattern) analysis is without statistical pattern analysis and a brain reading, then multivoxel (pattern) analysis is without statistical pattern analysis and brain decoding.\nMultivoxel (pattern) analysis is a type of mind-reading.",
+  "query": "Multivoxel (pattern) analysis is without statistical pattern analysis or writing a novel.",
+  "program": "mind_reading(V) => brain_reading(V) | brain_decoding(V). @ \"All mind-reading is either brain reading or brain decoding.\"\nbrain_decoding(V) & mind_reading(V) => extracts_bold(V). @ \"All brain decoding that is mind-reading is extracting information from BOLD signals.\"\nmind_reading(V) & extracts_bold(V) => not without_spa(V). @ \"No studies that are mind-reading and extract information from BOLD signals are without statistical pattern analysis.\"\nwriting_novel(V) => without_spa(V). @ \"Writing a novel is without statistical pattern analysis.\"\nwithout_spa(mva) & brain_reading(mva) => brain_decoding(mva). @ \"If multivoxel (pattern) analysis is without statistical pattern analysis and a brain reading, then multivoxel (pattern) analysis is without statistical pattern analysis and brain decoding.\"\nmind_reading(mva). @ \"Multivoxel (pattern) analysis is a type of mind-reading.\"\n? without_spa(mva) | writing_novel(mva).\n",
+  "expected": "no",
+  "wrong_verdict": "yes",
+  "changed": [
+   "writing_novel(V) => without_spa(V).",
+   "? without_spa(mva) | writing_novel(mva)."
+  ],
+  "source_id": "1087"
+ },
+ {
+  "text": "No Boeing-737 plane has more than 300 seats. \nAll of the planes acquired by Delta in this batch are Boeing-737. \nPlanes either have more than 300 seats or have a capacity of 100 passengers. \nAll planes with a capacity of 100 passengers are scheduled for a short-distance flight. \nAll planes with a capacity of 100 passengers are produced before 2010. \nJake32 is either a Boeing-737 plane or a plane acquired by Delta in this batch.\nT10 is either both a Boeing-737 plane and acquired by Delta in this batch, or it is neither.",
+  "query": "Jake32 was produced before 2010 and is scheduled for a short-distance flight.",
+  "program": "boeing737(V) => plane(V). @ \"No Boeing-737 plane\"\ndelta_batch(V) => plane(V). @ \"the planes acquired by Delta in this batch\"\nboeing737(V) => not more_300_seats(V). @ \"No Boeing-737 plane has more than 300 seats\"\ndelta_batch(V) => boeing737(V). @ \"All of the planes acquired by Delta in this batch are Boeing-737\"\nplane(V) => more_300_seats(V) | capacity_100(V). @ \"Planes either have more than 300 seats or have a capacity of 100 passengers\"\ncapacity_100(V) => short_distance(V). @ \"All planes with a capacity of 100 passengers are scheduled for a short-distance flight\"\ncapacity_100(V) => before_2010(V). @ \"All planes with a capacity of 100 passengers are produced before 2010\"\nplane(jake32). @ \"Jake32 is either a Boeing-737 plane or a plane acquired by Delta in this batch\"\nboeing737(jake32) | delta_batch(jake32). @ \"Jake32 is either a Boeing-737 plane or a plane acquired by Delta in this batch\"\n? before_2010(jake32) & short_distance(jake32).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "boeing737(V) => plane(V).",
+   "delta_batch(V) => plane(V).",
+   "plane(jake32)."
+  ],
+  "source_id": "1227"
+ },
+ {
+  "text": "If a person is the leader of a country for life, that person has power.\nLeaders of a country for life are either a king or a queen.\nQueens are female.\nKings are male. \nElizabeth is a queen.\nElizabeth is a leader of a country for life.",
+  "query": "Elizabeth is a king.",
+  "program": "leader_for_life(V) => power(V). @ \"If a person is the leader of a country for life, that person has power.\"\nleader_for_life(V) => king(V) | queen(V). @ \"Leaders of a country for life are either a king or a queen.\"\nleader_for_life(V) & queen(V) => not king(V). @ \"Leaders of a country for life are either a king or a queen.\"\nleader_for_life(V) & king(V) => not queen(V). @ \"Leaders of a country for life are either a king or a queen.\"\nqueen(V) => female(V). @ \"Queens are female.\"\nking(V) => male(V). @ \"Kings are male.\"\nqueen(elizabeth). @ \"Elizabeth is a queen.\"\nleader_for_life(elizabeth). @ \"Elizabeth is a leader of a country for life.\"\n? king(elizabeth).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "leader_for_life(V) & queen(V) => not king(V).",
+   "leader_for_life(V) & king(V) => not queen(V)."
+  ],
+  "source_id": "165"
+ },
+ {
+  "text": "All inductive reasoning processes derive general principles from a body of observations.\nTwo major types of reasoning rules are inductive reasoning and deductive reasoning. \nAll deductive reasoning processes are only based on facts and rules. \nNothing only based on facts and rules is used for statistical generalization. \nModus Ponens is not both used in inductive reasoning and used for statistical generalization. \nModus Ponens is a component of a major part of reasoning rule. ",
+  "query": "If Modus Ponens either derives general principles from a body of observations and is used for statistical generalization, or neither, then Modus Ponens is is neither used in inductive reasoning  nor used for statistical generalization.",
+  "program": "inductive_reasoning(V) => derives_principles(V). @ \"All inductive reasoning processes derive general principles from a body of observations.\"\ninductive_reasoning(modus_ponens) | deductive_reasoning(modus_ponens). @ \"Modus Ponens is a component of a major part of reasoning rule.\"\ndeductive_reasoning(V) => based_on_facts_rules(V). @ \"All deductive reasoning processes are only based on facts and rules.\"\nbased_on_facts_rules(V) => not statistical_generalization(V). @ \"Nothing only based on facts and rules is used for statistical generalization.\"\nnot inductive_reasoning(modus_ponens) | not statistical_generalization(modus_ponens). @ \"Modus Ponens is not both used in inductive reasoning and used for statistical generalization.\"\n? not ((derives_principles(modus_ponens) & statistical_generalization(modus_ponens)) | (not derives_principles(modus_ponens) & not statistical_generalization(modus_ponens))) | (not inductive_reasoning(modus_ponens) & not statistical_generalization(modus_ponens)).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "inductive_reasoning(modus_ponens) | deductive_reasoning(modus_ponens)."
+  ],
+  "source_id": "1062"
+ },
+ {
+  "text": "Any convicted criminal that is innocent is not truly guilty.\nAll convicted criminals who did not commit a crime are truly innocent.\nAll convicted criminals are truly guilty or found guilty.\nIf a convicted criminal is found guilty, then they are sentenced to a punishment.\nIf a convicted criminal is found guilty, then they can argue against their punishment.\nGarry is a convicted criminal who not found guilty or is sentenced to punishment.",
+  "query": "Garry did not commit a crime and can argue against his punishment.",
+  "program": "convicted_criminal(V) & innocent(V) => not truly_guilty(V). @ \"Any convicted criminal that is innocent is not truly guilty.\"\nconvicted_criminal(V) & not commit_crime(V) => innocent(V). @ \"All convicted criminals who did not commit a crime are truly innocent.\"\nconvicted_criminal(V) => truly_guilty(V) | found_guilty(V). @ \"All convicted criminals are truly guilty or found guilty.\"\nconvicted_criminal(V) & found_guilty(V) => sentenced(V). @ \"If a convicted criminal is found guilty, then they are sentenced to a punishment.\"\nconvicted_criminal(V) & found_guilty(V) => can_argue(V). @ \"If a convicted criminal is found guilty, then they can argue against their punishment.\"\nconvicted_criminal(garry). @ \"Garry is a convicted criminal\"\nnot found_guilty(garry). @ \"who not found guilty or is sentenced to punishment\"\nnot sentenced(garry). @ \"who not found guilty or is sentenced to punishment\"\n? not commit_crime(garry) & can_argue(garry).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "not found_guilty(garry).",
+   "not sentenced(garry)."
+  ],
+  "source_id": "1331"
+ },
+ {
+  "text": "New York City is Located in the United States of America.\nThe United States of America is part of North America.\nNorth America is in the western hemisphere of the earth.\nNew York City is a highly developed city.\nIf place A is located in place B and place B is located in place C, then place A is located in place C.",
+  "query": "A highly developed city is located in the western hemisphere of the earth.",
+  "program": "located_in(new_york_city, usa). @ \"New York City is Located in the United States of America\"\nlocated_in(usa, north_america). @ \"The United States of America is part of North America\"\nlocated_in(north_america, western_hemisphere). @ \"North America is in the western hemisphere of the earth\"\nhighly_developed_city(new_york_city). @ \"New York City is a highly developed city\"\nlocated_in(A, B) & located_in(B, C) => located_in(A, C). @ \"If place A is located in place B and place B is located in place C, then place A is located in place C\"\n? highly_developed_city(new_york_city) & located_in(new_york_city, western_hemisphere).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "located_in(usa, north_america)."
+  ],
+  "source_id": "376"
+ },
+ {
+  "text": "No battery-powered watch is automatic.\nAll digital watches are battery-powered.\nSome mechanical watches are automatic.\nAll smart watches are digital.\nMoonwatch is either a digital watch and an automatic, or it is neither.",
+  "query": "If Moonwatch is a smartwatch and a mechanical watch, then Moonwatch is not a mechanical watch.",
+  "program": "battery_powered(V) => not automatic(V). @ \"No battery-powered watch is automatic.\"\ndigital(V) => battery_powered(V). @ \"All digital watches are battery-powered.\"\nmechanical(some_mech_1). @ \"Some mechanical watches are automatic.\"\nautomatic(some_mech_1). @ \"Some mechanical watches are automatic.\"\nsmart(V) => digital(V). @ \"All smart watches are digital.\"\ndigital(moonwatch) => automatic(moonwatch). @ \"Moonwatch is either a digital watch and an automatic, or it is neither.\"\nautomatic(moonwatch) => digital(moonwatch). @ \"Moonwatch is either a digital watch and an automatic, or it is neither.\"\nnot digital(moonwatch) => not automatic(moonwatch). @ \"Moonwatch is either a digital watch and an automatic, or it is neither.\"\nnot automatic(moonwatch) => not digital(moonwatch). @ \"Moonwatch is either a digital watch and an automatic, or it is neither.\"\n? not (smart(moonwatch) & mechanical(moonwatch)) | not mechanical(moonwatch).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "not digital(moonwatch) => not automatic(moonwatch).",
+   "not automatic(moonwatch) => not digital(moonwatch).",
+   "? not (smart(moonwatch) & mechanical(moonwatch)) | not mechanical(moonwatch)."
+  ],
+  "source_id": "898"
+ },
+ {
+  "text": "ETS develops various standardized tests primarily in the United States for K-12 and higher education. \nETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.\nMany of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions. \nETS also develops K-12 statewide assessments used for accountability testing in many states.",
+  "query": "ETS doesn't administer tests internationally.",
+  "program": "administers_international_tests(ets). @ \"ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests\"\n? not administers_international_tests(ets).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "administers_international_tests(ets)."
+  ],
+  "source_id": "558"
+ },
+ {
+  "text": "All imaginative processes that Dan knows are results of creative processes.\nAll science fiction that Dan knows comes from an imaginative process.\nEverthing that Dan knows comes from either science-fiction or realistic fiction.\nNo facts that Dan knows have proven to be false.\nDan knows that Dune is science fiction or has proven to be false.",
+  "query": "Dune is a result of creative processes and is science fiction.",
+  "program": "imaginative(V) & knows(dan, V) => creative_result(V). @ \"All imaginative processes that Dan knows are results of creative processes.\"\nscifi(V) & knows(dan, V) => imaginative(V). @ \"All science fiction that Dan knows comes from an imaginative process.\"\nknows(dan, V) => scifi(V) | realistic_fiction(V). @ \"Everthing that Dan knows comes from either science-fiction or realistic fiction.\"\nknows(dan, V) => not proven_false(V). @ \"No facts that Dan knows have proven to be false.\"\nknows(dan, dune). @ \"Dan knows that Dune is science fiction or has proven to be false.\"\nscifi(dune) | proven_false(dune). @ \"Dune is science fiction or has proven to be false\"\n? creative_result(dune) & scifi(dune).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "knows(dan, V) => not proven_false(V)."
+  ],
+  "source_id": "1050"
+ },
+ {
+  "text": "Some soccer defenders are center-backs.\nAll soccer defenders are soccer players.\nNo soccer players are professional basketball players.\nAll NBA players are professional basketball players.\nStephen Curry is an NBA player.",
+  "query": "If Stephen Curry is not both a centerback and a soccer defender, then Stephen Curry is neither a soccer player nor a professional basketball player.",
+  "program": "soccer_defender(some_sd_1). @ \"Some soccer defenders are center-backs\"\ncenter_back(some_sd_1). @ \"Some soccer defenders are center-backs\"\nsoccer_defender(V) => soccer_player(V). @ \"All soccer defenders are soccer players\"\nsoccer_player(V) => not professional_basketball_player(V). @ \"No soccer players are professional basketball players\"\nnba_player(V) => professional_basketball_player(V). @ \"All NBA players are professional basketball players\"\nnba_player(stephen_curry). @ \"Stephen Curry is an NBA player\"\n? (center_back(stephen_curry) & soccer_defender(stephen_curry)) | (not soccer_player(stephen_curry) | not professional_basketball_player(stephen_curry)).\n",
+  "expected": "yes",
+  "wrong_verdict": "no",
+  "changed": [
+   "? (center_back(stephen_curry) & soccer_defender(stephen_curry)) | (not soccer_player(stephen_curry) | not professional_basketball_player(stephen_curry))."
+  ],
+  "source_id": "836"
+ },
+ {
+  "text": "All phones are things.\nAll cell phones are phones. \nAll iPhones are cell phones. \nAll employees are wage earners.\nAll wage earners are human. \nJack is either an employee or a wage earner.\nJack is either a human or a phone.",
+  "query": "Jack is not both a thing and an iPhone.",
+  "program": "phone(V) => thing(V). @ \"All phones are things.\"\ncell_phone(V) => phone(V). @ \"All cell phones are phones.\"\niphone(V) => cell_phone(V). @ \"All iPhones are cell phones.\"\nemployee(V) => wage_earner(V). @ \"All employees are wage earners.\"\nwage_earner(V) => human(V). @ \"All wage earners are human.\"\nemployee(jack) | wage_earner(jack). @ \"Jack is either an employee or a wage earner.\"\nemployee(jack) => not wage_earner(jack). @ \"Jack is either an employee or a wage earner.\"\nwage_earner(jack) => not employee(jack). @ \"Jack is either an employee or a wage earner.\"\nhuman(jack) | phone(jack). @ \"Jack is either a human or a phone.\"\nhuman(jack) => not phone(jack). @ \"Jack is either a human or a phone.\"\nphone(jack) => not human(jack). @ \"Jack is either a human or a phone.\"\n? not (thing(jack) & iphone(jack)).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "employee(jack) => not wage_earner(jack).",
+   "wage_earner(jack) => not employee(jack).",
+   "human(jack) => not phone(jack).",
+   "phone(jack) => not human(jack)."
+  ],
+  "source_id": "1384"
+ },
+ {
+  "text": "Everyone that knows about breath-first-search knows how to use a queue. \nIf someone is a seasoned software engineer interviewer at Google, then they know what breath-first-search is. \nSomeone is either a seasoned software engineer interviewer at Google, has human rights, or both. \nEvery person who has human rights is entitled to the right to life and liberty. \nEveryone that knows how to use a queue knows about the first-in-first-out data structure. \nEveryone that is entitled to the right to life and liberty cannot be deprived of their rights without due process of law. \nJack is entitled to the right to life and liberty, has human rights, or knows about the first-in-first-out data structure. ",
+  "query": "Jack can be deprived of their rights without due process of law.",
+  "program": "knows_bfs(V) => knows_queue(V). @ \"Everyone that knows about breath-first-search knows how to use a queue.\"\nseasoned_interviewer(V) => knows_bfs(V). @ \"If someone is a seasoned software engineer interviewer at Google, then they know what breath-first-search is.\"\nseasoned_interviewer(some_person_1) | has_human_rights(some_person_1). @ \"Someone is either a seasoned software engineer interviewer at Google, has human rights, or both.\"\nhas_human_rights(V) => entitled_life_liberty(V). @ \"Every person who has human rights is entitled to the right to life and liberty.\"\nknows_queue(V) => knows_fifo(V). @ \"Everyone that knows how to use a queue knows about the first-in-first-out data structure.\"\nentitled_life_liberty(V) => not deprived_without_due_process(V). @ \"Everyone that is entitled to the right to life and liberty cannot be deprived of their rights without due process of law.\"\nentitled_life_liberty(jack). @ \"Jack is entitled to the right to life and liberty\"\nhas_human_rights(jack). @ \"has human rights\"\nknows_fifo(jack). @ \"knows about the first-in-first-out data structure\"\n? deprived_without_due_process(jack).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "entitled_life_liberty(jack).",
+   "has_human_rights(jack).",
+   "knows_fifo(jack)."
+  ],
+  "source_id": "1291"
+ },
+ {
+  "text": "Boves is a railway station located in France. \nThe preceding station of Boves is Longueau.\nThe preceding station of Dommartin is Boves.\nFrance is a European country.\nDommartin is situated on the Paris–Lille railway. \nAny two contiguous stations are on the same railway.\nBoves is served by regional TER Hauts-de-France trains.\nIf place A is located in place B and place B is located in place C, then place A is located in place C.\nIf place A precedes place B and place B precedes place C, then place A precedes place C.",
+  "query": "Boves is not in Europe.",
+  "program": "station(boves). @ \"Boves is a railway station\"\nlocated_in(boves, france). @ \"located in France\"\npreceding(longueau, boves). @ \"The preceding station of Boves is Longueau\"\npreceding(boves, dommartin). @ \"The preceding station of Dommartin is Boves\"\neuropean_country(france). @ \"France is a European country\"\nlocated_in(france, europe). @ \"France is a European country\"\non_railway(dommartin, paris_lille_railway). @ \"Dommartin is situated on the Paris–Lille railway\"\nserved_by(boves, ter_hauts_de_france). @ \"Boves is served by regional TER Hauts-de-France trains\"\nlocated_in(A, B) & located_in(B, C) => located_in(A, C). @ \"If place A is located in place B and place B is located in place C, then place A is located in place C.\"\npreceding(A, B) & preceding(B, C) => preceding(A, C). @ \"If place A precedes place B and place B precedes place C, then place A precedes place C.\"\n? not located_in(boves, europe).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "located_in(france, europe).",
+   "on_railway(dommartin, paris_lille_railway)."
+  ],
+  "source_id": "15"
+ },
+ {
+  "text": "Shafaq-Asiman is a large complex of offshore geological structures in the Caspian Sea.\nBaku is northwest of Shafaq-Asiman.\nIf place A is northwest of place B, then place B is southeast of place A.",
+  "query": "Baku is not northwest of offshore geological structures.",
+  "program": "same(shafaq_asiman, offshore_geological_structures). @ \"Shafaq-Asiman is a large complex of offshore geological structures\"\nlarge(shafaq_asiman). @ \"a large complex\"\nin(shafaq_asiman, caspian_sea). @ \"in the Caspian Sea\"\nnorthwest(baku, shafaq_asiman). @ \"Baku is northwest of Shafaq-Asiman\"\nnorthwest(A, B) => southeast(B, A). @ \"If place A is northwest of place B, then place B is southeast of place A\"\n? not northwest(baku, offshore_geological_structures).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "same(shafaq_asiman, offshore_geological_structures).",
+   "large(shafaq_asiman)."
+  ],
+  "source_id": "300"
+ },
+ {
+  "text": "There are no elements with atomic number between 61-63 that are not scarce in China.\nNon-rare earth elements are not scarce in China.\nAll elements are either non-rare earth elements or rare earth elements. \nAll rare earth elements can be used for industry.\nAll rare earth elements are essential for exploring future directions of electronics.\nLithium is either a non-rare earth element and essential for exploring future directions of electronics, or is not a non-rare earth element and is not essential for exploring future directions of electronics.",
+  "query": "Lithium is an element with atomic number between 61-63 and is used for batteries.",
+  "program": "element_61_63(V) => scarce_china(V). @ \"There are no elements with atomic number between 61-63 that are not scarce in China.\"\nnon_rare_earth(V) => not scarce_china(V). @ \"Non-rare earth elements are not scarce in China.\"\nelement(V) => non_rare_earth(V) | rare_earth(V). @ \"All elements are either non-rare earth elements or rare earth elements.\"\nrare_earth(V) => industry_use(V). @ \"All rare earth elements can be used for industry.\"\nrare_earth(V) => essential_electronics(V). @ \"All rare earth elements are essential for exploring future directions of electronics.\"\nelement(lithium). @ \"Lithium is either a non-rare earth element\"\nnon_rare_earth(lithium) => essential_electronics(lithium). @ \"Lithium is either a non-rare earth element and essential for exploring future directions of electronics\"\nessential_electronics(lithium) => non_rare_earth(lithium). @ \"or is not a non-rare earth element and is not essential for exploring future directions of electronics\"\n? element_61_63(lithium) & battery_use(lithium).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "element(lithium)."
+  ],
+  "source_id": "1045"
+ },
+ {
+  "text": "No athletes never exercise.\nAll professional basketball players are athletes. \nAll NBA players are professional basketball players. \nAll Knicks players are NBA players. \nEither John is a professional basketball player and he never exercises, or he is not a professional basketball player and he sometimes exercises.",
+  "query": "Jim is not a Knicks player.",
+  "program": "athlete(V) => exercise(V). @ \"No athletes never exercise.\"\nprofessional_basketball_player(V) => athlete(V). @ \"All professional basketball players are athletes.\"\nnba_player(V) => professional_basketball_player(V). @ \"All NBA players are professional basketball players.\"\nknicks_player(V) => nba_player(V). @ \"All Knicks players are NBA players.\"\nprofessional_basketball_player(john) | exercise(john). @ \"Either John is a professional basketball player and he never exercises, or he is not a professional basketball player and he sometimes exercises.\"\nprofessional_basketball_player(john) => not exercise(john). @ \"Either John is a professional basketball player and he never exercises\"\nexercise(john) => not professional_basketball_player(john). @ \"or he is not a professional basketball player and he sometimes exercises\"\n? not knicks_player(john).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "professional_basketball_player(john) => not exercise(john).",
+   "exercise(john) => not professional_basketball_player(john).",
+   "? not knicks_player(john)."
+  ],
+  "source_id": "882"
+ },
+ {
+  "text": "There are no mansion houses in an urban area.\nAll skyscrapers are in urban areas.\nEvery creepy haunted house is a mansion house.\nEvery terrifying building on Halloween is a creepy haunted house.\nThe LaLaurie House is a creepy haunted house or a terrifying building on Halloween.",
+  "query": "If the LaLaurie House is either a skyscraper or a mansion house, then it is in an urban area.",
+  "program": "mansion_house(V) => not in_urban_area(V). @ \"There are no mansion houses in an urban area.\"\nskyscraper(V) => in_urban_area(V). @ \"All skyscrapers are in urban areas.\"\ncreepy_haunted_house(V) => mansion_house(V). @ \"Every creepy haunted house is a mansion house.\"\nterrifying_halloween_building(V) => creepy_haunted_house(V). @ \"Every terrifying building on Halloween is a creepy haunted house.\"\ncreepy_haunted_house(lalaurie_house) | terrifying_halloween_building(lalaurie_house). @ \"The LaLaurie House is a creepy haunted house or a terrifying building on Halloween.\"\n? not (skyscraper(lalaurie_house) | mansion_house(lalaurie_house)) | in_urban_area(lalaurie_house).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "mansion_house(V) => not in_urban_area(V).",
+   "skyscraper(V) => in_urban_area(V).",
+   "creepy_haunted_house(V) => mansion_house(V).",
+   "terrifying_halloween_building(V) => creepy_haunted_house(V).",
+   "creepy_haunted_house(lalaurie_house) | terrifying_halloween_building(lalaurie_house).",
+   "? not (skyscraper(lalaurie_house) | mansion_house(lalaurie_house)) | in_urban_area(lalaurie_house)."
+  ],
+  "source_id": "796"
+ },
+ {
+  "text": "The Lumina APV is produced by Chevrolet. \nThe Astro is a van produced by Chevrolet. \nVehicles produced by Chevrolet in this batch are either cars or vans.",
+  "query": "The Astro is a car.",
+  "program": "produced_by(lumina_apv, chevrolet). @ \"The Lumina APV is produced by Chevrolet.\"\nvan(astro). @ \"The Astro is a van produced by Chevrolet.\"\nproduced_by(astro, chevrolet). @ \"The Astro is a van produced by Chevrolet.\"\nproduced_by(V, chevrolet) => car(V) | van(V). @ \"Vehicles produced by Chevrolet in this batch are either cars or vans.\"\nproduced_by(V, chevrolet) & van(V) => not car(V). @ \"are either cars or vans\"\nproduced_by(V, chevrolet) & car(V) => not van(V). @ \"are either cars or vans\"\n? car(astro).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "produced_by(V, chevrolet) & van(V) => not car(V).",
+   "produced_by(V, chevrolet) & car(V) => not van(V)."
+  ],
+  "source_id": "153"
+ },
+ {
+  "text": "There are no buildings in New Haven higher than 400 meters. \nAll buildings managed by Yale Housing are in New Haven. \nAll Manhattan skyscrapers are higher than 400 meters. \nAll buildings owned by Bloomberg are in Manhattan. \nAll buildings with the Bloomberg logo are buildings owned by Bloomberg. \nTower A is neither a building in New Haven nor a skyscraper in Manhattan.\nTower B is a skyscraper building in Manhattan with a Bloomberg logo. ",
+  "query": "Tower A is a building with the Bloomberg logo or it is managed by Yale Housing.",
+  "program": "building(V) & in_new_haven(V) => not higher_400(V). @ \"There are no buildings in New Haven higher than 400 meters.\"\nmanaged_by_yale(V) => in_new_haven(V). @ \"All buildings managed by Yale Housing are in New Haven.\"\nin_manhattan(V) => higher_400(V). @ \"All Manhattan skyscrapers are higher than 400 meters.\"\nowned_by_bloomberg(V) => in_manhattan(V). @ \"All buildings owned by Bloomberg are in Manhattan.\"\nbloomberg_logo(V) => owned_by_bloomberg(V). @ \"All buildings with the Bloomberg logo are buildings owned by Bloomberg.\"\nbuilding(tower_a). @ \"Tower A is neither a building in New Haven nor a skyscraper in Manhattan.\"\nnot in_new_haven(tower_a). @ \"Tower A is neither a building in New Haven nor a skyscraper in Manhattan.\"\nnot in_manhattan(tower_a). @ \"Tower A is neither a building in New Haven nor a skyscraper in Manhattan.\"\nin_manhattan(tower_b). @ \"Tower B is a skyscraper building in Manhattan with a Bloomberg logo.\"\nbuilding(tower_b). @ \"Tower B is a skyscraper building in Manhattan with a Bloomberg logo.\"\nbloomberg_logo(tower_b). @ \"Tower B is a skyscraper building in Manhattan with a Bloomberg logo.\"\n? bloomberg_logo(tower_a) | managed_by_yale(tower_a).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "in_manhattan(V) => higher_400(V).",
+   "not in_manhattan(tower_a).",
+   "in_manhattan(tower_b)."
+  ],
+  "source_id": "1237"
+ },
+ {
+  "text": "No Boeing-737 plane has more than 300 seats. \nAll of the planes acquired by Delta in this batch are Boeing-737. \nPlanes either have more than 300 seats or have a capacity of 100 passengers. \nAll planes with a capacity of 100 passengers are scheduled for a short-distance flight. \nAll planes with a capacity of 100 passengers are produced before 2010. \nJake32 is either a Boeing-737 plane or a plane acquired by Delta in this batch.\nT10 is either both a Boeing-737 plane and acquired by Delta in this batch, or it is neither.",
+  "query": "Jake32 is neither produced before 2010 nor scheduled for a short-distance flight.",
+  "program": "boeing737(V) => not more_300_seats(V). @ \"No Boeing-737 plane has more than 300 seats.\"\ndelta_batch(V) => boeing737(V). @ \"All of the planes acquired by Delta in this batch are Boeing-737.\"\nplane(V) => more_300_seats(V) | capacity_100(V). @ \"Planes either have more than 300 seats or have a capacity of 100 passengers.\"\ncapacity_100(V) => short_distance(V). @ \"All planes with a capacity of 100 passengers are scheduled for a short-distance flight.\"\ncapacity_100(V) => produced_before_2010(V). @ \"All planes with a capacity of 100 passengers are produced before 2010.\"\nboeing737(jake32) | delta_batch(jake32). @ \"Jake32 is either a Boeing-737 plane or a plane acquired by Delta in this batch.\"\nboeing737(V) => plane(V). @ \"Boeing-737 plane\"\ndelta_batch(V) => plane(V). @ \"a plane acquired by Delta in this batch\"\nboeing737(t10) => delta_batch(t10). @ \"T10 is either both a Boeing-737 plane and acquired by Delta in this batch, or it is neither.\"\ndelta_batch(t10) => boeing737(t10). @ \"T10 is either both a Boeing-737 plane and acquired by Delta in this batch, or it is neither.\"\n? not produced_before_2010(jake32) & not short_distance(jake32).\n",
+  "expected": "no",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "boeing737(V) => plane(V).",
+   "delta_batch(V) => plane(V)."
+  ],
+  "source_id": "1230"
+ },
+ {
+  "text": "Tipped employees are not entitled to be paid the federal minimum wage by their employees. \nIf a person is a white-collar worker, they are entitled to be paid the federal minimum wage by their employees. \nAll lawyers are white-collar workers.\nEvery advocate is a lawyer.\nMary is not a lawyer or a tipped employee.",
+  "query": "If Mary is not both an advocate and is entitled to be paid the federal minimum wage by their employees, she is not a tipped employee.",
+  "program": "tipped(V) => not entitled(V). @ \"Tipped employees are not entitled to be paid the federal minimum wage by their employees.\"\nwhite_collar(V) => entitled(V). @ \"If a person is a white-collar worker, they are entitled to be paid the federal minimum wage by their employees.\"\nlawyer(V) => white_collar(V). @ \"All lawyers are white-collar workers.\"\nadvocate(V) => lawyer(V). @ \"Every advocate is a lawyer.\"\nnot lawyer(mary). @ \"Mary is not a lawyer or a tipped employee\"\nnot tipped(mary). @ \"Mary is not a lawyer or a tipped employee\"\n? (advocate(mary) & entitled(mary)) | not tipped(mary).\n",
+  "expected": "yes",
+  "wrong_verdict": "unknown",
+  "changed": [
+   "not lawyer(mary).",
+   "not tipped(mary)."
+  ],
+  "source_id": "768"
+ }
+]

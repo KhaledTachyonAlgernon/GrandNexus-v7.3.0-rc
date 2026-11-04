@@ -111,7 +111,7 @@ def main(argv=None, client=None) -> dict:
         random.Random(a.exp_seed).shuffle(pool)
         exp_items, test_items = pool[: a.exp_n], pool[a.exp_n: a.exp_n + a.test_n]
     else:
-        exp_items = draw(a.split, a.exp_seed, a.exp_n, set())
+        exp_items = draw(a.split, a.exp_seed, a.exp_n, set()) if (a.exp_n > 0 or not a.memory) else []   # --memory with --exp-n 0: no experience phase
         test_items = draw(a.split, a.test_seed, a.test_n, {it["id"] for it in exp_items} | (ExperienceMemory.load(a.memory).known_ids if a.memory else set()))
     assert not ({it["id"] for it in exp_items} & {it["id"] for it in test_items}), "experience and test sets overlap"
     exp_sha, test_sha = freeze(exp_items), freeze(test_items)
@@ -181,6 +181,20 @@ def main(argv=None, client=None) -> dict:
         ok = (m["learned"]["acc"] > m["none"]["acc"] and m["learned"]["acc"] > m["random"]["acc"] and asserted("learned") <= asserted("none"))
         print(f"\nCRITERIA (run 1 form): learned > none and learned > random, asserted errors not above none -> {'PASS' if ok else 'FAIL'}")
         summary["criteria_pass"] = ok
+    # paired comparison per item (sign test): the honest statistic for small differences
+    from math import comb
+
+    def paired(x, y):
+        X = {r["id"] for r in rows[x] if r["pred"] == r["expected"]}; Y = {r["id"] for r in rows[y] if r["pred"] == r["expected"]}
+        w, l = len(X - Y), len(Y - X); n = w + l
+        pv = 1.0 if n == 0 else min(1.0, 2 * sum(comb(n, i) for i in range(0, min(w, l) + 1)) / 2 ** n)
+        return w, l, pv
+    summary["paired"] = {}
+    for x, y in (("learned", "none"), ("learned", "random"), ("learned", "static"), ("static", "none"), ("random", "none")):
+        if x in rows and y in rows:
+            w, l, pv = paired(x, y)
+            summary["paired"][f"{x}_vs_{y}"] = {"only_first_right": w, "only_second_right": l, "sign_test_p": round(pv, 3)}
+            print(f"paired {x:7} vs {y:7}: only {x} right {w:>2} | only {y} right {l:>2} | sign test p = {pv:.3f}")
     out = outdir / f"learning_{a.split}_test{len(test_items)}_{test_sha}_{stamp}.json"
     out.write_text(json.dumps({"summary": summary, "rows": rows}, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"written: {out}")
