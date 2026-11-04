@@ -26,6 +26,7 @@ No item text is printed; the memory is saved as JSON (it quotes the experience t
 from __future__ import annotations
 
 import argparse
+import glob
 import json
 import pathlib
 import random
@@ -97,6 +98,7 @@ def main(argv=None, client=None) -> dict:
     ap.add_argument("--memory", help="reuse a saved memory; with --exp-n > 0 the experience phase EXTENDS it with new items")
     ap.add_argument("--store-correct", action="store_true", help="also store first-try correct readings (positive experiences)")
     ap.add_argument("--conditions", default=",".join(CONDITIONS))
+    ap.add_argument("--exclude-from", nargs="*", default=[], help="result JSONs of earlier runs: their test items are excluded (independent replication)")
     ap.add_argument("--model", default="claude-sonnet-5-5")
     ap.add_argument("--out", default=str(ROOT / "tests_lab" / "resultats" / "learning"))
     a = ap.parse_args(argv)
@@ -111,8 +113,15 @@ def main(argv=None, client=None) -> dict:
         random.Random(a.exp_seed).shuffle(pool)
         exp_items, test_items = pool[: a.exp_n], pool[a.exp_n: a.exp_n + a.test_n]
     else:
-        exp_items = draw(a.split, a.exp_seed, a.exp_n, set()) if (a.exp_n > 0 or not a.memory) else []   # --memory with --exp-n 0: no experience phase
-        test_items = draw(a.split, a.test_seed, a.test_n, {it["id"] for it in exp_items} | (ExperienceMemory.load(a.memory).known_ids if a.memory else set()))
+        used = set()
+        for f in a.exclude_from:
+            for pattern in (glob.glob(f) or [f]):
+                d = json.load(open(pattern, encoding="utf-8"))
+                used |= {r["id"] for rows in d.get("rows", {}).values() for r in rows}
+        exp_items = draw(a.split, a.exp_seed, a.exp_n, used) if (a.exp_n > 0 or not a.memory) else []   # --memory with --exp-n 0: no experience phase
+        test_items = draw(a.split, a.test_seed, a.test_n, used | {it["id"] for it in exp_items} | (ExperienceMemory.load(a.memory).known_ids if a.memory else set()))
+        if used:
+            print(f"excluded {len(used)} items already used by earlier runs")
     assert not ({it["id"] for it in exp_items} & {it["id"] for it in test_items}), "experience and test sets overlap"
     exp_sha, test_sha = freeze(exp_items), freeze(test_items)
     print(f"experience pool: {len(exp_items)} items (sha {exp_sha}) | test set: {len(test_items)} items (sha {test_sha}), "

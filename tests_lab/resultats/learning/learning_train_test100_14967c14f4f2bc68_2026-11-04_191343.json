@@ -1,0 +1,6357 @@
+{
+ "summary": {
+  "experience_sha": "1533062121ae0743",
+  "test_sha": "14967c14f4f2bc68",
+  "n_exp": 391,
+  "n_test": 100,
+  "k": 3,
+  "memory_size": 61,
+  "experience": {
+   "loaded": 18,
+   "read": 391,
+   "right_first": 305,
+   "wrong_first": 86,
+   "unverified": 43,
+   "verified": 43
+  },
+  "model": "claude-sonnet-5-5",
+  "prompt_version": "v5.4",
+  "engine_version": "ref-2.3",
+  "modes": {
+   "none": {
+    "acc": 77,
+    "n": 100,
+    "pct": 77.0,
+    "false_yes": 1,
+    "false_no": 0,
+    "inventions": 1,
+    "false_contradictory": 2,
+    "unknown": 47,
+    "contradictory": 2,
+    "errors": 0,
+    "confusion": {
+     "no->no": 21,
+     "no->unknown": 13,
+     "no->yes": 1,
+     "unknown->contradictory": 1,
+     "unknown->unknown": 27,
+     "yes->contradictory": 1,
+     "yes->unknown": 7,
+     "yes->yes": 29
+    }
+   },
+   "static": {
+    "acc": 74,
+    "n": 100,
+    "pct": 74.0,
+    "false_yes": 2,
+    "false_no": 0,
+    "inventions": 1,
+    "false_contradictory": 3,
+    "unknown": 48,
+    "contradictory": 3,
+    "errors": 0,
+    "confusion": {
+     "no->no": 19,
+     "no->unknown": 14,
+     "no->yes": 2,
+     "unknown->contradictory": 1,
+     "unknown->unknown": 27,
+     "yes->contradictory": 2,
+     "yes->unknown": 7,
+     "yes->yes": 28
+    }
+   },
+   "random": {
+    "acc": 76,
+    "n": 100,
+    "pct": 76.0,
+    "false_yes": 2,
+    "false_no": 1,
+    "inventions": 1,
+    "false_contradictory": 2,
+    "unknown": 46,
+    "contradictory": 2,
+    "errors": 0,
+    "confusion": {
+     "no->no": 23,
+     "no->unknown": 10,
+     "no->yes": 2,
+     "unknown->contradictory": 1,
+     "unknown->unknown": 27,
+     "yes->contradictory": 1,
+     "yes->no": 1,
+     "yes->unknown": 9,
+     "yes->yes": 26
+    }
+   },
+   "learned": {
+    "acc": 81,
+    "n": 100,
+    "pct": 81.0,
+    "false_yes": 1,
+    "false_no": 1,
+    "inventions": 1,
+    "false_contradictory": 1,
+    "unknown": 43,
+    "contradictory": 1,
+    "errors": 0,
+    "confusion": {
+     "no->no": 25,
+     "no->unknown": 9,
+     "no->yes": 1,
+     "unknown->no": 1,
+     "unknown->unknown": 27,
+     "yes->contradictory": 1,
+     "yes->unknown": 7,
+     "yes->yes": 29
+    }
+   }
+  },
+  "criteria_experience": false,
+  "criteria_relevance": true,
+  "paired": {
+   "learned_vs_none": {
+    "only_first_right": 7,
+    "only_second_right": 3,
+    "sign_test_p": 0.344
+   },
+   "learned_vs_random": {
+    "only_first_right": 7,
+    "only_second_right": 2,
+    "sign_test_p": 0.18
+   },
+   "learned_vs_static": {
+    "only_first_right": 9,
+    "only_second_right": 2,
+    "sign_test_p": 0.065
+   },
+   "static_vs_none": {
+    "only_first_right": 4,
+    "only_second_right": 7,
+    "sign_test_p": 0.549
+   },
+   "random_vs_none": {
+    "only_first_right": 4,
+    "only_second_right": 5,
+    "sign_test_p": 1.0
+   }
+  }
+ },
+ "rows": {
+  "none": [
+   {
+    "id": "844",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3286
+   },
+   {
+    "id": "395",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3071
+   },
+   {
+    "id": "137",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3329
+   },
+   {
+    "id": "801",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2633
+   },
+   {
+    "id": "710",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2938
+   },
+   {
+    "id": "953",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "contradictory",
+    "pred_full": "contradictory",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3432
+   },
+   {
+    "id": "400",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2564
+   },
+   {
+    "id": "586",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2668
+   },
+   {
+    "id": "329",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3196
+   },
+   {
+    "id": "777",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2718
+   },
+   {
+    "id": "78",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2641
+   },
+   {
+    "id": "725",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2771
+   },
+   {
+    "id": "200",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 6941
+   },
+   {
+    "id": "824",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3266
+   },
+   {
+    "id": "897",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 6265
+   },
+   {
+    "id": "767",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3089
+   },
+   {
+    "id": "82",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2720
+   },
+   {
+    "id": "1369",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3317
+   },
+   {
+    "id": "296",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3031
+   },
+   {
+    "id": "284",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2610
+   },
+   {
+    "id": "1078",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3330
+   },
+   {
+    "id": "1335",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3406
+   },
+   {
+    "id": "233",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2955
+   },
+   {
+    "id": "1007",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3797
+   },
+   {
+    "id": "112",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 5616
+   },
+   {
+    "id": "419",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2998
+   },
+   {
+    "id": "3",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2455
+   },
+   {
+    "id": "921",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2756
+   },
+   {
+    "id": "343",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2669
+   },
+   {
+    "id": "139",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3027
+   },
+   {
+    "id": "607",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2978
+   },
+   {
+    "id": "161",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2676
+   },
+   {
+    "id": "1225",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3350
+   },
+   {
+    "id": "1337",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2685
+   },
+   {
+    "id": "1156",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3770
+   },
+   {
+    "id": "695",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2582
+   },
+   {
+    "id": "978",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3746
+   },
+   {
+    "id": "1009",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3828
+   },
+   {
+    "id": "30",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 5387
+   },
+   {
+    "id": "381",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 5406
+   },
+   {
+    "id": "938",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 6653
+   },
+   {
+    "id": "321",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 6136
+   },
+   {
+    "id": "299",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2555
+   },
+   {
+    "id": "600",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2786
+   },
+   {
+    "id": "834",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2611
+   },
+   {
+    "id": "1068",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7043
+   },
+   {
+    "id": "194",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2834
+   },
+   {
+    "id": "1149",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2706
+   },
+   {
+    "id": "196",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3709
+   },
+   {
+    "id": "11",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3336
+   },
+   {
+    "id": "746",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2743
+   },
+   {
+    "id": "901",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2594
+   },
+   {
+    "id": "44",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2749
+   },
+   {
+    "id": "1126",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3863
+   },
+   {
+    "id": "973",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3661
+   },
+   {
+    "id": "792",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3189
+   },
+   {
+    "id": "123",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3228
+   },
+   {
+    "id": "1253",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3130
+   },
+   {
+    "id": "1343",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3248
+   },
+   {
+    "id": "1342",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3075
+   },
+   {
+    "id": "450",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3211
+   },
+   {
+    "id": "1192",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2858
+   },
+   {
+    "id": "510",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2770
+   },
+   {
+    "id": "1144",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3479
+   },
+   {
+    "id": "453",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3261
+   },
+   {
+    "id": "1089",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3873
+   },
+   {
+    "id": "444",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2451
+   },
+   {
+    "id": "1375",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2895
+   },
+   {
+    "id": "1054",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3549
+   },
+   {
+    "id": "203",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2896
+   },
+   {
+    "id": "166",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2588
+   },
+   {
+    "id": "909",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2645
+   },
+   {
+    "id": "69",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 6583
+   },
+   {
+    "id": "769",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3394
+   },
+   {
+    "id": "1308",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2932
+   },
+   {
+    "id": "223",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2647
+   },
+   {
+    "id": "1230",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2910
+   },
+   {
+    "id": "1282",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2999
+   },
+   {
+    "id": "954",
+    "expected": "yes",
+    "run": 0,
+    "pred": "contradictory",
+    "pred_full": "contradictory",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3572
+   },
+   {
+    "id": "1167",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2836
+   },
+   {
+    "id": "541",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3540
+   },
+   {
+    "id": "1000",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3070
+   },
+   {
+    "id": "842",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2944
+   },
+   {
+    "id": "84",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2490
+   },
+   {
+    "id": "587",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2831
+   },
+   {
+    "id": "817",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3334
+   },
+   {
+    "id": "1152",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2839
+   },
+   {
+    "id": "10",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2497
+   },
+   {
+    "id": "911",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2666
+   },
+   {
+    "id": "1008",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3867
+   },
+   {
+    "id": "193",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 5728
+   },
+   {
+    "id": "1142",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3133
+   },
+   {
+    "id": "985",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3120
+   },
+   {
+    "id": "1021",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7099
+   },
+   {
+    "id": "1264",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2998
+   },
+   {
+    "id": "297",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2771
+   },
+   {
+    "id": "108",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2943
+   },
+   {
+    "id": "210",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2650
+   },
+   {
+    "id": "590",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2675
+   },
+   {
+    "id": "1293",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "no",
+    "n_examples": 0,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2595
+   }
+  ],
+  "static": [
+   {
+    "id": "844",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4882
+   },
+   {
+    "id": "395",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4860
+   },
+   {
+    "id": "137",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5063
+   },
+   {
+    "id": "801",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7386
+   },
+   {
+    "id": "710",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3992
+   },
+   {
+    "id": "953",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "contradictory",
+    "pred_full": "contradictory",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4915
+   },
+   {
+    "id": "400",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4118
+   },
+   {
+    "id": "586",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4242
+   },
+   {
+    "id": "329",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4765
+   },
+   {
+    "id": "777",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4227
+   },
+   {
+    "id": "78",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4172
+   },
+   {
+    "id": "725",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7292
+   },
+   {
+    "id": "200",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8548
+   },
+   {
+    "id": "824",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4233
+   },
+   {
+    "id": "897",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7458
+   },
+   {
+    "id": "767",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4662
+   },
+   {
+    "id": "82",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4247
+   },
+   {
+    "id": "1369",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4971
+   },
+   {
+    "id": "296",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4345
+   },
+   {
+    "id": "284",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4387
+   },
+   {
+    "id": "1078",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4651
+   },
+   {
+    "id": "1335",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5012
+   },
+   {
+    "id": "233",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4272
+   },
+   {
+    "id": "1007",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5373
+   },
+   {
+    "id": "112",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4225
+   },
+   {
+    "id": "419",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4802
+   },
+   {
+    "id": "3",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3986
+   },
+   {
+    "id": "921",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4677
+   },
+   {
+    "id": "343",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4220
+   },
+   {
+    "id": "139",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4303
+   },
+   {
+    "id": "607",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4638
+   },
+   {
+    "id": "161",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4292
+   },
+   {
+    "id": "1225",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5410
+   },
+   {
+    "id": "1337",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4715
+   },
+   {
+    "id": "1156",
+    "expected": "yes",
+    "run": 0,
+    "pred": "contradictory",
+    "pred_full": "contradictory",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5143
+   },
+   {
+    "id": "695",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4084
+   },
+   {
+    "id": "978",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5363
+   },
+   {
+    "id": "1009",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5524
+   },
+   {
+    "id": "30",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4063
+   },
+   {
+    "id": "381",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 6901
+   },
+   {
+    "id": "938",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8321
+   },
+   {
+    "id": "321",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4210
+   },
+   {
+    "id": "299",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4094
+   },
+   {
+    "id": "600",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4874
+   },
+   {
+    "id": "834",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4142
+   },
+   {
+    "id": "1068",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8620
+   },
+   {
+    "id": "194",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4365
+   },
+   {
+    "id": "1149",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4526
+   },
+   {
+    "id": "196",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5110
+   },
+   {
+    "id": "11",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4860
+   },
+   {
+    "id": "746",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4328
+   },
+   {
+    "id": "901",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4496
+   },
+   {
+    "id": "44",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4219
+   },
+   {
+    "id": "1126",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5558
+   },
+   {
+    "id": "973",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5664
+   },
+   {
+    "id": "792",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4740
+   },
+   {
+    "id": "123",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4381
+   },
+   {
+    "id": "1253",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4655
+   },
+   {
+    "id": "1343",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4704
+   },
+   {
+    "id": "1342",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4851
+   },
+   {
+    "id": "450",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4659
+   },
+   {
+    "id": "1192",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4739
+   },
+   {
+    "id": "510",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4248
+   },
+   {
+    "id": "1144",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4999
+   },
+   {
+    "id": "453",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4775
+   },
+   {
+    "id": "1089",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 9764
+   },
+   {
+    "id": "444",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3978
+   },
+   {
+    "id": "1375",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8304
+   },
+   {
+    "id": "1054",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5064
+   },
+   {
+    "id": "203",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4427
+   },
+   {
+    "id": "166",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4119
+   },
+   {
+    "id": "909",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4428
+   },
+   {
+    "id": "69",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5015
+   },
+   {
+    "id": "769",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5236
+   },
+   {
+    "id": "1308",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4920
+   },
+   {
+    "id": "223",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4172
+   },
+   {
+    "id": "1230",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5090
+   },
+   {
+    "id": "1282",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4613
+   },
+   {
+    "id": "954",
+    "expected": "yes",
+    "run": 0,
+    "pred": "contradictory",
+    "pred_full": "contradictory",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5212
+   },
+   {
+    "id": "1167",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4731
+   },
+   {
+    "id": "541",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 9394
+   },
+   {
+    "id": "1000",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4933
+   },
+   {
+    "id": "842",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4501
+   },
+   {
+    "id": "84",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4021
+   },
+   {
+    "id": "587",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4280
+   },
+   {
+    "id": "817",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5012
+   },
+   {
+    "id": "1152",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4635
+   },
+   {
+    "id": "10",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4028
+   },
+   {
+    "id": "911",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4197
+   },
+   {
+    "id": "1008",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5541
+   },
+   {
+    "id": "193",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4648
+   },
+   {
+    "id": "1142",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5355
+   },
+   {
+    "id": "985",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5010
+   },
+   {
+    "id": "1021",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8797
+   },
+   {
+    "id": "1264",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4400
+   },
+   {
+    "id": "297",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4362
+   },
+   {
+    "id": "108",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4419
+   },
+   {
+    "id": "210",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4442
+   },
+   {
+    "id": "590",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4210
+   },
+   {
+    "id": "1293",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4107
+   }
+  ],
+  "random": [
+   {
+    "id": "844",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8497
+   },
+   {
+    "id": "395",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4780
+   },
+   {
+    "id": "137",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5711
+   },
+   {
+    "id": "801",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4521
+   },
+   {
+    "id": "710",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3853
+   },
+   {
+    "id": "953",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "contradictory",
+    "pred_full": "contradictory",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4861
+   },
+   {
+    "id": "400",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3829
+   },
+   {
+    "id": "586",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4644
+   },
+   {
+    "id": "329",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8199
+   },
+   {
+    "id": "777",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4662
+   },
+   {
+    "id": "78",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4620
+   },
+   {
+    "id": "725",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3968
+   },
+   {
+    "id": "200",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8960
+   },
+   {
+    "id": "824",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4779
+   },
+   {
+    "id": "897",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7329
+   },
+   {
+    "id": "767",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4580
+   },
+   {
+    "id": "82",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4224
+   },
+   {
+    "id": "1369",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4292
+   },
+   {
+    "id": "296",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5391
+   },
+   {
+    "id": "284",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4650
+   },
+   {
+    "id": "1078",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5949
+   },
+   {
+    "id": "1335",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5038
+   },
+   {
+    "id": "233",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4194
+   },
+   {
+    "id": "1007",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5782
+   },
+   {
+    "id": "112",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4584
+   },
+   {
+    "id": "419",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4823
+   },
+   {
+    "id": "3",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3956
+   },
+   {
+    "id": "921",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4997
+   },
+   {
+    "id": "343",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4578
+   },
+   {
+    "id": "139",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4973
+   },
+   {
+    "id": "607",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4282
+   },
+   {
+    "id": "161",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4632
+   },
+   {
+    "id": "1225",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5640
+   },
+   {
+    "id": "1337",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4399
+   },
+   {
+    "id": "1156",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5616
+   },
+   {
+    "id": "695",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4027
+   },
+   {
+    "id": "978",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5704
+   },
+   {
+    "id": "1009",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5811
+   },
+   {
+    "id": "30",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4921
+   },
+   {
+    "id": "381",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7857
+   },
+   {
+    "id": "938",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8348
+   },
+   {
+    "id": "321",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4876
+   },
+   {
+    "id": "299",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3755
+   },
+   {
+    "id": "600",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4860
+   },
+   {
+    "id": "834",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4199
+   },
+   {
+    "id": "1068",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8994
+   },
+   {
+    "id": "194",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4768
+   },
+   {
+    "id": "1149",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4070
+   },
+   {
+    "id": "196",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5238
+   },
+   {
+    "id": "11",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4832
+   },
+   {
+    "id": "746",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4365
+   },
+   {
+    "id": "901",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4227
+   },
+   {
+    "id": "44",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4055
+   },
+   {
+    "id": "1126",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5360
+   },
+   {
+    "id": "973",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5598
+   },
+   {
+    "id": "792",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4376
+   },
+   {
+    "id": "123",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4837
+   },
+   {
+    "id": "1253",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5036
+   },
+   {
+    "id": "1343",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4979
+   },
+   {
+    "id": "1342",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4236
+   },
+   {
+    "id": "450",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5272
+   },
+   {
+    "id": "1192",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4441
+   },
+   {
+    "id": "510",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4469
+   },
+   {
+    "id": "1144",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5084
+   },
+   {
+    "id": "453",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5329
+   },
+   {
+    "id": "1089",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4931
+   },
+   {
+    "id": "444",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 6797
+   },
+   {
+    "id": "1375",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4912
+   },
+   {
+    "id": "1054",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5658
+   },
+   {
+    "id": "203",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4601
+   },
+   {
+    "id": "166",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4327
+   },
+   {
+    "id": "909",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4834
+   },
+   {
+    "id": "69",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4929
+   },
+   {
+    "id": "769",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5673
+   },
+   {
+    "id": "1308",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4761
+   },
+   {
+    "id": "223",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4064
+   },
+   {
+    "id": "1230",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4109
+   },
+   {
+    "id": "1282",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4529
+   },
+   {
+    "id": "954",
+    "expected": "yes",
+    "run": 0,
+    "pred": "contradictory",
+    "pred_full": "contradictory",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4805
+   },
+   {
+    "id": "1167",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4562
+   },
+   {
+    "id": "541",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 9874
+   },
+   {
+    "id": "1000",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4961
+   },
+   {
+    "id": "842",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4803
+   },
+   {
+    "id": "84",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3748
+   },
+   {
+    "id": "587",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4569
+   },
+   {
+    "id": "817",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4301
+   },
+   {
+    "id": "1152",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4106
+   },
+   {
+    "id": "10",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4139
+   },
+   {
+    "id": "911",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4446
+   },
+   {
+    "id": "1008",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5674
+   },
+   {
+    "id": "193",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4871
+   },
+   {
+    "id": "1142",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4586
+   },
+   {
+    "id": "985",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5042
+   },
+   {
+    "id": "1021",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4929
+   },
+   {
+    "id": "1264",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4299
+   },
+   {
+    "id": "297",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4198
+   },
+   {
+    "id": "108",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4665
+   },
+   {
+    "id": "210",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4256
+   },
+   {
+    "id": "590",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4434
+   },
+   {
+    "id": "1293",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4284
+   }
+  ],
+  "learned": [
+   {
+    "id": "844",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4753
+   },
+   {
+    "id": "395",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4727
+   },
+   {
+    "id": "137",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5253
+   },
+   {
+    "id": "801",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4092
+   },
+   {
+    "id": "710",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3976
+   },
+   {
+    "id": "953",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5585
+   },
+   {
+    "id": "400",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4221
+   },
+   {
+    "id": "586",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4026
+   },
+   {
+    "id": "329",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8166
+   },
+   {
+    "id": "777",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4563
+   },
+   {
+    "id": "78",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4046
+   },
+   {
+    "id": "725",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4343
+   },
+   {
+    "id": "200",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8828
+   },
+   {
+    "id": "824",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4439
+   },
+   {
+    "id": "897",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4100
+   },
+   {
+    "id": "767",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4563
+   },
+   {
+    "id": "82",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4230
+   },
+   {
+    "id": "1369",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4261
+   },
+   {
+    "id": "296",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4099
+   },
+   {
+    "id": "284",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4450
+   },
+   {
+    "id": "1078",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5992
+   },
+   {
+    "id": "1335",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5734
+   },
+   {
+    "id": "233",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4266
+   },
+   {
+    "id": "1007",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 6780
+   },
+   {
+    "id": "112",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4102
+   },
+   {
+    "id": "419",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4884
+   },
+   {
+    "id": "3",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3660
+   },
+   {
+    "id": "921",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5244
+   },
+   {
+    "id": "343",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4310
+   },
+   {
+    "id": "139",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3786
+   },
+   {
+    "id": "607",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4642
+   },
+   {
+    "id": "161",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3902
+   },
+   {
+    "id": "1225",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5615
+   },
+   {
+    "id": "1337",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4414
+   },
+   {
+    "id": "1156",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5290
+   },
+   {
+    "id": "695",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4595
+   },
+   {
+    "id": "978",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 6356
+   },
+   {
+    "id": "1009",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 9298
+   },
+   {
+    "id": "30",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4487
+   },
+   {
+    "id": "381",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7009
+   },
+   {
+    "id": "938",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5188
+   },
+   {
+    "id": "321",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3908
+   },
+   {
+    "id": "299",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4035
+   },
+   {
+    "id": "600",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4558
+   },
+   {
+    "id": "834",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3985
+   },
+   {
+    "id": "1068",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5257
+   },
+   {
+    "id": "194",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4446
+   },
+   {
+    "id": "1149",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4062
+   },
+   {
+    "id": "196",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5165
+   },
+   {
+    "id": "11",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4522
+   },
+   {
+    "id": "746",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4431
+   },
+   {
+    "id": "901",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5288
+   },
+   {
+    "id": "44",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4734
+   },
+   {
+    "id": "1126",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5652
+   },
+   {
+    "id": "973",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5811
+   },
+   {
+    "id": "792",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4917
+   },
+   {
+    "id": "123",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4484
+   },
+   {
+    "id": "1253",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4941
+   },
+   {
+    "id": "1343",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8747
+   },
+   {
+    "id": "1342",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5297
+   },
+   {
+    "id": "450",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4958
+   },
+   {
+    "id": "1192",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4944
+   },
+   {
+    "id": "510",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3927
+   },
+   {
+    "id": "1144",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5312
+   },
+   {
+    "id": "453",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5375
+   },
+   {
+    "id": "1089",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 6086
+   },
+   {
+    "id": "444",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3855
+   },
+   {
+    "id": "1375",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4285
+   },
+   {
+    "id": "1054",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4727
+   },
+   {
+    "id": "203",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4142
+   },
+   {
+    "id": "166",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3828
+   },
+   {
+    "id": "909",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4467
+   },
+   {
+    "id": "69",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4647
+   },
+   {
+    "id": "769",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4927
+   },
+   {
+    "id": "1308",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4549
+   },
+   {
+    "id": "223",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4135
+   },
+   {
+    "id": "1230",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4970
+   },
+   {
+    "id": "1282",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4918
+   },
+   {
+    "id": "954",
+    "expected": "yes",
+    "run": 0,
+    "pred": "contradictory",
+    "pred_full": "contradictory",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5674
+   },
+   {
+    "id": "1167",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4454
+   },
+   {
+    "id": "541",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 9593
+   },
+   {
+    "id": "1000",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5305
+   },
+   {
+    "id": "842",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4479
+   },
+   {
+    "id": "84",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3751
+   },
+   {
+    "id": "587",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4275
+   },
+   {
+    "id": "817",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5017
+   },
+   {
+    "id": "1152",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4719
+   },
+   {
+    "id": "10",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4470
+   },
+   {
+    "id": "911",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4441
+   },
+   {
+    "id": "1008",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 9241
+   },
+   {
+    "id": "193",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4604
+   },
+   {
+    "id": "1142",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5258
+   },
+   {
+    "id": "985",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 6192
+   },
+   {
+    "id": "1021",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5066
+   },
+   {
+    "id": "1264",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4110
+   },
+   {
+    "id": "297",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4123
+   },
+   {
+    "id": "108",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4435
+   },
+   {
+    "id": "210",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4208
+   },
+   {
+    "id": "590",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4770
+   },
+   {
+    "id": "1293",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4664
+   }
+  ],
+  "always_unknown": [
+   {
+    "id": "844",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "395",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "137",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "801",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "710",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "953",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "400",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "586",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "329",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "777",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "78",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "725",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "200",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "824",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "897",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "767",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "82",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1369",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "296",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "284",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1078",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1335",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "233",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1007",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "112",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "419",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "3",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "921",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "343",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "139",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "607",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "161",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1225",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1337",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1156",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "695",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "978",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1009",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "30",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "381",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "938",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "321",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "299",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "600",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "834",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1068",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "194",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1149",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "196",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "11",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "746",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "901",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "44",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1126",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "973",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "792",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "123",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1253",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1343",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1342",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "450",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1192",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "510",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1144",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "453",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1089",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "444",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1375",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1054",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "203",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "166",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "909",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "69",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "769",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1308",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "223",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1230",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1282",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "954",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1167",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "541",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1000",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "842",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "84",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "587",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "817",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1152",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "10",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "911",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1008",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "193",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1142",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "985",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1021",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1264",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "297",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "108",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "210",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "590",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1293",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   }
+  ],
+  "majority": [
+   {
+    "id": "844",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "395",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "137",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "801",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "710",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "953",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "400",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "586",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "329",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "777",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "78",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "725",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "200",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "824",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "897",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "767",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "82",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1369",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "296",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "284",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1078",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1335",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "233",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1007",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "112",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "419",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "3",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "921",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "343",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "139",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "607",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "161",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1225",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1337",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1156",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "695",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "978",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1009",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "30",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "381",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "938",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "321",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "299",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "600",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "834",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1068",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "194",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1149",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "196",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "11",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "746",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "901",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "44",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1126",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "973",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "792",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "123",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1253",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1343",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1342",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "450",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1192",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "510",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1144",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "453",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1089",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "444",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1375",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1054",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "203",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "166",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "909",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "69",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "769",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1308",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "223",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1230",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1282",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "954",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1167",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "541",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1000",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "842",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "84",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "587",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "817",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1152",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "10",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "911",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1008",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "193",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1142",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "985",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1021",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1264",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "297",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "108",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "210",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "590",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1293",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   }
+  ],
+  "random_label": [
+   {
+    "id": "844",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "395",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "137",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "801",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "710",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "953",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "400",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "586",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "329",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "777",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "78",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "725",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "200",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "824",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "897",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "767",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "82",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1369",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "296",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "284",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1078",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1335",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "233",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1007",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "112",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "419",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "3",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "921",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "343",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "139",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "607",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "161",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1225",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1337",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1156",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "695",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "978",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1009",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "30",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "381",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "938",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "321",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "299",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "600",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "834",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1068",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "194",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1149",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "196",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "11",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "746",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "901",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "44",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1126",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "973",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "792",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "123",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1253",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1343",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1342",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "450",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1192",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "510",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1144",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "453",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1089",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "444",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1375",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1054",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "203",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "166",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "909",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "69",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "769",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1308",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "223",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1230",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1282",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "954",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1167",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "541",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1000",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "842",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "84",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "587",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "817",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1152",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "10",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "911",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1008",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "193",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1142",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "985",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1021",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1264",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "297",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "108",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "210",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "590",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1293",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   }
+  ]
+ }
+}
