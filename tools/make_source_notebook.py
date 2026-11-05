@@ -5,7 +5,8 @@ Source notebook for the project folder: STATUS.md, the git history, then every t
 services_1505/ originals, result JSONs and saved memories (they quote item texts), caches, empty files, notebooks.
 The complete zip (with .git) stays the reference; this notebook exists because the project folder takes no zip.
 
-  python tools/make_source_notebook.py --version v7.2.4-rc --out /mnt/user-data/outputs/GrandNexus_v7_2_4-rc_source.ipynb
+  python tools/make_source_notebook.py --version v7.2.4-rc --out GrandNexus_v7_2_4-rc_source.ipynb \\
+         --branch-files lessons:grandnexus/cognition/lessons.py lessons:tests_lab/test_lessons.py lessons:tools/bench_learning.py
 """
 from __future__ import annotations
 
@@ -46,12 +47,17 @@ def main(argv=None) -> None:
     ap.add_argument("--version", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--base", default="/content/GrandNexus")
+    ap.add_argument("--branch-files", nargs="*", default=[], metavar="BRANCH:PATH",
+                    help="files of another branch to append (written under <base>_branch_<branch>/, never over the main tree)")
     a = ap.parse_args(argv)
 
     files = tracked_files()
     dirs = sorted({str(pathlib.Path(f).parent) for f in files})
     history = subprocess.run(["git", "log", "--oneline", "--decorate", "-40"], cwd=ROOT, capture_output=True, text=True).stdout
     branches = subprocess.run(["git", "branch", "--list"], cwd=ROOT, capture_output=True, text=True).stdout
+    for spec in a.branch_files:
+        branch, path = spec.split(":", 1)
+        dirs.append(f"../{pathlib.Path(a.base).name}_branch_{branch}/{pathlib.Path(path).parent}")
     cells = [cell("markdown", f"# GrandNexus {a.version} — full source (notebook for the project folder)\n"
                               f"**Runtime > Run all** writes the package to `{a.base}`. The complete zip (with `.git`) is the reference.\n"),
              cell("markdown", (ROOT / "STATUS.md").read_text(encoding="utf-8")),
@@ -65,6 +71,12 @@ def main(argv=None) -> None:
             cells.append(cell("markdown", f"## `{d}/`\n" if d != "." else "## repository root\n"))
         body = (ROOT / f).read_text(encoding="utf-8", errors="replace")
         cells.append(cell("code", f"%%writefile {a.base}/{f}\n{body}" + ("" if body.endswith("\n") else "\n")))
+    for spec in a.branch_files:
+        branch, path = spec.split(":", 1)
+        body = subprocess.run(["git", "show", f"{branch}:{path}"], cwd=ROOT, capture_output=True, text=True, check=True).stdout
+        cells.append(cell("markdown", f"## branch `{branch}`: `{path}`\n(written under `{a.base}_branch_{branch}/`; "
+                                      f"`git checkout {branch}` in the zip gives the real thing)\n"))
+        cells.append(cell("code", f"%%writefile {a.base}_branch_{branch}/{path}\n{body}" + ("" if body.endswith("\n") else "\n")))
     nb = {"cells": cells, "metadata": {"kernelspec": {"display_name": "Python 3", "name": "python3"},
                                        "language_info": {"name": "python"}, "colab": {"provenance": []}},
           "nbformat": 4, "nbformat_minor": 4}
