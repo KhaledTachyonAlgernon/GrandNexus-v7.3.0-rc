@@ -1,11 +1,14 @@
-# GrandNexus v7.1.0
+# GrandNexus v7.2.4-rc
 
 **An anchored translator and a reference engine that decide without inventing, and a laboratory to measure whether a loop learns.**
 
 Claude translates a text and a question into a small logic language (anchored to the text: every statement quotes
 the span it comes from); the reference engine `nexus_logic` decides (yes / no / unknown / contradictory) with a printable
 proof, checked against clingo; the answer is the strict verdict (text only), the background-knowledge verdict is reported apart.
-Measured on FOLIO (100 fresh items of the train split): strict 78/100 with 2 asserted errors, Claude alone 79/100 with 11.
+Measured on FOLIO v2 validation (203 items, 6 runs): 83.1% with 7 asserted errors per run, Claude alone 84.5% with 22-25; on 100 fresh
+train items: 78/100 with 2 asserted errors, Claude alone 79/100 with 11. The learning loop (verified corrections kept as experience,
+`grandnexus/cognition/experience.py`) is measured by `tools/bench_learning.py`: so far it recalls the corrected reading of a text it has
+already seen and does not transfer to new texts (logbook 56); recall and transfer are now tested separately (STATUS.md).
 Everything else in this repository (the 2025 cognitive-architecture scaffolding: memories, graph, orchestrator, 15/05 layer)
 is an experimental ground around that core, kept and runnable but not demonstrated.
 
@@ -13,7 +16,7 @@ This archive is a complete, self-contained snapshot: no notebook chain, no `%%wr
 
 ## Quick start (Colab or any Python 3.10+)
 ```bash
-unzip GrandNexus_v6.8.1_complet.zip -d /content      # -> /content/GrandNexus
+unzip GrandNexus_v7.2.4-rc.zip -d /content           # -> /content/GrandNexus
 pip install -q -r /content/GrandNexus/requirements.txt
 ```
 ```python
@@ -35,14 +38,16 @@ Modes: laboratory (default, deterministic, nothing runs in the background) or li
 | `grandnexus/nexus_logic/` | the core: language spec, parser, reference engine (disjunctions, formulas, reductio), clingo export, bridge |
 | `grandnexus/llm_interface/translator_v5.py` | Claude as anchored translator into the nexus_logic language (prompt v5.4), Claude-alone control |
 | `grandnexus/cognition/reasoning/text_reasoner.py` | text -> program/premises -> reference engine -> verdict (grammar, JSON and nx pathways) |
+| `grandnexus/cognition/experience.py` | the learning loop: verified corrections as experience, TF-IDF retrieval, shown as examples to the reader |
 | `grandnexus/cognition/deliberation.py` | the deliberation experiment (several readings, targeted re-reading; hypothesis rejected, logbook 44) |
 | `grandnexus/llm_interface/llm_translator.py` | the earlier JSON translator (prompt versions v1-v4), kept for comparison |
 | `tools/bench_folio.py`, `tools/bench_deliberation.py`, `tools/diff_engines.py` | FOLIO bench (content-sha freezing, trivial controls, --strict), deliberation bench, differential reference / clingo / home engine |
+| `tools/bench_learning.py`, `tools/story_split.py` | learning-loop bench (none / static / random / learned, story-aware draws, paired sign tests, checkpoint/resume) and the offline story split of archived runs |
 | `tools/test_bench.py` | bench for hand-written sets: freezes a set, measures 4 modes, never prints item texts |
 | `tools/smoke_test.py`, `tools/lab_*.py` | import test, labs (controls, layer oracles) |
 | `tests_lab/test_*.py` | offline tests (no API) |
-| `LOGBOOK.md` | logbook: every hypothesis -> result -> decision (49 entries) |
-| `tests_lab/resultats/` | every FOLIO run: results JSON + the translated programs |
+| `STATUS.md`, `LOGBOOK.md` | one-page current state; logbook: every hypothesis -> result -> decision (58 entries) |
+| `tests_lab/resultats/` | every FOLIO and learning run: results JSON, saved memories, the translated programs |
 | `archive/` | original 15/05 and 29/05 sources (untouched) |
 | `.git` | full history: every repair is one commit (`git log --oneline`) |
 

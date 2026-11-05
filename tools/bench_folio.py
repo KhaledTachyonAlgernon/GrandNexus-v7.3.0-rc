@@ -5,7 +5,7 @@ The set is frozen by a CONTENT sha before measuring (no rewritten-file trap, log
 controls; stability over N runs; the model id is recorded; no item text is printed or written
 (except --save-programs, which writes the translated programs for tools/diff_engines.py).
 
-  pip install datasets                                   # once, to download FOLIO
+  FOLIO is downloaded once from the public mirror into tests_lab/data/ (no `datasets` needed; FOLIO_DIR overrides)
   python tools/bench_folio.py --n 50 --modes translator,direct
   python tools/bench_folio.py --jsonl tests_lab/my_set.jsonl --modes translator,direct,grandnexus --runs 3
 
@@ -37,15 +37,37 @@ API_MODES = ("translator", "direct", "grandnexus")
 VERDICTS = ("contradictory", "unknown", "yes", "no")
 
 
+FOLIO_MIRROR = "https://huggingface.co/datasets/tasksource/folio/resolve/main/folio_v2_{split}.jsonl"
+FOLIO_CACHE = ROOT / "tests_lab" / "data"          # *.jsonl is git-ignored: a download cache, not a frozen set
+
+
+def _folio_rows(split: str) -> list[dict]:
+    """FOLIO v2 rows: local cache (tests_lab/data or $FOLIO_DIR), else the public mirror file (same rows as the
+    `datasets` mirror: the archived shas reproduce), else `datasets` (yale-nlp/FOLIO is gated: login + terms)."""
+    import os
+    for d in (os.environ.get("FOLIO_DIR"), FOLIO_CACHE):
+        p = pathlib.Path(d) / f"folio_v2_{split}.jsonl" if d else None
+        if p and p.exists():
+            return [json.loads(l) for l in open(p, encoding="utf-8") if l.strip()]
+    try:
+        import urllib.request
+        FOLIO_CACHE.mkdir(parents=True, exist_ok=True)
+        p = FOLIO_CACHE / f"folio_v2_{split}.jsonl"
+        urllib.request.urlretrieve(FOLIO_MIRROR.format(split=split), p)
+        return [json.loads(l) for l in open(p, encoding="utf-8") if l.strip()]
+    except Exception:  # noqa: BLE001
+        from datasets import load_dataset
+        try:
+            return list(load_dataset("yale-nlp/FOLIO", split=split))
+        except Exception:  # noqa: BLE001
+            return list(load_dataset("tasksource/folio", split=split))
+
+
 def load_items(split: str, jsonl: str | None) -> list[dict]:
     if jsonl:
         rows = [json.loads(l) for l in open(jsonl, encoding="utf-8") if l.strip()]
     else:
-        from datasets import load_dataset
-        try:
-            rows = list(load_dataset("yale-nlp/FOLIO", split=split))          # gated on the Hub (login + terms)
-        except Exception:
-            rows = list(load_dataset("tasksource/folio", split=split))         # public mirror, same columns
+        rows = _folio_rows(split)
     items = []
     for i, r in enumerate(rows):
         text = r.get("text") or r.get("premises") or r.get("premise") or r.get("context") or ""
@@ -53,12 +75,23 @@ def load_items(split: str, jsonl: str | None) -> list[dict]:
         query = r.get("query") or r.get("conclusion") or r.get("question") or r.get("hypothesis") or ""
         exp = LABELS.get(str(r.get("expected", r.get("label", ""))).strip().lower())
         if text and query and exp:
-            items.append({"id": str(r.get("id", r.get("example_id", i))), "text": text, "query": str(query), "expected": exp})
+            items.append({"id": str(r.get("id", r.get("example_id", i))), "text": text, "query": str(query), "expected": exp,
+                          "story": story_key(text)})
     return items
 
 
+FROZEN_KEYS = ("id", "text", "query", "expected")   # the content that is frozen; derived fields (story) never change a sha
+
+
+def story_key(text: str) -> str:
+    """One key per distinct text (FOLIO: several conclusions share one 'story' = one premises text; in FOLIO v2 train
+    and validation the story_id and the premises text are 1:1). Disjoint by id is NOT disjoint by story (logbook 56)."""
+    return hashlib.sha256(" ".join(text.split()).encode("utf-8")).hexdigest()[:12]
+
+
 def freeze(items: list[dict]) -> str:
-    return hashlib.sha256(json.dumps(items, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()[:16]
+    canon = [{k: it[k] for k in FROZEN_KEYS if k in it} for it in items]
+    return hashlib.sha256(json.dumps(canon, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()[:16]
 
 
 def as_question(q: str) -> str:
