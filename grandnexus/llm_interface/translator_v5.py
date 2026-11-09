@@ -13,7 +13,7 @@ import os
 import re
 from dataclasses import dataclass
 from types import SimpleNamespace
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from grandnexus.nexus_logic import ENGINE_VERSION, LANGUAGE_SPEC, Program, decide, parse
 
@@ -125,29 +125,41 @@ class FakeClient:
 class Receipt:
     id: str
     model: str
-    tokens_in: int
+    tokens_in: int           # input tokens NOT read from or written to the prompt cache
     tokens_out: int
     role: str
+    cache_read: int = 0      # input tokens read from the prompt cache (billed at a fraction of the input price)
+    cache_write: int = 0     # input tokens written to the prompt cache
 
 
 class Translator:
     def __init__(self, client=None, model: str = DEFAULT_MODEL, corrective_rounds: int = 1,
-                 require_anchor: bool = True, max_tokens: int = 2000) -> None:
+                 require_anchor: bool = True, max_tokens: int = 2000, cache_system: bool = True) -> None:
+        """cache_system: the system prompt (identical for every call of a role) is marked for the API prompt cache
+        (logbook 63). Per the API documentation, caching has no effect on the generated output: the answer is the one
+        that would be obtained without it; only the billing of the cached prefix changes. Prompts shorter than the
+        model's minimum cacheable length are processed without caching and without error."""
         self.client = client or _default_client()
         self.model, self.corrective_rounds, self.require_anchor, self.max_tokens = model, corrective_rounds, require_anchor, max_tokens
+        self.cache_system = cache_system
         self.receipts: List[Receipt] = []
 
     def _call(self, system: str, user: str, role: str) -> str:
-        resp = self.client.messages.create(model=self.model, max_tokens=self.max_tokens, system=system,
+        sys_param: Any = ([{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}]
+                          if self.cache_system else system)
+        resp = self.client.messages.create(model=self.model, max_tokens=self.max_tokens, system=sys_param,
                                            messages=[{"role": "user", "content": user}])
         u = getattr(resp, "usage", None)
+        n = lambda field: int(getattr(u, field, 0) or 0)          # absent or None on fakes and older SDKs
         self.receipts.append(Receipt(getattr(resp, "id", "?"), getattr(resp, "model", self.model),
-                                     getattr(u, "input_tokens", 0), getattr(u, "output_tokens", 0), role))
+                                     n("input_tokens"), n("output_tokens"), role,
+                                     n("cache_read_input_tokens"), n("cache_creation_input_tokens")))
         return "".join(getattr(b, "text", "") for b in resp.content)
 
     def _tally(self, n0: int) -> Dict[str, Any]:
         rec = self.receipts[n0:]
         return {"calls": len(rec), "tokens_in": sum(r.tokens_in for r in rec), "tokens_out": sum(r.tokens_out for r in rec),
+                "cache_read": sum(r.cache_read for r in rec), "cache_write": sum(r.cache_write for r in rec),
                 "message_ids": [r.id for r in rec], "model": rec[0].model if rec else self.model}
 
     def translate(self, text: str, query: str, examples: str = "") -> Dict[str, Any]:

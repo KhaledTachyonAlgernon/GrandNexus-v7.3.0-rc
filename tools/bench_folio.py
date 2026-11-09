@@ -94,6 +94,13 @@ def freeze(items: list[dict]) -> str:
     return hashlib.sha256(json.dumps(canon, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()[:16]
 
 
+def _usage(r: dict) -> dict:
+    """Usage of one answer: tokens = every input and output token processed (comparable with rows written before the
+    prompt cache), plus the split needed for the cost (tools/cost.py)."""
+    u = {k: int(r.get(k, 0) or 0) for k in ("tokens_in", "tokens_out", "cache_read", "cache_write")}
+    return {"tokens": sum(u.values()), **u}
+
+
 def as_question(q: str) -> str:
     return q if q.rstrip().endswith("?") else f"Is the following statement true? {q}"
 
@@ -176,14 +183,13 @@ def main() -> None:
                         row.update(pred=r["verdict_strict"] if a.strict else r["verdict"], pred_full=r["verdict"],
                                    pred_strict=r["verdict_strict"], knowledge=r["depends_on_knowledge"],
                                    rejections=len(r["rejections"]), corrective=r["corrective_rounds"], calls=r["calls"],
-                                   tokens=r["tokens_in"] + r["tokens_out"], model=r["model"], ids=r["message_ids"])
+                                   model=r["model"], ids=r["message_ids"], **_usage(r))
                         if a.save_programs:
                             progdir.mkdir(parents=True, exist_ok=True)
                             (progdir / f"{it['id']}_r{run}.nx").write_text(r["program"], encoding="utf-8")
                     elif m == "direct":
                         r = tr.direct(it["text"], as_question(it["query"]))
-                        row.update(pred=normalise(r["answer"]), calls=r["calls"], tokens=r["tokens_in"] + r["tokens_out"],
-                                   model=r["model"], ids=r["message_ids"])
+                        row.update(pred=normalise(r["answer"]), calls=r["calls"], model=r["model"], ids=r["message_ids"], **_usage(r))
                     elif m == "grandnexus":
                         r = gn_reasoner.answer(it["text"] + "\n" + as_question(it["query"]))
                         row["pred"] = normalise(r.get("answer", "") if isinstance(r, dict) else r)
@@ -233,6 +239,10 @@ def main() -> None:
             print(f"   K1 {'PASS' if mt['pct'] > base else 'FAIL'} (> control {base}%) ; K2 false yes = {mt['false_yes']}, false no = {mt['false_no']}, false contradictory = {mt['false_contradictory']}")
         if a.runs > 1 and m in API_MODES:
             print(f"   stability : {summary['modes'][m]['stable_items']}/{len(items)} items identiques sur {a.runs} runs")
+    if tr is not None:
+        import cost
+        print()
+        summary["cost"] = cost.report({m: rows[m] for m in modes if m in ("translator", "direct")}, tr.model)
     out = outdir / f"{name}.json"
     out.write_text(json.dumps({"summary": summary, "rows": rows}, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"\nwritten: {out}")

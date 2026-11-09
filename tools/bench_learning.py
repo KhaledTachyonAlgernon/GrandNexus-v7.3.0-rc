@@ -57,6 +57,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tools"))
 
 from bench_folio import freeze, load_items, metrics, story_key                        # noqa: E402
+import cost                                                                             # noqa: E402
 from grandnexus.cognition.experience import (Experience, ExperienceMemory,            # noqa: E402
                                              examples_block, statements_diff)
 from grandnexus.nexus_logic import ENGINE_VERSION                                     # noqa: E402
@@ -84,6 +85,18 @@ def draw(split: str, seed: int, n: int, exclude: set, items: list | None = None,
 
 def memory_stories(memory: ExperienceMemory) -> set:
     return {story_key(e.text) for e in memory.entries}
+
+
+DISCORDANT = 0.09   # share of items on which learned and none disagree, runs 1-4 and 5a pooled: 52/568 (logbook 61)
+
+
+def mde_points(n: int, d: float = DISCORDANT, z: float = 1.96 + 0.84) -> float:
+    """Minimum detectable net gain, in points of accuracy, for a paired sign test on n items (normal approximation)."""
+    return 100 * z * (d / max(1, n)) ** 0.5
+
+
+def n_for(points: float, d: float = DISCORDANT, z: float = 1.96 + 0.84) -> int:
+    return int(round(d * (z / (points / 100)) ** 2))
 
 
 def sign_test(w: int, l: int) -> float:
@@ -188,8 +201,9 @@ def main(argv=None, client=None) -> dict:
                 d = json.load(open(pattern, encoding="utf-8"))
                 if isinstance(d, list):                      # a saved memory: its experience items
                     used |= {str(e["source_id"]) for e in d if e.get("source_id")}
-                else:                                        # a bench result (learning or FOLIO): its test items
-                    used |= {str(r["id"]) for rows in d.get("rows", {}).values() for r in rows}
+                else:                                        # a bench result (learning or FOLIO): its test items, and every
+                    used |= {str(r["id"]) for rows in d.get("rows", {}).values() for r in rows}   # item its experience
+                    used |= {str(i) for i in d.get("summary", {}).get("experience_read_ids", [])}  # phase READ (logbook 61)
         used_stories = {story_of[i] for i in used if i in story_of}
         exp_items = (draw(a.split, a.exp_seed, a.exp_n, used | memory.known_ids, all_items)
                      if (a.exp_n > 0 or not a.memory) else [])   # --memory with --exp-n 0: no experience phase
@@ -211,6 +225,8 @@ def main(argv=None, client=None) -> dict:
     print(f"experience pool: {len(exp_items)} items (sha {exp_sha}) | test set: {len(test_items)} items (sha {test_sha}), "
           f"labels {dict(Counter(i['expected'] for i in test_items))}, stories {len({i['story'] for i in test_items})} "
           f"({n_same} items with their story in the memory) | story mode: {a.story_mode}")
+    print(f"power: with ~{100 * DISCORDANT:.0f}% discordant items per comparison (runs 1-5a), {len(test_items)} items detect a net gain of "
+          f"about {mde_points(len(test_items)):.1f} points (80% power, two-sided 5%); 3 points would need about {n_for(3)} items")
     if a.dry_run:
         print("dry run: nothing measured")
         return {"experience_sha": exp_sha, "test_sha": test_sha, "n_exp": len(exp_items), "n_test": len(test_items),
@@ -252,7 +268,10 @@ def main(argv=None, client=None) -> dict:
                 r = tr.answer(it["text"], it["query"], examples_block(ex))
                 rows[c].append({**base, "pred": r["verdict_strict"], "pred_full": r["verdict"], "n_examples": len(ex),
                                 "shown": [e.source_id for e in ex], "same_story": any(story_key(e.text) == it["story"] for e in ex),
-                                "rejections": len(r["rejections"]), "calls": r["calls"], "tokens": r["tokens_in"] + r["tokens_out"]})
+                                "rejections": len(r["rejections"]), "calls": r["calls"],
+                                "tokens": r["tokens_in"] + r["tokens_out"] + r.get("cache_read", 0) + r.get("cache_write", 0),
+                                "tokens_in": r["tokens_in"], "tokens_out": r["tokens_out"],
+                                "cache_read": r.get("cache_read", 0), "cache_write": r.get("cache_write", 0)})
             except Exception as e:  # noqa: BLE001
                 rows[c].append({**base, "pred": "error", "error": f"{type(e).__name__}: {str(e)[:120]}"})
         rows["always_unknown"].append({**base, "pred": "unknown"})
@@ -264,6 +283,7 @@ def main(argv=None, client=None) -> dict:
             print(f"  test {k}/{len(test_items)}")
 
     summary = {"experience_sha": exp_sha, "test_sha": test_sha, "n_exp": len(exp_items), "n_test": len(test_items), "k": a.k,
+               "experience_read_ids": [it["id"] for it in exp_items],
                "memory_size": len(memory.entries), "memory_file": a.memory or "", "experience": exp_stats, "model": a.model,
                "prompt_version": PROMPT_VERSION, "engine_version": ENGINE_VERSION,
                "story_mode": a.story_mode, "exp_seed": a.exp_seed, "test_seed": a.test_seed, "conditions": conditions,
@@ -319,6 +339,12 @@ def main(argv=None, client=None) -> dict:
         print(f"\n{name} (learned vs none: sign test p < 0.05 in favour of learned, asserted errors not above none): "
               f"{'PASS' if c_main else 'FAIL'} ({w}/{l}, p = {pv:.3f}; asserted {asserted('learned')} vs {asserted('none')})")
         summary[name] = c_main
+    print()
+    summary["cost"] = cost.report({c: rows[c] for c in conditions}, a.model)
+    run_cost = cost.from_receipts(tr.receipts, a.model)
+    if run_cost:
+        summary["cost"]["run_total_including_experience_phase"] = run_cost
+        print(f"cost of the whole run (every call, experience phase included): ${run_cost['usd']:.3f}")
     out = outdir / f"learning_{a.split}_test{len(test_items)}_{test_sha}_{stamp}.json"
     out.write_text(json.dumps({"summary": summary, "rows": rows}, ensure_ascii=False, indent=1), encoding="utf-8")
     if ckpt.exists():
