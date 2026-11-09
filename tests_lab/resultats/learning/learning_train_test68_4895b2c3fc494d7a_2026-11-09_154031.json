@@ -1,0 +1,4587 @@
+{
+ "summary": {
+  "experience_sha": "4f53cda18c2baa0c",
+  "test_sha": "4895b2c3fc494d7a",
+  "n_exp": 0,
+  "n_test": 68,
+  "k": 3,
+  "memory_size": 61,
+  "memory_file": "tests_lab/resultats/learning/memory_train_61exp_2026-11-04_191343.json",
+  "experience": {
+   "loaded": 61
+  },
+  "model": "claude-sonnet-5-5",
+  "prompt_version": "v5.4",
+  "engine_version": "ref-2.3",
+  "story_mode": "in-memory",
+  "exp_seed": 3,
+  "test_seed": 7,
+  "conditions": [
+   "none",
+   "random",
+   "learned"
+  ],
+  "excluded_ids": 595,
+  "excluded_stories": 292,
+  "same_story_items": 68,
+  "args": [
+   "--split",
+   "train",
+   "--memory",
+   "tests_lab/resultats/learning/memory_train_61exp_2026-11-04_191343.json",
+   "--exp-n",
+   "0",
+   "--story-mode",
+   "in-memory",
+   "--test-n",
+   "0",
+   "--test-seed",
+   "7",
+   "--k",
+   "3",
+   "--conditions",
+   "none,random,learned",
+   "--exclude-from",
+   "tests_lab/resultats/learning/*.json",
+   "tests_lab/resultats/folio/folio_train_*.json"
+  ],
+  "modes": {
+   "none": {
+    "acc": 46,
+    "n": 68,
+    "pct": 67.6,
+    "false_yes": 5,
+    "false_no": 2,
+    "inventions": 2,
+    "false_contradictory": 3,
+    "unknown": 29,
+    "contradictory": 3,
+    "errors": 0,
+    "confusion": {
+     "no->contradictory": 1,
+     "no->no": 11,
+     "no->unknown": 6,
+     "no->yes": 5,
+     "unknown->contradictory": 1,
+     "unknown->no": 1,
+     "unknown->unknown": 17,
+     "yes->contradictory": 1,
+     "yes->no": 1,
+     "yes->unknown": 6,
+     "yes->yes": 18
+    }
+   },
+   "random": {
+    "acc": 48,
+    "n": 68,
+    "pct": 70.6,
+    "false_yes": 5,
+    "false_no": 2,
+    "inventions": 1,
+    "false_contradictory": 0,
+    "unknown": 31,
+    "contradictory": 0,
+    "errors": 0,
+    "confusion": {
+     "no->no": 11,
+     "no->unknown": 7,
+     "no->yes": 5,
+     "unknown->no": 1,
+     "unknown->unknown": 18,
+     "yes->no": 1,
+     "yes->unknown": 6,
+     "yes->yes": 19
+    }
+   },
+   "learned": {
+    "acc": 48,
+    "n": 68,
+    "pct": 70.6,
+    "false_yes": 5,
+    "false_no": 2,
+    "inventions": 1,
+    "false_contradictory": 0,
+    "unknown": 31,
+    "contradictory": 0,
+    "errors": 0,
+    "confusion": {
+     "no->no": 12,
+     "no->unknown": 6,
+     "no->yes": 5,
+     "unknown->no": 1,
+     "unknown->unknown": 18,
+     "yes->no": 1,
+     "yes->unknown": 7,
+     "yes->yes": 18
+    }
+   }
+  },
+  "criteria_pass": false,
+  "paired": {
+   "learned_vs_none": {
+    "only_first_right": 3,
+    "only_second_right": 1,
+    "sign_test_p": 0.625
+   },
+   "learned_vs_random": {
+    "only_first_right": 2,
+    "only_second_right": 2,
+    "sign_test_p": 1.0
+   },
+   "random_vs_none": {
+    "only_first_right": 2,
+    "only_second_right": 0,
+    "sign_test_p": 0.5
+   }
+  },
+  "paired_by_story": {
+   "learned_vs_none|same story retrieved": {
+    "n": 68,
+    "only_learned_right": 3,
+    "only_none_right": 1,
+    "sign_test_p": 0.625
+   },
+   "learned_vs_random|same story retrieved": {
+    "n": 68,
+    "only_learned_right": 2,
+    "only_random_right": 2,
+    "sign_test_p": 1.0
+   }
+  },
+  "C-recall": false
+ },
+ "rows": {
+  "none": [
+   {
+    "id": "1139",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3433
+   },
+   {
+    "id": "1199",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3069
+   },
+   {
+    "id": "1173",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 6899
+   },
+   {
+    "id": "782",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 5872
+   },
+   {
+    "id": "1141",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3407
+   },
+   {
+    "id": "537",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3429
+   },
+   {
+    "id": "1424",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2763
+   },
+   {
+    "id": "158",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 5843
+   },
+   {
+    "id": "1256",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3260
+   },
+   {
+    "id": "870",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3356
+   },
+   {
+    "id": "168",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2597
+   },
+   {
+    "id": "993",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7478
+   },
+   {
+    "id": "811",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 5887
+   },
+   {
+    "id": "1127",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4088
+   },
+   {
+    "id": "1359",
+    "expected": "yes",
+    "run": 0,
+    "pred": "contradictory",
+    "pred_full": "contradictory",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3458
+   },
+   {
+    "id": "825",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3074
+   },
+   {
+    "id": "974",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4399
+   },
+   {
+    "id": "1140",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 1,
+    "calls": 2,
+    "tokens": 6994
+   },
+   {
+    "id": "64",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2741
+   },
+   {
+    "id": "1053",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3294
+   },
+   {
+    "id": "863",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2833
+   },
+   {
+    "id": "41",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2734
+   },
+   {
+    "id": "556",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2518
+   },
+   {
+    "id": "1055",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3514
+   },
+   {
+    "id": "1429",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2792
+   },
+   {
+    "id": "341",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2671
+   },
+   {
+    "id": "1201",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3303
+   },
+   {
+    "id": "43",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2562
+   },
+   {
+    "id": "651",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2711
+   },
+   {
+    "id": "1254",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3136
+   },
+   {
+    "id": "869",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3420
+   },
+   {
+    "id": "572",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3162
+   },
+   {
+    "id": "1135",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2948
+   },
+   {
+    "id": "868",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3195
+   },
+   {
+    "id": "766",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3118
+   },
+   {
+    "id": "1357",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "contradictory",
+    "pred_full": "contradictory",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3346
+   },
+   {
+    "id": "1425",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2968
+   },
+   {
+    "id": "169",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3207
+   },
+   {
+    "id": "1185",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2652
+   },
+   {
+    "id": "16",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2929
+   },
+   {
+    "id": "1330",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3031
+   },
+   {
+    "id": "1360",
+    "expected": "no",
+    "run": 0,
+    "pred": "contradictory",
+    "pred_full": "contradictory",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3685
+   },
+   {
+    "id": "427",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2632
+   },
+   {
+    "id": "1073",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7416
+   },
+   {
+    "id": "1106",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7745
+   },
+   {
+    "id": "142",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 5795
+   },
+   {
+    "id": "815",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3183
+   },
+   {
+    "id": "1104",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3766
+   },
+   {
+    "id": "867",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2845
+   },
+   {
+    "id": "358",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2621
+   },
+   {
+    "id": "1069",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 6519
+   },
+   {
+    "id": "1426",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2781
+   },
+   {
+    "id": "1427",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2781
+   },
+   {
+    "id": "1070",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 6961
+   },
+   {
+    "id": "1176",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3711
+   },
+   {
+    "id": "378",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2591
+   },
+   {
+    "id": "498",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2612
+   },
+   {
+    "id": "70",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7740
+   },
+   {
+    "id": "1107",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3723
+   },
+   {
+    "id": "160",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3066
+   },
+   {
+    "id": "1077",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2849
+   },
+   {
+    "id": "568",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3479
+   },
+   {
+    "id": "865",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2777
+   },
+   {
+    "id": "1137",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2972
+   },
+   {
+    "id": "1072",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3390
+   },
+   {
+    "id": "783",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 6191
+   },
+   {
+    "id": "1047",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2985
+   },
+   {
+    "id": "227",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 0,
+    "shown": [],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 2848
+   }
+  ],
+  "random": [
+   {
+    "id": "1139",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "15",
+     "871",
+     "225"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4915
+   },
+   {
+    "id": "1199",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "300",
+     "342",
+     "742"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3846
+   },
+   {
+    "id": "1173",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "170",
+     "42",
+     "1331"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4797
+   },
+   {
+    "id": "782",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "620",
+     "1079",
+     "826"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7750
+   },
+   {
+    "id": "1141",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "742",
+     "1049",
+     "1138"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4759
+   },
+   {
+    "id": "537",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1428",
+     "1229",
+     "1071"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5376
+   },
+   {
+    "id": "1424",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1294",
+     "99",
+     "170"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4369
+   },
+   {
+    "id": "158",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1094",
+     "1071",
+     "383"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4496
+   },
+   {
+    "id": "1256",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1294",
+     "742",
+     "42"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4449
+   },
+   {
+    "id": "870",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1093",
+     "1200",
+     "871"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4857
+   },
+   {
+    "id": "168",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "538",
+     "428",
+     "826"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3942
+   },
+   {
+    "id": "993",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "871",
+     "742",
+     "1093"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 9032
+   },
+   {
+    "id": "811",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "826",
+     "300",
+     "742"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7195
+   },
+   {
+    "id": "1127",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "538",
+     "1229",
+     "383"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5680
+   },
+   {
+    "id": "1359",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "650",
+     "995",
+     "12"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 6285
+   },
+   {
+    "id": "825",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "99",
+     "225",
+     "1331"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4843
+   },
+   {
+    "id": "974",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1200",
+     "1093",
+     "633"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5731
+   },
+   {
+    "id": "1140",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "383",
+     "42",
+     "65"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4949
+   },
+   {
+    "id": "64",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "566",
+     "620",
+     "826"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4531
+   },
+   {
+    "id": "1053",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1093",
+     "428",
+     "350"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4558
+   },
+   {
+    "id": "863",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1079",
+     "620",
+     "383"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4709
+   },
+   {
+    "id": "41",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1177",
+     "170",
+     "1093"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4590
+   },
+   {
+    "id": "556",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "742",
+     "1052",
+     "1428"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3968
+   },
+   {
+    "id": "1055",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "141",
+     "65",
+     "1331"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5098
+   },
+   {
+    "id": "1429",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1294",
+     "1383",
+     "15"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4962
+   },
+   {
+    "id": "341",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "377",
+     "826",
+     "555"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3864
+   },
+   {
+    "id": "1201",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "377",
+     "1079",
+     "633"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5563
+   },
+   {
+    "id": "43",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1094",
+     "499",
+     "566"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4780
+   },
+   {
+    "id": "651",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1109",
+     "1383",
+     "1094"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4842
+   },
+   {
+    "id": "1254",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1071",
+     "1093",
+     "633"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4910
+   },
+   {
+    "id": "869",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "573",
+     "141",
+     "1128"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5243
+   },
+   {
+    "id": "572",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "747",
+     "1218",
+     "1048"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4556
+   },
+   {
+    "id": "1135",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "12",
+     "785",
+     "170"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4413
+   },
+   {
+    "id": "868",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "1200",
+     "1138",
+     "99"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4547
+   },
+   {
+    "id": "766",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "429",
+     "334",
+     "747"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4603
+   },
+   {
+    "id": "1357",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "225",
+     "555",
+     "141"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5084
+   },
+   {
+    "id": "1425",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "99",
+     "1229",
+     "813"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4640
+   },
+   {
+    "id": "169",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "170",
+     "334",
+     "383"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4729
+   },
+   {
+    "id": "1185",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "1093",
+     "499",
+     "1128"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4399
+   },
+   {
+    "id": "16",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "42",
+     "15",
+     "747"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3826
+   },
+   {
+    "id": "1330",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1109",
+     "71",
+     "785"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5037
+   },
+   {
+    "id": "1360",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "141",
+     "826",
+     "1186"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5267
+   },
+   {
+    "id": "427",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "377",
+     "170",
+     "952"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4287
+   },
+   {
+    "id": "1073",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1071",
+     "871",
+     "359"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5247
+   },
+   {
+    "id": "1106",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "159",
+     "1109",
+     "813"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5220
+   },
+   {
+    "id": "142",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "170",
+     "742",
+     "1218"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4661
+   },
+   {
+    "id": "815",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1109",
+     "633",
+     "342"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8656
+   },
+   {
+    "id": "1104",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1093",
+     "65",
+     "42"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5110
+   },
+   {
+    "id": "867",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "1048",
+     "12",
+     "1177"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4708
+   },
+   {
+    "id": "358",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "765",
+     "1128",
+     "813"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7224
+   },
+   {
+    "id": "1069",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "71",
+     "1056",
+     "871"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5090
+   },
+   {
+    "id": "1426",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "377",
+     "71",
+     "429"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4496
+   },
+   {
+    "id": "1427",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1052",
+     "1200",
+     "141"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4230
+   },
+   {
+    "id": "1070",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "742",
+     "1428",
+     "1383"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 9676
+   },
+   {
+    "id": "1176",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "12",
+     "995",
+     "177"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5571
+   },
+   {
+    "id": "378",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1094",
+     "300",
+     "1049"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4207
+   },
+   {
+    "id": "498",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1358",
+     "141",
+     "1071"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4397
+   },
+   {
+    "id": "70",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "429",
+     "1048",
+     "300"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8353
+   },
+   {
+    "id": "1107",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "383",
+     "359",
+     "1128"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5707
+   },
+   {
+    "id": "160",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "995",
+     "42",
+     "1294"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4511
+   },
+   {
+    "id": "1077",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1358",
+     "383",
+     "359"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4689
+   },
+   {
+    "id": "568",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1177",
+     "99",
+     "71"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5791
+   },
+   {
+    "id": "865",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "65",
+     "1128",
+     "765"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4826
+   },
+   {
+    "id": "1137",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "538",
+     "225",
+     "1071"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4493
+   },
+   {
+    "id": "1072",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "566",
+     "225",
+     "538"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 9194
+   },
+   {
+    "id": "783",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "813",
+     "538",
+     "1255"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4258
+   },
+   {
+    "id": "1047",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "141",
+     "952",
+     "826"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5034
+   },
+   {
+    "id": "227",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "566",
+     "385",
+     "12"
+    ],
+    "same_story": false,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7983
+   }
+  ],
+  "learned": [
+   {
+    "id": "1139",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1138",
+     "1109",
+     "99"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5432
+   },
+   {
+    "id": "1199",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "1200",
+     "65",
+     "159"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4390
+   },
+   {
+    "id": "1173",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1177",
+     "1229",
+     "538"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4599
+   },
+   {
+    "id": "782",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "785",
+     "1383",
+     "1177"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4259
+   },
+   {
+    "id": "1141",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "1138",
+     "1109",
+     "99"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5199
+   },
+   {
+    "id": "537",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "538",
+     "1186",
+     "1177"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7206
+   },
+   {
+    "id": "1424",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1428",
+     "99",
+     "1383"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4358
+   },
+   {
+    "id": "158",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "159",
+     "170",
+     "813"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4061
+   },
+   {
+    "id": "1256",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1255",
+     "1186",
+     "952"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5099
+   },
+   {
+    "id": "870",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "871",
+     "952",
+     "1294"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5184
+   },
+   {
+    "id": "168",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "170",
+     "1094",
+     "1093"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4361
+   },
+   {
+    "id": "993",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "995",
+     "1093",
+     "1094"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5255
+   },
+   {
+    "id": "811",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "813",
+     "170",
+     "1218"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4944
+   },
+   {
+    "id": "1127",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1128",
+     "1109",
+     "538"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5936
+   },
+   {
+    "id": "1359",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1358",
+     "429",
+     "428"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5081
+   },
+   {
+    "id": "825",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "826",
+     "995",
+     "742"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4458
+   },
+   {
+    "id": "974",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "975",
+     "952",
+     "1331"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 6093
+   },
+   {
+    "id": "1140",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1138",
+     "1109",
+     "99"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5523
+   },
+   {
+    "id": "64",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "65",
+     "1200",
+     "1186"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4166
+   },
+   {
+    "id": "1053",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1052",
+     "1049",
+     "1048"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5002
+   },
+   {
+    "id": "863",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "871",
+     "952",
+     "1294"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4515
+   },
+   {
+    "id": "41",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "42",
+     "377",
+     "225"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3981
+   },
+   {
+    "id": "556",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "555",
+     "1218",
+     "177"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4038
+   },
+   {
+    "id": "1055",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1052",
+     "1049",
+     "1048"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4576
+   },
+   {
+    "id": "1429",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1428",
+     "1358",
+     "1383"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5026
+   },
+   {
+    "id": "341",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "342",
+     "1093",
+     "1094"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4312
+   },
+   {
+    "id": "1201",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1200",
+     "65",
+     "159"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4538
+   },
+   {
+    "id": "43",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "42",
+     "377",
+     "225"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4064
+   },
+   {
+    "id": "651",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "650",
+     "377",
+     "42"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4506
+   },
+   {
+    "id": "1254",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1255",
+     "1186",
+     "952"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4994
+   },
+   {
+    "id": "869",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "871",
+     "952",
+     "1294"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5325
+   },
+   {
+    "id": "572",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "573",
+     "99",
+     "1255"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4411
+   },
+   {
+    "id": "1135",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1138",
+     "1109",
+     "99"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5143
+   },
+   {
+    "id": "868",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "871",
+     "952",
+     "1294"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4522
+   },
+   {
+    "id": "766",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "765",
+     "1383",
+     "170"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4635
+   },
+   {
+    "id": "1357",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1358",
+     "1177",
+     "429"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5634
+   },
+   {
+    "id": "1425",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1428",
+     "99",
+     "1358"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4456
+   },
+   {
+    "id": "169",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "170",
+     "1094",
+     "813"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4637
+   },
+   {
+    "id": "1185",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "1186",
+     "1109",
+     "1255"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4624
+   },
+   {
+    "id": "16",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "15",
+     "377",
+     "300"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3993
+   },
+   {
+    "id": "1330",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1331",
+     "975",
+     "952"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5531
+   },
+   {
+    "id": "1360",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1358",
+     "429",
+     "1177"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5611
+   },
+   {
+    "id": "427",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "428",
+     "429",
+     "1358"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4296
+   },
+   {
+    "id": "1073",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1071",
+     "1358",
+     "1177"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5491
+   },
+   {
+    "id": "1106",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "1109",
+     "1128",
+     "1186"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5969
+   },
+   {
+    "id": "142",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "141",
+     "1186",
+     "1094"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4688
+   },
+   {
+    "id": "815",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "813",
+     "170",
+     "785"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4429
+   },
+   {
+    "id": "1104",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1109",
+     "1128",
+     "1138"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 6071
+   },
+   {
+    "id": "867",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "871",
+     "952",
+     "1294"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4536
+   },
+   {
+    "id": "358",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "359",
+     "1218",
+     "975"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5286
+   },
+   {
+    "id": "1069",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1071",
+     "1358",
+     "1177"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5233
+   },
+   {
+    "id": "1426",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1428",
+     "99",
+     "1383"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4376
+   },
+   {
+    "id": "1427",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1428",
+     "99",
+     "1383"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4376
+   },
+   {
+    "id": "1070",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1071",
+     "1358",
+     "1177"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5282
+   },
+   {
+    "id": "1176",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "1177",
+     "1229",
+     "538"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5062
+   },
+   {
+    "id": "378",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "377",
+     "15",
+     "300"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3797
+   },
+   {
+    "id": "498",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "499",
+     "377",
+     "1093"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 3911
+   },
+   {
+    "id": "70",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "n_examples": 3,
+    "shown": [
+     "71",
+     "1218",
+     "1229"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 8530
+   },
+   {
+    "id": "1107",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1109",
+     "1128",
+     "1186"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 6126
+   },
+   {
+    "id": "160",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "159",
+     "71",
+     "170"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4347
+   },
+   {
+    "id": "1077",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1079",
+     "1358",
+     "1383"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5969
+   },
+   {
+    "id": "568",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "566",
+     "1358",
+     "952"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 6137
+   },
+   {
+    "id": "865",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "871",
+     "952",
+     "1294"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4499
+   },
+   {
+    "id": "1137",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1138",
+     "1109",
+     "99"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5265
+   },
+   {
+    "id": "1072",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "1071",
+     "1358",
+     "1177"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 5344
+   },
+   {
+    "id": "783",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "n_examples": 3,
+    "shown": [
+     "785",
+     "1383",
+     "1177"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4261
+   },
+   {
+    "id": "1047",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "1048",
+     "1049",
+     "1052"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 1,
+    "tokens": 4242
+   },
+   {
+    "id": "227",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "n_examples": 3,
+    "shown": [
+     "225",
+     "650",
+     "633"
+    ],
+    "same_story": true,
+    "rejections": 0,
+    "calls": 2,
+    "tokens": 7767
+   }
+  ],
+  "always_unknown": [
+   {
+    "id": "1139",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1199",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1173",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "782",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1141",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "537",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1424",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "158",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1256",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "870",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "168",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "993",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "811",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1127",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1359",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "825",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "974",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1140",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "64",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1053",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "863",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "41",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "556",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1055",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1429",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "341",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1201",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "43",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "651",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1254",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "869",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "572",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1135",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "868",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "766",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1357",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1425",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "169",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1185",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "16",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1330",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1360",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "427",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1073",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1106",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "142",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "815",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1104",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "867",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "358",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1069",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1426",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1427",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1070",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1176",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "378",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "498",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "70",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1107",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "160",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1077",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "568",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "865",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1137",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1072",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "783",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1047",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "227",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   }
+  ],
+  "majority": [
+   {
+    "id": "1139",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1199",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1173",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "782",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1141",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "537",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1424",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "158",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1256",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "870",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "168",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "993",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "811",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1127",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1359",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "825",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "974",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1140",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "64",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1053",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "863",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "41",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "556",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1055",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1429",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "341",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1201",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "43",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "651",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1254",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "869",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "572",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1135",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "868",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "766",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1357",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1425",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "169",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1185",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "16",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1330",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1360",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "427",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1073",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1106",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "142",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "815",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1104",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "867",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "358",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1069",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1426",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1427",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1070",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1176",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "378",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "498",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "70",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1107",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "160",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1077",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "568",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "865",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1137",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1072",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "783",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1047",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "227",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   }
+  ],
+  "random_label": [
+   {
+    "id": "1139",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1199",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1173",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "782",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1141",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "537",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1424",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "158",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1256",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "870",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "168",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "993",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "811",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1127",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1359",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "825",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "974",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1140",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "64",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1053",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "863",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "41",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "556",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1055",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1429",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "341",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1201",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "43",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "651",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1254",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "869",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "572",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1135",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "868",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "766",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1357",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1425",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "169",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1185",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "16",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1330",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1360",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "427",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1073",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1106",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "142",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "815",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1104",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "867",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "358",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1069",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1426",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1427",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1070",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1176",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "378",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "498",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "70",
+    "expected": "no",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1107",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "160",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "1077",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "568",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "865",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1137",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1072",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "783",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1047",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "227",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   }
+  ]
+ }
+}
