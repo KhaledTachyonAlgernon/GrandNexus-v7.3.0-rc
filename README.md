@@ -1,4 +1,4 @@
-# GrandNexus v7.2.5-rc
+# GrandNexus v7.3.0-rc
 
 **An anchored translator and a reference engine that decide without inventing, and a laboratory to measure whether a loop learns.**
 
@@ -16,13 +16,14 @@ This archive is a complete, self-contained snapshot: no notebook chain, no `%%wr
 
 ## Quick start (Colab or any Python 3.10+)
 ```bash
-unzip GrandNexus_v7.2.5-rc.zip -d /content           # -> /content/GrandNexus
+unzip GrandNexus_v7.3.0-rc.zip -d /content           # -> /content/GrandNexus
 pip install -q -r /content/GrandNexus/requirements.txt
 ```
 ```python
 import sys; sys.path.insert(0, "/content/GrandNexus")
 from grandnexus.boot import boot
 gn = boot(llm="auto")          # nx pathway (Claude -> nexus_logic) if ANTHROPIC_API_KEY is set, else grammar only
+# gn = boot(profile="minimal") # only the demonstrated core, NexusCore as orchestrator (17 modules, 0.05 s; MODULES.md)
 gn.print_report()
 tr = gn.modules()["text_reasoner"]
 print(tr.answer("All men are mortal. Socrates is a man. Is Socrates mortal?")["answer"])
@@ -34,7 +35,7 @@ Modes: laboratory (default, deterministic, nothing runs in the background) or li
 | Path | Content |
 |---|---|
 | `grandnexus/` | the package (core, memories, cognition, graph, LLM interface, 15/05 layer) |
-| `grandnexus/boot.py` | assembles and wires the whole system |
+| `grandnexus/boot.py`, `grandnexus/module_status.py`, `MODULES.md` | assembles the system (profile full: everything; profile minimal: the core only); the status of every module (core / supported / experimental / archive) |
 | `grandnexus/nexus_logic/` | the core: language spec, parser, reference engine (disjunctions, formulas, reductio), clingo export, bridge |
 | `grandnexus/llm_interface/translator_v5.py` | Claude as anchored translator into the nexus_logic language (prompt v5.4), Claude-alone control |
 | `grandnexus/cognition/reasoning/text_reasoner.py` | text -> program/premises -> reference engine -> verdict (grammar, JSON and nx pathways) |
@@ -47,7 +48,7 @@ Modes: laboratory (default, deterministic, nothing runs in the background) or li
 | `tools/test_bench.py` | bench for hand-written sets: freezes a set, measures 4 modes, never prints item texts |
 | `tools/smoke_test.py`, `tools/lab_*.py` | import test, labs (controls, layer oracles) |
 | `tests_lab/test_*.py` | offline tests (no API) |
-| `STATUS.md`, `LOGBOOK.md` | one-page current state; logbook: every hypothesis -> result -> decision (63 entries) |
+| `STATUS.md`, `LOGBOOK.md` | one-page current state; logbook: every hypothesis -> result -> decision (65 entries) |
 | `tests_lab/resultats/` | every FOLIO and learning run: results JSON, saved memories, the translated programs |
 | `archive/` | original 15/05 and 29/05 sources (untouched) |
 | `.git` | full history: every repair is one commit (`git log --oneline`) |

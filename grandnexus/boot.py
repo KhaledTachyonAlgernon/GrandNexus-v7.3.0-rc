@@ -6,6 +6,13 @@ boot.py - Assembly of GrandNexus: creates and wires the modules in the right ord
     gn.cognition.invoke(CognitiveProcessType.PERCEPTION, "2*x + 3 = 7")
     gn.shutdown()
 
+Two profiles (v7.3.0, logbook 64):
+    boot()                    full: the whole 2025 ground is assembled around the core (default, unchanged)
+    boot(profile="minimal")   NexusCore as orchestrator only + the demonstrated core (premise extractor,
+                              text reasoner, nexus_logic, translator_v5 when a key is present or injected)
+    gn.modules()["text_reasoner"].answer("All men are mortal. Socrates is a man. Is Socrates mortal?")
+The tag of every module (core / supported / experimental / archive) is in grandnexus/module_status.py.
+
 Every step is traced in gn.report: a failing module does not stop the next ones,
 it is recorded (nothing is hidden, nothing is thrown away).
 """
@@ -41,6 +48,8 @@ class GrandNexusSystem:
     llm_engine: Any = None
     translator: Any = None
     nx_translator: Any = None
+    profile: str = "full"
+    core_modules: Dict[str, Any] = field(default_factory=dict)   # minimal profile: the modules NexusCore orchestrates
     report: List[BootStep] = field(default_factory=list)
 
     def ok(self) -> bool:
@@ -61,6 +70,7 @@ class GrandNexusSystem:
             for attr in ("perception_modules", "reasoning_modules", "learning_modules", "metacognition_modules",
                          "extra_modules"):
                 out.update(getattr(self.cognition, attr, {}) or {})
+        out.update(self.core_modules)
         return out
 
     def start(self) -> bool:
@@ -153,15 +163,22 @@ def boot(db_file: Optional[str] = None, start_threads: bool = False,
          with_orchestrator: bool = True, orchestrator_threads: bool = False,
          start_core: bool = False,
          llm: str = "auto", llm_model: str = "claude-sonnet-5-5",
-         api_key: Optional[str] = None, reasoner_mode: Optional[str] = None) -> GrandNexusSystem:
+         api_key: Optional[str] = None, reasoner_mode: Optional[str] = None,
+         profile: str = "full", nx_translator: Any = None) -> GrandNexusSystem:
     """Assemble GrandNexus.
     Default: LABORATORY mode - everything is created and wired, but NexusCore is not
     started (no background loop: deterministic results, ideal for measuring).
     start_core=True (or gn.start() later): LIVE mode - NexusCore starts and launches
-    every registered module."""
+    every registered module.
+    profile="minimal": NexusCore as orchestrator only + the demonstrated core (logbook 64).
+    nx_translator: a translator_v5.Translator to use instead of creating one (tests, scripted readings)."""
     logging.basicConfig(level=log_level, format="%(asctime)s %(name)s %(levelname)s: %(message)s")
     logging.getLogger().setLevel(log_level)
     logging.getLogger("NexusCore").setLevel(log_level)
+    if profile == "minimal":
+        return _boot_minimal(db_file, verbose, start_core, llm, llm_model, api_key, reasoner_mode, nx_translator)
+    if profile != "full":
+        raise ValueError(f"unknown profile {profile!r} (full or minimal)")
 
     from grandnexus.core.nexus_core import NexusCore
     from grandnexus.memory.working import WorkingMemory, WorkingMemoryConfig
@@ -220,6 +237,9 @@ def boot(db_file: Optional[str] = None, start_threads: bool = False,
             _step(gn, "shared graph injected", _share_graph, verbose)
         def _llm():
             # Language layer backed by Claude, used ONLY as a translator (see llm_translator.py)
+            if nx_translator is not None:
+                gn.nx_translator = nx_translator          # injected (tests, scripted readings): no JSON translator
+                return "nx translator injected"
             if llm == "off":
                 return "disabled (llm='off')"
             key, why = find_anthropic_key(api_key, with_reason=True)
@@ -299,6 +319,61 @@ def boot(db_file: Optional[str] = None, start_threads: bool = False,
             gn.orchestrator = orch
             return orch
         _step(gn, "CognitiveOrchestrator", _orchestrator, verbose)
+    if start_core:
+        _step(gn, "NexusCore.start() (live mode)", gn.start, verbose)
+    return gn
+
+
+def _nx_translator(llm: str, llm_model: str, api_key: Optional[str]):
+    """(translator_v5.Translator or None, detail): the nexus_logic pathway's translator, when a key is available."""
+    if llm == "off":
+        return None, "disabled (llm='off')"
+    key, why = find_anthropic_key(api_key, with_reason=True)
+    if not key and llm == "auto":
+        return None, f"DISABLED - key not found: {why}"
+    if not key:
+        raise RuntimeError(f"llm='on' but ANTHROPIC_API_KEY not found: {why}")
+    try:
+        import anthropic
+    except ImportError:
+        raise RuntimeError("package 'anthropic' missing: !pip install -q anthropic")
+    from grandnexus.llm_interface.translator_v5 import Translator
+    return Translator(client=anthropic.Anthropic(api_key=key), model=llm_model), f"{llm_model} (key: {why}) | pathway: nexus_logic"
+
+
+def _boot_minimal(db_file, verbose, start_core, llm, llm_model, api_key, reasoner_mode, nx_translator) -> GrandNexusSystem:
+    """Minimal profile (logbook 64): NexusCore is the orchestrator only (it registers, starts and stops the modules);
+    the modules are the demonstrated core: premise extractor, text reasoner (grammar and nx pathways), nexus_logic,
+    translator_v5. Nothing of the 2025 ground is imported (no memories, graph, CognitionManager, 15/05 orchestrator,
+    JSON translator): see grandnexus/module_status.py."""
+    from grandnexus.core.nexus_core import NexusCore
+    from grandnexus.cognition.perception.premise_extractor import PremiseExtractor
+    from grandnexus.cognition.reasoning.text_reasoner import TextReasoner
+
+    gn = GrandNexusSystem(profile="minimal")
+    db_file = db_file or tempfile.mktemp(prefix="nexuscore_", suffix=".db")
+    gn.core = _step(gn, "NexusCore (orchestrator only)", lambda: NexusCore(db_file=db_file), verbose)
+    lg = logging.getLogger("NexusCore")
+    if lg.handlers:
+        lg.propagate = False
+
+    def _translator():
+        if nx_translator is not None:
+            gn.nx_translator = nx_translator
+            return "nx translator injected"
+        gn.nx_translator, detail = _nx_translator(llm, llm_model, api_key)
+        return detail
+    _step(gn, "translator_v5 (nx pathway)", _translator, verbose)
+
+    def _core():
+        extractor = PremiseExtractor(nexus_core=gn.core)
+        reasoner = TextReasoner(extractor=extractor, nexus_core=gn.core, mode=reasoner_mode, nx_translator=gn.nx_translator)
+        gn.core_modules = {"premise_extractor": extractor, "text_reasoner": reasoner}
+        if gn.core is not None:
+            for name, mod in gn.core_modules.items():
+                gn.core.register_module(name, mod)
+        return f"{len(gn.core_modules)} core modules registered in NexusCore"
+    _step(gn, "core pathway (extractor, text reasoner)", _core, verbose)
     if start_core:
         _step(gn, "NexusCore.start() (live mode)", gn.start, verbose)
     return gn
