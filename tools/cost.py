@@ -5,7 +5,8 @@ API cost of a bench run, from the usage recorded on each row (logbook 63).
 Rows written since v7.2.5-rc carry tokens_in (input not read from / written to the prompt cache), tokens_out,
 cache_read and cache_write. Older rows only carry `tokens` (input + output, not split): their cost is not estimated.
 Prices in USD per million tokens, from https://platform.claude.com/docs/en/about-claude/pricing (read 2026-11-09);
-update PRICES when they change. The estimate is for the Messages API at standard rates (no Batch discount).
+update PRICES when they change. Rows measured through the Message Batches API carry `batch: true` and are priced
+at 50% (BATCH_FACTOR), cache reads and writes included (the discounts stack).
 
   python tools/cost.py tests_lab/resultats/learning/learning_train_test68_*.json
 """
@@ -22,6 +23,7 @@ PRICES = {   # input, output, 5-minute cache write, cache read (hit or refresh)
     "claude-fable-5-1": {"input": 10.00, "output": 50.00, "cache_write": 12.50, "cache_read": 0.25},
 }
 FIELDS = ("tokens_in", "tokens_out", "cache_read", "cache_write")
+BATCH_FACTOR = 0.5
 
 
 def usage(rows) -> dict | None:
@@ -29,7 +31,8 @@ def usage(rows) -> dict | None:
     api = [r for r in rows if "calls" in r]
     if not api or not all("tokens_in" in r for r in api):
         return None
-    return {f: sum(int(r.get(f, 0) or 0) for r in api) for f in FIELDS} | {"calls": sum(r["calls"] for r in api)}
+    return ({f: sum(int(r.get(f, 0) or 0) for r in api) for f in FIELDS}
+            | {"calls": sum(r["calls"] for r in api), "batch": all(bool(r.get("batch")) for r in api)})
 
 
 def cost_usd(u: dict | None, model: str) -> dict | None:
@@ -37,11 +40,11 @@ def cost_usd(u: dict | None, model: str) -> dict | None:
     p = PRICES.get(model)
     if u is None or p is None:
         return None
-    m = 1e-6
+    m = 1e-6 * (BATCH_FACTOR if u.get("batch") else 1.0)
     actual = (u["tokens_in"] * p["input"] + u["tokens_out"] * p["output"] + u["cache_write"] * p["cache_write"]
               + u["cache_read"] * p["cache_read"]) * m
     without = ((u["tokens_in"] + u["cache_write"] + u["cache_read"]) * p["input"] + u["tokens_out"] * p["output"]) * m
-    return {"usd": round(actual, 4), "usd_without_cache": round(without, 4), "calls": u["calls"],
+    return {"usd": round(actual, 4), "usd_without_cache": round(without, 4), "calls": u["calls"], "batch": bool(u.get("batch")),
             "cache_hit_share": round(u["cache_read"] / max(1, u["tokens_in"] + u["cache_read"] + u["cache_write"]), 3)}
 
 
@@ -58,14 +61,15 @@ def from_receipts(receipts, model: str) -> dict | None:
 
 def report(rows_by_condition: dict, model: str) -> dict:
     """{condition: cost dict} for the API conditions, plus a 'total'. Prints one line per condition."""
-    out, tot = {}, {f: 0 for f in FIELDS} | {"calls": 0}
+    out, tot = {}, {f: 0 for f in FIELDS} | {"calls": 0, "batch": True}
     for c, rows in rows_by_condition.items():
         u = usage(rows)
         if u is None:
             continue
         out[c] = cost_usd(u, model)
-        for f in tot:
+        for f in FIELDS + ("calls",):
             tot[f] += u[f]
+        tot["batch"] = tot["batch"] and u["batch"]
         if out[c]:
             print(f"cost {c:14} ${out[c]['usd']:.3f} ({out[c]['calls']} calls; without the prompt cache ${out[c]['usd_without_cache']:.3f}; "
                   f"cached share of the input {100 * out[c]['cache_hit_share']:.0f}%)")
@@ -74,7 +78,8 @@ def report(rows_by_condition: dict, model: str) -> dict:
         if out["total"]:
             t = out["total"]
             print(f"cost TOTAL          ${t['usd']:.3f} (without the prompt cache ${t['usd_without_cache']:.3f}; saved "
-                  f"{100 * (1 - t['usd'] / max(t['usd_without_cache'], 1e-9)):.0f}%)")
+                  f"{100 * (1 - t['usd'] / max(t['usd_without_cache'], 1e-9)):.0f}%)"
+                  + (f" | Batch API: half price; the same tokens at the standard rate ${t['usd'] / BATCH_FACTOR:.3f}" if t["batch"] else ""))
     return out
 
 

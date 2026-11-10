@@ -43,6 +43,7 @@ from __future__ import annotations
 
 import argparse
 import glob
+import hashlib
 import json
 import pathlib
 import random
@@ -111,8 +112,32 @@ def paired(rows: dict, x: str, y: str, ids: set | None = None) -> tuple:
     return w, l, sign_test(w, l)
 
 
+def experience_job(tr: Translator, it: dict) -> dict:
+    """One item of the experience phase as a replayable job (batch mode): the reading, and the reflection when the
+    strict verdict is wrong. Exceptions are returned, not raised, so the phase reports them as it does synchronously."""
+    out: dict = {"r": None, "c": None}
+    try:
+        out["r"] = tr.answer(it["text"], it["query"])
+    except Exception as e:  # noqa: BLE001
+        out["r"] = e
+        return out
+    if out["r"]["verdict_strict"] != it["expected"]:
+        try:
+            out["c"] = tr.reflect_correction(it["text"], it["query"], out["r"]["program"], out["r"]["verdict_strict"], it["expected"])
+        except Exception as e:  # noqa: BLE001
+            out["c"] = e
+    return out
+
+
+def _take(x):
+    if isinstance(x, Exception):
+        raise x
+    return x
+
+
 def experience_phase(tr: Translator, items: list, memory: ExperienceMemory, store_correct: bool,
-                     ckpt: pathlib.Path | None = None, resume: bool = True) -> dict:
+                     ckpt: pathlib.Path | None = None, resume: bool = True, pre: dict | None = None) -> dict:
+    """pre: {item id: experience_job result}, the readings already obtained by batches (then no API call here)."""
     st = Counter()
     done = set()
     if ckpt and resume and ckpt.exists():
@@ -126,7 +151,7 @@ def experience_phase(tr: Translator, items: list, memory: ExperienceMemory, stor
         if it["id"] in done:
             continue
         try:
-            r = tr.answer(it["text"], it["query"])
+            r = tr.answer(it["text"], it["query"]) if pre is None else _take(pre[it["id"]]["r"])
         except Exception as e:  # noqa: BLE001
             st["errors"] += 1
             print(f"  !! item {it['id']}: {type(e).__name__}: {str(e)[:120]}")
@@ -139,7 +164,8 @@ def experience_phase(tr: Translator, items: list, memory: ExperienceMemory, stor
         else:
             st["wrong_first"] += 1
             try:
-                c = tr.reflect_correction(it["text"], it["query"], r["program"], r["verdict_strict"], it["expected"])
+                c = (tr.reflect_correction(it["text"], it["query"], r["program"], r["verdict_strict"], it["expected"])
+                     if pre is None else _take(pre[it["id"]]["c"]))
             except Exception as e:  # noqa: BLE001
                 st["errors"] += 1
                 print(f"  !! reflection {it['id']}: {type(e).__name__}: {str(e)[:120]}")
@@ -178,6 +204,8 @@ def main(argv=None, client=None) -> dict:
                          "(stories present in the memory); any = disjoint by id only (runs 1-4)")
     ap.add_argument("--dry-run", action="store_true", help="draw, freeze and print the sets; no API call")
     ap.add_argument("--no-resume", action="store_true", help="ignore an existing checkpoint for this test set")
+    ap.add_argument("--batch", action="store_true", help="every reading through the Message Batches API: same requests, half the "
+                                                         "price, asynchronous (tools/batch_runner.py); re-run the same command to resume")
     ap.add_argument("--model", default="claude-sonnet-5-5")
     ap.add_argument("--out", default=str(ROOT / "tests_lab" / "resultats" / "learning"))
     a = ap.parse_args(argv)
@@ -232,13 +260,27 @@ def main(argv=None, client=None) -> dict:
         return {"experience_sha": exp_sha, "test_sha": test_sha, "n_exp": len(exp_items), "n_test": len(test_items),
                 "same_story_items": n_same, "story_mode": a.story_mode}
 
-    tr = Translator(client=client, model=a.model) if client is not None else Translator(model=a.model)
+    session = None
+    if a.batch:
+        from batch_runner import BatchSession
+        from grandnexus.llm_interface.translator_v5 import _default_client
+        key = hashlib.sha256(json.dumps([a.conditions, a.k, a.model, a.store_correct, a.memory or ""]).encode()).hexdigest()[:8]
+        session = BatchSession(client or _default_client(), outdir / f"batch_state_{exp_sha}_{test_sha}_{key}.json")
+        tr = Translator(client=session, model=a.model)
+    else:
+        tr = Translator(client=client, model=a.model) if client is not None else Translator(model=a.model)
     if a.memory:
         print(f"memory loaded: {len(memory.entries)} experiences")
         exp_items = [it for it in exp_items if it["id"] not in memory.known_ids]
     if exp_items and (not a.memory or a.exp_n > 0):
-        exp_stats.update(experience_phase(tr, exp_items, memory, a.store_correct, outdir / f"checkpoint_memory_{exp_sha}.json",
-                                          not a.no_resume))
+        if session is not None:
+            print(f"batch mode: experience phase, {len(exp_items)} readings (+ reflections)")
+            pre_exp = session.run({f"exp|{it['id']}": (lambda it=it: experience_job(tr, it)) for it in exp_items})
+            exp_stats.update(experience_phase(tr, exp_items, memory, a.store_correct,
+                                              pre={it["id"]: _take(pre_exp[f"exp|{it['id']}"]) for it in exp_items}))
+        else:
+            exp_stats.update(experience_phase(tr, exp_items, memory, a.store_correct, outdir / f"checkpoint_memory_{exp_sha}.json",
+                                              not a.no_resume))
         mem_path = outdir / f"memory_{a.split}_{len(memory.entries)}exp_{stamp}.json"
         memory.save(str(mem_path))
         print(f"experience: {exp_stats} | memory: {len(memory.entries)} experiences -> {mem_path}")
@@ -257,18 +299,31 @@ def main(argv=None, client=None) -> dict:
     done = {r["id"] for r in rows[conditions[0]]}
     majority = Counter(i["expected"] for i in test_items).most_common(1)[0][0]
     rng = random.Random(a.test_seed)
+
+    def examples(c: str, it: dict) -> list:
+        return ([] if c == "none" else static if c == "static"
+                else memory.retrieve(it["text"], it["query"], a.k, "random" if c == "random" else "similar"))
+
+    shown: dict = {}
+    pre_test: dict = {}
+    if session is not None:      # examples drawn once, in the order of the synchronous loop; then every reading by batches
+        for it in test_items:
+            for c in conditions:
+                shown[(c, it["id"])] = examples(c, it)
+        print(f"batch mode: test phase, {len(shown)} readings")
+        pre_test = session.run({f"test|{c}|{it['id']}": (lambda c=c, it=it: tr.answer(it["text"], it["query"], examples_block(shown[(c, it["id"])])))
+                                for it in test_items for c in conditions})
     for k, it in enumerate(test_items, 1):
         if it["id"] in done:
             continue
         base = {"id": it["id"], "expected": it["expected"], "run": 0}
         for c in conditions:
             try:
-                ex = ([] if c == "none" else static if c == "static"
-                      else memory.retrieve(it["text"], it["query"], a.k, "random" if c == "random" else "similar"))
-                r = tr.answer(it["text"], it["query"], examples_block(ex))
+                ex = shown[(c, it["id"])] if session is not None else examples(c, it)
+                r = tr.answer(it["text"], it["query"], examples_block(ex)) if session is None else _take(pre_test[f"test|{c}|{it['id']}"])
                 rows[c].append({**base, "pred": r["verdict_strict"], "pred_full": r["verdict"], "n_examples": len(ex),
                                 "shown": [e.source_id for e in ex], "same_story": any(story_key(e.text) == it["story"] for e in ex),
-                                "rejections": len(r["rejections"]), "calls": r["calls"],
+                                "rejections": len(r["rejections"]), "calls": r["calls"], "batch": session is not None,
                                 "tokens": r["tokens_in"] + r["tokens_out"] + r.get("cache_read", 0) + r.get("cache_write", 0),
                                 "tokens_in": r["tokens_in"], "tokens_out": r["tokens_out"],
                                 "cache_read": r.get("cache_read", 0), "cache_write": r.get("cache_write", 0)})
@@ -341,7 +396,10 @@ def main(argv=None, client=None) -> dict:
         summary[name] = c_main
     print()
     summary["cost"] = cost.report({c: rows[c] for c in conditions}, a.model)
-    run_cost = cost.from_receipts(tr.receipts, a.model)
+    run_cost = cost.cost_usd(session.usage(), a.model) if session is not None else cost.from_receipts(tr.receipts, a.model)
+    if session is not None:
+        summary["batches"] = session.batches_created
+        print(f"batches: {session.batches_created}")
     if run_cost:
         summary["cost"]["run_total_including_experience_phase"] = run_cost
         print(f"cost of the whole run (every call, experience phase included): ${run_cost['usd']:.3f}")
@@ -349,6 +407,8 @@ def main(argv=None, client=None) -> dict:
     out.write_text(json.dumps({"summary": summary, "rows": rows}, ensure_ascii=False, indent=1), encoding="utf-8")
     if ckpt.exists():
         ckpt.unlink()
+    if session is not None:
+        session.finish()
     print(f"written: {out}")
     return summary
 
