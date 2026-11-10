@@ -17,16 +17,17 @@ Talk with Khaled in French. Code, commits, benches, notebooks, LOGBOOK, STATUS a
 ## API key (cost safety)
 - Claude Code itself must run on Khaled's Claude subscription. NEVER set `ANTHROPIC_API_KEY` for the session, in a
   settings file or in a `.env` file: Claude Code would use it and bill its own work to the API account.
-- The key lives in the variable `GRANDNEXUS_API_KEY`, never in `ANTHROPIC_API_KEY`:
+- GrandNexus's key is only ever read from `GRANDNEXUS_API_KEY`:
   - on Khaled's PC, a user environment variable he set once in his own terminal;
-  - in a Claude Code cloud environment, the real key is an API credential held by the agent proxy for
-    `api.anthropic.com`; the environment variables only hold the placeholder `GRANDNEXUS_API_KEY=proxy-injected`.
-  Pass it only to the Python process of a bench, and never print it or write it to a file:
-  - Git Bash: `ANTHROPIC_API_KEY="$GRANDNEXUS_API_KEY" python tools/bench_folio.py ...`
+  - in a Claude Code cloud environment, an environment variable Khaled enters himself in the environment settings
+    (a key held by the agent proxy is impossible: it refuses Anthropic domains, logbook 66). Only a dedicated key
+    with a spending limit goes there. If the variable is absent, there is no API run in the cloud.
+  Pass it only to the Python process of a bench, and never print it, echo it, or write it to a file:
+  - bash: `ANTHROPIC_API_KEY="$GRANDNEXUS_API_KEY" python tools/bench_folio.py ...`
   - PowerShell: `$env:ANTHROPIC_API_KEY = $env:GRANDNEXUS_API_KEY; python tools/bench_folio.py ...; Remove-Item Env:ANTHROPIC_API_KEY`
 - Before an API run, print its expected number of calls and wait for Khaled's go. The benches print their cost;
   after the first run in a new environment, Khaled checks that the API usage matches that cost (a much larger bill
-  would mean Claude Code's own work went to the API key: stop and remove the credential).
+  would mean Claude Code's own work went to the API key: stop and remove the key).
 
 ## Environment (once)
 - Python 3.11+, git. In the repository: `python -m venv .venv`, activate it, then
@@ -34,14 +35,8 @@ Talk with Khaled in French. Code, commits, benches, notebooks, LOGBOOK, STATUS a
 - Windows: set `PYTHONUTF8=1` (user variable) so every file is read as UTF-8, child processes included.
 - FOLIO is downloaded on first use into `tests_lab/data/` (git-ignored).
 
-## Current task: the v7.3.0 check (logbook 64-65), the local equivalent of `notebooks/GrandNexus_v7_3_0-rc_check.ipynb`
-1. `git describe --tags` must print `v7.3.0-rc`. Otherwise STOP.
-2. Offline tests, 0 API call: run every `tests_lab/test_*.py` with `python -W ignore`; each must exit 0 and its last line
-   must not start with FAIL.
-3. Boot profiles, 0 API call: `python -W ignore tools/boot_profiles.py`: four PASS lines expected.
-4. Prompt cache on the real API, about 6 calls (ask Khaled first):
-   `python tools/bench_folio.py --split validation --n 5 --seed 0 --modes translator --strict` with the key passed as above.
-   Expected: a `cost TOTAL ... saved N%` line, and cache reads > 0 in the rows of the result JSON
-   (`tests_lab/resultats/folio_validation_5_*.json`, fields `cache_read`).
-5. If 2, 3 and 4 pass: `git add -A`, commit `v7.3.0 check (local): all criteria pass`, then `git tag v7.3.0`.
-   Otherwise commit `v7.3.0 check (local): NOT all criteria pass`, no tag. Show Khaled the outputs of steps 3 and 4.
+## Current state
+- v7.3.0 is released (tag `v7.3.0`, checked on Colab on 2026-11-10, logbook 66). There is no pending measurement.
+- Offline checks (0 API call) can be run at any time: every `tests_lab/test_*.py` with `python -W ignore` (each must exit
+  0 and its last line must not start with FAIL), and `python -W ignore tools/boot_profiles.py` (four PASS lines).
+- The next task comes from Khaled, with its criteria written in LOGBOOK.md first.
