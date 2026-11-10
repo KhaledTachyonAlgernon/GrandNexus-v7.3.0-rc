@@ -1,7 +1,7 @@
-# GrandNexus — status (2026-11-09, v7.3.0-rc)
+# GrandNexus — status (2026-11-10, v7.3.0)
 
 **An anchored translator and a reference engine that decide without inventing, and a laboratory to measure whether a loop learns.**
-Read this file first; `LOGBOOK.md` holds every hypothesis -> result -> decision (65 entries); `MODULES.md` gives the status of every module.
+Read this file first; `LOGBOOK.md` holds every hypothesis -> result -> decision (66 entries); `MODULES.md` gives the status of every module.
 
 ## The core (what is demonstrated)
 | Part | File |
@@ -21,21 +21,25 @@ Module status (`MODULES.md`, generated from `grandnexus/module_status.py`): core
 - **The loop that learns: not demonstrated** (point 3 closed, logbook 62). Two pre-registered tests failed: run 4 (200 items) 9/6, run 5a (recall, 68 items) 3/1; together 12/7, p = 0.36. The effect of the earlier runs was recall of the same story, a selection artefact that did not replicate. Transfer with "lessons" (branch `lessons`) is parked, not rejected: FOLIO has 130 never-read items left, enough to see only a gain of about 7 points, while the effects seen are 2-3 points.
 
 ## Costs (logbook 63)
-- The translator's system prompt is sent to the API prompt cache: same answers (API documentation), the cached part billed at 5% of the input price on Sonnet 5.5; estimated -25% per run.
+- The translator's system prompt (2,280 tokens) is sent to the API prompt cache: same answers (API documentation), the cached part billed at 5% of the input price on Sonnet 5.5. Measured on the real API: -42% (logbook 66); the output tokens are now 87% of a run's cost.
 - Every bench row records input, output, cache-read and cache-write tokens; the benches print the run's cost and what it would have cost without the cache (`tools/cost.py`, prices of 2026-11-09).
 - Next lever, not done: the Batch API (-50% on everything, asynchronous), when a large run is planned.
 - Before any run, the dry run prints the smallest gain the set can detect (80% power): do not launch a run that cannot conclude.
 
 ## Minimal boot profile (point 4, logbook 64-65)
-- `boot(profile="minimal")`: NexusCore registers, starts and stops the core modules only (premise extractor, text reasoner, nexus_logic, translator_v5). Measured offline: 17 modules, boot 0.05 s, 1-2 threads, shutdown 0.0 s, no thread left, in laboratory and live mode; same answers as the full profile on all 31 offline items (frozen sets + scripted nx readings).
+- `boot(profile="minimal")`: NexusCore registers, starts and stops the core modules only (premise extractor, text reasoner, nexus_logic, translator_v5). Measured offline, then confirmed on Colab (logbook 66): 17 modules, boot under 0.1 s, 1-2 threads, shutdown 0.0 s, no thread left, in laboratory and live mode; same answers as the full profile on all 31 offline items (frozen sets + scripted nx readings).
 - Found and repaired on the way: `grandnexus/llm_interface/__init__.py` imported the LLM engine eagerly, which made the core translator load the 2025 memories and graph; same exports, now loaded on first access.
 - The full profile is unchanged and stays the default.
 
 ## Open experiments
-- None. The notebook of this version (`notebooks/GrandNexus_v7_3_0-rc_check.ipynb`, 0 call for the profiles, about 6 calls for the cost check on 5 seen validation items) confirms the profiles and the prompt cache on Colab and tags v7.3.0 if everything passes.
+- None. v7.3.0 was checked on Colab (`notebooks/GrandNexus_v7_3_0-rc_check.ipynb`) and tagged.
+
+## Where things run
+- Colab: API runs (notebooks with STOP guards; save with `tools/colab_save.py`).
+- Claude Code on the web, on Khaled's GitHub copy, follows `CLAUDE.md`: every offline step. An API run there needs a dedicated key with a spending limit in `GRANDNEXUS_API_KEY`, entered by Khaled; the agent proxy cannot hold Anthropic keys.
 
 ## Work order (validated 2026-11-02, updated 2026-11-09)
-1. v7.1.0 stable — done. 2. The comparable number (validation 203 x 3, literature read) — done. 3. The loop that learns — closed, not demonstrated (logbook 62). 4. Minimal boot profile: NexusCore as orchestrator only, modules tagged core / supported / experimental / archive — done offline (v7.3.0-rc, logbook 65), Colab confirmation pending. Next: to be decided (candidates: the Batch API for cheaper runs, the live mode's dead addressing, a larger never-read set to reopen the learning question).
+1. v7.1.0 stable — done. 2. The comparable number (validation 203 x 3, literature read) — done. 3. The loop that learns — closed, not demonstrated (logbook 62). 4. Minimal boot profile: NexusCore as orchestrator only, modules tagged core / supported / experimental / archive — done (v7.3.0, logbook 65-66). Next: to be decided (candidates: the Batch API for cheaper runs, the live mode's dead addressing, a larger never-read set to reopen the learning question).
 
 ## Conventions
 - Verdicts: yes / no / unknown / contradictory (French labels of the old frozen sets are mapped at load time; a set frozen with French labels has another content sha but the same ids).

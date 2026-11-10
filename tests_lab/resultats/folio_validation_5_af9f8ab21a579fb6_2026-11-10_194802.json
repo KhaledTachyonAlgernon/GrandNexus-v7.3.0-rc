@@ -1,0 +1,352 @@
+{
+ "summary": {
+  "set": "folio_validation_5_af9f8ab21a579fb6_2026-11-10_194802",
+  "sha": "af9f8ab21a579fb6",
+  "n": 5,
+  "runs": 1,
+  "model": "claude-sonnet-5-5",
+  "prompt_version": "v5.4",
+  "engine_version": "ref-2.3",
+  "modes": {
+   "translator": {
+    "runs": {
+     "0": {
+      "acc": 5,
+      "n": 5,
+      "pct": 100.0,
+      "false_yes": 0,
+      "false_no": 0,
+      "inventions": 0,
+      "false_contradictory": 0,
+      "unknown": 2,
+      "contradictory": 0,
+      "errors": 0,
+      "confusion": {
+       "no->no": 1,
+       "unknown->unknown": 2,
+       "yes->yes": 2
+      },
+      "strict": {
+       "acc": 5,
+       "n": 5,
+       "pct": 100.0,
+       "false_yes": 0,
+       "false_no": 0,
+       "inventions": 0,
+       "false_contradictory": 0,
+       "unknown": 2,
+       "contradictory": 0,
+       "errors": 0,
+       "confusion": {
+        "no->no": 1,
+        "unknown->unknown": 2,
+        "yes->yes": 2
+       }
+      },
+      "depends_on_knowledge": 0,
+      "rejections": 0
+     }
+    },
+    "stable_items": 5,
+    "calls": 8,
+    "tokens": 24744
+   },
+   "always_unknown": {
+    "runs": {
+     "0": {
+      "acc": 2,
+      "n": 5,
+      "pct": 40.0,
+      "false_yes": 0,
+      "false_no": 0,
+      "inventions": 0,
+      "false_contradictory": 0,
+      "unknown": 5,
+      "contradictory": 0,
+      "errors": 0,
+      "confusion": {
+       "no->unknown": 1,
+       "unknown->unknown": 2,
+       "yes->unknown": 2
+      }
+     }
+    },
+    "stable_items": 5,
+    "calls": 0,
+    "tokens": 0
+   },
+   "majority": {
+    "runs": {
+     "0": {
+      "acc": 2,
+      "n": 5,
+      "pct": 40.0,
+      "false_yes": 0,
+      "false_no": 0,
+      "inventions": 0,
+      "false_contradictory": 0,
+      "unknown": 5,
+      "contradictory": 0,
+      "errors": 0,
+      "confusion": {
+       "no->unknown": 1,
+       "unknown->unknown": 2,
+       "yes->unknown": 2
+      }
+     }
+    },
+    "stable_items": 5,
+    "calls": 0,
+    "tokens": 0
+   },
+   "random": {
+    "runs": {
+     "0": {
+      "acc": 1,
+      "n": 5,
+      "pct": 20.0,
+      "false_yes": 1,
+      "false_no": 2,
+      "inventions": 2,
+      "false_contradictory": 0,
+      "unknown": 1,
+      "contradictory": 0,
+      "errors": 0,
+      "confusion": {
+       "no->no": 1,
+       "unknown->no": 1,
+       "unknown->yes": 1,
+       "yes->no": 1,
+       "yes->unknown": 1
+      }
+     }
+    },
+    "stable_items": 5,
+    "calls": 0,
+    "tokens": 0
+   }
+  },
+  "cost": {
+   "translator": {
+    "usd": 0.0485,
+    "usd_without_cache": 0.0831,
+    "calls": 8,
+    "cache_hit_share": 0.888
+   },
+   "total": {
+    "usd": 0.0485,
+    "usd_without_cache": 0.0831,
+    "calls": 8,
+    "cache_hit_share": 0.888
+   }
+  }
+ },
+ "rows": {
+  "translator": [
+   {
+    "id": "942",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "pred_strict": "no",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 1,
+    "calls": 2,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgupqQXTsVtNPvTPDZKLU",
+     "msg_011Cgupqk7BV38PVMcxoSuXB"
+    ],
+    "tokens": 7058,
+    "tokens_in": 989,
+    "tokens_out": 1509,
+    "cache_read": 4560,
+    "cache_write": 0
+   },
+   {
+    "id": "244",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "pred_strict": "unknown",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 1,
+    "calls": 2,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011Cgupr611EXbxE3WY6N6Q5",
+     "msg_011CguprGCC31EzY4fXuvALD"
+    ],
+    "tokens": 6054,
+    "tokens_in": 530,
+    "tokens_out": 964,
+    "cache_read": 4560,
+    "cache_write": 0
+   },
+   {
+    "id": "1362",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "contradictory",
+    "pred_strict": "unknown",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CguprburHZUu8kXNUEEFC"
+    ],
+    "tokens": 2821,
+    "tokens_in": 159,
+    "tokens_out": 382,
+    "cache_read": 2280,
+    "cache_write": 0
+   },
+   {
+    "id": "560",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "pred_strict": "yes",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CguprnrAJGfdEobousPjG"
+    ],
+    "tokens": 2749,
+    "tokens_in": 174,
+    "tokens_out": 295,
+    "cache_read": 2280,
+    "cache_write": 0
+   },
+   {
+    "id": "74",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "pred_strict": "yes",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 1,
+    "calls": 2,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CguprwpRWLf8cw4M6SZdT",
+     "msg_011Cgups41VGCQoXzxm2w7XP"
+    ],
+    "tokens": 6062,
+    "tokens_in": 448,
+    "tokens_out": 1054,
+    "cache_read": 4560,
+    "cache_write": 0
+   }
+  ],
+  "always_unknown": [
+   {
+    "id": "942",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "244",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1362",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "560",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "74",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   }
+  ],
+  "majority": [
+   {
+    "id": "942",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "244",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1362",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "560",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "74",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   }
+  ],
+  "random": [
+   {
+    "id": "942",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "244",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1362",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "560",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "74",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   }
+  ]
+ }
+}
