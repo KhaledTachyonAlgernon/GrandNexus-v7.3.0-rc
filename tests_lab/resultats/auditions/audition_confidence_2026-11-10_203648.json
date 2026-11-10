@@ -1,0 +1,64 @@
+{
+ "n": {
+  "all": 1218,
+  "decided": 671,
+  "unknown": 547
+ },
+ "right": {
+  "all": 1023,
+  "decided": 627,
+  "unknown": 396
+ },
+ "auroc": {
+  "F0": {
+   "all": 0.693631100082713,
+   "decided": 0.5,
+   "unknown": 0.5
+  },
+  "F1": {
+   "all": 0.5064691580820613,
+   "decided": 0.6067130636508626,
+   "unknown": 0.6357448658773162
+  },
+  "constant": {
+   "all": 0.5,
+   "decided": 0.5,
+   "unknown": 0.5
+  },
+  "random": {
+   "all": 0.5114419630548663,
+   "decided": 0.5048571842830216,
+   "unknown": 0.5034784935447187
+  },
+  "decided_sig": {
+   "all": 0.693631100082713,
+   "decided": 0.5,
+   "unknown": 0.5
+  },
+  "no_rejection": {
+   "all": 0.5,
+   "decided": 0.5,
+   "unknown": 0.5
+  },
+  "no_corrective": {
+   "all": 0.45695916986239565,
+   "decided": 0.4310207336523126,
+   "unknown": 0.4743879189243428
+  },
+  "short_program": {
+   "all": 0.6366318269544076,
+   "decided": 0.7457590256633319,
+   "unknown": 0.5633069101612148
+  },
+  "short_proof": {
+   "all": 0.38412662606210995,
+   "decided": 0.4750978686385385,
+   "unknown": 0.5
+  }
+ },
+ "best_trivial": {
+  "all": 0.693631100082713,
+  "decided": 0.7457590256633319
+ },
+ "pass": false
+}

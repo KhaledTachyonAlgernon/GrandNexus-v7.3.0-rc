@@ -126,7 +126,7 @@ def metrics(rows: list[dict], key: str = "pred") -> dict:
             "confusion": {f"{e}->{p}": c for (e, p), c in sorted(Counter((r["expected"], g(r)) for r in rows).items())}}
 
 
-def main() -> None:
+def main(argv=None, client=None) -> dict:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--split", default="validation")
     ap.add_argument("--jsonl", help="local set: FOLIO jsonl or {id,text,query,expected}")
@@ -139,7 +139,9 @@ def main() -> None:
     ap.add_argument("--out", default=str(ROOT / "tests_lab" / "resultats"))
     ap.add_argument("--save-programs", action="store_true", help="write the translated programs (they quote the text)")
     ap.add_argument("--strict", action="store_true", help="main prediction = the verdict WITHOUT background knowledge (FOLIO: premises only)")
-    a = ap.parse_args()
+    ap.add_argument("--batch", action="store_true", help="translator / direct through the Message Batches API: same requests, half the "
+                                                         "price, asynchronous (tools/batch_runner.py); re-run the same command to resume")
+    a = ap.parse_args(argv)
 
     items = load_items(a.split, a.jsonl)
     if a.n or a.skip:
@@ -152,19 +154,47 @@ def main() -> None:
     print(f"[{name}] {len(items)} items frozen, sha {sha}, labels {dict(Counter(i['expected'] for i in items))}")
 
     modes = [m.strip() for m in a.modes.split(",") if m.strip()]
-    tr = gn_reasoner = None
+    tr = gn_reasoner = session = None
+    outdir = pathlib.Path(a.out)
+    outdir.mkdir(parents=True, exist_ok=True)
     if any(m in ("translator", "direct") for m in modes):
-        from grandnexus.llm_interface.translator_v5 import Translator
-        tr = Translator(model=a.model) if a.model else Translator()
+        from grandnexus.llm_interface.translator_v5 import Translator, _default_client
+        kw = {"model": a.model} if a.model else {}
+        if a.batch:
+            from batch_runner import BatchSession
+            key = hashlib.sha256(json.dumps([modes, a.runs, a.model]).encode()).hexdigest()[:8]
+            session = BatchSession(client or _default_client(),
+                                   outdir / f"batch_state_{'local' if a.jsonl else 'folio_' + a.split}_{len(items)}_{sha}_{key}.json")
+            tr = Translator(client=session, **kw)
+        else:
+            tr = Translator(client=client, **kw) if client is not None else Translator(**kw)
+    if a.batch and "grandnexus" in modes:
+        raise SystemExit("--batch covers the translator and direct modes; run the grandnexus mode without it")
     if "grandnexus" in modes:
         from grandnexus.boot import boot
         gn_reasoner = boot(llm="auto").modules()["text_reasoner"]
 
     majority = Counter(i["expected"] for i in items).most_common(1)[0][0]
     rows: dict[str, list[dict]] = {m: [] for m in modes + ["always_unknown", "majority", "random"]}
-    outdir = pathlib.Path(a.out)
-    outdir.mkdir(parents=True, exist_ok=True)
     progdir = outdir / "programs" / name
+
+    def api(m: str, run: int, it: dict) -> dict:
+        return tr.answer(it["text"], it["query"]) if m == "translator" else tr.direct(it["text"], as_question(it["query"]))
+
+    pre: dict = {}
+    if session is not None:     # every API reading first, by batches; the loop below then only assembles the rows
+        jobs = {f"{m}|{run}|{it['id']}": (lambda m=m, run=run, it=it: api(m, run, it))
+                for m in modes if m in ("translator", "direct") for run in range(a.runs) for it in items}
+        print(f"batch mode: {len(jobs)} readings")
+        pre = session.run(jobs)
+
+    def reading(m: str, run: int, it: dict) -> dict:
+        if session is None:
+            return api(m, run, it)
+        r = pre[f"{m}|{run}|{it['id']}"]
+        if isinstance(r, Exception):
+            raise r
+        return r
 
     for m in rows:
         for run in range(a.runs if m in API_MODES else 1):
@@ -179,17 +209,18 @@ def main() -> None:
                     elif m == "random":
                         row["pred"] = rng.choice(["yes", "no", "unknown"])
                     elif m == "translator":
-                        r = tr.answer(it["text"], it["query"])
+                        r = reading(m, run, it)
                         row.update(pred=r["verdict_strict"] if a.strict else r["verdict"], pred_full=r["verdict"],
                                    pred_strict=r["verdict_strict"], knowledge=r["depends_on_knowledge"],
                                    rejections=len(r["rejections"]), corrective=r["corrective_rounds"], calls=r["calls"],
-                                   model=r["model"], ids=r["message_ids"], **_usage(r))
+                                   model=r["model"], ids=r["message_ids"], batch=session is not None, **_usage(r))
                         if a.save_programs:
                             progdir.mkdir(parents=True, exist_ok=True)
                             (progdir / f"{it['id']}_r{run}.nx").write_text(r["program"], encoding="utf-8")
                     elif m == "direct":
-                        r = tr.direct(it["text"], as_question(it["query"]))
-                        row.update(pred=normalise(r["answer"]), calls=r["calls"], model=r["model"], ids=r["message_ids"], **_usage(r))
+                        r = reading(m, run, it)
+                        row.update(pred=normalise(r["answer"]), calls=r["calls"], model=r["model"], ids=r["message_ids"],
+                                   batch=session is not None, **_usage(r))
                     elif m == "grandnexus":
                         r = gn_reasoner.answer(it["text"] + "\n" + as_question(it["query"]))
                         row["pred"] = normalise(r.get("answer", "") if isinstance(r, dict) else r)
@@ -245,7 +276,13 @@ def main() -> None:
         summary["cost"] = cost.report({m: rows[m] for m in modes if m in ("translator", "direct")}, tr.model)
     out = outdir / f"{name}.json"
     out.write_text(json.dumps({"summary": summary, "rows": rows}, ensure_ascii=False, indent=1), encoding="utf-8")
+    if session is not None:
+        summary["batches"] = session.batches_created
+        out.write_text(json.dumps({"summary": summary, "rows": rows}, ensure_ascii=False, indent=1), encoding="utf-8")
+        session.finish()
+        print(f"batches: {summary['batches']}")
     print(f"\nwritten: {out}")
+    return summary
 
 
 if __name__ == "__main__":
