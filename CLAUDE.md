@@ -17,11 +17,16 @@ Talk with Khaled in French. Code, commits, benches, notebooks, LOGBOOK, STATUS a
 ## API key (cost safety)
 - Claude Code itself must run on Khaled's Claude subscription. NEVER set `ANTHROPIC_API_KEY` for the session, in a
   settings file or in a `.env` file: Claude Code would use it and bill its own work to the API account.
-- The key lives in the user environment variable `GRANDNEXUS_API_KEY` (set once by Khaled in his own terminal).
+- The key lives in the variable `GRANDNEXUS_API_KEY`, never in `ANTHROPIC_API_KEY`:
+  - on Khaled's PC, a user environment variable he set once in his own terminal;
+  - in a Claude Code cloud environment, the real key is an API credential held by the agent proxy for
+    `api.anthropic.com`; the environment variables only hold the placeholder `GRANDNEXUS_API_KEY=proxy-injected`.
   Pass it only to the Python process of a bench, and never print it or write it to a file:
   - Git Bash: `ANTHROPIC_API_KEY="$GRANDNEXUS_API_KEY" python tools/bench_folio.py ...`
   - PowerShell: `$env:ANTHROPIC_API_KEY = $env:GRANDNEXUS_API_KEY; python tools/bench_folio.py ...; Remove-Item Env:ANTHROPIC_API_KEY`
-- Before an API run, print its expected number of calls and wait for Khaled's go. The benches print their cost.
+- Before an API run, print its expected number of calls and wait for Khaled's go. The benches print their cost;
+  after the first run in a new environment, Khaled checks that the API usage matches that cost (a much larger bill
+  would mean Claude Code's own work went to the API key: stop and remove the credential).
 
 ## Environment (once)
 - Python 3.11+, git. In the repository: `python -m venv .venv`, activate it, then
