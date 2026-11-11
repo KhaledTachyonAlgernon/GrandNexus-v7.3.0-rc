@@ -25,10 +25,13 @@ Generated from `grandnexus/module_status.py` (v7.3.0, logbook 64-65). core: the 
 | `grandnexus.cognition.deliberation` | supported | deliberation experiment (several readings), rejected (logbook 44), bench kept |
 | `grandnexus.cognition.experience` | supported | experience memory of the learning loop; measured, no effect shown (logbook 62) |
 | `grandnexus.cognition.reasoning.reasoning_core` | supported | home engine, kept for the comparison with the reference engine |
+| `grandnexus.graph.graph_engine` | supported | InMemoryGraphEngine: two-step chains in the living bench, logbook 78-80 |
 | `grandnexus.llm_interface.llm_engine` | supported | LLM engine used by the JSON translator |
 | `grandnexus.llm_interface.llm_translator` | supported | earlier JSON translator (prompts v1-v4), kept for comparison |
 | `grandnexus.llm_interface.prompt_templates` | supported | templates of the LLM engine |
 | `grandnexus.llm_interface.response_parser` | supported | parsers of the LLM engine |
+| `grandnexus.memory.episodic` | supported | repaired (succession, retrieval by the question); time in the living bench, logbook 77-80 |
+| `grandnexus.memory.semantic` | supported | relations walked from the person: chains in the living bench, logbook 78-80 |
 | `grandnexus.module_status` | supported | this file: the tags and their checks |
 | `grandnexus.actuators` | experimental | 2025 ground: runs, not demonstrated |
 | `grandnexus.actuators.actuator_hub` | experimental | 2025 ground: runs, not demonstrated |
@@ -77,7 +80,6 @@ Generated from `grandnexus/module_status.py` (v7.3.0, logbook 64-65). core: the 
 | `grandnexus.evolution` | experimental | 2025 ground: runs, not demonstrated |
 | `grandnexus.evolution.evolution_manager` | experimental | 2025 ground: runs, not demonstrated |
 | `grandnexus.graph` | experimental | 2025 ground: runs, not demonstrated |
-| `grandnexus.graph.graph_engine` | experimental | 2025 ground: runs, not demonstrated |
 | `grandnexus.graph.graph_module_manager` | experimental | 2025 ground: runs, not demonstrated |
 | `grandnexus.graph.graph_pattern_interface` | experimental | 2025 ground: runs, not demonstrated |
 | `grandnexus.graph.graph_sync_service` | experimental | 2025 ground: runs, not demonstrated |
@@ -90,9 +92,7 @@ Generated from `grandnexus/module_status.py` (v7.3.0, logbook 64-65). core: the 
 | `grandnexus.kernel` | experimental | 2025 ground: runs, not demonstrated |
 | `grandnexus.kernel.kernel_bridge` | experimental | 2025 ground: runs, not demonstrated |
 | `grandnexus.memory` | experimental | 2025 ground: runs, not demonstrated |
-| `grandnexus.memory.episodic` | experimental | 2025 ground: runs, not demonstrated |
 | `grandnexus.memory.memory_manager` | experimental | not loaded by any profile |
-| `grandnexus.memory.semantic` | experimental | 2025 ground: runs, not demonstrated |
 | `grandnexus.memory.semantic_v2` | experimental | variant of semantic, not loaded by any profile |
 | `grandnexus.memory.working` | experimental | 2025 ground: runs, not demonstrated |
 | `grandnexus.memory.working_v2` | experimental | variant of working, not loaded by any profile |

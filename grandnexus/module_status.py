@@ -49,6 +49,9 @@ _SUPPORTED = {
     "grandnexus.llm_interface.llm_engine": "LLM engine used by the JSON translator",
     "grandnexus.llm_interface.prompt_templates": "templates of the LLM engine",
     "grandnexus.llm_interface.response_parser": "parsers of the LLM engine",
+    "grandnexus.memory.episodic": "repaired (succession, retrieval by the question); time in the living bench, logbook 77-80",
+    "grandnexus.graph.graph_engine": "InMemoryGraphEngine: two-step chains in the living bench, logbook 78-80",
+    "grandnexus.memory.semantic": "relations walked from the person: chains in the living bench, logbook 78-80",
 }
 _ARCHIVE = {
     "grandnexus.graph.graph_engine_v1": "duplicate of graph_engine (kept side by side, logbook: legacy notes)",
