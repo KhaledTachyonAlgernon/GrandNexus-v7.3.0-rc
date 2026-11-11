@@ -1,7 +1,7 @@
-# GrandNexus — status (2026-11-10, v7.4.0-rc)
+# GrandNexus — status (2026-11-11, v7.4.0)
 
 **An anchored translator and a reference engine that decide without inventing, and a laboratory to measure whether a loop learns.**
-Read this file first; `LOGBOOK.md` holds every hypothesis -> result -> decision (74 entries); `MODULES.md` gives the status of every module.
+Read this file first; `LOGBOOK.md` holds every hypothesis -> result -> decision (76 entries); `MODULES.md` gives the status of every module.
 
 ## The core (what is demonstrated)
 | Part | File |
@@ -23,7 +23,7 @@ Module status (`MODULES.md`, generated from `grandnexus/module_status.py`): core
 ## Costs (logbook 63)
 - The translator's system prompt (2,280 tokens) is sent to the API prompt cache: same answers (API documentation), the cached part billed at 5% of the input price on Sonnet 5.5. Measured on the real API: -42% (logbook 66); the output tokens are now 87% of a run's cost.
 - Every bench row records input, output, cache-read and cache-write tokens; the benches print the run's cost and what it would have cost without the cache (`tools/cost.py`, prices of 2026-11-09).
-- Batch mode (logbook 69, 71): `--batch` on `tools/bench_folio.py` and `tools/bench_learning.py` sends every reading through the Message Batches API: same model, same requests, half the price, asynchronous (minutes to an hour). The benches are unchanged; `tools/batch_runner.py` replays the jobs (first readings, corrective rounds, reflections: at most 4 batches). An interrupted session resumes by running the same command again. Offline: identical rows to the synchronous mode. Real API: to confirm (see below).
+- Batch mode (logbook 69, 71): `--batch` on `tools/bench_folio.py` and `tools/bench_learning.py` sends every reading through the Message Batches API: same model, same requests, half the price, asynchronous (minutes to an hour). The benches are unchanged; `tools/batch_runner.py` replays the jobs (first readings, corrective rounds, reflections: at most 4 batches). An interrupted session resumes by running the same command again. Offline: identical rows to the synchronous mode. Real API (logbook 75): $0.024 instead of $0.049 on the same 5 items, 2 batches, 13 minutes.
 - Before any run, the dry run prints the smallest gain the set can detect (80% power): do not launch a run that cannot conclude.
 
 ## Minimal boot profile (point 4, logbook 64-65)
@@ -38,14 +38,14 @@ Module status (`MODULES.md`, generated from `grandnexus/module_status.py`): core
 - n°2-4 (logbook 74), attention filter, linguistic patterns, reflection: FAIL, FAIL, FAIL. None beats a trivial control; the attention filter has a defect (a catch-all focus wins every time). The direct path is exhausted for the 2025 modules; what remains for them is a "living" bench.
 
 ## Open experiments
-- Batch mode on the real API (criterion 4 of logbook 69): `notebooks/GrandNexus_v7_4_0-rc_check.ipynb`, the 5 seen validation items through one batch, expected cost about $0.03 instead of $0.049; tags v7.4.0 if it passes.
+- Living bench, sandbox (logbook 76, `tools/living_bench.py`, offline, synthetic worlds): 548 questions over 12 sessions. Concat 85.2% with 65 asserted errors (moves); a trivial "latest city" rule 85.2% with 0; word overlap 81.2% with 6 facts instead of 36; the 2025 WorkingMemory 63.1% and EpisodicMemory 33.6%, both below word overlap. Window for a real memory: time (supersession) and context size. Next steps in sandbox to choose with Khaled.
 
 ## Where things run
 - Colab: API runs (notebooks with STOP guards; save with `tools/colab_save.py`).
 - Claude Code on the web, on Khaled's GitHub copy, follows `CLAUDE.md`: every offline step. An API run there needs a dedicated key with a spending limit in `GRANDNEXUS_API_KEY`, entered by Khaled; the agent proxy cannot hold Anthropic keys.
 
 ## Work order (validated 2026-11-02, updated 2026-11-09)
-1. v7.1.0 stable — done. 2. The comparable number (validation 203 x 3, literature read) — done. 3. The loop that learns — closed, not demonstrated (logbook 62). 4. Minimal boot profile: NexusCore as orchestrator only, modules tagged core / supported / experimental / archive — done (v7.3.0, logbook 65-66). 5. Batch mode for the benches — built, offline criteria passed (v7.4.0-rc, logbook 71), real API pending. 6. Module auditions, family by family — n°1-4 done, all FAIL (logbook 70, 74); the direct path is exhausted. Later, in sandbox: a "living" bench (facts arriving over several sessions) where memories and graph are needed.
+1. v7.1.0 stable — done. 2. The comparable number (validation 203 x 3, literature read) — done. 3. The loop that learns — closed, not demonstrated (logbook 62). 4. Minimal boot profile: NexusCore as orchestrator only, modules tagged core / supported / experimental / archive — done (v7.3.0, logbook 65-66). 5. Batch mode for the benches — done (v7.4.0, logbook 71, 75). 6. Module auditions, family by family — n°1-4 done, all FAIL (logbook 70, 74); the direct path is exhausted. Later, in sandbox: a "living" bench (facts arriving over several sessions) where memories and graph are needed.
 
 ## Conventions
 - Verdicts: yes / no / unknown / contradictory (French labels of the old frozen sets are mapped at load time; a set frozen with French labels has another content sha but the same ids).
