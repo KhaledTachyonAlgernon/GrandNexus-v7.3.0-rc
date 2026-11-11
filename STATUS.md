@@ -1,7 +1,7 @@
 # GrandNexus — status (2026-11-11, v7.4.0)
 
 **An anchored translator and a reference engine that decide without inventing, and a laboratory to measure whether a loop learns.**
-Read this file first; `LOGBOOK.md` holds every hypothesis -> result -> decision (77 entries); `MODULES.md` gives the status of every module.
+Read this file first; `LOGBOOK.md` holds every hypothesis -> result -> decision (78 entries); `MODULES.md` gives the status of every module.
 
 ## The core (what is demonstrated)
 | Part | File |
@@ -38,7 +38,7 @@ Module status (`MODULES.md`, generated from `grandnexus/module_status.py`): core
 - n°2-4 (logbook 74), attention filter, linguistic patterns, reflection: FAIL, FAIL, FAIL. None beats a trivial control; the attention filter has a defect (a catch-all focus wins every time). The direct path is exhausted for the 2025 modules; what remains for them is a "living" bench.
 
 ## Open experiments
-- Living bench, sandbox (logbook 76, `tools/living_bench.py`, offline, synthetic worlds): 548 questions over 12 sessions. Concat 85.2% with 65 asserted errors (moves); a trivial "latest city" rule 85.2% with 0; word overlap 81.2% with 6 facts instead of 36; the 2025 WorkingMemory 63.1% and EpisodicMemory 33.6%, both below word overlap. Window for a real memory: time (supersession) and context size. Repaired 2025 episodic memory (logbook 77: retrieval by the question's words, succession for single-valued relations): 95.8% with 0 asserted errors and 6 facts per question, the best pipeline. Next: the graph and semantic memory for the 23 missed chains, then a lab version.
+- Living bench, sandbox (logbook 76, `tools/living_bench.py`, offline, synthetic worlds): 548 questions over 12 sessions. Concat 85.2% with 65 asserted errors (moves); a trivial "latest city" rule 85.2% with 0; word overlap 81.2% with 6 facts instead of 36; the 2025 WorkingMemory 63.1% and EpisodicMemory 33.6%, both below word overlap. Window for a real memory: time (supersession) and context size. Repaired 2025 episodic memory (logbook 77: retrieval by the question's words, succession for single-valued relations): 95.8% with 0 asserted errors and 6 facts per question, the best pipeline. World v2 with two-step chains (logbook 78): the 2025 graph engine and semantic memory, with the repaired episodic memory for time, answer 100% of 517 questions with 0 asserted errors and under 2 facts per question (concat: 89.0%, 57 errors, 37 facts); word-based retrieval misses the two-step chains even with 16 facts. Next: a lab version, with the structure of the facts extracted by the grammar pathway and criteria written first.
 
 ## Where things run
 - Colab: API runs (notebooks with STOP guards; save with `tools/colab_save.py`).
