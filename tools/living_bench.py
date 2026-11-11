@@ -22,7 +22,9 @@ Pipelines, each giving a context (facts) + the question to the same reasoner:
   latest      concat, but only the latest city of each person (a trivial supersession rule)
   overlap     the K past facts sharing most words with the question, most recent first on ties
   working     the 2025 WorkingMemory: every fact stored as it arrives, retrieve(question, K)
-  episodic    the 2025 EpisodicMemory: one episode per session, retrieve_events(question, K)
+  episodic_2025  the EpisodicMemory as written in 2025: one episode per session, retrieve_events(question, K)
+  episodic    the same module repaired (logbook 77): retrieval by the question's words, and succession for "lives in"
+              (a new city closes the old one and the memory records "X does not live in <old city>.")
 
   python tools/living_bench.py --worlds 20 --sessions 12 --seed 1
 """
@@ -47,7 +49,7 @@ ROLES = ["chess player", "painter", "swimmer", "teacher", "gardener", "pilot", "
 ADJS = ["patient", "curious", "brave", "calm", "strong", "careful", "generous", "honest"]
 CITIES = ["Lyon", "Paris", "Lille", "Nantes", "Nice", "Rennes", "Dijon", "Brest", "Metz", "Tours", "Caen", "Rouen"]
 KINDS = ("recall", "chain", "update_new", "update_old", "unknown")
-PIPELINES = ("none", "concat", "latest", "overlap", "working", "episodic")
+PIPELINES = ("none", "concat", "latest", "overlap", "working", "episodic_2025", "episodic")
 STOP = set("the a an is are does do every no not in of to live lives".split())
 
 
@@ -130,16 +132,22 @@ def words(s: str) -> set:
 def run_world(world: World, reasoner, k: int) -> list:
     from grandnexus.memory.episodic import EpisodicMemory, EpisodicMemoryConfig
     from grandnexus.memory.working import WorkingMemory, WorkingMemoryConfig
-    wm, em = WorkingMemory(WorkingMemoryConfig()), EpisodicMemory(EpisodicMemoryConfig())
+    wm = WorkingMemory(WorkingMemoryConfig())
+    em_old = EpisodicMemory(EpisodicMemoryConfig(lexical_retrieval=False))          # the 2025 behaviour
+    em = EpisodicMemory(EpisodicMemoryConfig(single_valued_relations={"lives in": "{subject} does not live in {value}."}))
     history: list = []                              # (session, fact)
     rows = []
     for s, (facts, questions) in enumerate(world.sessions):
-        ep = em.create_episode("session", context={"session": s})
+        ep, ep_old = em.create_episode("session", context={"session": s}), em_old.create_episode("session", context={"session": s})
         for f in facts:
             history.append((s, f))
             wm.store_item(f, source=f"session{s}")
-            em.add_event(ep.episode_id, f, metadata={"session": s})
+            em_old.add_event(ep_old.episode_id, f, metadata={"session": s})
+            m = re.match(r"(\w+) lives in (\w+)\.", f)
+            md = {"session": s, "subject": m.group(1), "relation": "lives in", "value": m.group(2)} if m else {"session": s}
+            em.add_event(ep.episode_id, f, metadata=md)
         em.close_episode(ep.episode_id)
+        em_old.close_episode(ep_old.episode_id)
         for kind, q, gold in questions:
             latest_city = {}
             for t, f in history:
@@ -152,6 +160,7 @@ def run_world(world: World, reasoner, k: int) -> list:
                 "latest": [f for _, f in history if not re.match(r"\w+ lives in", f) or latest_city.get(f.split()[0]) == f],
                 "overlap": [f for _, _, f in sorted(((-len(words(f) & words(q)), -t, f) for t, f in history))[:k]],
                 "working": [getattr(x[0] if isinstance(x, tuple) else x, "content", "") for x in wm.retrieve(q, max_results=k)],
+                "episodic_2025": [getattr(x[0] if isinstance(x, tuple) else x, "content", "") for x in em_old.retrieve_events(text=q, max_results=k)],
                 "episodic": [getattr(x[0] if isinstance(x, tuple) else x, "content", "") for x in em.retrieve_events(text=q, max_results=k)],
             }
             for name, c in ctx.items():
