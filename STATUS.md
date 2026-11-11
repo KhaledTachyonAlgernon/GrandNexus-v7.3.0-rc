@@ -1,7 +1,7 @@
 # GrandNexus — status (2026-11-10, v7.4.0-rc)
 
 **An anchored translator and a reference engine that decide without inventing, and a laboratory to measure whether a loop learns.**
-Read this file first; `LOGBOOK.md` holds every hypothesis -> result -> decision (71 entries); `MODULES.md` gives the status of every module.
+Read this file first; `LOGBOOK.md` holds every hypothesis -> result -> decision (74 entries); `MODULES.md` gives the status of every module.
 
 ## The core (what is demonstrated)
 | Part | File |
@@ -34,6 +34,8 @@ Module status (`MODULES.md`, generated from `grandnexus/module_status.py`): core
 ## Module auditions (logbook 68, 70)
 - An audition = one hypothesis on what a 2025 module changes on the way to the verdict, a cheap test, trivial controls. A module that passes becomes a candidate for wiring; one that fails stays experimental.
 - n°1, metacognition, `ConfidenceEvaluator` (offline, 1,218 archived programs): FAIL. As wired it only relays the reasoner's field; its own model is at chance (AUROC 0.51) and below the trivial "short program" on decided verdicts (0.61 against 0.75). It stays experimental.
+- Module review (logbook 72, `AUDITIONS.md`): of the 62 experimental modules with code, 13 have a direct path to the verdict, 24 only make sense over time (memories, learning, graph), 25 are agent infrastructure.
+- n°2-4 (logbook 74), attention filter, linguistic patterns, reflection: FAIL, FAIL, FAIL. None beats a trivial control; the attention filter has a defect (a catch-all focus wins every time). The direct path is exhausted for the 2025 modules; what remains for them is a "living" bench.
 
 ## Open experiments
 - Batch mode on the real API (criterion 4 of logbook 69): `notebooks/GrandNexus_v7_4_0-rc_check.ipynb`, the 5 seen validation items through one batch, expected cost about $0.03 instead of $0.049; tags v7.4.0 if it passes.
@@ -43,7 +45,7 @@ Module status (`MODULES.md`, generated from `grandnexus/module_status.py`): core
 - Claude Code on the web, on Khaled's GitHub copy, follows `CLAUDE.md`: every offline step. An API run there needs a dedicated key with a spending limit in `GRANDNEXUS_API_KEY`, entered by Khaled; the agent proxy cannot hold Anthropic keys.
 
 ## Work order (validated 2026-11-02, updated 2026-11-09)
-1. v7.1.0 stable — done. 2. The comparable number (validation 203 x 3, literature read) — done. 3. The loop that learns — closed, not demonstrated (logbook 62). 4. Minimal boot profile: NexusCore as orchestrator only, modules tagged core / supported / experimental / archive — done (v7.3.0, logbook 65-66). 5. Batch mode for the benches — built, offline criteria passed (v7.4.0-rc, logbook 71), real API pending. 6. Module auditions, family by family — n°1 done (logbook 70); next ones to choose. Later, in sandbox: a "living" bench (facts arriving over several sessions) where memories and graph are needed.
+1. v7.1.0 stable — done. 2. The comparable number (validation 203 x 3, literature read) — done. 3. The loop that learns — closed, not demonstrated (logbook 62). 4. Minimal boot profile: NexusCore as orchestrator only, modules tagged core / supported / experimental / archive — done (v7.3.0, logbook 65-66). 5. Batch mode for the benches — built, offline criteria passed (v7.4.0-rc, logbook 71), real API pending. 6. Module auditions, family by family — n°1-4 done, all FAIL (logbook 70, 74); the direct path is exhausted. Later, in sandbox: a "living" bench (facts arriving over several sessions) where memories and graph are needed.
 
 ## Conventions
 - Verdicts: yes / no / unknown / contradictory (French labels of the old frozen sets are mapped at load time; a set frozen with French labels has another content sha but the same ids).

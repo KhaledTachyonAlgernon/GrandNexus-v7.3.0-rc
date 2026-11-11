@@ -1,0 +1,58 @@
+{
+ "n_readings": 1218,
+ "n2_attention_filter": {
+  "auroc": {
+   "attention filter salience": 0.5,
+   "word overlap with the question": 0.6110945115370195,
+   "position (first sentences first)": 0.5349666556844389,
+   "position (last sentences first)": 0.46503334431556104,
+   "random": 0.5109667011281399
+  },
+  "best_control": "word overlap with the question",
+  "pass": false,
+  "units": 1879,
+  "positives": 989
+ },
+ "n3_linguistic_patterns": {
+  "auroc": {
+   "linguistic patterns found": 0.5923377697571246,
+   "text length": 0.5763666441085796,
+   "number of sentences": 0.6217234378524701,
+   "presence of 'or'": 0.5567411083540116,
+   "presence of 'not'": 0.5207835175577111,
+   "random": 0.49932576384189287
+  },
+  "best_control": "number of sentences",
+  "pass": false,
+  "units": 1218,
+  "positives": 195,
+  "patterns_per_item": {
+   "min": 0,
+   "max": 122,
+   "distinct": 62
+  }
+ },
+ "n4_reflection_error_analysis": {
+  "auroc": {
+   "issues reported by the reflection": 0.5,
+   "undecided verdict": 0.693631100082713,
+   "a rejection": 0.5,
+   "a corrective round": 0.45695916986239565,
+   "long program": 0.6361831716670426,
+   "short proof": 0.6158733739378901,
+   "random": 0.5029200190490513
+  },
+  "best_control": "undecided verdict",
+  "pass": false,
+  "units": 1218,
+  "positives": 195,
+  "issues": {
+   "min": 0.0,
+   "max": 0.0,
+   "distinct": 1,
+   "confidence_values": [
+    0.8
+   ]
+  }
+ }
+}

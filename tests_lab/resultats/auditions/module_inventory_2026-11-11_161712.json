@@ -1,0 +1,2676 @@
+{
+ "date": "2026-11-11 16:17",
+ "modules": {
+  "grandnexus.actuators": {
+   "family": "actuators",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ]
+  },
+  "grandnexus.actuators.actuator_hub": {
+   "family": "actuators",
+   "lines": 343,
+   "doc": "ActuatorHub \u2014 Unified Motor Gateway for GrandNexus",
+   "classes": {
+    "ActuatorDriver": 4,
+    "HubConfig": 0,
+    "ActuatorHub": 6
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "grandnexus.actuators.drivers.virtual_gripper",
+    "tools/layer_runtime_test.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "ActuatorDriver": {
+      "instantiable": "TypeError: Protocols cannot be instantiated"
+     },
+     "ActuatorHub": {
+      "instantiable": "needs arguments"
+     },
+     "HubConfig": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.actuators.drivers": {
+   "family": "actuators",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": []
+  },
+  "grandnexus.actuators.drivers.virtual_gripper": {
+   "family": "actuators.drivers",
+   "lines": 50,
+   "doc": "Exemple : driver simple simulant un gripper (ouvrir / fermer).",
+   "classes": {
+    "VirtualGripperDriver": 4
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "VirtualGripperDriver": {
+      "instantiable": "yes",
+      "start": "ok",
+      "stop": "ok"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.clock": {
+   "family": "clock",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ]
+  },
+  "grandnexus.clock.cognitive_clock": {
+   "family": "clock",
+   "lines": 362,
+   "doc": "CognitiveClock \u2014 GrandNexus Core Timing Module",
+   "classes": {
+    "ClockChannelConfig": 1,
+    "CognitiveClockConfig": 0,
+    "CognitiveClock": 8
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "grandnexus.actuators.drivers.virtual_gripper",
+    "grandnexus.cognition.learning.world_model_learner",
+    "grandnexus.cognition.metacognition.affect_regulator",
+    "grandnexus.cognition.metacognition.self_model",
+    "grandnexus.cognition.perception.filters.attention_filter_v2",
+    "grandnexus.graph.graph_sync_service",
+    "grandnexus.homeostasis.homeostasis_manager",
+    "grandnexus.memory.working_v2",
+    "grandnexus.ops.metrics_exporter",
+    "grandnexus.sensors.drivers.gym_driver",
+    "tools/layer_runtime_test.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "ClockChannelConfig": {
+      "instantiable": "needs arguments"
+     },
+     "CognitiveClock": {
+      "instantiable": "needs arguments"
+     },
+     "CognitiveClockConfig": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.adapters": {
+   "family": "cognition",
+   "lines": 113,
+   "doc": "adapters.py \u2014 Les trois classes que le CognitiveOrchestrator (15/05) importe",
+   "classes": {
+    "PerceptionModule": 1,
+    "ReasoningEngine": 1,
+    "LearningManager": 1
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.boot",
+    "grandnexus.cognition.learning",
+    "grandnexus.cognition.perception",
+    "grandnexus.cognition.reasoning",
+    "tools/repairs.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "LearningManager": {
+      "instantiable": "yes"
+     },
+     "PerceptionModule": {
+      "instantiable": "yes"
+     },
+     "ReasoningEngine": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.cognition_manager": {
+   "family": "cognition",
+   "lines": 1946,
+   "doc": "cognition_manager.py - Central Cognitive Orchestrator for GrandNexus",
+   "classes": {
+    "CognitiveEventType": 0,
+    "CognitiveEvent": 0,
+    "CognitiveTask": 0,
+    "CognitiveState": 0,
+    "CognitionManager": 14
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.boot",
+    "grandnexus.io.dialogue_interface",
+    "grandnexus.planning.executive_planner",
+    "tools/repairs.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "CognitionManager": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "CognitiveEvent": {
+      "instantiable": "yes"
+     },
+     "CognitiveEventType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "CognitiveState": {
+      "instantiable": "yes"
+     },
+     "CognitiveTask": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.learning": {
+   "family": "cognition",
+   "lines": 7,
+   "doc": "Paquet cognition.learning (r\u00e9paration 6.5 : export paresseux de LearningManager).",
+   "classes": {},
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.orchestration.cognitive_orchestrator",
+    "grandnexus.cognition.orchestration.cognitive_orchestrator_v1"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {},
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.learning.continuous_learner": {
+   "family": "cognition.learning",
+   "lines": 1679,
+   "doc": "continuous_learner.py - Continuous Learning Module for GrandNexus",
+   "classes": {
+    "CLStrategy": 0,
+    "TaskType": 0,
+    "CLExperience": 2,
+    "CLScenario": 3,
+    "GrandNexusDataset": 0,
+    "ContinuousLearner": 20
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "CLExperience": {
+      "instantiable": "needs arguments"
+     },
+     "CLScenario": {
+      "instantiable": "needs arguments"
+     },
+     "CLStrategy": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "ContinuousLearner": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "Dataset": {
+      "instantiable": "yes"
+     },
+     "GrandNexusDataset": {
+      "instantiable": "needs arguments"
+     },
+     "TaskType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.learning.curriculum": {
+   "family": "cognition.learning",
+   "lines": 1498,
+   "doc": "curriculum.py - Curriculum Learning Module for GrandNexus",
+   "classes": {
+    "TaskStatus": 0,
+    "DifficultyLevel": 0,
+    "LearningTask": 0,
+    "LearningUnit": 0,
+    "Curriculum": 0,
+    "PerformanceRecord": 0,
+    "CurriculumConfig": 0,
+    "CurriculumManager": 17
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "Curriculum": {
+      "instantiable": "needs arguments"
+     },
+     "CurriculumConfig": {
+      "instantiable": "yes"
+     },
+     "CurriculumManager": {
+      "instantiable": "yes",
+      "initialize": "ok"
+     },
+     "DifficultyLevel": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "LearningTask": {
+      "instantiable": "needs arguments"
+     },
+     "LearningUnit": {
+      "instantiable": "needs arguments"
+     },
+     "PerformanceRecord": {
+      "instantiable": "yes"
+     },
+     "TaskStatus": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.learning.intrinsic_motivation": {
+   "family": "cognition.learning",
+   "lines": 1687,
+   "doc": "intrinsic_motivation.py - Intrinsic Motivation and Curiosity Module for GrandNexus",
+   "classes": {
+    "MotivationType": 0,
+    "AttentionFocusType": 0,
+    "CuriosityState": 0,
+    "ObservationData": 0,
+    "MotivationSignal": 0,
+    "IntrinsicMotivationConfig": 0,
+    "NoveltyDetector": 2,
+    "SurpriseDetector": 2,
+    "UncertaintyEstimator": 3,
+    "CompetenceProgressTracker": 4,
+    "EmpowermentEstimator": 3,
+    "IntrinsicMotivation": 11
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.learning.curriculum"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "AttentionFocusType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "CompetenceProgressTracker": {
+      "instantiable": "needs arguments"
+     },
+     "CuriosityState": {
+      "instantiable": "yes"
+     },
+     "EmpowermentEstimator": {
+      "instantiable": "needs arguments"
+     },
+     "IntrinsicMotivation": {
+      "instantiable": "yes",
+      "initialize": "ok"
+     },
+     "IntrinsicMotivationConfig": {
+      "instantiable": "yes"
+     },
+     "MotivationSignal": {
+      "instantiable": "needs arguments"
+     },
+     "MotivationType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "NoveltyDetector": {
+      "instantiable": "needs arguments"
+     },
+     "ObservationData": {
+      "instantiable": "needs arguments"
+     },
+     "SurpriseDetector": {
+      "instantiable": "needs arguments"
+     },
+     "UncertaintyEstimator": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.learning.learning_core": {
+   "family": "cognition.learning",
+   "lines": 1468,
+   "doc": "learning_core.py - Core Learning Module for GrandNexus",
+   "classes": {
+    "LearningParadigm": 0,
+    "LearningEventType": 0,
+    "LearningEvent": 0,
+    "LearningTask": 0,
+    "LearningStrategy": 1,
+    "AdaptiveLearningParameter": 2,
+    "LearningCore": 15,
+    "LearningResult": 0
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.adapters",
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.learning.continuous_learner",
+    "grandnexus.cognition.learning.curriculum",
+    "grandnexus.cognition.learning.intrinsic_motivation",
+    "grandnexus.cognition.learning.meta_learner"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "AdaptiveLearningParameter": {
+      "instantiable": "needs arguments"
+     },
+     "LearningCore": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "LearningEvent": {
+      "instantiable": "yes"
+     },
+     "LearningEventType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "LearningParadigm": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "LearningResult": {
+      "instantiable": "needs arguments"
+     },
+     "LearningStrategy": {
+      "instantiable": "needs arguments"
+     },
+     "LearningTask": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.learning.meta_learner": {
+   "family": "cognition.learning",
+   "lines": 981,
+   "doc": "meta_learner.py - Meta-Learning Module for GrandNexus",
+   "classes": {
+    "MetaLearningParadigm": 0,
+    "TaskDescription": 0,
+    "MetaLearningResult": 0,
+    "AdaptationRequest": 0,
+    "MetaLearnerConfig": 0,
+    "MetaLearner": 8
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "AdaptationRequest": {
+      "instantiable": "needs arguments"
+     },
+     "MetaLearner": {
+      "instantiable": "yes",
+      "initialize": "ok"
+     },
+     "MetaLearnerConfig": {
+      "instantiable": "yes"
+     },
+     "MetaLearningParadigm": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "MetaLearningResult": {
+      "instantiable": "needs arguments"
+     },
+     "TaskDescription": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.learning.reinforcement": {
+   "family": "cognition.learning",
+   "lines": 1652,
+   "doc": "reinforcement.py - Reinforcement Learning Module for GrandNexus",
+   "classes": {
+    "RLAlgorithm": 0,
+    "ExplorationStrategy": 0,
+    "State": 0,
+    "Action": 0,
+    "Experience": 0,
+    "RLEnvironment": 0,
+    "RLPolicy": 0,
+    "RLConfig": 0,
+    "ExperienceBuffer": 5,
+    "ReinforcementLearning": 12
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "Action": {
+      "instantiable": "needs arguments"
+     },
+     "Experience": {
+      "instantiable": "needs arguments"
+     },
+     "ExperienceBuffer": {
+      "instantiable": "yes"
+     },
+     "ExplorationStrategy": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "RLAlgorithm": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "RLConfig": {
+      "instantiable": "yes"
+     },
+     "RLEnvironment": {
+      "instantiable": "needs arguments"
+     },
+     "RLPolicy": {
+      "instantiable": "needs arguments"
+     },
+     "ReinforcementLearner": {
+      "instantiable": "yes",
+      "initialize": "ok"
+     },
+     "ReinforcementLearning": {
+      "instantiable": "yes",
+      "initialize": "ok"
+     },
+     "State": {
+      "instantiable": "needs arguments"
+     },
+     "nn": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.learning.world_model_learner": {
+   "family": "cognition.learning",
+   "lines": 226,
+   "doc": "WorldModelLearner \u2014 Online & Offline Environment Dynamics Learner",
+   "classes": {
+    "WMdLearnerCfg": 0,
+    "LSTMWorldModel": 1,
+    "WorldModelLearner": 7
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": false,
+    "classes": {},
+    "import_error": "ModuleNotFoundError: No module named 'torch'"
+   }
+  },
+  "grandnexus.cognition.manager_bridges": {
+   "family": "cognition",
+   "lines": 161,
+   "doc": "manager_bridges.py \u2014 Le CognitionManager appelle 12 m\u00e9thodes que ses modules",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager",
+    "tools/repairs.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {},
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.metacognition": {
+   "family": "cognition",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "tools/audition_confidence.py",
+    "tools/layer_runtime_test.py",
+    "tools/repairs.py"
+   ]
+  },
+  "grandnexus.cognition.metacognition.adaptation": {
+   "family": "cognition.metacognition",
+   "lines": 1319,
+   "doc": "adaptation.py - Dynamic Parameter Adaptation Module for GrandNexus",
+   "classes": {
+    "AdaptationStrategy": 0,
+    "ChangeType": 0,
+    "ParameterChange": 0,
+    "AdaptableParameter": 4,
+    "ParameterGroup": 0,
+    "AdaptationEngine": 21
+   },
+   "path": "over time",
+   "path_why": "adapts parameters from accumulated performance",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.manager_bridges",
+    "grandnexus.cognition.metacognition.reflection"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "AdaptableParameter": {
+      "instantiable": "needs arguments"
+     },
+     "AdaptationEngine": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "AdaptationManager": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "AdaptationStrategy": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "ChangeType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "ParameterChange": {
+      "instantiable": "yes"
+     },
+     "ParameterGroup": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.metacognition.affect_regulator": {
+   "family": "cognition.metacognition",
+   "lines": 208,
+   "doc": "AffectRegulator \u2014 Valence-Arousal Modulator for GrandNexus",
+   "classes": {
+    "AffectConfig": 0,
+    "AffectRegulator": 5
+   },
+   "path": "over time",
+   "path_why": "affective state regulated over time",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "AffectConfig": {
+      "instantiable": "yes"
+     },
+     "AffectRegulator": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.metacognition.confidence": {
+   "family": "cognition.metacognition",
+   "lines": 1009,
+   "doc": "confidence.py - Confidence Evaluation and Uncertainty Management for GrandNexus",
+   "classes": {
+    "ConfidenceSource": 0,
+    "ConfidenceScore": 0,
+    "ConfidenceThresholds": 0,
+    "ConfidenceStats": 0,
+    "ConfidenceEvaluator": 14
+   },
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.manager_bridges",
+    "grandnexus.cognition.metacognition.adaptation",
+    "grandnexus.cognition.metacognition.monitor",
+    "grandnexus.cognition.metacognition.reflection",
+    "tools/audition_confidence.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "ConfidenceEstimator": {
+      "instantiable": "yes",
+      "initialize": "ok"
+     },
+     "ConfidenceEvaluator": {
+      "instantiable": "yes",
+      "initialize": "ok"
+     },
+     "ConfidenceScore": {
+      "instantiable": "needs arguments"
+     },
+     "ConfidenceSource": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "ConfidenceStats": {
+      "instantiable": "yes"
+     },
+     "ConfidenceThresholds": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.metacognition.explainability_engine": {
+   "family": "cognition.metacognition",
+   "lines": 147,
+   "doc": "ExplainabilityEngine \u2014 Real-Time Explainability Layer for GrandNexus",
+   "classes": {
+    "ExplainabilityConfig": 0,
+    "ExplainabilityEngine": 6
+   },
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": false,
+    "classes": {},
+    "import_error": "ModuleNotFoundError: No module named 'fastapi'"
+   }
+  },
+  "grandnexus.cognition.metacognition.monitor": {
+   "family": "cognition.metacognition",
+   "lines": 1453,
+   "doc": "monitor.py - Cognitive Process Monitoring Module for GrandNexus",
+   "classes": {
+    "MetricType": 0,
+    "MetricPriority": 0,
+    "MetricDefinition": 0,
+    "MetricValue": 0,
+    "MonitoredSystem": 0,
+    "MonitorAlert": 0,
+    "PerformanceReport": 0,
+    "CognitiveMonitor": 14
+   },
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.manager_bridges",
+    "grandnexus.cognition.metacognition.adaptation",
+    "grandnexus.cognition.metacognition.reflection"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "CognitiveMonitor": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "MetaMonitor": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "MetricDefinition": {
+      "instantiable": "needs arguments"
+     },
+     "MetricPriority": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "MetricType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "MetricValue": {
+      "instantiable": "needs arguments"
+     },
+     "MonitorAlert": {
+      "instantiable": "needs arguments"
+     },
+     "MonitoredSystem": {
+      "instantiable": "needs arguments"
+     },
+     "PerformanceReport": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.metacognition.reflection": {
+   "family": "cognition.metacognition",
+   "lines": 1942,
+   "doc": "reflection.py - Self-Analysis and Cognitive Process Reflection Module for GrandNexus",
+   "classes": {
+    "ReflectionType": 0,
+    "ReflectionTarget": 0,
+    "ReflectionTrigger": 0,
+    "ReflectionTask": 0,
+    "ReflectionResult": 0,
+    "ReflectionStrategy": 2,
+    "ReflectionModule": 17,
+    "ProcessTraceReflectionStrategy": 1,
+    "DecisionAnalysisStrategy": 1,
+    "ErrorAnalysisStrategy": 1,
+    "KnowledgeGapStrategy": 1,
+    "ExplanationGenerationStrategy": 1,
+    "LessonExtractionStrategy": 1
+   },
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.manager_bridges"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "DecisionAnalysisStrategy": {
+      "instantiable": "yes"
+     },
+     "ErrorAnalysisStrategy": {
+      "instantiable": "yes"
+     },
+     "ExplanationGenerationStrategy": {
+      "instantiable": "yes"
+     },
+     "KnowledgeGapStrategy": {
+      "instantiable": "yes"
+     },
+     "LessonExtractionStrategy": {
+      "instantiable": "yes"
+     },
+     "ProcessTraceReflectionStrategy": {
+      "instantiable": "yes"
+     },
+     "ReflectionModule": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "ReflectionResult": {
+      "instantiable": "needs arguments"
+     },
+     "ReflectionStrategy": {
+      "instantiable": "needs arguments"
+     },
+     "ReflectionTarget": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "ReflectionTask": {
+      "instantiable": "yes"
+     },
+     "ReflectionTrigger": {
+      "instantiable": "yes"
+     },
+     "ReflectionType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "Reflector": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.metacognition.self_model": {
+   "family": "cognition.metacognition",
+   "lines": 228,
+   "doc": "SelfModelService \u2014 Structured Body-Schema & Capability Registry",
+   "classes": {
+    "ResourceType": 0,
+    "JointState": 0,
+    "ResourceQuota": 0,
+    "SelfModelConfig": 0,
+    "SelfModelService": 10
+   },
+   "path": "over time",
+   "path_why": "model of the agent itself across sessions",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "JointState": {
+      "instantiable": "needs arguments"
+     },
+     "ResourceQuota": {
+      "instantiable": "needs arguments"
+     },
+     "ResourceType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "SelfModelConfig": {
+      "instantiable": "yes"
+     },
+     "SelfModelService": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.orchestration": {
+   "family": "cognition",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": true,
+   "importers": []
+  },
+  "grandnexus.cognition.orchestration.cognitive_orchestrator": {
+   "family": "cognition.orchestration",
+   "lines": 1794,
+   "doc": "\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557",
+   "classes": {
+    "CognitiveState": 0,
+    "CognitiveContext": 0,
+    "CognitiveAction": 0,
+    "CognitiveEpisode": 0,
+    "CognitiveOrchestrator": 5
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.boot"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "CognitiveAction": {
+      "instantiable": "needs arguments"
+     },
+     "CognitiveContext": {
+      "instantiable": "yes"
+     },
+     "CognitiveEpisode": {
+      "instantiable": "needs arguments"
+     },
+     "CognitiveOrchestrator": {
+      "instantiable": "needs arguments"
+     },
+     "CognitiveState": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.perception.code_analyzer": {
+   "family": "cognition.perception",
+   "lines": 1702,
+   "doc": "code_analyzer.py - Code Analysis Module for GrandNexus",
+   "classes": {
+    "CodeLanguage": 0,
+    "CodeNodeType": 0,
+    "CodeMetrics": 0,
+    "CodeNode": 1,
+    "CodeAnalysisResult": 1,
+    "CodeAnalyzer": 8
+   },
+   "path": "agent",
+   "path_why": "analyses source code, not the text of a problem",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "CodeAnalysisResult": {
+      "instantiable": "needs arguments"
+     },
+     "CodeAnalyzer": {
+      "instantiable": "yes",
+      "initialize": "ok"
+     },
+     "CodeLanguage": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "CodeMetrics": {
+      "instantiable": "yes"
+     },
+     "CodeNode": {
+      "instantiable": "needs arguments"
+     },
+     "CodeNodeType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.perception.filters": {
+   "family": "cognition.perception",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ]
+  },
+  "grandnexus.cognition.perception.filters.attention_filter": {
+   "family": "cognition.perception",
+   "lines": 1361,
+   "doc": "attention_filter.py - Attentional Filter Module for GrandNexus",
+   "classes": {
+    "AttentionMode": 0,
+    "AttentionalFocus": 3,
+    "FilteredPerception": 0,
+    "SaliencyMap": 2,
+    "AttentionFilter": 12,
+    "SelectiveAttentionFilter": 1,
+    "TemporalAttentionFilter": 1,
+    "ContextualFilter": 2
+   },
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "grandnexus.cognition.perception.filters.attention_filter_v2",
+    "tools/layer_runtime_test.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "AttentionFilter": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "AttentionMode": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "AttentionalFocus": {
+      "instantiable": "yes"
+     },
+     "ContextualFilter": {
+      "instantiable": "yes"
+     },
+     "FilteredPerception": {
+      "instantiable": "needs arguments"
+     },
+     "SaliencyMap": {
+      "instantiable": "needs arguments"
+     },
+     "SelectiveAttentionFilter": {
+      "instantiable": "needs arguments"
+     },
+     "TemporalAttentionFilter": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.perception.filters.attention_filter_v2": {
+   "family": "cognition.perception",
+   "lines": 274,
+   "doc": "AttentionFilter \u2014 Dynamic Saliency & Perceptual Gating Layer",
+   "classes": {
+    "SpotlightRule": 0,
+    "FilterConfig": 0,
+    "AttentionFilter": 6
+   },
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "AttentionFilter": {
+      "instantiable": "needs arguments"
+     },
+     "FilterConfig": {
+      "instantiable": "yes"
+     },
+     "SpotlightRule": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.perception.pattern_recognizer": {
+   "family": "cognition.perception",
+   "lines": 1783,
+   "doc": "pattern_recognizer.py - Pattern Recognition Module for GrandNexus",
+   "classes": {
+    "PatternType": 0,
+    "Pattern": 3,
+    "PatternMatch": 0,
+    "PatternSearchConfig": 0,
+    "PatternRecognizer": 7,
+    "PatternDetectorBase": 2,
+    "SequentialPatternDetector": 2,
+    "TemporalPatternDetector": 2,
+    "StructuralPatternDetector": 2,
+    "LinguisticPatternDetector": 2,
+    "SymbolicPatternDetector": 2
+   },
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.manager_bridges"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "LinguisticPatternDetector": {
+      "instantiable": "yes"
+     },
+     "Pattern": {
+      "instantiable": "yes"
+     },
+     "PatternDetectorBase": {
+      "instantiable": "yes"
+     },
+     "PatternMatch": {
+      "instantiable": "needs arguments"
+     },
+     "PatternRecognizer": {
+      "instantiable": "yes",
+      "initialize": "ok"
+     },
+     "PatternSearchConfig": {
+      "instantiable": "yes"
+     },
+     "PatternType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "SequentialPatternDetector": {
+      "instantiable": "yes"
+     },
+     "StructuralPatternDetector": {
+      "instantiable": "yes"
+     },
+     "SymbolicPatternDetector": {
+      "instantiable": "yes"
+     },
+     "TemporalPatternDetector": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.perception.perception_core": {
+   "family": "cognition.perception",
+   "lines": 1461,
+   "doc": "perception_core.py - Core Perception Module for GrandNexus",
+   "classes": {
+    "InputType": 0,
+    "PerceptionFilter": 0,
+    "PerceptionResult": 0,
+    "PerceptionCore": 9
+   },
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.manager_bridges",
+    "grandnexus.cognition.perception.filters.attention_filter"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "InputType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "PerceptionCore": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "PerceptionFilter": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "PerceptionResult": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.perception.symbolic_parser": {
+   "family": "cognition.perception",
+   "lines": 1702,
+   "doc": "symbolic_parser.py - Symbolic Expression Parsing Module for GrandNexus",
+   "classes": {
+    "SymbolicType": 0,
+    "SymbolicAST": 2,
+    "ParseResult": 2,
+    "SymbolicParser": 8
+   },
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.reasoning.symbolic_engine"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "ParseResult": {
+      "instantiable": "needs arguments"
+     },
+     "SymbolicAST": {
+      "instantiable": "needs arguments"
+     },
+     "SymbolicParser": {
+      "instantiable": "yes",
+      "initialize": "ok"
+     },
+     "SymbolicType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.reasoning.hybrid_inference": {
+   "family": "cognition.reasoning",
+   "lines": 1626,
+   "doc": "hybrid_inference.py - Raisonnement Neuro-Symbolique pour GrandNexus",
+   "classes": {
+    "InferenceType": 0,
+    "HybridMode": 0,
+    "SymbolicConstraint": 0,
+    "InferenceQuery": 0,
+    "InferenceStep": 0,
+    "InferenceResult": 0,
+    "HybridInferenceEngine": 10
+   },
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "HybridInferenceEngine": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "HybridMode": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "InferenceQuery": {
+      "instantiable": "yes"
+     },
+     "InferenceResult": {
+      "instantiable": "needs arguments"
+     },
+     "InferenceStep": {
+      "instantiable": "yes"
+     },
+     "InferenceType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "SymbolicConstraint": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.reasoning.neural_reasoner": {
+   "family": "cognition.reasoning",
+   "lines": 2001,
+   "doc": "neural_reasoner.py - Neural reasoning module for GrandNexus",
+   "classes": {
+    "EvidenceSourceType": 0,
+    "ReasoningTask": 0,
+    "NeuralEvidence": 0,
+    "NeuralReasoningRequest": 0,
+    "NeuralReasoningResult": 0,
+    "NeuralReasoner": 11
+   },
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.reasoning.hybrid_inference"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "EvidenceSourceType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "NeuralEvidence": {
+      "instantiable": "yes"
+     },
+     "NeuralReasoner": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "NeuralReasoningRequest": {
+      "instantiable": "yes"
+     },
+     "NeuralReasoningResult": {
+      "instantiable": "needs arguments"
+     },
+     "ReasoningTask": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.reasoning.planning": {
+   "family": "cognition.reasoning",
+   "lines": 1541,
+   "doc": "planning.py - Planning and Goal Decomposition Module for GrandNexus",
+   "classes": {
+    "GoalState": 0,
+    "TaskState": 0,
+    "PlanningApproach": 0,
+    "Condition": 1,
+    "Effect": 1,
+    "Task": 3,
+    "Goal": 3,
+    "Plan": 5,
+    "PlanningModule": 17
+   },
+   "path": "agent",
+   "path_why": "plans actions; no step of a deduction",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.manager_bridges"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "Condition": {
+      "instantiable": "needs arguments"
+     },
+     "Effect": {
+      "instantiable": "needs arguments"
+     },
+     "Goal": {
+      "instantiable": "yes"
+     },
+     "GoalState": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "Plan": {
+      "instantiable": "yes"
+     },
+     "PlanningApproach": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "PlanningEngine": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "PlanningModule": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "Task": {
+      "instantiable": "yes"
+     },
+     "TaskState": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.reasoning.symbolic_engine": {
+   "family": "cognition.reasoning",
+   "lines": 1716,
+   "doc": "symbolic_engine.py - Formal Symbolic Reasoning Engine for GrandNexus",
+   "classes": {
+    "SymbolicEntityType": 0,
+    "InferenceStrategy": 0,
+    "SymbolicEntity": 1,
+    "Term": 1,
+    "Formula": 1,
+    "Rule": 1,
+    "InferenceStep": 1,
+    "InferenceResult": 1,
+    "KnowledgeBase": 11,
+    "SymbolicEngine": 14
+   },
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.reasoning.hybrid_inference"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "Formula": {
+      "instantiable": "yes"
+     },
+     "InferenceResult": {
+      "instantiable": "needs arguments"
+     },
+     "InferenceStep": {
+      "instantiable": "yes"
+     },
+     "InferenceStrategy": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "KnowledgeBase": {
+      "instantiable": "yes"
+     },
+     "Rule": {
+      "instantiable": "yes"
+     },
+     "SymbolicEngine": {
+      "instantiable": "yes",
+      "initialize": "ok"
+     },
+     "SymbolicEntity": {
+      "instantiable": "yes"
+     },
+     "SymbolicEntityType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "Term": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.cognition.reasoning.uncertainty": {
+   "family": "cognition.reasoning",
+   "lines": 1691,
+   "doc": "uncertainty.py - Uncertainty Management and Probabilistic Reasoning Module for GrandNexus",
+   "classes": {
+    "UncertaintyType": 0,
+    "UncertainBelief": 3,
+    "BayesianNode": 1,
+    "BayesianNetwork": 4,
+    "UncertaintyManager": 14
+   },
+   "path": "direct",
+   "path_why": "perception, reasoning or metacognition: can act on a step of the pathway",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.cognition.cognition_manager"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "BayesianNetwork": {
+      "instantiable": "needs arguments"
+     },
+     "BayesianNode": {
+      "instantiable": "needs arguments"
+     },
+     "UncertainBelief": {
+      "instantiable": "ValueError: Probability value must be provided for PROBABILITY type"
+     },
+     "UncertaintyManager": {
+      "instantiable": "yes",
+      "initialize": "ok"
+     },
+     "UncertaintyType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.computation": {
+   "family": "computation",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": true,
+   "importers": []
+  },
+  "grandnexus.computation.resource_manager": {
+   "family": "computation",
+   "lines": 1268,
+   "doc": "resource_manager.py - Advanced Resource & Scheduling System for GrandNexus",
+   "classes": {
+    "TaskStatus": 0,
+    "SchedulingPolicy": 0,
+    "Task": 0,
+    "ResourceSnapshot": 0,
+    "ResourceManagerConfig": 0,
+    "ModuleQuota": 1,
+    "ResourceManager": 9
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.boot",
+    "grandnexus.cognition.orchestration.cognitive_orchestrator",
+    "grandnexus.cognition.orchestration.cognitive_orchestrator_v1"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "ModuleQuota": {
+      "instantiable": "needs arguments"
+     },
+     "ResourceManager": {
+      "instantiable": "yes",
+      "start": "ok",
+      "initialize": "ok",
+      "stop": "ok"
+     },
+     "ResourceManagerConfig": {
+      "instantiable": "yes"
+     },
+     "ResourceSnapshot": {
+      "instantiable": "yes"
+     },
+     "SchedulingPolicy": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "Task": {
+      "instantiable": "needs arguments"
+     },
+     "TaskStatus": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.core.registry": {
+   "family": "core",
+   "lines": 772,
+   "doc": "registry.py - Advanced Module Registry for GrandNexus",
+   "classes": {
+    "ModuleRegistry": 17
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.graph.graph_module_manager"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "ModuleRegistry": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.distributed": {
+   "family": "distributed",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": false,
+   "importers": []
+  },
+  "grandnexus.distributed.federated_learning_coordinator": {
+   "family": "distributed",
+   "lines": 177,
+   "doc": "FederatedLearningCoordinator \u2014 Federated Model Aggregation Service for GrandNexus",
+   "classes": {
+    "FedConfig": 0,
+    "FederatedLearningCoordinator": 6
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": false,
+    "classes": {},
+    "import_error": "ModuleNotFoundError: No module named 'torch'"
+   }
+  },
+  "grandnexus.evolution": {
+   "family": "evolution",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": false,
+   "importers": []
+  },
+  "grandnexus.evolution.evolution_manager": {
+   "family": "evolution",
+   "lines": 149,
+   "doc": "EvolutionManager \u2014 Self-adaptive Evolutionary Optimization for GrandNexus",
+   "classes": {
+    "EvolutionConfig": 0,
+    "EvolutionManager": 4
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": false,
+    "classes": {},
+    "import_error": "ModuleNotFoundError: No module named 'deap'"
+   }
+  },
+  "grandnexus.graph": {
+   "family": "graph",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "tools/repairs.py"
+   ]
+  },
+  "grandnexus.graph.graph_engine": {
+   "family": "graph",
+   "lines": 2781,
+   "doc": "graph_engine.py - Advanced Graph Engine Module for GrandNexus",
+   "classes": {
+    "GraphNode": 2,
+    "GraphEdge": 0,
+    "GraphPattern": 0,
+    "GraphQuery": 0,
+    "GraphEngineError": 0,
+    "NodeNotFoundError": 0,
+    "EdgeNotFoundError": 0,
+    "InvalidQueryError": 0,
+    "AbstractGraphEngine": 20,
+    "InMemoryGraphEngine": 20,
+    "Neo4jGraphEngine": 20
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.boot",
+    "grandnexus.cognition.orchestration.cognitive_orchestrator",
+    "grandnexus.cognition.orchestration.cognitive_orchestrator_v1",
+    "grandnexus.cognition.perception.pattern_recognizer",
+    "grandnexus.cognition.reasoning.hybrid_inference",
+    "grandnexus.cognition.reasoning.neural_reasoner",
+    "grandnexus.cognition.reasoning.reasoning_core",
+    "grandnexus.cognition.reasoning.symbolic_engine",
+    "grandnexus.graph.graph_module_manager",
+    "grandnexus.graph.graph_pattern_interface",
+    "grandnexus.graph.pattern_mining",
+    "grandnexus.llm_interface.llm_engine",
+    "grandnexus.memory.semantic",
+    "tools/repairs.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "EdgeNotFoundError": {
+      "instantiable": "ValueError: no signature found for builtin type <class 'grandnexus.graph.graph_engine.EdgeNo"
+     },
+     "GraphEdge": {
+      "instantiable": "needs arguments"
+     },
+     "GraphEngineError": {
+      "instantiable": "ValueError: no signature found for builtin type <class 'grandnexus.graph.graph_engine.GraphE"
+     },
+     "GraphNode": {
+      "instantiable": "needs arguments"
+     },
+     "GraphPattern": {
+      "instantiable": "needs arguments"
+     },
+     "GraphQuery": {
+      "instantiable": "yes"
+     },
+     "InMemoryGraphEngine": {
+      "instantiable": "yes"
+     },
+     "InvalidQueryError": {
+      "instantiable": "ValueError: no signature found for builtin type <class 'grandnexus.graph.graph_engine.Invali"
+     },
+     "Neo4jGraphEngine": {
+      "instantiable": "needs arguments"
+     },
+     "NodeNotFoundError": {
+      "instantiable": "ValueError: no signature found for builtin type <class 'grandnexus.graph.graph_engine.NodeNo"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.graph.graph_module_manager": {
+   "family": "graph",
+   "lines": 898,
+   "doc": "graph_module_manager.py - Integration point for Graph and PatternMining modules with NexusCore",
+   "classes": {
+    "GraphModuleManager": 12
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.boot"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "GraphModuleManager": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.graph.graph_pattern_interface": {
+   "family": "graph",
+   "lines": 302,
+   "doc": "graph_pattern_interface.py - Interface between GraphEngine and PatternMining",
+   "classes": {
+    "PatternMatchResult": 0,
+    "FrequentPattern": 0,
+    "PatternMiningInterface": 5,
+    "GraphPatternBridge": 6
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.graph.graph_module_manager",
+    "grandnexus.graph.pattern_mining"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "FrequentPattern": {
+      "instantiable": "needs arguments"
+     },
+     "GraphPatternBridge": {
+      "instantiable": "needs arguments"
+     },
+     "PatternMatchResult": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.graph.graph_sync_service": {
+   "family": "graph",
+   "lines": 262,
+   "doc": "GraphSyncService \u2014 Bidirectional Synchronizer between SemanticMemory & GraphEngine",
+   "classes": {
+    "SyncConfig": 0,
+    "GraphSyncService": 5
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": false,
+    "classes": {},
+    "import_error": "ModuleNotFoundError: No module named 'neo4j'"
+   }
+  },
+  "grandnexus.graph.pattern_mining": {
+   "family": "graph",
+   "lines": 1504,
+   "doc": "pattern_mining.py - Advanced Pattern Mining & Anomaly Detection for GrandNexus",
+   "classes": {
+    "PatternMiningModule": 11
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.graph.graph_module_manager"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "PatternMiningModule": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.homeostasis": {
+   "family": "homeostasis",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ]
+  },
+  "grandnexus.homeostasis.homeostasis_manager": {
+   "family": "homeostasis",
+   "lines": 284,
+   "doc": "HomeostasisManager \u2014 Resource Autoregulation & Drive Generator",
+   "classes": {
+    "Thresholds": 0,
+    "HomeostasisConfig": 0,
+    "HomeostasisManager": 4
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "HomeostasisConfig": {
+      "instantiable": "yes"
+     },
+     "HomeostasisManager": {
+      "instantiable": "needs arguments"
+     },
+     "Thresholds": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.io": {
+   "family": "io",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/repairs.py"
+   ]
+  },
+  "grandnexus.io.dialogue_interface": {
+   "family": "io",
+   "lines": 195,
+   "doc": "DialogueInterface \u2014 REST + WebSocket Gateway for GrandNexus",
+   "classes": {
+    "DIConfig": 0,
+    "DialogueInterface": 5
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "grandnexus.cognition.metacognition.explainability_engine"
+   ],
+   "probe": {
+    "imports": false,
+    "classes": {},
+    "import_error": "ModuleNotFoundError: No module named 'fastapi'"
+   }
+  },
+  "grandnexus.io.external_connector_hub": {
+   "family": "io",
+   "lines": 126,
+   "doc": "ExternalConnectorHub \u2014 Universal External Integration Gateway for GrandNexus",
+   "classes": {
+    "ConnectorConfig": 0,
+    "ExternalConnectorHub": 5
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": false,
+    "classes": {},
+    "import_error": "ModuleNotFoundError: No module named 'fastapi'"
+   }
+  },
+  "grandnexus.kernel": {
+   "family": "kernel",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ]
+  },
+  "grandnexus.kernel.kernel_bridge": {
+   "family": "kernel",
+   "lines": 317,
+   "doc": "KernelBridge \u2014 Recursive Core Spawner & Message Router for GrandNexus",
+   "classes": {
+    "SpawnPolicy": 0,
+    "KBConfig": 0,
+    "KernelBridge": 8
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "grandnexus.evolution.evolution_manager",
+    "tools/layer_runtime_test.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "KBConfig": {
+      "instantiable": "yes"
+     },
+     "KernelBridge": {
+      "instantiable": "needs arguments"
+     },
+     "SpawnPolicy": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.memory": {
+   "family": "memory",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "tools/layer_runtime_test.py",
+    "tools/repairs.py"
+   ]
+  },
+  "grandnexus.memory.episodic": {
+   "family": "memory",
+   "lines": 2279,
+   "doc": "episodic.py - Enhanced Episodic Memory Module for GrandNexus",
+   "classes": {
+    "MemoryStrength": 0,
+    "EpisodeType": 0,
+    "RetrievalMode": 0,
+    "EpisodeEvent": 2,
+    "Episode": 8,
+    "Epoch": 4,
+    "EpisodicQuery": 0,
+    "EpisodicMemoryConfig": 0,
+    "EpisodicMemoryState": 0,
+    "EpisodicMemory": 17
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.boot",
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.learning.continuous_learner",
+    "grandnexus.cognition.learning.curriculum",
+    "grandnexus.cognition.learning.intrinsic_motivation",
+    "grandnexus.cognition.learning.learning_core",
+    "grandnexus.cognition.learning.meta_learner",
+    "grandnexus.cognition.learning.reinforcement",
+    "grandnexus.cognition.metacognition.adaptation",
+    "grandnexus.cognition.metacognition.confidence",
+    "grandnexus.cognition.metacognition.reflection",
+    "grandnexus.cognition.orchestration.cognitive_orchestrator",
+    "grandnexus.cognition.orchestration.cognitive_orchestrator_v1",
+    "grandnexus.cognition.perception.pattern_recognizer",
+    "grandnexus.cognition.reasoning.hybrid_inference",
+    "grandnexus.cognition.reasoning.neural_reasoner",
+    "grandnexus.cognition.reasoning.planning",
+    "grandnexus.llm_interface.llm_engine",
+    "tools/repairs.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "Episode": {
+      "instantiable": "needs arguments"
+     },
+     "EpisodeEvent": {
+      "instantiable": "yes"
+     },
+     "EpisodeType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "EpisodicMemory": {
+      "instantiable": "needs arguments"
+     },
+     "EpisodicMemoryConfig": {
+      "instantiable": "yes"
+     },
+     "EpisodicMemoryState": {
+      "instantiable": "yes"
+     },
+     "EpisodicQuery": {
+      "instantiable": "yes"
+     },
+     "Epoch": {
+      "instantiable": "needs arguments"
+     },
+     "MemoryStrength": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "RetrievalMode": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.memory.memory_manager": {
+   "family": "memory",
+   "lines": 1006,
+   "doc": "memory_manager.py - Hierarchical Memory System for GrandNexus",
+   "classes": {
+    "MemoryItem": 10,
+    "NexusMemoryManager": 10
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "MemoryItem": {
+      "instantiable": "needs arguments"
+     },
+     "NexusMemoryManager": {
+      "instantiable": "yes",
+      "start": "ok",
+      "stop": "ok"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.memory.semantic": {
+   "family": "memory",
+   "lines": 2108,
+   "doc": "semantic.py - Enhanced Semantic Memory for GrandNexus",
+   "classes": {
+    "AbstractionLevel": 0,
+    "RelationType": 0,
+    "Concept": 0,
+    "Relation": 0,
+    "SemanticQuery": 0,
+    "SemanticMemoryConfig": 0,
+    "SemanticMemory": 20
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.boot",
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.learning.continuous_learner",
+    "grandnexus.cognition.learning.curriculum",
+    "grandnexus.cognition.learning.intrinsic_motivation",
+    "grandnexus.cognition.learning.learning_core",
+    "grandnexus.cognition.learning.meta_learner",
+    "grandnexus.cognition.learning.reinforcement",
+    "grandnexus.cognition.metacognition.confidence",
+    "grandnexus.cognition.metacognition.reflection",
+    "grandnexus.cognition.orchestration.cognitive_orchestrator",
+    "grandnexus.cognition.orchestration.cognitive_orchestrator_v1",
+    "grandnexus.cognition.perception.code_analyzer",
+    "grandnexus.cognition.perception.filters.attention_filter",
+    "grandnexus.cognition.perception.pattern_recognizer",
+    "grandnexus.cognition.perception.perception_core",
+    "grandnexus.cognition.perception.symbolic_parser",
+    "grandnexus.cognition.reasoning.hybrid_inference",
+    "grandnexus.cognition.reasoning.neural_reasoner",
+    "grandnexus.cognition.reasoning.planning",
+    "grandnexus.cognition.reasoning.reasoning_core",
+    "grandnexus.cognition.reasoning.symbolic_engine",
+    "grandnexus.cognition.reasoning.uncertainty",
+    "grandnexus.graph.graph_sync_service",
+    "grandnexus.llm_interface.llm_engine",
+    "tools/repairs.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "AbstractionLevel": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "Concept": {
+      "instantiable": "needs arguments"
+     },
+     "Relation": {
+      "instantiable": "needs arguments"
+     },
+     "RelationType": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "SemanticMemory": {
+      "instantiable": "needs arguments"
+     },
+     "SemanticMemoryConfig": {
+      "instantiable": "yes"
+     },
+     "SemanticQuery": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.memory.semantic_v2": {
+   "family": "memory",
+   "lines": 359,
+   "doc": "SemanticMemory \u2014 Hybrid Vector + Graph Knowledge Store for GrandNexus",
+   "classes": {
+    "Neo4jCfg": 0,
+    "PGVectorCfg": 0,
+    "AnnoyCfg": 0,
+    "SemMemConfig": 0,
+    "SemanticMemory": 7
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": false,
+    "classes": {},
+    "import_error": "ModuleNotFoundError: No module named 'sentence_transformers'"
+   }
+  },
+  "grandnexus.memory.working": {
+   "family": "memory",
+   "lines": 824,
+   "doc": "working.py - Hybrid Working Memory for GrandNexus",
+   "classes": {
+    "WorkingMemoryItem": 0,
+    "WorkingMemoryConfig": 0,
+    "WorkingMemory": 8
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": true,
+   "importers": [
+    "grandnexus.boot",
+    "grandnexus.cognition.cognition_manager",
+    "grandnexus.cognition.learning.continuous_learner",
+    "grandnexus.cognition.learning.curriculum",
+    "grandnexus.cognition.learning.intrinsic_motivation",
+    "grandnexus.cognition.learning.learning_core",
+    "grandnexus.cognition.learning.meta_learner",
+    "grandnexus.cognition.learning.reinforcement",
+    "grandnexus.cognition.metacognition.adaptation",
+    "grandnexus.cognition.metacognition.confidence",
+    "grandnexus.cognition.metacognition.reflection",
+    "grandnexus.cognition.orchestration.cognitive_orchestrator",
+    "grandnexus.cognition.orchestration.cognitive_orchestrator_v1",
+    "grandnexus.cognition.perception.code_analyzer",
+    "grandnexus.cognition.perception.filters.attention_filter",
+    "grandnexus.cognition.perception.pattern_recognizer",
+    "grandnexus.cognition.perception.perception_core",
+    "grandnexus.cognition.perception.symbolic_parser",
+    "grandnexus.cognition.reasoning.hybrid_inference",
+    "grandnexus.cognition.reasoning.neural_reasoner",
+    "grandnexus.cognition.reasoning.planning",
+    "grandnexus.cognition.reasoning.reasoning_core",
+    "grandnexus.cognition.reasoning.symbolic_engine",
+    "grandnexus.cognition.reasoning.uncertainty",
+    "grandnexus.llm_interface.llm_engine",
+    "grandnexus.memory.working_v2",
+    "tools/layer_runtime_test.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "WorkingMemory": {
+      "instantiable": "needs arguments"
+     },
+     "WorkingMemoryConfig": {
+      "instantiable": "yes"
+     },
+     "WorkingMemoryItem": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.memory.working_v2": {
+   "family": "memory",
+   "lines": 314,
+   "doc": "WorkingMemory \u2014 Active Store with Decay & Semantic Retrieval",
+   "classes": {
+    "MemoryChunk": 0,
+    "WMConfig": 0,
+    "WorkingMemory": 8
+   },
+   "path": "over time",
+   "path_why": "memory, learning, graph: makes sense across sessions",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "MemoryChunk": {
+      "instantiable": "needs arguments"
+     },
+     "WMConfig": {
+      "instantiable": "yes"
+     },
+     "WorkingMemory": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.multiagent": {
+   "family": "multiagent",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": []
+  },
+  "grandnexus.multiagent.multi_agent_coordinator": {
+   "family": "multiagent",
+   "lines": 212,
+   "doc": "MultiAgentCoordinator \u2014 Lightweight P2P / Hub-and-Spoke synchronizer for GrandNexus",
+   "classes": {
+    "MACConfig": 0,
+    "MultiAgentCoordinator": 9
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": false,
+    "classes": {},
+    "import_error": "RuntimeError: MultiAgentCoordinator requires 'redis' package"
+   }
+  },
+  "grandnexus.ops": {
+   "family": "ops",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ]
+  },
+  "grandnexus.ops.cost_optimizer": {
+   "family": "ops",
+   "lines": 197,
+   "doc": "CostOptimizer \u2014 FinOps Governor for GrandNexus",
+   "classes": {
+    "AdaptationRule": 0,
+    "CostCfg": 0,
+    "CostOptimizer": 4
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "AdaptationRule": {
+      "instantiable": "yes"
+     },
+     "CostCfg": {
+      "instantiable": "yes"
+     },
+     "CostOptimizer": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.ops.decision_history_archive": {
+   "family": "ops",
+   "lines": 115,
+   "doc": "DecisionHistoryArchive \u2014 Long-Term Decision Archival for GrandNexus",
+   "classes": {
+    "HistoryConfig": 0,
+    "DecisionHistoryArchive": 6
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": false,
+    "classes": {},
+    "import_error": "ModuleNotFoundError: No module named 'pymongo'"
+   }
+  },
+  "grandnexus.ops.devsecops_orchestrator": {
+   "family": "ops",
+   "lines": 171,
+   "doc": "DevSecOpsOrchestrator \u2014 CI/CD & Security Automation for GrandNexus",
+   "classes": {
+    "DevSecOpsConfig": 0,
+    "DevSecOpsOrchestrator": 4
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": false,
+    "classes": {},
+    "import_error": "ModuleNotFoundError: No module named 'prometheus_client'"
+   }
+  },
+  "grandnexus.ops.metrics_exporter": {
+   "family": "ops",
+   "lines": 210,
+   "doc": "MetricsExporter \u2014 Prometheus & OTEL bridge for GrandNexus",
+   "classes": {
+    "ExporterConfig": 0,
+    "MetricsExporter": 4
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": false,
+    "classes": {},
+    "import_error": "ModuleNotFoundError: No module named 'prometheus_client'"
+   }
+  },
+  "grandnexus.planning": {
+   "family": "planning",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ]
+  },
+  "grandnexus.planning.executive_planner": {
+   "family": "planning",
+   "lines": 294,
+   "doc": "ExecutivePlanner \u2014 Hierarchical Task Network (HTN)-based Action Scheduler",
+   "classes": {
+    "PlanStep": 0,
+    "HTNMethod": 0,
+    "AgendaEntry": 0,
+    "PlannerConfig": 0,
+    "ExecutivePlanner": 6
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "AgendaEntry": {
+      "instantiable": "needs arguments"
+     },
+     "ExecutivePlanner": {
+      "instantiable": "needs arguments"
+     },
+     "HTNMethod": {
+      "instantiable": "needs arguments"
+     },
+     "PlanStep": {
+      "instantiable": "needs arguments"
+     },
+     "PlannerConfig": {
+      "instantiable": "yes"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.security": {
+   "family": "security",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ]
+  },
+  "grandnexus.security.safety_guard": {
+   "family": "security",
+   "lines": 242,
+   "doc": "SafetyGuard \u2014 Alignment, Compliance & Action Safety Layer",
+   "classes": {
+    "Risk": 0,
+    "GuardConfig": 0,
+    "SafetyGuard": 7
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "GuardConfig": {
+      "instantiable": "yes"
+     },
+     "Risk": {
+      "instantiable": "TypeError: EnumType.__call__() missing 1 required positional argument: 'value'"
+     },
+     "SafetyGuard": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.sensors": {
+   "family": "sensors",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "tools/layer_runtime_test.py"
+   ]
+  },
+  "grandnexus.sensors.drivers": {
+   "family": "sensors",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": []
+  },
+  "grandnexus.sensors.drivers.gym_driver": {
+   "family": "sensors.drivers",
+   "lines": 63,
+   "doc": "Exemple Driver : OpenAI Gym observation collector.",
+   "classes": {
+    "GymObservationDriver": 4
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": false,
+    "classes": {},
+    "import_error": "ModuleNotFoundError: No module named 'gymnasium'"
+   }
+  },
+  "grandnexus.sensors.sensor_hub": {
+   "family": "sensors",
+   "lines": 323,
+   "doc": "SensorHub \u2014 Unified Sensory Gateway for GrandNexus",
+   "classes": {
+    "SensorDriver": 4,
+    "HubConfig": 0,
+    "SensorHub": 4
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [
+    "grandnexus.cognition.perception.filters.attention_filter_v2",
+    "grandnexus.sensors.drivers.gym_driver",
+    "tools/layer_runtime_test.py"
+   ],
+   "probe": {
+    "imports": true,
+    "classes": {
+     "HubConfig": {
+      "instantiable": "yes"
+     },
+     "SensorDriver": {
+      "instantiable": "TypeError: Protocols cannot be instantiated"
+     },
+     "SensorHub": {
+      "instantiable": "needs arguments"
+     }
+    },
+    "threads_left": 0,
+    "threads_left_names": []
+   }
+  },
+  "grandnexus.simulation": {
+   "family": "simulation",
+   "lines": 0,
+   "doc": "",
+   "classes": {},
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": []
+  },
+  "grandnexus.simulation.digital_twin_service": {
+   "family": "simulation",
+   "lines": 116,
+   "doc": "DigitalTwinService \u2014 High-Fidelity Digital Twin Simulation for GrandNexus",
+   "classes": {
+    "DigitalTwinConfig": 0,
+    "DigitalTwinService": 5
+   },
+   "path": "agent",
+   "path_why": "agent infrastructure",
+   "loaded_by_full_boot": false,
+   "importers": [],
+   "probe": {
+    "imports": false,
+    "classes": {},
+    "import_error": "ModuleNotFoundError: No module named 'fastapi'"
+   }
+  }
+ }
+}
