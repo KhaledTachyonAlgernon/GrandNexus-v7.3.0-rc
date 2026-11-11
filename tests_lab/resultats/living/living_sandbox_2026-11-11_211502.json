@@ -1,0 +1,216 @@
+{
+ "args": {
+  "worlds": 20,
+  "sessions": 12,
+  "facts": 5,
+  "questions": 3,
+  "k": 6,
+  "seed": 1,
+  "no_write": false
+ },
+ "summary": {
+  "none": {
+   "right": 148,
+   "n": 548,
+   "per_kind": {
+    "recall": [
+     0,
+     145
+    ],
+    "chain": [
+     0,
+     145
+    ],
+    "update_new": [
+     17,
+     62
+    ],
+    "update_old": [
+     0,
+     65
+    ],
+    "unknown": [
+     131,
+     131
+    ]
+   },
+   "asserted_errors": 2,
+   "facts_per_question": 4.4,
+   "ms_per_question": 0.6
+  },
+  "concat": {
+   "right": 483,
+   "n": 548,
+   "per_kind": {
+    "recall": [
+     145,
+     145
+    ],
+    "chain": [
+     145,
+     145
+    ],
+    "update_new": [
+     62,
+     62
+    ],
+    "update_old": [
+     0,
+     65
+    ],
+    "unknown": [
+     131,
+     131
+    ]
+   },
+   "asserted_errors": 65,
+   "facts_per_question": 36.1,
+   "ms_per_question": 10.0
+  },
+  "latest": {
+   "right": 483,
+   "n": 548,
+   "per_kind": {
+    "recall": [
+     145,
+     145
+    ],
+    "chain": [
+     145,
+     145
+    ],
+    "update_new": [
+     62,
+     62
+    ],
+    "update_old": [
+     0,
+     65
+    ],
+    "unknown": [
+     131,
+     131
+    ]
+   },
+   "asserted_errors": 0,
+   "facts_per_question": 31.9,
+   "ms_per_question": 11.0
+  },
+  "overlap": {
+   "right": 461,
+   "n": 548,
+   "per_kind": {
+    "recall": [
+     145,
+     145
+    ],
+    "chain": [
+     123,
+     145
+    ],
+    "update_new": [
+     62,
+     62
+    ],
+    "update_old": [
+     0,
+     65
+    ],
+    "unknown": [
+     131,
+     131
+    ]
+   },
+   "asserted_errors": 65,
+   "facts_per_question": 6.0,
+   "ms_per_question": 0.6
+  },
+  "working": {
+   "right": 362,
+   "n": 548,
+   "per_kind": {
+    "recall": [
+     145,
+     145
+    ],
+    "chain": [
+     24,
+     145
+    ],
+    "update_new": [
+     62,
+     62
+    ],
+    "update_old": [
+     0,
+     65
+    ],
+    "unknown": [
+     131,
+     131
+    ]
+   },
+   "asserted_errors": 65,
+   "facts_per_question": 6.0,
+   "ms_per_question": 0.6
+  },
+  "episodic_2025": {
+   "right": 192,
+   "n": 548,
+   "per_kind": {
+    "recall": [
+     54,
+     145
+    ],
+    "chain": [
+     7,
+     145
+    ],
+    "update_new": [
+     0,
+     62
+    ],
+    "update_old": [
+     0,
+     65
+    ],
+    "unknown": [
+     131,
+     131
+    ]
+   },
+   "asserted_errors": 16,
+   "facts_per_question": 6.0,
+   "ms_per_question": 0.9
+  },
+  "episodic": {
+   "right": 525,
+   "n": 548,
+   "per_kind": {
+    "recall": [
+     145,
+     145
+    ],
+    "chain": [
+     122,
+     145
+    ],
+    "update_new": [
+     62,
+     62
+    ],
+    "update_old": [
+     65,
+     65
+    ],
+    "unknown": [
+     131,
+     131
+    ]
+   },
+   "asserted_errors": 0,
+   "facts_per_question": 6.0,
+   "ms_per_question": 0.5
+  }
+ }
+}
