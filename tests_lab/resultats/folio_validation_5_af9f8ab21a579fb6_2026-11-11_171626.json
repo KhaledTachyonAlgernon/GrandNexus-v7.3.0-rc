@@ -1,0 +1,360 @@
+{
+ "summary": {
+  "set": "folio_validation_5_af9f8ab21a579fb6_2026-11-11_171626",
+  "sha": "af9f8ab21a579fb6",
+  "n": 5,
+  "runs": 1,
+  "model": "claude-sonnet-5-5",
+  "prompt_version": "v5.4",
+  "engine_version": "ref-2.3",
+  "modes": {
+   "translator": {
+    "runs": {
+     "0": {
+      "acc": 5,
+      "n": 5,
+      "pct": 100.0,
+      "false_yes": 0,
+      "false_no": 0,
+      "inventions": 0,
+      "false_contradictory": 0,
+      "unknown": 2,
+      "contradictory": 0,
+      "errors": 0,
+      "confusion": {
+       "no->no": 1,
+       "unknown->unknown": 2,
+       "yes->yes": 2
+      },
+      "strict": {
+       "acc": 5,
+       "n": 5,
+       "pct": 100.0,
+       "false_yes": 0,
+       "false_no": 0,
+       "inventions": 0,
+       "false_contradictory": 0,
+       "unknown": 2,
+       "contradictory": 0,
+       "errors": 0,
+       "confusion": {
+        "no->no": 1,
+        "unknown->unknown": 2,
+        "yes->yes": 2
+       }
+      },
+      "depends_on_knowledge": 0,
+      "rejections": 0
+     }
+    },
+    "stable_items": 5,
+    "calls": 8,
+    "tokens": 24003
+   },
+   "always_unknown": {
+    "runs": {
+     "0": {
+      "acc": 2,
+      "n": 5,
+      "pct": 40.0,
+      "false_yes": 0,
+      "false_no": 0,
+      "inventions": 0,
+      "false_contradictory": 0,
+      "unknown": 5,
+      "contradictory": 0,
+      "errors": 0,
+      "confusion": {
+       "no->unknown": 1,
+       "unknown->unknown": 2,
+       "yes->unknown": 2
+      }
+     }
+    },
+    "stable_items": 5,
+    "calls": 0,
+    "tokens": 0
+   },
+   "majority": {
+    "runs": {
+     "0": {
+      "acc": 2,
+      "n": 5,
+      "pct": 40.0,
+      "false_yes": 0,
+      "false_no": 0,
+      "inventions": 0,
+      "false_contradictory": 0,
+      "unknown": 5,
+      "contradictory": 0,
+      "errors": 0,
+      "confusion": {
+       "no->unknown": 1,
+       "unknown->unknown": 2,
+       "yes->unknown": 2
+      }
+     }
+    },
+    "stable_items": 5,
+    "calls": 0,
+    "tokens": 0
+   },
+   "random": {
+    "runs": {
+     "0": {
+      "acc": 1,
+      "n": 5,
+      "pct": 20.0,
+      "false_yes": 1,
+      "false_no": 2,
+      "inventions": 2,
+      "false_contradictory": 0,
+      "unknown": 1,
+      "contradictory": 0,
+      "errors": 0,
+      "confusion": {
+       "no->no": 1,
+       "unknown->no": 1,
+       "unknown->yes": 1,
+       "yes->no": 1,
+       "yes->unknown": 1
+      }
+     }
+    },
+    "stable_items": 5,
+    "calls": 0,
+    "tokens": 0
+   }
+  },
+  "cost": {
+   "translator": {
+    "usd": 0.0237,
+    "usd_without_cache": 0.0383,
+    "calls": 8,
+    "batch": true,
+    "cache_hit_share": 0.782
+   },
+   "total": {
+    "usd": 0.0237,
+    "usd_without_cache": 0.0383,
+    "calls": 8,
+    "batch": true,
+    "cache_hit_share": 0.782
+   }
+  },
+  "batches": 2
+ },
+ "rows": {
+  "translator": [
+   {
+    "id": "942",
+    "expected": "no",
+    "run": 0,
+    "pred": "no",
+    "pred_full": "no",
+    "pred_strict": "no",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 1,
+    "calls": 2,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgwX7P32CNSmJ1qyMXdop",
+     "msg_011CgwXcpGdHpy2MNjRVW18r"
+    ],
+    "batch": true,
+    "tokens": 7100,
+    "tokens_in": 961,
+    "tokens_out": 1579,
+    "cache_read": 2280,
+    "cache_write": 2280
+   },
+   {
+    "id": "244",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "pred_strict": "unknown",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 1,
+    "calls": 2,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgwXSHJmKLPq4f4AqL89f",
+     "msg_011CgwXswaawZdPiHu394hQG"
+    ],
+    "batch": true,
+    "tokens": 5534,
+    "tokens_in": 440,
+    "tokens_out": 534,
+    "cache_read": 4560,
+    "cache_write": 0
+   },
+   {
+    "id": "1362",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown",
+    "pred_full": "unknown",
+    "pred_strict": "unknown",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgwXNNNkTW4SwZdr33b3W"
+    ],
+    "batch": true,
+    "tokens": 2737,
+    "tokens_in": 159,
+    "tokens_out": 298,
+    "cache_read": 2280,
+    "cache_write": 0
+   },
+   {
+    "id": "560",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "pred_strict": "yes",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 0,
+    "calls": 1,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgwXSH8MWHVZVWpsniWW8"
+    ],
+    "batch": true,
+    "tokens": 2704,
+    "tokens_in": 174,
+    "tokens_out": 250,
+    "cache_read": 2280,
+    "cache_write": 0
+   },
+   {
+    "id": "74",
+    "expected": "yes",
+    "run": 0,
+    "pred": "yes",
+    "pred_full": "yes",
+    "pred_strict": "yes",
+    "knowledge": false,
+    "rejections": 0,
+    "corrective": 1,
+    "calls": 2,
+    "model": "claude-sonnet-5-5",
+    "ids": [
+     "msg_011CgwXNNPzw1n87LWPWWge2",
+     "msg_011CgwXswYbcAPvFxY7wo3UK"
+    ],
+    "batch": true,
+    "tokens": 5928,
+    "tokens_in": 448,
+    "tokens_out": 920,
+    "cache_read": 4560,
+    "cache_write": 0
+   }
+  ],
+  "always_unknown": [
+   {
+    "id": "942",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "244",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1362",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "560",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "74",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   }
+  ],
+  "majority": [
+   {
+    "id": "942",
+    "expected": "no",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "244",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "1362",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "560",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   },
+   {
+    "id": "74",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   }
+  ],
+  "random": [
+   {
+    "id": "942",
+    "expected": "no",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "244",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "1362",
+    "expected": "unknown",
+    "run": 0,
+    "pred": "yes"
+   },
+   {
+    "id": "560",
+    "expected": "yes",
+    "run": 0,
+    "pred": "no"
+   },
+   {
+    "id": "74",
+    "expected": "yes",
+    "run": 0,
+    "pred": "unknown"
+   }
+  ]
+ }
+}
