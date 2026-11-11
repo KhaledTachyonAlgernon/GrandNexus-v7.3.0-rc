@@ -23,6 +23,8 @@ An audition = one hypothesis on what the module changes on the way to the verdic
 | `memory.working` | 66.1% on 548 questions, below plain word overlap (84.1%): its retrieval loses the rule of a chain (logbook 76-77) |
 | `memory.episodic` as in 2025 | 35.0%: retrieval ignored the question (logbook 76) |
 | `memory.episodic` repaired | 95.8%, 0 asserted errors, 6 facts per question: the best pipeline (logbook 77; sandbox, the bench gives the structure of each fact) |
+| `graph.graph_engine` (InMemoryGraphEngine) | world v2: 100%, 0 asserted errors, 1.8 facts per question with the repaired episodic memory for time; two-step chains 44/44 where word retrieval gets 2-16 (logbook 78; sandbox) |
+| `memory.semantic` | world v2: 100%, 0 asserted errors, 1.7 facts per question, same set-up (logbook 78; sandbox) |
 
 ## Inventory
 

@@ -1,0 +1,311 @@
+{
+ "args": {
+  "worlds": 20,
+  "sessions": 12,
+  "facts": 5,
+  "questions": 3,
+  "k": 6,
+  "seed": 1,
+  "world": "v2",
+  "no_write": false
+ },
+ "summary": {
+  "none": {
+   "right": 170,
+   "n": 517,
+   "per_kind": {
+    "recall": [
+     0,
+     136
+    ],
+    "chain": [
+     1,
+     76
+    ],
+    "chain2": [
+     0,
+     44
+    ],
+    "update_new": [
+     20,
+     55
+    ],
+    "update_old": [
+     0,
+     57
+    ],
+    "unknown": [
+     149,
+     149
+    ]
+   },
+   "asserted_errors": 0,
+   "facts_per_question": 4.4,
+   "ms_per_question": 0.6
+  },
+  "concat": {
+   "right": 460,
+   "n": 517,
+   "per_kind": {
+    "recall": [
+     136,
+     136
+    ],
+    "chain": [
+     76,
+     76
+    ],
+    "chain2": [
+     44,
+     44
+    ],
+    "update_new": [
+     55,
+     55
+    ],
+    "update_old": [
+     0,
+     57
+    ],
+    "unknown": [
+     149,
+     149
+    ]
+   },
+   "asserted_errors": 57,
+   "facts_per_question": 37.2,
+   "ms_per_question": 17.3
+  },
+  "latest": {
+   "right": 460,
+   "n": 517,
+   "per_kind": {
+    "recall": [
+     136,
+     136
+    ],
+    "chain": [
+     76,
+     76
+    ],
+    "chain2": [
+     44,
+     44
+    ],
+    "update_new": [
+     55,
+     55
+    ],
+    "update_old": [
+     0,
+     57
+    ],
+    "unknown": [
+     149,
+     149
+    ]
+   },
+   "asserted_errors": 0,
+   "facts_per_question": 32.6,
+   "ms_per_question": 19.3
+  },
+  "overlap": {
+   "right": 412,
+   "n": 517,
+   "per_kind": {
+    "recall": [
+     136,
+     136
+    ],
+    "chain": [
+     69,
+     76
+    ],
+    "chain2": [
+     3,
+     44
+    ],
+    "update_new": [
+     55,
+     55
+    ],
+    "update_old": [
+     0,
+     57
+    ],
+    "unknown": [
+     149,
+     149
+    ]
+   },
+   "asserted_errors": 57,
+   "facts_per_question": 6.0,
+   "ms_per_question": 0.6
+  },
+  "working": {
+   "right": 352,
+   "n": 517,
+   "per_kind": {
+    "recall": [
+     136,
+     136
+    ],
+    "chain": [
+     12,
+     76
+    ],
+    "chain2": [
+     0,
+     44
+    ],
+    "update_new": [
+     55,
+     55
+    ],
+    "update_old": [
+     0,
+     57
+    ],
+    "unknown": [
+     149,
+     149
+    ]
+   },
+   "asserted_errors": 57,
+   "facts_per_question": 6.0,
+   "ms_per_question": 0.6
+  },
+  "episodic_2025": {
+   "right": 204,
+   "n": 517,
+   "per_kind": {
+    "recall": [
+     50,
+     136
+    ],
+    "chain": [
+     2,
+     76
+    ],
+    "chain2": [
+     0,
+     44
+    ],
+    "update_new": [
+     3,
+     55
+    ],
+    "update_old": [
+     0,
+     57
+    ],
+    "unknown": [
+     149,
+     149
+    ]
+   },
+   "asserted_errors": 10,
+   "facts_per_question": 6.0,
+   "ms_per_question": 0.8
+  },
+  "episodic": {
+   "right": 465,
+   "n": 517,
+   "per_kind": {
+    "recall": [
+     136,
+     136
+    ],
+    "chain": [
+     66,
+     76
+    ],
+    "chain2": [
+     2,
+     44
+    ],
+    "update_new": [
+     55,
+     55
+    ],
+    "update_old": [
+     57,
+     57
+    ],
+    "unknown": [
+     149,
+     149
+    ]
+   },
+   "asserted_errors": 0,
+   "facts_per_question": 6.0,
+   "ms_per_question": 0.5
+  },
+  "graph": {
+   "right": 517,
+   "n": 517,
+   "per_kind": {
+    "recall": [
+     136,
+     136
+    ],
+    "chain": [
+     76,
+     76
+    ],
+    "chain2": [
+     44,
+     44
+    ],
+    "update_new": [
+     55,
+     55
+    ],
+    "update_old": [
+     57,
+     57
+    ],
+    "unknown": [
+     149,
+     149
+    ]
+   },
+   "asserted_errors": 0,
+   "facts_per_question": 1.8,
+   "ms_per_question": 0.2
+  },
+  "semantic": {
+   "right": 517,
+   "n": 517,
+   "per_kind": {
+    "recall": [
+     136,
+     136
+    ],
+    "chain": [
+     76,
+     76
+    ],
+    "chain2": [
+     44,
+     44
+    ],
+    "update_new": [
+     55,
+     55
+    ],
+    "update_old": [
+     57,
+     57
+    ],
+    "unknown": [
+     149,
+     149
+    ]
+   },
+   "asserted_errors": 0,
+   "facts_per_question": 1.7,
+   "ms_per_question": 0.2
+  }
+ }
+}
