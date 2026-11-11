@@ -22,6 +22,7 @@ import json
 import pathlib
 import subprocess
 import sys
+import tempfile
 import time
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -146,7 +147,8 @@ def main(argv=None) -> dict:
         if lines:
             code = PROBE.replace("ROOT)", repr(str(ROOT)) + ")").replace("NAME", repr(name))
             try:
-                p = subprocess.run([sys.executable, "-W", "ignore", "-c", code], capture_output=True, text=True, timeout=60, cwd=ROOT)
+                with tempfile.TemporaryDirectory() as tmp:   # modules may write files in the working directory
+                    p = subprocess.run([sys.executable, "-W", "ignore", "-c", code], capture_output=True, text=True, timeout=60, cwd=tmp)
                 line = next((l for l in p.stdout.splitlines() if l.startswith("@@")), None)
                 rec["probe"] = json.loads(line[2:]) if line else {"error": (p.stderr or "no output")[-160:]}
             except subprocess.TimeoutExpired:

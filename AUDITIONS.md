@@ -16,6 +16,14 @@ An audition = one hypothesis on what the module changes on the way to the verdic
 | 3 | `cognition.perception.pattern_recognizer` | FAIL (logbook 74): 0.59, below the number of premise sentences (0.62) |
 | 4 | `cognition.metacognition.reflection` (error analysis) | FAIL (logbook 74): same report for every reading; it analyses software exceptions, not reasoning |
 
+## Living bench (sandbox, over-time modules)
+
+| Module | Result |
+|---|---|
+| `memory.working` | 66.1% on 548 questions, below plain word overlap (84.1%): its retrieval loses the rule of a chain (logbook 76-77) |
+| `memory.episodic` as in 2025 | 35.0%: retrieval ignored the question (logbook 76) |
+| `memory.episodic` repaired | 95.8%, 0 asserted errors, 6 facts per question: the best pipeline (logbook 77; sandbox, the bench gives the structure of each fact) |
+
 ## Inventory
 
 | Module | Path | Lines | Imports | Loaded by the full boot | Imported by |

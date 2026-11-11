@@ -16,6 +16,7 @@ Features:
 """
 
 import logging
+import re
 import time
 import uuid
 import heapq
@@ -67,6 +68,9 @@ class RetrievalMode(Enum):
 # -----------------------------------------------------------------------------
 # Data Structures
 # -----------------------------------------------------------------------------
+
+_STOPWORDS = set("the and does did not are was were has have who which that this with from into for".split())
+
 
 @dataclass
 class EpisodeEvent:
@@ -533,6 +537,15 @@ class EpisodicMemoryConfig:
     max_associative_distance: int = 3
     attention_span: int = 5
     consciousness_threshold: float = 0.7
+    # v7.4.x repairs (logbook 77):
+    # lexical_retrieval: without an embedding, retrieve_events(text=...) only matched a query that is a SUBSTRING of an
+    #   event, so a question never matched and events came back in activation order. With this flag, an event also
+    #   scores by the share of the query's content words it contains, ties broken by recency.
+    # single_valued_relations: relation -> negation template ("{subject}", "{value}"). An event whose metadata carries
+    #   {"subject", "relation", "value"} for such a relation closes the previous value of the same subject: the old event
+    #   is marked superseded (left out of retrieval unless asked) and a derived event states the negation.
+    lexical_retrieval: bool = True
+    single_valued_relations: Dict[str, str] = field(default_factory=dict)
     temporal_context_size: int = 10
     max_epochs: int = 100
     consolidation_scheduler: str = "adaptive"  # "periodic" or "adaptive"
@@ -764,6 +777,7 @@ class EpisodicMemory:
             # Store event
             self.events[event_id] = event
             self.event_activations[event_id] = 1.0  # Full initial activation
+            self._supersede(event, episode_id)
 
             # Add to episode
             episode.add_event(event)
@@ -789,6 +803,39 @@ class EpisodicMemory:
 
             self.logger.debug(f"Added event {event_id} to episode {episode_id}")
             return event_id
+
+    def _supersede(self, event: "EpisodeEvent", episode_id: str) -> None:
+        """Succession (logbook 77): a new value of a single-valued relation closes the previous value of the same
+        subject. The previous event is marked superseded; a derived event records the negation of the old value."""
+        md = event.metadata or {}
+        rel = md.get("relation")
+        if rel not in self.config.single_valued_relations or md.get("derived") or "subject" not in md or "value" not in md:
+            return
+        for other in list(self.events.values()):
+            om = other.metadata or {}
+            if (om.get("derived") and om.get("negated") and om.get("relation") == rel and om.get("subject") == md["subject"]
+                    and om.get("value") == md["value"] and not om.get("superseded_by")):
+                om["superseded_by"] = event.event_id          # back to an old value: its negation no longer holds
+                other.metadata = om
+                continue
+            if (other is event or om.get("relation") != rel or om.get("subject") != md["subject"] or om.get("derived")
+                    or om.get("superseded_by") or om.get("value") == md["value"]):
+                continue
+            om["superseded_by"] = event.event_id
+            other.metadata = om
+            text = self.config.single_valued_relations[rel].format(subject=md["subject"], value=om.get("value"))
+            neg = EpisodeEvent(event_id=str(uuid.uuid4()), timestamp=event.timestamp, content=text,
+                               metadata={"derived": "negation of a superseded value", "relation": rel, "subject": md["subject"],
+                                         "value": om.get("value"), "negated": True, "superseded_event": other.event_id},
+                               importance=event.importance)
+            self.events[neg.event_id] = neg
+            self.event_activations[neg.event_id] = 1.0
+            if episode_id in self.episodes:
+                self.episodes[episode_id].add_event(neg)
+
+    @staticmethod
+    def _content_words(text: str) -> set:
+        return {w for w in re.findall(r"[a-z0-9]+", text.lower()) if len(w) > 2 and w not in _STOPWORDS}
 
     def close_episode(self, episode_id: str) -> bool:
         """
@@ -1120,7 +1167,8 @@ class EpisodicMemory:
                        embedding: Optional[np.ndarray] = None,
                        time_range: Optional[Tuple[float, float]] = None,
                        importance_threshold: float = 0.0,
-                       max_results: int = 20) -> List[EpisodeEvent]:
+                       max_results: int = 20,
+                       include_superseded: bool = False) -> List[EpisodeEvent]:
         """
         Retrieve individual events matching the criteria.
 
@@ -1142,6 +1190,8 @@ class EpisodicMemory:
                 # Apply filters
                 if importance_threshold > 0 and event.importance < importance_threshold:
                     continue
+                if not include_superseded and (event.metadata or {}).get("superseded_by"):
+                    continue
 
                 if time_range:
                     start_time, end_time = time_range
@@ -1152,6 +1202,7 @@ class EpisodicMemory:
 
             # Score candidates
             scored_events = []
+            qwords = self._content_words(text) if (text and self.config.lexical_retrieval) else set()
             for event in candidates:
                 score = 0.0
 
@@ -1159,6 +1210,8 @@ class EpisodicMemory:
                 if text and isinstance(event.content, str):
                     if text.lower() in event.content.lower():
                         score += 0.5
+                    if qwords:                    # repair (logbook 77): share of the query's content words in the event
+                        score += len(qwords & self._content_words(event.content)) / len(qwords)
 
                 # Embedding similarity
                 if embedding is not None and event.embedding is not None:
@@ -1172,7 +1225,7 @@ class EpisodicMemory:
                 scored_events.append((score, event))
 
             # Sort by score
-            scored_events.sort(reverse=True, key=lambda x: x[0])
+            scored_events.sort(reverse=True, key=lambda x: (x[0], x[1].timestamp) if self.config.lexical_retrieval else x[0])
 
             # Get top results
             top_events = [event for _, event in scored_events[:max_results]]

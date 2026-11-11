@@ -321,11 +321,16 @@ class PremiseExtractor(CognitiveModuleBase):
                 for k in range(1, len(rest) - 1):              # « is Paris in Europe »
                     if rest[k] in LOC_PREPS and strip_articles(rest[:k]):
                         return Clause("in", term(rest[:k]), term(rest[k + 1:]))
-                for cut in range(len(rest) - 1, 0, -1):
+                # « is Bob a chess player »: the article opens the predicate; the first such cut from the left wins.
+                # (v7.4.x repair, logbook 77: scanning from the right accepted the last word alone first, so a two-word
+                # role in a question became is(bob_chess, player) and never met the statement is(bob, chess_player).)
+                for cut in range(1, len(rest)):
                     subj, obj = rest[:cut], rest[cut:]
-                    if strip_articles(subj) and strip_articles(obj):
-                        if obj[0] in ARTICLES or cut == len(rest) - 1:
-                            return Clause("is", term(subj), term(obj))
+                    if obj[0] in ARTICLES and strip_articles(subj) and strip_articles(obj):
+                        return Clause("is", term(subj), term(obj))
+                subj, obj = rest[:-1], rest[-1:]                 # no article: « is Bob patient »
+                if strip_articles(subj) and strip_articles(obj):
+                    return Clause("is", term(subj), term(obj))
                 return None
             if v in {"can", "peut", "peuvent"}:
                 return Clause("can", term(rest[:-1]), term(rest[-1:]))

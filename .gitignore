@@ -3,3 +3,6 @@ __pycache__/
 *.db
 *.sqlite
 *.jsonl
+
+# run artifacts of 2025 modules (memory_manager storage file)
+nexus_memory.dat
