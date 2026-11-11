@@ -12,6 +12,9 @@ An audition = one hypothesis on what the module changes on the way to the verdic
 | n° | Module | Result |
 |---|---|---|
 | 1 | `cognition.metacognition.confidence` | FAIL (logbook 70): as wired it relays the reasoner's field; its own model is at chance |
+| 2 | `cognition.perception.filters.attention_filter` | FAIL (logbook 74): constant salience, a catch-all focus defeats the question's focus (defect); its rule is word overlap, which itself scores 0.61 |
+| 3 | `cognition.perception.pattern_recognizer` | FAIL (logbook 74): 0.59, below the number of premise sentences (0.62) |
+| 4 | `cognition.metacognition.reflection` (error analysis) | FAIL (logbook 74): same report for every reading; it analyses software exceptions, not reasoning |
 
 ## Inventory
 
