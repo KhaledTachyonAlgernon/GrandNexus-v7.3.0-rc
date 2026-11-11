@@ -1,0 +1,210 @@
+{
+ "args": {
+  "seed": 7,
+  "worlds": 40,
+  "sessions": 12,
+  "no_write": false
+ },
+ "fidelity": {
+  "exact": 2113,
+  "facts": 2113
+ },
+ "summary": {
+  "concat": {
+   "right": 941,
+   "n": 1049,
+   "pct": 89.7,
+   "asserted_errors": 108,
+   "facts_per_question": 36.28,
+   "per_kind": {
+    "recall": [
+     240,
+     240
+    ],
+    "chain": [
+     174,
+     174
+    ],
+    "chain2": [
+     133,
+     133
+    ],
+    "update_new": [
+     122,
+     122
+    ],
+    "update_old": [
+     0,
+     108
+    ],
+    "unknown": [
+     272,
+     272
+    ]
+   }
+  },
+  "overlap": {
+   "right": 795,
+   "n": 1049,
+   "pct": 75.79,
+   "asserted_errors": 108,
+   "facts_per_question": 6.0,
+   "per_kind": {
+    "recall": [
+     240,
+     240
+    ],
+    "chain": [
+     153,
+     174
+    ],
+    "chain2": [
+     8,
+     133
+    ],
+    "update_new": [
+     122,
+     122
+    ],
+    "update_old": [
+     0,
+     108
+    ],
+    "unknown": [
+     272,
+     272
+    ]
+   }
+  },
+  "bfs+script": {
+   "right": 1049,
+   "n": 1049,
+   "pct": 100.0,
+   "asserted_errors": 0,
+   "facts_per_question": 1.44,
+   "per_kind": {
+    "recall": [
+     240,
+     240
+    ],
+    "chain": [
+     174,
+     174
+    ],
+    "chain2": [
+     133,
+     133
+    ],
+    "update_new": [
+     122,
+     122
+    ],
+    "update_old": [
+     108,
+     108
+    ],
+    "unknown": [
+     272,
+     272
+    ]
+   }
+  },
+  "graph+episodic": {
+   "right": 1049,
+   "n": 1049,
+   "pct": 100.0,
+   "asserted_errors": 0,
+   "facts_per_question": 1.88,
+   "per_kind": {
+    "recall": [
+     240,
+     240
+    ],
+    "chain": [
+     174,
+     174
+    ],
+    "chain2": [
+     133,
+     133
+    ],
+    "update_new": [
+     122,
+     122
+    ],
+    "update_old": [
+     108,
+     108
+    ],
+    "unknown": [
+     272,
+     272
+    ]
+   },
+   "paired": {
+    "concat": {
+     "only_this_right": 108,
+     "only_control_right": 0,
+     "p": 6.162975822039155e-33
+    },
+    "overlap": {
+     "only_this_right": 254,
+     "only_control_right": 0,
+     "p": 6.908934844075556e-77
+    }
+   }
+  },
+  "semantic+episodic": {
+   "right": 1049,
+   "n": 1049,
+   "pct": 100.0,
+   "asserted_errors": 0,
+   "facts_per_question": 1.82,
+   "per_kind": {
+    "recall": [
+     240,
+     240
+    ],
+    "chain": [
+     174,
+     174
+    ],
+    "chain2": [
+     133,
+     133
+    ],
+    "update_new": [
+     122,
+     122
+    ],
+    "update_old": [
+     108,
+     108
+    ],
+    "unknown": [
+     272,
+     272
+    ]
+   },
+   "paired": {
+    "concat": {
+     "only_this_right": 108,
+     "only_control_right": 0,
+     "p": 6.162975822039155e-33
+    },
+    "overlap": {
+     "only_this_right": 254,
+     "only_control_right": 0,
+     "p": 6.908934844075556e-77
+    }
+   }
+  }
+ },
+ "criteria": {
+  "C0": true,
+  "C1 graph+episodic": true,
+  "C2 graph+episodic": true,
+  "C1 semantic+episodic": true,
+  "C2 semantic+episodic": true
+ }
+}
