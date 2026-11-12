@@ -161,7 +161,7 @@ def run(a, client=None) -> dict:
                 for p, (verdict, n) in ans.items():
                     rows.append({"level": L, "world": w, "kind": kind, "gold": gold, "pipeline": p, "answer": verdict, "facts": n,
                                  "key": f"{L}|{w}|{s}|{i}"})
-    out = {"args": vars(a), "failed_calls": failed, "levels": {}, "criteria": {}}
+    out = {"args": vars(a), "failed_calls": failed, "levels": {}, "criteria": {}, "rows": rows}   # rows: per question (logbook 86)
     ok = lambda r: r["answer"] == r["gold"]
     asserted = lambda rs: sum(r["answer"] in ("yes", "no", "contradictory") and r["answer"] != r["gold"] for r in rs)
     for L in levels:

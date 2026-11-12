@@ -172,16 +172,18 @@ class Memory:
             return [f"lives_in({subject}, {vals[-1]})"] + [f"not lives_in({subject}, {v})" for v in dict.fromkeys(vals) if v != vals[-1]]
         return [e.content for e in self.epi.retrieve_events(text=goal, max_results=4)]
 
-    def decide(self, question: str, trivial: bool = False) -> tuple:
+    def decide(self, question: str, trivial: bool = False, detail: bool = False) -> tuple:
+        """(strict verdict, number of statements used); with detail=True also the goal and the statements (logbook 86)."""
         from grandnexus.nexus_logic import decide, parse
         g = goal_of(question)
         if g is None:
-            return "unknown", 0
+            return ("unknown", 0, "", []) if detail else ("unknown", 0)
         goal, start, end = g
         items = self.residence(goal, start, trivial) if end == "lives_in" else self.path(start, end, trivial)
         lines = [x if x.rstrip().endswith(".") else x + "." for x in items + self.global_rules]
         prog = parse("\n".join(lines + [f"? {goal}."]), require_anchor=False)
-        return decide(prog, use_knowledge=False).answer, len(items)
+        ans = decide(prog, use_knowledge=False).answer
+        return (ans, len(items), goal, lines) if detail else (ans, len(items))
 
 
 def run_world(world: WorldV2, level: int, seed: int, tr, extractor, concat: bool) -> list:
