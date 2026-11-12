@@ -1,0 +1,539 @@
+{
+ "args": {
+  "seed": 13,
+  "worlds": 10,
+  "sessions": 12,
+  "levels": "1,2,3",
+  "concat_worlds": 4,
+  "model": "claude-sonnet-5-5",
+  "batch": true,
+  "state_dir": "/content/drive/MyDrive/GrandNexus/batch_state",
+  "dry_run": false,
+  "no_write": false
+ },
+ "failed_calls": {
+  "lexicon": 0,
+  "nolexicon": 0,
+  "concat": 0
+ },
+ "levels": {
+  "1": {
+   "grammar": {
+    "n": 249,
+    "pct": 20.88,
+    "asserted_errors": 0,
+    "facts_per_question": 0.0,
+    "per_kind": {
+     "recall": [
+      0,
+      59
+     ],
+     "chain": [
+      0,
+      20
+     ],
+     "chain2": [
+      0,
+      26
+     ],
+     "update_new": [
+      0,
+      43
+     ],
+     "update_old": [
+      0,
+      49
+     ],
+     "unknown": [
+      52,
+      52
+     ]
+    }
+   },
+   "llm_lexicon": {
+    "n": 249,
+    "pct": 92.37,
+    "asserted_errors": 1,
+    "facts_per_question": 2.23,
+    "per_kind": {
+     "recall": [
+      51,
+      59
+     ],
+     "chain": [
+      20,
+      20
+     ],
+     "chain2": [
+      26,
+      26
+     ],
+     "update_new": [
+      43,
+      43
+     ],
+     "update_old": [
+      39,
+      49
+     ],
+     "unknown": [
+      51,
+      52
+     ]
+    }
+   },
+   "llm_lexicon_bfs": {
+    "n": 249,
+    "pct": 92.37,
+    "asserted_errors": 1,
+    "facts_per_question": 1.49,
+    "per_kind": {
+     "recall": [
+      51,
+      59
+     ],
+     "chain": [
+      20,
+      20
+     ],
+     "chain2": [
+      26,
+      26
+     ],
+     "update_new": [
+      43,
+      43
+     ],
+     "update_old": [
+      39,
+      49
+     ],
+     "unknown": [
+      51,
+      52
+     ]
+    }
+   },
+   "llm_nolexicon": {
+    "n": 249,
+    "pct": 48.59,
+    "asserted_errors": 3,
+    "facts_per_question": 1.21,
+    "per_kind": {
+     "recall": [
+      34,
+      59
+     ],
+     "chain": [
+      12,
+      20
+     ],
+     "chain2": [
+      12,
+      26
+     ],
+     "update_new": [
+      12,
+      43
+     ],
+     "update_old": [
+      0,
+      49
+     ],
+     "unknown": [
+      51,
+      52
+     ]
+    }
+   },
+   "llm_concat_onto": {
+    "n": 107,
+    "pct": 82.24,
+    "asserted_errors": 13,
+    "facts_per_question": 34.23,
+    "per_kind": {
+     "recall": [
+      23,
+      23
+     ],
+     "chain": [
+      10,
+      10
+     ],
+     "chain2": [
+      9,
+      9
+     ],
+     "update_new": [
+      27,
+      27
+     ],
+     "update_old": [
+      1,
+      19
+     ],
+     "unknown": [
+      18,
+      19
+     ]
+    }
+   }
+  },
+  "2": {
+   "grammar": {
+    "n": 249,
+    "pct": 20.88,
+    "asserted_errors": 0,
+    "facts_per_question": 0.0,
+    "per_kind": {
+     "recall": [
+      0,
+      59
+     ],
+     "chain": [
+      0,
+      20
+     ],
+     "chain2": [
+      0,
+      26
+     ],
+     "update_new": [
+      0,
+      43
+     ],
+     "update_old": [
+      0,
+      49
+     ],
+     "unknown": [
+      52,
+      52
+     ]
+    }
+   },
+   "llm_lexicon": {
+    "n": 249,
+    "pct": 97.59,
+    "asserted_errors": 0,
+    "facts_per_question": 2.24,
+    "per_kind": {
+     "recall": [
+      56,
+      59
+     ],
+     "chain": [
+      20,
+      20
+     ],
+     "chain2": [
+      26,
+      26
+     ],
+     "update_new": [
+      43,
+      43
+     ],
+     "update_old": [
+      46,
+      49
+     ],
+     "unknown": [
+      52,
+      52
+     ]
+    }
+   },
+   "llm_lexicon_bfs": {
+    "n": 249,
+    "pct": 97.59,
+    "asserted_errors": 0,
+    "facts_per_question": 1.6,
+    "per_kind": {
+     "recall": [
+      56,
+      59
+     ],
+     "chain": [
+      20,
+      20
+     ],
+     "chain2": [
+      26,
+      26
+     ],
+     "update_new": [
+      43,
+      43
+     ],
+     "update_old": [
+      46,
+      49
+     ],
+     "unknown": [
+      52,
+      52
+     ]
+    }
+   },
+   "llm_nolexicon": {
+    "n": 249,
+    "pct": 40.16,
+    "asserted_errors": 0,
+    "facts_per_question": 0.35,
+    "per_kind": {
+     "recall": [
+      29,
+      59
+     ],
+     "chain": [
+      6,
+      20
+     ],
+     "chain2": [
+      13,
+      26
+     ],
+     "update_new": [
+      0,
+      43
+     ],
+     "update_old": [
+      0,
+      49
+     ],
+     "unknown": [
+      52,
+      52
+     ]
+    }
+   },
+   "llm_concat_onto": {
+    "n": 107,
+    "pct": 83.18,
+    "asserted_errors": 14,
+    "facts_per_question": 34.23,
+    "per_kind": {
+     "recall": [
+      23,
+      23
+     ],
+     "chain": [
+      10,
+      10
+     ],
+     "chain2": [
+      9,
+      9
+     ],
+     "update_new": [
+      27,
+      27
+     ],
+     "update_old": [
+      1,
+      19
+     ],
+     "unknown": [
+      19,
+      19
+     ]
+    }
+   }
+  },
+  "3": {
+   "grammar": {
+    "n": 249,
+    "pct": 20.88,
+    "asserted_errors": 0,
+    "facts_per_question": 1.42,
+    "per_kind": {
+     "recall": [
+      0,
+      59
+     ],
+     "chain": [
+      0,
+      20
+     ],
+     "chain2": [
+      0,
+      26
+     ],
+     "update_new": [
+      0,
+      43
+     ],
+     "update_old": [
+      0,
+      49
+     ],
+     "unknown": [
+      52,
+      52
+     ]
+    }
+   },
+   "llm_lexicon": {
+    "n": 249,
+    "pct": 100.0,
+    "asserted_errors": 0,
+    "facts_per_question": 2.26,
+    "per_kind": {
+     "recall": [
+      59,
+      59
+     ],
+     "chain": [
+      20,
+      20
+     ],
+     "chain2": [
+      26,
+      26
+     ],
+     "update_new": [
+      43,
+      43
+     ],
+     "update_old": [
+      49,
+      49
+     ],
+     "unknown": [
+      52,
+      52
+     ]
+    }
+   },
+   "llm_lexicon_bfs": {
+    "n": 249,
+    "pct": 100.0,
+    "asserted_errors": 0,
+    "facts_per_question": 1.63,
+    "per_kind": {
+     "recall": [
+      59,
+      59
+     ],
+     "chain": [
+      20,
+      20
+     ],
+     "chain2": [
+      26,
+      26
+     ],
+     "update_new": [
+      43,
+      43
+     ],
+     "update_old": [
+      49,
+      49
+     ],
+     "unknown": [
+      52,
+      52
+     ]
+    }
+   },
+   "llm_nolexicon": {
+    "n": 249,
+    "pct": 51.41,
+    "asserted_errors": 32,
+    "facts_per_question": 1.97,
+    "per_kind": {
+     "recall": [
+      39,
+      59
+     ],
+     "chain": [
+      16,
+      20
+     ],
+     "chain2": [
+      19,
+      26
+     ],
+     "update_new": [
+      2,
+      43
+     ],
+     "update_old": [
+      0,
+      49
+     ],
+     "unknown": [
+      52,
+      52
+     ]
+    }
+   },
+   "llm_concat_onto": {
+    "n": 107,
+    "pct": 83.18,
+    "asserted_errors": 15,
+    "facts_per_question": 34.23,
+    "per_kind": {
+     "recall": [
+      23,
+      23
+     ],
+     "chain": [
+      10,
+      10
+     ],
+     "chain2": [
+      9,
+      9
+     ],
+     "update_new": [
+      27,
+      27
+     ],
+     "update_old": [
+      1,
+      19
+     ],
+     "unknown": [
+      19,
+      19
+     ]
+    }
+   }
+  }
+ },
+ "criteria": {
+  "1": {
+   "C1": false,
+   "C2": true,
+   "C2_paired": [
+    113,
+    4,
+    9.245353271951796e-29
+   ],
+   "C3": true,
+   "C3_detail": "subset 107 questions: llm_lexicon 90.7% / 2.31 facts / 0 asserted; llm_concat_onto 82.2% / 34.23 facts / 13 asserted"
+  },
+  "2": {
+   "C1": true,
+   "C2": true,
+   "C2_paired": [
+    143,
+    0,
+    1.793662034335766e-43
+   ],
+   "C3": true,
+   "C3_detail": "subset 107 questions: llm_lexicon 100.0% / 2.39 facts / 0 asserted; llm_concat_onto 83.2% / 34.23 facts / 14 asserted"
+  }
+ },
+ "cost": {
+  "usd": 2.4707,
+  "usd_without_cache": 4.7422,
+  "calls": 1050,
+  "batch": true,
+  "cache_hit_share": 0.832
+ },
+ "batches": 12
+}
