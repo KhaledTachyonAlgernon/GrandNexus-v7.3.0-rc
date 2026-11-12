@@ -1,4 +1,4 @@
-# GrandNexus v7.5.0
+# GrandNexus v7.7.0-rc
 
 **An anchored translator and a reference engine that decide without inventing, and a laboratory to measure whether a loop learns.**
 
@@ -16,7 +16,7 @@ This archive is a complete, self-contained snapshot: no notebook chain, no `%%wr
 
 ## Quick start (Colab or any Python 3.10+)
 ```bash
-unzip GrandNexus_v7.5.0.zip -d /content              # -> /content/GrandNexus
+unzip GrandNexus_v7.7.0-rc.zip -d /content           # -> /content/GrandNexus
 pip install -q -r /content/GrandNexus/requirements.txt
 ```
 ```python
@@ -44,13 +44,13 @@ Modes: laboratory (default, deterministic, nothing runs in the background) or li
 | `grandnexus/llm_interface/llm_translator.py` | the earlier JSON translator (prompt versions v1-v4), kept for comparison |
 | `tools/bench_folio.py`, `tools/bench_deliberation.py`, `tools/diff_engines.py` | FOLIO bench (content-sha freezing, trivial controls, --strict), deliberation bench, differential reference / clingo / home engine |
 | `tools/bench_learning.py`, `tools/story_split.py` | learning-loop bench (none / static / random / learned, story-aware draws, read items excluded, paired sign tests, power and cost printed, checkpoint/resume) and the offline story split of archived runs |
-| `tools/living_bench.py`, `tools/living_lab.py` | living bench: facts over sessions, structured memory (episodic + graph / semantic) against text contexts; sandbox and pre-registered lab version (logbook 76-80) |
+| `tools/living_bench.py`, `tools/living_lab.py`, `tools/living_language.py`, `tools/living_llm.py`, `tools/living_lab_language.py` | living bench: facts over sessions, structured memory (episodic + graph / semantic) against text contexts; sandbox and pre-registered lab version (logbook 76-80) |
 | `tools/batch_runner.py`, `tools/audition_confidence.py` | `--batch` for both benches (Message Batches API by replay: half the price, resumable); the first module audition (offline) |
 | `tools/cost.py`, `tools/colab_save.py` | API cost of a run from the recorded usage (prompt cache included); safe Colab save (zips the repository it belongs to, checks the results are inside) |
 | `tools/test_bench.py` | bench for hand-written sets: freezes a set, measures 4 modes, never prints item texts |
 | `tools/smoke_test.py`, `tools/lab_*.py` | import test, labs (controls, layer oracles) |
 | `tests_lab/test_*.py` | offline tests (no API) |
-| `STATUS.md`, `LOGBOOK.md` | one-page current state; logbook: every hypothesis -> result -> decision (80 entries) |
+| `STATUS.md`, `LOGBOOK.md` | one-page current state; logbook: every hypothesis -> result -> decision (84 entries) |
 | `tests_lab/resultats/` | every FOLIO and learning run: results JSON, saved memories, the translated programs |
 | `archive/` | original 15/05 and 29/05 sources (untouched) |
 | `.git` | full history: every repair is one commit (`git log --oneline`) |
