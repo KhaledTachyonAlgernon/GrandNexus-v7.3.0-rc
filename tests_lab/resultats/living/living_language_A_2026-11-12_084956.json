@@ -1,0 +1,663 @@
+{
+ "args": {
+  "seed": 11,
+  "worlds": 20,
+  "sessions": 12,
+  "levels": "0,1,2,3",
+  "no_write": false
+ },
+ "levels": {
+  "0": {
+   "fidelity": [
+    1079,
+    1079
+   ],
+   "pipelines": {
+    "concat": {
+     "pct": 87.0,
+     "asserted_errors": 69,
+     "facts_per_question": 36.47,
+     "per_kind": {
+      "recall": [
+       127,
+       127
+      ],
+      "chain": [
+       63,
+       63
+      ],
+      "chain2": [
+       64,
+       64
+      ],
+      "update_new": [
+       74,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "overlap": {
+     "pct": 75.7,
+     "asserted_errors": 69,
+     "facts_per_question": 6.0,
+     "per_kind": {
+      "recall": [
+       127,
+       127
+      ],
+      "chain": [
+       61,
+       63
+      ],
+      "chain2": [
+       6,
+       64
+      ],
+      "update_new": [
+       74,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "bfs+script": {
+     "pct": 100.0,
+     "asserted_errors": 0,
+     "facts_per_question": 1.49,
+     "per_kind": {
+      "recall": [
+       127,
+       127
+      ],
+      "chain": [
+       63,
+       63
+      ],
+      "chain2": [
+       64,
+       64
+      ],
+      "update_new": [
+       74,
+       74
+      ],
+      "update_old": [
+       69,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "graph+episodic": {
+     "pct": 100.0,
+     "asserted_errors": 0,
+     "facts_per_question": 1.97,
+     "per_kind": {
+      "recall": [
+       127,
+       127
+      ],
+      "chain": [
+       63,
+       63
+      ],
+      "chain2": [
+       64,
+       64
+      ],
+      "update_new": [
+       74,
+       74
+      ],
+      "update_old": [
+       69,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "semantic+episodic": {
+     "pct": 100.0,
+     "asserted_errors": 0,
+     "facts_per_question": 1.91,
+     "per_kind": {
+      "recall": [
+       127,
+       127
+      ],
+      "chain": [
+       63,
+       63
+      ],
+      "chain2": [
+       64,
+       64
+      ],
+      "update_new": [
+       74,
+       74
+      ],
+      "update_old": [
+       69,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    }
+   }
+  },
+  "1": {
+   "fidelity": [
+    247,
+    1079
+   ],
+   "pipelines": {
+    "concat": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 36.47,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "overlap": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 6.0,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "bfs+script": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 0.0,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "graph+episodic": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 0.0,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "semantic+episodic": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 0.0,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    }
+   }
+  },
+  "2": {
+   "fidelity": [
+    0,
+    1079
+   ],
+   "pipelines": {
+    "concat": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 36.47,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "overlap": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 6.0,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "bfs+script": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 0.0,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "graph+episodic": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 0.0,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "semantic+episodic": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 0.0,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    }
+   }
+  },
+  "3": {
+   "fidelity": [
+    0,
+    1079
+   ],
+   "pipelines": {
+    "concat": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 36.47,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "overlap": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 6.0,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "bfs+script": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 0.0,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "graph+episodic": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 1.06,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    },
+    "semantic+episodic": {
+     "pct": 25.2,
+     "asserted_errors": 0,
+     "facts_per_question": 1.06,
+     "per_kind": {
+      "recall": [
+       0,
+       127
+      ],
+      "chain": [
+       0,
+       63
+      ],
+      "chain2": [
+       0,
+       64
+      ],
+      "update_new": [
+       0,
+       74
+      ],
+      "update_old": [
+       0,
+       69
+      ],
+      "unknown": [
+       134,
+       134
+      ]
+     }
+    }
+   }
+  }
+ }
+}

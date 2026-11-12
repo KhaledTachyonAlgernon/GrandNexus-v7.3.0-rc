@@ -188,15 +188,18 @@ class Structured:
         return [("fact", e.content) for e in self.epi.retrieve_events(text=goal, max_results=4)]
 
 
-def run_world(world: WorldV2, extractor, reasoner) -> tuple:
+def run_world(world: WorldV2, extractor, reasoner, surface=None) -> tuple:
+    """surface: optional function (canonical fact, its structure, session) -> the text actually given to GrandNexus
+    (phase A, logbook 81: paraphrases); None = the canonical sentence, as measured in logbook 80."""
     st = Structured()
     history: list = []
     rows, fidelity = [], [0, 0]
     for s, (facts, questions) in enumerate(world.sessions):
         st.new_session()
         for f in facts:
-            history.append((s, f))
-            ex = extractor.extract(f)
+            text = surface(f, world.meta[f], s) if surface else f
+            history.append((s, text))
+            ex = extractor.extract(text)
             items = [("fact", a) for a in ex.facts] + [("univ", u["category"], u["clause"].obj, u["clause"]) for u in ex.universals]
             exp = expected_structure(world.meta[f])
             got = [("fact", it[1]) if it[0] == "fact" else ("univ", it[1], it[2], it[3].negated) for it in items]

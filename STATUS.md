@@ -1,7 +1,7 @@
 # GrandNexus — status (2026-11-11, v7.5.0)
 
 **An anchored translator and a reference engine that decide without inventing, and a laboratory to measure whether a loop learns.**
-Read this file first; `LOGBOOK.md` holds every hypothesis -> result -> decision (80 entries); `MODULES.md` gives the status of every module.
+Read this file first; `LOGBOOK.md` holds every hypothesis -> result -> decision (81 entries); `MODULES.md` gives the status of every module.
 
 ## The core (what is demonstrated)
 | Part | File |
@@ -17,6 +17,8 @@ Module status (`MODULES.md`, generated from `grandnexus/module_status.py`): core
 
 ## Measured: the living bench (offline, synthetic worlds, logbook 79-80)
 - Facts arriving over 12 sessions, read by GrandNexus's own grammar pathway; 1,049 questions on 40 never-used worlds, criteria written first. A structured memory (repaired episodic memory for time + 2025 graph engine or semantic memory for chains) answers 100% with 0 asserted errors and about 1.9 facts per question; putting everything back in the text: 89.7%, 108 asserted errors, 36 facts; word retrieval: 75.8%. The 2025 modules equal a trivial search on the same triples: they work as components; they move to "supported". Scope: templated English, "live" declared single-valued.
+
+- Phase A of "the real language" (logbook 81, sandbox): with paraphrased facts the grammar pathway keeps 23% of the structures at level 1 and none beyond; every pipeline falls to the "always unknown" floor (25%), without a single asserted error. Reading is the bottleneck; phase B (the LLM translator with a shared lexicon) to design.
 
 ## Measured (claude-sonnet-5-5, strict = premises only)
 - FOLIO v2 validation, 203 items, 6 runs: **83.1% ± 1.7** (ref-2.3 offline replay 84.0%), asserted errors **7**/run; Claude alone 84.5%, asserted errors **22-25**. Clingo agrees on 1,218/1,218 real programs. Literature (GPT-4, FOLIO v1, 2023-24): Logic-LM 78.9, Logic-LM++ 84.8, SymbCoT 83.3, LINC 72.5 — indicative only.
