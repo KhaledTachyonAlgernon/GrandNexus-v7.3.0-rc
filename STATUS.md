@@ -1,7 +1,7 @@
-# GrandNexus — status (2026-11-12, v7.7.0-rc)
+# GrandNexus — status (2026-11-12, v7.7.1-rc)
 
 **An anchored translator and a reference engine that decide without inventing, and a laboratory to measure whether a loop learns.**
-Read this file first; `LOGBOOK.md` holds every hypothesis -> result -> decision (84 entries); `MODULES.md` gives the status of every module.
+Read this file first; `LOGBOOK.md` holds every hypothesis -> result -> decision (86 entries); `MODULES.md` gives the status of every module.
 
 ## The core (what is demonstrated)
 | Part | File |
@@ -18,7 +18,7 @@ Module status (`MODULES.md`, generated from `grandnexus/module_status.py`): core
 ## Measured: the living bench (offline, synthetic worlds, logbook 79-80)
 - Facts arriving over 12 sessions, read by GrandNexus's own grammar pathway; 1,049 questions on 40 never-used worlds, criteria written first. A structured memory (repaired episodic memory for time + 2025 graph engine or semantic memory for chains) answers 100% with 0 asserted errors and about 1.9 facts per question; putting everything back in the text: 89.7%, 108 asserted errors, 36 facts; word retrieval: 75.8%. The 2025 modules equal a trivial search on the same triples: they work as components; they move to "supported". Scope: templated English, "live" declared single-valued.
 
-- Phase A of "the real language" (logbook 81, sandbox): with paraphrased facts the grammar pathway keeps 23% of the structures at level 1 and none beyond; every pipeline falls to the "always unknown" floor (25%), without a single asserted error. Reading is the bottleneck. Phase B (logbook 82-83, sandbox): with a shared lexicon the LLM translator reads the paraphrased facts at 97.5-100% (levels 1-2), 0 asserted error, about 2 facts per question; without the lexicon 38-54%; $0.68 for 200 calls. Phase C (logbook 84, pre-registered): seed 13, 10 never-used worlds, levels 1-2 with criteria C1-C3, level 3 exploratory, "concat + ontology" control, Batch API with resume; about 1,040 calls, about $2, 1.5-2.5 h. To run (`notebooks/GrandNexus_v7_7_0-rc_phaseC.ipynb` or Claude Code with a dedicated key).
+- Phase A of "the real language" (logbook 81, sandbox): with paraphrased facts the grammar pathway keeps 23% of the structures at level 1 and none beyond; every pipeline falls to the "always unknown" floor (25%), without a single asserted error. Reading is the bottleneck. Phase B (logbook 82-83, sandbox): with a shared lexicon the LLM translator reads the paraphrased facts at 97.5-100% (levels 1-2), 0 asserted error, about 2 facts per question; without the lexicon 38-54%; $0.68 for 200 calls. Phase C (logbook 84-85, pre-registered, 10 never-used worlds): 5 of 6 criteria pass. Level 2: all three (shared lexicon 97.6%, 0 asserted error). Level 1: 92.4% with 1 asserted error, C1 missed; C2 and C3 pass. At both levels the structured memory beats reading everything at once with the same ontology (0 against 13-15 asserted errors, 7% of the context); level 3 (pronouns, exploratory) 100%. The level-1 shortfall is being diagnosed on debug worlds (logbook 86, `tools/living_diag.py`, about $0.5); the measuring tool now keeps per-question rows.
 
 ## Measured (claude-sonnet-5-5, strict = premises only)
 - FOLIO v2 validation, 203 items, 6 runs: **83.1% ± 1.7** (ref-2.3 offline replay 84.0%), asserted errors **7**/run; Claude alone 84.5%, asserted errors **22-25**. Clingo agrees on 1,218/1,218 real programs. Literature (GPT-4, FOLIO v1, 2023-24): Logic-LM 78.9, Logic-LM++ 84.8, SymbCoT 83.3, LINC 72.5 — indicative only.

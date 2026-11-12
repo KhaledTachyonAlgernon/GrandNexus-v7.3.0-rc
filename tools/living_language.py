@@ -52,10 +52,16 @@ class Paraphraser:
     def __init__(self, level: int, seed: int) -> None:
         self.level, self.rng = level, random.Random(seed)
         self.has_city: set = set()
+        self.forms: dict = {}          # surface sentence -> index of the form it used (diagnosis, logbook 86)
 
     def __call__(self, fact: str, meta: tuple, session: int) -> str:
         a, rel, b, pol = meta
-        L, pick = self.level, self.rng.choice
+        L = self.level
+
+        def pick(options):
+            text = self.rng.choice(options)
+            self.forms[text] = options.index(text)
+            return text
         if rel == "instance_of":
             p, role = a, b
             he = "She" if p in FEMALE else "He"
