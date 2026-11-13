@@ -662,7 +662,8 @@ def run(a, client=None) -> dict:
               f"names right {l_} | sign test p = {sign_test(w_, l_):.2g}  {'PASS' if crit['D2'] else 'FAIL'}{tag}")
     if mode == "measurement":
         crit["claim"] = v_ok and d1 and d3
-        print(f"CLAIM (V, D1 and D3): {'ESTABLISHED within the scope of logbook 91' + (' (phase D', logbook 94)' if a.question_note == 2 else '') if crit['claim'] else 'NOT established'}")
+        scope = "logbook 91" + (", phase D' of logbook 94" if a.question_note == 2 else "")
+        print(f"CLAIM (V, D1 and D3): {('ESTABLISHED within the scope of ' + scope) if crit['claim'] else 'NOT established'}")
     out["criteria"] = crit
     if a.gate:
         g1, audit = audit_ok(frozen, a.questions_dir)
