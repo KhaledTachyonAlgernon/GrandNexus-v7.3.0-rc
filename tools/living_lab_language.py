@@ -37,7 +37,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 from living_bench import KINDS_V2, WorldV2                                                 # noqa: E402
 from living_language import Paraphraser                                                    # noqa: E402
-from living_llm import ONTOLOGY, READ_QUERY, Memory, lexicon_block                         # noqa: E402
+from living_llm import ONTOLOGIES, READ_QUERY, Memory, lexicon_block                       # noqa: E402
 
 PIPELINES = ("grammar", "llm_lexicon", "llm_lexicon_bfs", "llm_nolexicon", "llm_concat_onto")
 CRITERION_LEVELS = (1, 2)
@@ -48,9 +48,9 @@ def sign_test(w: int, l: int) -> float:
     return 1.0 if n == 0 else min(1.0, 2 * sum(comb(n, i) for i in range(0, min(w, l) + 1)) / 2 ** n)
 
 
-def surfaces(world: WorldV2, level: int, seed: int) -> list:
+def surfaces(world: WorldV2, level: int, seed: int, version: int = 1) -> list:
     """[(session texts, questions)] for one world at one level (deterministic)."""
-    para = Paraphraser(level, seed * 10 + level)
+    para = Paraphraser(level, seed * 10 + level, version)
     return [([para(f, world.meta[f], s) for f in facts], qs) for s, (facts, qs) in enumerate(world.sessions)]
 
 
@@ -62,14 +62,14 @@ def reading(tr, text: str, block: str):
         return None
 
 
-def lexicon_chain(tr, sess: list) -> list:
+def lexicon_chain(tr, sess: list, ontology: int = 1) -> list:
     """Job: the lexicon readings of one world, session after session; returns the answers to every question at the
     session it is asked, for llm_lexicon and its trivial control, plus the number of failed readings."""
     mem, out, failed = Memory(), [], 0
     for texts, qs in sess:
         mem.new_session()
         if texts:
-            prog = reading(tr, " ".join(texts), lexicon_block(mem, True))
+            prog = reading(tr, " ".join(texts), lexicon_block(mem, True, ontology))
             if prog is None:
                 failed += 1
             else:
@@ -87,11 +87,12 @@ def run(a, client=None) -> dict:
     import cost
     levels = [int(x) for x in a.levels.split(",")]
     worlds = [WorldV2(a.seed * 1000 + w, a.sessions, 5, 3) for w in range(a.worlds)]
-    surf = {(L, w): surfaces(worlds[w], L, a.seed * 1000 + w) for L in levels for w in range(a.worlds)}
+    surf = {(L, w): surfaces(worlds[w], L, a.seed * 1000 + w, a.paraphraser) for L in levels for w in range(a.worlds)}
     session = None
     if a.batch:
         from batch_runner import BatchSession
-        key = hashlib.sha256(json.dumps([a.seed, a.worlds, a.sessions, a.levels, a.concat_worlds, a.model]).encode()).hexdigest()[:10]
+        key = hashlib.sha256(json.dumps([a.seed, a.worlds, a.sessions, a.levels, a.concat_worlds, a.model]
+                                        + ([a.paraphraser, a.ontology] if (a.paraphraser, a.ontology) != (1, 1) else [])).encode()).hexdigest()[:10]
         out_dir = pathlib.Path(a.state_dir) if a.state_dir else ROOT / "tests_lab" / "resultats" / "living"
         session = BatchSession(client or _default_client(), out_dir / f"batch_state_phaseC_{key}.json")
         tr = Translator(client=session, model=a.model)
@@ -99,7 +100,7 @@ def run(a, client=None) -> dict:
         tr = Translator(client=client, model=a.model) if client is not None else Translator(model=a.model)
     jobs = {}
     for (L, w), sess in surf.items():
-        jobs[f"lex|{L}|{w}"] = (lambda sess=sess: lexicon_chain(tr, sess))
+        jobs[f"lex|{L}|{w}"] = (lambda sess=sess: lexicon_chain(tr, sess, a.ontology))
         for s, (texts, _qs) in enumerate(sess):
             if texts:
                 jobs[f"nolex|{L}|{w}|{s}"] = (lambda texts=texts: reading(tr, " ".join(texts), ""))
@@ -108,7 +109,7 @@ def run(a, client=None) -> dict:
             for s, (texts, qs) in enumerate(sess):
                 seen = seen + texts
                 for i, (_k, q, _g) in enumerate(qs):
-                    jobs[f"concat|{L}|{w}|{s}|{i}"] = (lambda text=" ".join(seen), q=q: tr.answer(text, q, ONTOLOGY + "\n\n"))
+                    jobs[f"concat|{L}|{w}|{s}|{i}"] = (lambda text=" ".join(seen), q=q: tr.answer(text, q, ONTOLOGIES[a.ontology] + "\n\n"))
     print(f"{len(jobs)} API jobs ({sum(k.startswith('lex|') for k in jobs)} lexicon chains, {sum(k.startswith('nolex|') for k in jobs)} readings "
           f"without lexicon, {sum(k.startswith('concat|') for k in jobs)} concat questions)")
     res = session.run(jobs) if session is not None else {k: f() for k, f in jobs.items()}
@@ -226,6 +227,8 @@ def main(argv=None, client=None) -> dict:
     ap.add_argument("--concat-worlds", type=int, default=4)
     ap.add_argument("--model", default="claude-sonnet-5-5")
     ap.add_argument("--batch", action="store_true")
+    ap.add_argument("--paraphraser", type=int, default=1, help="1: logbook 84-85; 2: logbook 88")
+    ap.add_argument("--ontology", type=int, default=1, help="1: logbook 84-85; 2: logbook 88")
     ap.add_argument("--state-dir", help="where the batch state is kept (on Colab: a Drive folder, so that a reset runtime resumes)")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--no-write", action="store_true")

@@ -36,6 +36,9 @@ def read(sentence, canonical):
          or re.match(r"(?:Anyone who is an?|If someone is an?) ([a-z ]+?),? (?:is|they are) not (" + "|".join(ADJS) + ")$", s))
     if m:
         return [f"{n(sing(m.group(1)))}(V) => not {m.group(2)}(V).{anchor}"]
+    m = re.match(r"(\w+)'s home is in (\w+)$", s)
+    if m:
+        return [f"{'lives_in' if canonical else 'home_in'}({n(m.group(1))}, {n(m.group(2))}).{anchor}"]
     m = re.match(r"(\w+) (moved to|now lives in|resides in|has a flat in|recently relocated to|left for|settled in) (\w+)(?: a while ago)?$", s)
     if m:
         pred = "lives_in" if canonical else n(m.group(2).replace("recently ", ""))

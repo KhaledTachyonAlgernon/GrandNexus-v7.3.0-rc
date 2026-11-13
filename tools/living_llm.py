@@ -49,6 +49,12 @@ ONTOLOGY = """ONTOLOGY OF THE MEMORY YOU WRITE INTO (follow it; it is shared by 
   living somewhere or moving there, write lives_in(person, city).
 - Prefer a name already in memory when the text says the same thing in other words (an activity and the role of the
   people who do it, a plural, a synonym); create a new name only for something new."""
+ONTOLOGY_V1 = ONTOLOGY
+ONTOLOGY_V2 = ONTOLOGY_V1 + """
+- A person described by what they do belongs to the role named by the noun for the people who do it: someone who sings
+  is a singer(..), someone who runs marathons is a marathon_runner(..). A broader category is not that role: a singer
+  is not written performer(..) unless the text says performer."""
+ONTOLOGIES = {1: ONTOLOGY_V1, 2: ONTOLOGY_V2}
 
 
 def node(x: str) -> str:
@@ -68,12 +74,13 @@ def goal_of(question: str) -> tuple | None:
     return None
 
 
-def lexicon_block(mem: "Memory", with_lexicon: bool) -> str:
+def lexicon_block(mem: "Memory", with_lexicon: bool, ontology: int = 1) -> str:
+    """ontology 1: logbook 82-87 (default, reproduces them); 2: logbook 88 (practitioner-noun convention)."""
     if not with_lexicon:
         return ""
     preds = sorted(f"{p}/{n}" for p, n in mem.preds)
     consts = sorted(mem.consts)
-    return (ONTOLOGY + "\nNAMES ALREADY IN MEMORY: predicates " + (", ".join(preds) or "(none yet)")
+    return (ONTOLOGIES[ontology] + "\nNAMES ALREADY IN MEMORY: predicates " + (", ".join(preds) or "(none yet)")
             + "; constants " + (", ".join(consts) or "(none yet)") + ".\n\n")
 
 

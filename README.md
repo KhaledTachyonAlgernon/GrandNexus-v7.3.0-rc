@@ -1,4 +1,4 @@
-# GrandNexus v7.7.1-rc
+# GrandNexus v7.7.2-rc
 
 **An anchored translator and a reference engine that decide without inventing, and a laboratory to measure whether a loop learns.**
 
@@ -16,7 +16,7 @@ This archive is a complete, self-contained snapshot: no notebook chain, no `%%wr
 
 ## Quick start (Colab or any Python 3.10+)
 ```bash
-unzip GrandNexus_v7.7.1-rc.zip -d /content           # -> /content/GrandNexus
+unzip GrandNexus_v7.7.2-rc.zip -d /content           # -> /content/GrandNexus
 pip install -q -r /content/GrandNexus/requirements.txt
 ```
 ```python
@@ -50,7 +50,7 @@ Modes: laboratory (default, deterministic, nothing runs in the background) or li
 | `tools/test_bench.py` | bench for hand-written sets: freezes a set, measures 4 modes, never prints item texts |
 | `tools/smoke_test.py`, `tools/lab_*.py` | import test, labs (controls, layer oracles) |
 | `tests_lab/test_*.py` | offline tests (no API) |
-| `STATUS.md`, `LOGBOOK.md` | one-page current state; logbook: every hypothesis -> result -> decision (86 entries) |
+| `STATUS.md`, `LOGBOOK.md` | one-page current state; logbook: every hypothesis -> result -> decision (88 entries) |
 | `tests_lab/resultats/` | every FOLIO and learning run: results JSON, saved memories, the translated programs |
 | `archive/` | original 15/05 and 29/05 sources (untouched) |
 | `.git` | full history: every repair is one commit (`git log --oneline`) |
