@@ -63,10 +63,10 @@ import glob
 a87 = sorted(glob.glob("tests_lab/resultats/living/living_diag_L1_2026-11-12_*.json"))
 a89 = sorted(glob.glob("tests_lab/resultats/living/living_diag_L1_2026-11-13_*.json"))
 if a87 and a89:
-    r87 = D.main(["--regate", a87[0]])["repaired"]
+    r87 = D.main(["--regate", a87[0], "--no-write"])["repaired"]
     assert (round(r87["first_residences"] * r87["n_first_residences"]), r87["n_first_residences"]) == (56, 90), r87
     assert (round(r87["role_facts"] * r87["n_role_facts"]), r87["n_role_facts"]) == (157, 163), r87
-    r89 = D.main(["--regate", a89[0]])
+    r89 = D.main(["--regate", a89[0], "--no-write"])
     assert r89["archived"]["pass"] and not r89["repaired"]["pass"] and r89["repaired"]["failed_readings"] == 50
     ok = r89["successful_readings_only"]
     assert (ok["n_first_residences"], ok["first_residence_misses"], ok["of_which_superseded_in_session"]) == (55, 3, 3), ok

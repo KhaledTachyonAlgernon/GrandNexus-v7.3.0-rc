@@ -232,7 +232,14 @@ def main(argv=None, client=None) -> dict:
     ap.add_argument("--regate", metavar="RESULT_JSON", help="recompute the gate of an archived run of this tool, 0 API call")
     a = ap.parse_args(argv)
     if a.regate:
-        return regate(a.regate)
+        r = regate(a.regate)
+        if not a.no_write:
+            d = ROOT / "tests_lab" / "resultats" / "living"
+            d.mkdir(parents=True, exist_ok=True)
+            path = d / f"living_regate_{time.strftime('%Y-%m-%d_%H%M%S')}.json"
+            path.write_text(json.dumps({"source": a.regate, **r}, indent=1), encoding="utf-8")
+            print(f"written: {path.relative_to(ROOT)}")
+        return r
     if a.seed == 13:
         raise SystemExit("seed 13 holds the measured worlds of logbook 84-85: diagnose on other seeds")
     worlds = [WorldV2(a.seed * 1000 + w, a.sessions, 5, 3) for w in range(a.worlds)]
