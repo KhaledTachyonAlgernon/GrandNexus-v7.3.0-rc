@@ -187,7 +187,8 @@ class Scripted:
         lines = [l for sent in re.split(r"(?<=\.)\s+", text) if sent for l in read(sent, canonical)]
         if not q.startswith("(none"):
             g = B.goal_of(q)
-            lines.append(f"? {g[0]}.")
+            if g:                                   # a question outside the bench's templates: no question line
+                lines.append(f"? {g[0]}.")
         return SimpleNamespace(id="s", model=model, content=[SimpleNamespace(text="```nx\n" + "\n".join(lines) + "\n```")],
                                usage=SimpleNamespace(input_tokens=1, output_tokens=1))
 
