@@ -11,6 +11,14 @@ Hypotheses under test (logbook 85): (1) a role first met as an activity ("Carol 
 any role noun exists; (2) a first residence phrased "has a flat in" is not read as lives_in, so the move closes nothing.
 
   python tools/living_diag.py --seed 11 --worlds 10 --level 1 --dry-run
+
+Repairs of logbook 90 (the gate of logbook 88-89 ignored the 50 readings that failed with the API unavailable):
+- transient API errors are retried with growing waits by the translator itself (translator_v5.Translator._create);
+- a reading that still fails is logged with its facts, each counted as NOT read (reading_failed: true), so every
+  rate over facts, the gate included, has the bench's facts as denominator, whatever the API did;
+- whether a residence fact is a move comes from the world, not from the readings that happened to succeed (before,
+  a move whose first residence was in a failed reading was counted as a first residence);
+- the number of failed readings, the facts they held and the retries are printed and written, next to the gate.
 """
 from __future__ import annotations
 
@@ -51,45 +59,72 @@ def expected(meta) -> str:
     return f"lives_in({node(a)}, {node(b)})"
 
 
+def session_facts(world: WorldV2, s: int, facts: list, texts: list, program: list, failed: bool, moved_seen: set,
+                  pred_names: set, para) -> list:
+    """Every fact the bench gave in session s, with whether the program wrote the ontology's statement for it; the facts
+    of a failed reading count as not read; a residence is a move when the world gave that person a residence before."""
+    normed = {norm(x.replace("  [knowledge]", "")) for x in program} if not failed else set()
+    rows = []
+    for i, (f, t) in enumerate(zip(facts, texts)):
+        meta = world.meta[f]
+        rel = meta[1]
+        exp = expected(meta)
+        extra = {}
+        if rel == "instance_of":
+            extra["role_name_known_before"] = node(meta[2]) in pred_names
+        if rel == "lives in":
+            extra["move"] = meta[0] in moved_seen          # from the world, whatever the readings did
+            moved_seen.add(meta[0])
+            # reported, not used by the gate: the same person moves again later in this very session, so a reader that
+            # writes only the current city (one city at a time) leaves this one unwritten without misreading it
+            extra["superseded_in_session"] = any(world.meta[g][1] == "lives in" and world.meta[g][0] == meta[0]
+                                                 for g in facts[i + 1:])
+        rows.append({"session": s, "rel": rel, "surface": t, "form": para.forms.get(t), "expected": exp,
+                     "read_as_expected": (not failed) and norm(exp) in normed, "reading_failed": failed, **extra})
+    return rows
+
+
+def gate_of(facts: list) -> dict:
+    """The gate of logbook 88 over every fact of the bench (logbook 90)."""
+    first = [f for f in facts if f["rel"] == "lives in" and not f.get("move")]
+    roles = [f for f in facts if f["rel"] == "instance_of"]
+    r1 = sum(f["read_as_expected"] for f in first) / max(1, len(first))
+    r2 = sum(f["read_as_expected"] for f in roles) / max(1, len(roles))
+    return {"first_residences": round(r1, 4), "role_facts": round(r2, 4), "n_first_residences": len(first),
+            "n_role_facts": len(roles), "pass": r1 >= 0.95 and r2 >= 0.95}
+
+
 def run_world(tr, world: WorldV2, level: int, seed: int, version: int = 1, ontology: int = 1) -> dict:
     para = Paraphraser(level, seed * 10 + level, version)
     mem = Memory()
     facts_log, questions_log, sessions_log = [], [], []
     moved_seen: set = set()
+    failed_readings = 0
     for s, (facts, qs) in enumerate(world.sessions):
         texts = [para(f, world.meta[f], s) for f in facts]
         mem.new_session()
         names_before = {"preds": sorted(f"{p}/{n}" for p, n in mem.preds), "consts": sorted(mem.consts)}
-        program = []
+        program, failed = [], False
         if texts:
             try:
                 prog = tr.translate(" ".join(texts), READ_QUERY, lexicon_block(mem, True, ontology))["parsed"]
-            except Exception as e:  # noqa: BLE001
-                prog = None
+            except Exception as e:  # noqa: BLE001  (an API error that outlived the retries)
+                prog, failed = None, True
+                failed_readings += 1
                 program = [f"(reading failed: {type(e).__name__})"]
             if prog is not None:
                 program = [str(l) + ("  [knowledge]" if k else "") for l, _sid, k in prog.facts] + \
                           [str(r) + ("  [knowledge]" if r.knowledge else "") for r in prog.rules]
-                pred_names = {p for p, _n in mem.preds}
-                normed = {norm(x.replace("  [knowledge]", "")) for x in program}
-                for f, t in zip(facts, texts):
-                    meta = world.meta[f]
-                    rel = meta[1]
-                    exp = expected(meta)
-                    extra = {}
-                    if rel == "instance_of":
-                        extra["role_name_known_before"] = node(meta[2]) in pred_names
-                    if rel == "lives in":
-                        extra["move"] = meta[0] in moved_seen
-                        moved_seen.add(meta[0])
-                    facts_log.append({"session": s, "rel": rel, "surface": t, "form": para.forms.get(t), "expected": exp,
-                                      "read_as_expected": norm(exp) in normed, **extra})
+            facts_log += session_facts(world, s, facts, texts, program, failed, moved_seen,       # every fact, read or not
+                                       {p for p, _n in mem.preds}, para)
+            if prog is not None:
                 mem.add_program(prog)
-        sessions_log.append({"session": s, "texts": texts, "names_before": names_before, "program": program})
+        sessions_log.append({"session": s, "texts": texts, "names_before": names_before, "program": program,
+                             "reading_failed": failed})
         for kind, q, gold in qs:
             ans, n, goal, lines = mem.decide(q, detail=True)
             questions_log.append({"session": s, "kind": kind, "question": q, "gold": gold, "answer": ans, "goal": goal, "used": lines})
-    return {"facts": facts_log, "questions": questions_log, "sessions": sessions_log}
+    return {"facts": facts_log, "questions": questions_log, "sessions": sessions_log, "failed_readings": failed_readings}
 
 
 def analyse(worlds: list) -> dict:
@@ -140,6 +175,48 @@ def analyse(worlds: list) -> dict:
     return out
 
 
+def regate(path: str) -> dict:
+    """Recompute the gate of an archived run of this tool from the programs it recorded (0 API call): the worlds and
+    their paraphrases are regenerated from the recorded arguments (and checked against the recorded texts), the facts
+    of failed readings count as not read, and moves come from the world (logbook 90)."""
+    d = json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
+    a = d["args"]
+    if a["seed"] == 13:
+        raise SystemExit("seed 13 holds the measured worlds of logbook 84-85")
+    facts, failed_readings, readings = [], 0, 0
+    for w, rec in enumerate(d["worlds"]):
+        world = WorldV2(a["seed"] * 1000 + w, a["sessions"], 5, 3)
+        para = Paraphraser(a["level"], (a["seed"] * 1000 + w) * 10 + a["level"], a.get("paraphraser", 1))
+        moved_seen: set = set()
+        for s, (fs, _qs) in enumerate(world.sessions):
+            texts = [para(f, world.meta[f], s) for f in fs]
+            sess = rec["sessions"][s]
+            if texts != sess["texts"]:
+                raise SystemExit(f"world {w} session {s}: regenerated texts differ from the archive (version mismatch)")
+            if not texts:
+                continue
+            readings += 1
+            failed = bool(sess["program"]) and str(sess["program"][0]).startswith("(reading failed")
+            failed_readings += failed
+            facts += session_facts(world, s, fs, texts, sess["program"], failed, moved_seen, set(), para)
+    g = {**gate_of(facts), "failed_readings": failed_readings, "readings": readings,
+         "facts_in_failed_readings": sum(f["reading_failed"] for f in facts)}
+    print(f"archived gate:   {d.get('gate')}")
+    print(f"repaired gate:   first residences {100 * g['first_residences']:.1f}% of {g['n_first_residences']}, role facts "
+          f"{100 * g['role_facts']:.1f}% of {g['n_role_facts']} -> {'PASS' if g['pass'] else 'FAIL'} "
+          f"({failed_readings}/{readings} readings failed, {g['facts_in_failed_readings']} facts counted as not read)")
+    ok = [f for f in facts if not f["reading_failed"]]
+    g_ok = gate_of(ok)
+    miss = [f for f in ok if f["rel"] == "lives in" and not f["move"] and not f["read_as_expected"]]
+    g_ok["first_residence_misses"] = len(miss)
+    g_ok["of_which_superseded_in_session"] = sum(f["superseded_in_session"] for f in miss)
+    print(f"successful readings only, moves from the world: first residences {100 * g_ok['first_residences']:.1f}% of "
+          f"{g_ok['n_first_residences']}, role facts {100 * g_ok['role_facts']:.1f}% of {g_ok['n_role_facts']}; "
+          f"first-residence misses {len(miss)}, of which superseded by a move in the same session "
+          f"{g_ok['of_which_superseded_in_session']} (reported, not used by the gate)")
+    return {"repaired": g, "successful_readings_only": g_ok, "archived": d.get("gate")}
+
+
 def main(argv=None, client=None) -> dict:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--seed", type=int, default=11)
@@ -152,7 +229,10 @@ def main(argv=None, client=None) -> dict:
     ap.add_argument("--gate", action="store_true", help="evaluate the gate of logbook 88 (first residences and role facts >= 95%%)")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--no-write", action="store_true")
+    ap.add_argument("--regate", metavar="RESULT_JSON", help="recompute the gate of an archived run of this tool, 0 API call")
     a = ap.parse_args(argv)
+    if a.regate:
+        return regate(a.regate)
     if a.seed == 13:
         raise SystemExit("seed 13 holds the measured worlds of logbook 84-85: diagnose on other seeds")
     worlds = [WorldV2(a.seed * 1000 + w, a.sessions, 5, 3) for w in range(a.worlds)]
@@ -177,16 +257,22 @@ def main(argv=None, client=None) -> dict:
     c = cost.from_receipts(tr.receipts, a.model)
     if c:
         print(f"\ncost: ${c['usd']:.3f} ({c['calls']} calls)")
-    out = {"args": vars(a), "right": right, "n": len(qs), "asserted_errors": asserted, "summary": summary, "worlds": res, "cost": c}
+    all_facts = [f for r in res for f in r["facts"]]
+    failed = {"readings": sum(r["failed_readings"] for r in res), "readings_total": n_read,
+              "facts_in_failed_readings": sum(f["reading_failed"] for f in all_facts),
+              "retries": len(tr.retry_log), "retried_errors": dict(Counter(x["error"] for x in tr.retry_log))}
+    print(f"API: {failed['readings']}/{n_read} readings failed after the retries ({failed['facts_in_failed_readings']} facts, "
+          f"counted as not read); {failed['retries']} transient errors retried {failed['retried_errors'] or ''}")
+    out = {"args": vars(a), "right": right, "n": len(qs), "asserted_errors": asserted, "summary": summary, "worlds": res,
+           "cost": c, "failed": failed}
     if a.gate:
-        facts = [f for r in res for f in r["facts"]]
-        first = [f for f in facts if f["rel"] == "lives in" and not f.get("move")]
-        roles = [f for f in facts if f["rel"] == "instance_of"]
-        r1 = sum(f["read_as_expected"] for f in first) / max(1, len(first))
-        r2 = sum(f["read_as_expected"] for f in roles) / max(1, len(roles))
-        out["gate"] = {"first_residences": round(r1, 4), "role_facts": round(r2, 4), "pass": r1 >= 0.95 and r2 >= 0.95}
-        print(f"\nGATE (logbook 88): first residences read as lives_in {100 * r1:.1f}%, role facts read as the role predicate "
-              f"{100 * r2:.1f}% (both >= 95%) -> {'PASS' if out['gate']['pass'] else 'FAIL'}")
+        out["gate"] = {**gate_of(all_facts), "failed_readings": failed["readings"]}
+        g = out["gate"]
+        print(f"\nGATE (logbook 88, counted as repaired in logbook 90: every fact of the bench, failed readings as not read): "
+              f"first residences read as lives_in {100 * g['first_residences']:.1f}% of {g['n_first_residences']}, role facts "
+              f"read as the role predicate {100 * g['role_facts']:.1f}% of {g['n_role_facts']} (both >= 95%) -> "
+              f"{'PASS' if g['pass'] else 'FAIL'}"
+              + (f"  [{failed['readings']} failed readings inside]" if failed["readings"] else ""))
     if not a.no_write:
         d = ROOT / "tests_lab" / "resultats" / "living"
         d.mkdir(parents=True, exist_ok=True)

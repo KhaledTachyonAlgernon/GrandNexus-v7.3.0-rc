@@ -1,4 +1,4 @@
-# GrandNexus v7.7.2
+# GrandNexus v7.7.3
 
 **An anchored translator and a reference engine that decide without inventing, and a laboratory to measure whether a loop learns.**
 
@@ -16,7 +16,7 @@ This archive is a complete, self-contained snapshot: no notebook chain, no `%%wr
 
 ## Quick start (Colab or any Python 3.10+)
 ```bash
-unzip GrandNexus_v7.7.2.zip -d /content              # -> /content/GrandNexus
+unzip GrandNexus_v7.7.3.zip -d /content              # -> /content/GrandNexus
 pip install -q -r /content/GrandNexus/requirements.txt
 ```
 ```python

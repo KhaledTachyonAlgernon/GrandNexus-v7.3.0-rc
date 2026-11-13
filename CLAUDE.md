@@ -36,7 +36,8 @@ Talk with Khaled in French. Code, commits, benches, notebooks, LOGBOOK, STATUS a
 - FOLIO is downloaded on first use into `tests_lab/data/` (git-ignored).
 
 ## Current state
-- v7.3.0 is released (tag `v7.3.0`, checked on Colab on 2026-11-10, logbook 66). There is no pending measurement.
+- The current version and what is pending are in `STATUS.md` (section Handover); this file does not repeat them, so it
+  cannot go stale (it said v7.3.0 until v7.7.3).
 - Offline checks (0 API call) can be run at any time: every `tests_lab/test_*.py` with `python -W ignore` (each must exit
   0 and its last line must not start with FAIL), and `python -W ignore tools/boot_profiles.py` (four PASS lines).
 - The next task comes from Khaled, with its criteria written in LOGBOOK.md first.
