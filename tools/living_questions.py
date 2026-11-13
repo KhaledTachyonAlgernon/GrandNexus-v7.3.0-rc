@@ -283,12 +283,13 @@ def render_goal(lits: list) -> str:
 
 def check_substitution(client, ledger: Ledger, model: str, question: str, lits: list) -> dict:
     """{'checked': False} when the goal names only what the question says; otherwise the judge's verdict on the
-    substitution (temperature 0): kept when the rendered goal asks the same thing as the question."""
+    substitution, at the model's default sampling like the fidelity judge (the API takes no temperature any more,
+    logbook 96): kept when the rendered goal asks the same thing as the question."""
     subs = substitutions(question, lits)
     if not subs:
         return {"checked": False}
     rendered = render_goal(lits)
-    reply = _ask(client, ledger, model, SYSTEM_JUDGE, f"First: {question}\nSecond: {rendered}", 8, temperature=0.0)
+    reply = _ask(client, ledger, model, SYSTEM_JUDGE, f"First: {question}\nSecond: {rendered}", 8)
     return {"checked": True, "names": subs, "rendered": rendered, "kept": reply.strip().upper().startswith("SAME")}
 
 

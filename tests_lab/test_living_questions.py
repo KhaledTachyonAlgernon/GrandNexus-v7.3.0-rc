@@ -212,4 +212,26 @@ try:
     assert again["gate"]["G1"] and again["gate"]["pass"], again["gate"]
 finally:
     Q.QUESTIONS_DIR = keep_q
+# ---- 9. logbook 96: every API call of the tool through the REAL SDK, offline (its own argument checks)
+from scripted_translator import sdk_offline_client, SDK_PARAMS
+try:
+    Scripted().create("m", 8, "x", [{"role": "user", "content": "x"}], temperature=0.0)
+    assert SDK_PARAMS is None, "a keyword the installed SDK does not know must be refused"
+except TypeError:
+    pass
+real = sdk_offline_client()
+if real is None:
+    print("anthropic or httpx not installed: the real-SDK path is not checked")
+else:
+    led = Q.Ledger()
+    assert Q.check_substitution(real, led, Q.JUDGE_MODEL, "Would you describe Rita as patient?", lits("calm(rita)"))["kept"] is False
+    assert Q.write_list(real, led, Q.WRITER_MODEL, ["Is Bob a chess player?"])[0]
+    assert Q.judge_same(real, led, Q.JUDGE_MODEL, "Is Bob a chess player?", "Does Bob play chess?")
+    tmp4 = pathlib.Path(tempfile.mkdtemp())
+    viasdk, _ = quiet(["--seed", "5", "--worlds", "2", "--sessions", "8", "--questions-dir", str(tmp4), "--no-write",
+                       "--sandbox"], client=sdk_offline_client(Scripted(attract=True)))
+    assert viasdk["criteria"]["D1"] and viasdk["substitution_check"]["checked"] > 0, viasdk["substitution_check"]
+    import grandnexus.llm_interface.translator_v5 as T5
+    trx = T5.Translator(client=sdk_offline_client())
+    assert trx._call(T5.SYSTEM_TRANSLATE, "TEXT:\nA is p.\n\nQUESTION (or statement to verify):\nIs A p?", "x")
 print("ALL OK")

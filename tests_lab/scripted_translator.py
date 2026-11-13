@@ -184,6 +184,9 @@ class Scripted:
         return self._reply(model, "```nx\n" + "\n".join(read_free(q, preds, attract)) + "\n```")
 
     def create(self, model, max_tokens, system, messages, **kw):
+        unknown = set(kw) - SDK_PARAMS if SDK_PARAMS is not None else set()
+        if unknown:                                   # logbook 96: the real SDK refuses what it does not know
+            raise TypeError(f"Messages.create() got an unexpected keyword argument {sorted(unknown)[0]!r}")
         self.calls += 1
         u = messages[0]["content"]
         role = system if isinstance(system, str) else ""       # the translator sends its system prompt as a cached block
@@ -233,3 +236,44 @@ class DualAPI:
         self.batches = BatchAPI(server, interrupt_first_wait)
         self.batches.reader = self.scripted
         self.messages = SimpleNamespace(create=self.scripted.create, batches=self.batches)
+
+
+# ---- logbook 96: the real SDK, offline ------------------------------------------------------------------------------
+# The scripted stand-ins above accepted any keyword, so the offline tests could not see that SDK 2.8.0 has no
+# `temperature` (the pre-flight of v7.8.1-rc stopped on it). Now they refuse any keyword the installed SDK does not
+# have, and sdk_offline_client() gives a REAL anthropic client whose HTTP transport is local: every call goes through
+# the SDK's own argument checks and request building, and is answered by the scripted stand-in. No network.
+try:
+    import inspect as _inspect
+    from anthropic.resources.messages import Messages as _Messages
+    SDK_PARAMS = {p for p in _inspect.signature(_Messages.create).parameters if p != "self"}
+except Exception:  # noqa: BLE001  (SDK not installed: no check)
+    SDK_PARAMS = None
+
+
+def sdk_offline_client(scripted=None):
+    """A real anthropic.Anthropic client answered locally by the scripted stand-in, or None without the SDK."""
+    try:
+        import anthropic
+    except ImportError:
+        return None
+    try:                                  # the HTTP package the installed SDK uses (httpx2 for SDK 2.8.0, else httpx)
+        import httpx2 as httpx
+    except ImportError:
+        try:
+            import httpx
+        except ImportError:
+            return None
+    sc = scripted or Scripted()
+
+    def handler(request):
+        body = json.loads(request.content)
+        r = sc.create(**body)
+        return httpx.Response(200, json={
+            "id": "msg_offline", "type": "message", "role": "assistant", "model": body["model"],
+            "content": [{"type": "text", "text": r.content[0].text}], "stop_reason": "end_turn", "stop_sequence": None,
+            "usage": {"input_tokens": 1, "output_tokens": 1, "cache_creation_input_tokens": 0, "cache_read_input_tokens": 0}})
+    client = anthropic.Anthropic(api_key="offline-test", max_retries=0,
+                                 http_client=httpx.Client(transport=httpx.MockTransport(handler)))
+    client.scripted = sc
+    return client
