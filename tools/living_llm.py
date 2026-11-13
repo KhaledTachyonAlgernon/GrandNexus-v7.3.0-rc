@@ -7,7 +7,8 @@ The crux (logbook 81): facts are read in different sessions, apart from the ques
 must stay the same from one reading to the next. Shared lexicon: before each reading, the memory gives the translator
 the conventions of its ontology and the names already in memory, to reuse when the text says the same thing in other
 words. The only knowledge given, as in the lab version: lives_in(person, city) holds one city at a time.
-Questions stay canonical and are mapped to the ontology's names without a call:
+Questions stay canonical here and are mapped to the ontology's names without a call (questions in free language, read
+by the translator: question_block and Memory.decide_goal below, used by tools/living_questions.py, logbook 91):
   "Is Bob a chess player?" -> chess_player(bob)    "Is Bob calm?" -> calm(bob)    "Does Alice live in Paris?" -> lives_in(alice, paris)
 Pipelines (all end in the reference engine, strict):
   grammar          the grammar pathway feeds graph+episodic (phase A, no call)
@@ -82,6 +83,45 @@ def lexicon_block(mem: "Memory", with_lexicon: bool, ontology: int = 1) -> str:
     consts = sorted(mem.consts)
     return (ONTOLOGIES[ontology] + "\nNAMES ALREADY IN MEMORY: predicates " + (", ".join(preds) or "(none yet)")
             + "; constants " + (", ".join(consts) or "(none yet)") + ".\n\n")
+
+
+# ---- questions asked alone, in free language (logbook 91) ---------------------------------------------------------
+QUESTION_TEXT = "(none: there is no text here, only a question asked to the memory; write its question line and nothing else)"
+QUESTION_NOTE = "A QUESTION IS ASKED TO THIS MEMORY: write its question line with the conventions above"
+QUESTION_NOTE_NAMES = QUESTION_NOTE + ", and when the question says in other words what a name already in memory says, use that name"
+
+
+def question_block(mem: "Memory", with_names: bool, ontology: int = 2) -> str:
+    """The block the translator receives before a question asked alone: the ontology's conventions, the names in memory
+    (with_names) and one line saying that a question is asked. Without names: the control of logbook 91 (free_nonames)."""
+    if with_names:
+        return lexicon_block(mem, True, ontology).rstrip("\n") + "\n" + QUESTION_NOTE_NAMES + ".\n\n"
+    return ONTOLOGIES[ontology] + "\n" + QUESTION_NOTE + ".\n\n"
+
+
+def _formula_text(f) -> str:
+    if not isinstance(f, tuple):
+        return str(f)
+    if f[0] == "not":
+        return "not (" + _formula_text(f[1]) + ")"
+    return "(" + _formula_text(f[1]) + (" & " if f[0] == "and" else " | ") + _formula_text(f[2]) + ")"
+
+
+def _formula_literals(f) -> list:
+    return [f] if not isinstance(f, tuple) else [l for x in f[1:] for l in _formula_literals(x)]
+
+
+def goal_of_program(prog) -> tuple | None:
+    """First question of a parsed program -> (its text without the '?', its literals, is it universal), or None."""
+    if not prog.questions:
+        return None
+    q = prog.questions[0]
+    if q and q[0] == "universal":
+        r = prog.universal_questions[q[1]]
+        return str(r), list(r.body) + [r.head], True
+    if q and q[0] == "formula":
+        return _formula_text(q[1]), _formula_literals(q[1]), False
+    return " & ".join(str(l) for l in q), list(q), False
 
 
 class Memory:
@@ -190,6 +230,38 @@ class Memory:
         lines = [x if x.rstrip().endswith(".") else x + "." for x in items + self.global_rules]
         prog = parse("\n".join(lines + [f"? {goal}."]), require_anchor=False)
         ans = decide(prog, use_knowledge=False).answer
+        return (ans, len(items), goal, lines) if detail else (ans, len(items))
+
+    def decide_goal(self, prog, trivial: bool = False, detail: bool = False) -> tuple:
+        """Strict verdict for the question line of a parsed program: a question read by the translator instead of the
+        template (logbook 91). Same retrieval as decide(), for each literal of the question: residence through the
+        episodic memory, anything else through the paths of the graph from the constant asked about to what is asked
+        of it (for a universal question, from the condition's name to the conclusion's). The program's other
+        statements are ignored: a question never writes into the memory."""
+        from grandnexus.nexus_logic import decide, parse
+        g = goal_of_program(prog)
+        if g is None:
+            return ("unknown", 0, "", []) if detail else ("unknown", 0)
+        goal, lits, universal = g
+        items: list = []
+        if universal:
+            found = self.path(lits[0].atom.pred, lits[-1].atom.pred, trivial)
+            items += [x for x in found if x not in items]
+        else:
+            for l in lits:
+                a = l.atom
+                args = [str(x) for x in a.args]
+                if a.pred == "lives_in" and len(args) == 2:
+                    found = self.residence(str(a), args[0], trivial)
+                elif len(args) == 1:
+                    found = self.path(args[0], a.pred, trivial)
+                elif len(args) == 2:
+                    found = self.path(args[0], args[1], trivial)
+                else:
+                    found = []
+                items += [x for x in found if x not in items]
+        lines = [x if x.rstrip().endswith(".") else x + "." for x in items + self.global_rules]
+        ans = decide(parse("\n".join(lines + [f"? {goal}."]), require_anchor=False), use_knowledge=False).answer
         return (ans, len(items), goal, lines) if detail else (ans, len(items))
 
 

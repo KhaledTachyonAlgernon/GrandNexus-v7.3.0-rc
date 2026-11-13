@@ -139,6 +139,23 @@ def _retry_after(e: BaseException) -> float:
         return 0.0
 
 
+def create_with_retry(client, retry_waits=DEFAULT_RETRY_WAITS, sleep=None, log=None, **kw) -> Any:
+    """client.messages.create(**kw) with retries of transient errors; the last error is raised when they run out.
+    Shared by the Translator and by the other API callers of the benches (question writer and judge, logbook 91)."""
+    for attempt in range(len(retry_waits) + 1):
+        try:
+            return client.messages.create(**kw)
+        except Exception as e:  # noqa: BLE001
+            if attempt >= len(retry_waits) or not is_transient(e):
+                raise
+            wait = max(retry_waits[attempt] * random.uniform(0.8, 1.2), _retry_after(e))
+            if log is not None:
+                log.append({"error": type(e).__name__, "status": getattr(e, "status_code", None),
+                            "attempt": attempt + 1, "wait_s": round(wait, 1)})
+            (sleep or SLEEP)(wait)
+    raise RuntimeError("unreachable")
+
+
 class FakeClient:
     """Offline stand-in for the SDK: returns the canned replies in order (tests without API, zero cost)."""
     def __init__(self, replies: List[str]) -> None:
@@ -181,17 +198,7 @@ class Translator:
 
     def _create(self, **kw) -> Any:
         """client.messages.create with retries of transient errors; the last error is raised when they run out."""
-        for attempt in range(len(self.retry_waits) + 1):
-            try:
-                return self.client.messages.create(**kw)
-            except Exception as e:  # noqa: BLE001
-                if attempt >= len(self.retry_waits) or not is_transient(e):
-                    raise
-                wait = max(self.retry_waits[attempt] * random.uniform(0.8, 1.2), _retry_after(e))
-                self.retry_log.append({"error": type(e).__name__, "status": getattr(e, "status_code", None),
-                                       "attempt": attempt + 1, "wait_s": round(wait, 1)})
-                (self._sleep or SLEEP)(wait)
-        raise RuntimeError("unreachable")
+        return create_with_retry(self.client, self.retry_waits, self._sleep, self.retry_log, **kw)
 
     def _call(self, system: str, user: str, role: str) -> str:
         sys_param: Any = ([{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}]

@@ -1,7 +1,14 @@
 """Scripted stand-in for the LLM translator, shared by the offline tests of the living bench (logbook 82-84): with the
 ontology or reading everything with the question it writes the ontology's names, otherwise names that follow the words
-of the text. Also a fake Message Batches API that answers with it. Not a test by itself."""
+of the text. Also a fake Message Batches API that answers with it. Not a test by itself.
+Logbook 91 (questions in free language): the same class also stands in for the question writer (it rewords canonical
+questions with a few frames and synonyms, with planted defects on demand), for the fidelity judge (it refuses an
+opposite word or a past state) and for the reader of a question asked alone (with the names in memory it gives back
+the memory's name for a synonym; without them it keeps the word of the question)."""
+import json
 import re
+import zlib
+from collections import Counter
 from types import SimpleNamespace
 import living_llm as B
 from living_bench import ROLES, CLASSES, ADJS
@@ -45,11 +52,135 @@ def read(sentence, canonical):
         return [f"{pred}({n(m.group(1))}, {n(m.group(3))}).{anchor}"]
     return []
 
+# ---- logbook 91: frames of the scripted question writer, and their inverse for the scripted question reader
+BASE = {"chess player": "play chess", "painter": "paint", "swimmer": "swim", "teacher": "teach", "gardener": "garden",
+        "pilot": "fly planes", "baker": "bake bread", "musician": "play music", "nurse": "work as a nurse", "farmer": "run a farm"}
+ROLE_OF_BASE = {v: k for k, v in BASE.items()}
+SYN = {"brave": "courageous", "calm": "serene", "honest": "truthful", "strong": "powerful"}
+ADJ_OF_SYN = {v: k for k, v in SYN.items()}
+ANT = {"patient": "impatient", "curious": "indifferent", "brave": "cowardly", "calm": "nervous", "strong": "weak",
+       "careful": "careless", "generous": "stingy", "honest": "dishonest"}
+
+def _pick(q, options):
+    return options[zlib.crc32(q.encode()) % len(options)]
+
+def reword(q):
+    """A faithful rewording of a canonical question."""
+    m = re.match(r"Does (\w+) live in (\w+)\?$", q)
+    if m:
+        p, c = m.groups()
+        return _pick(q, [f"Is {c} where {p} lives?", f"Is {p} based in {c} these days?", f"Is {p}'s home in {c}?"])
+    m = re.match(r"Is (\w+) (?:an? )?(.+)\?$", q)
+    p, x = m.groups()
+    if x in BASE:
+        return _pick(q, [f"Does {p} {BASE[x]}?", f"Would you call {p} {'an' if x[0] in 'aeiou' else 'a'} {x}?"])
+    if x in SYN:
+        return _pick(q, [f"Is {p} a {SYN[x]} person?", f"Would you describe {p} as {x}?"])
+    return _pick(q, [f"Would you describe {p} as {x}?", f"Is {p} someone you would call {x}?"])
+
+def unfaithful(q):
+    """A rewording that passes the mechanical checks but does not ask the same thing (for the judge)."""
+    m = re.match(r"Does (\w+) live in (\w+)\?$", q)
+    if m:
+        return f"Did {m.group(1)} once live in {m.group(2)}?"
+    p, x = re.match(r"Is (\w+) (?:an? )?(.+)\?$", q).groups()
+    return f"Would you describe {p} as {ANT[x]}?" if x in ANT else f"Was {p} once a {x}?"
+
+def read_free(q, preds):
+    """Scripted reading of a free question: the lines of its program. preds: the predicate names in memory, or None
+    when the names were not given (then a synonym keeps the word of the question)."""
+    n_ = lambda x: x.lower().replace(" ", "_")
+    m = re.match(r"Does (\w+) (.+)\?$", q)
+    if m and m.group(2) in ROLE_OF_BASE:
+        return [f"? {n_(ROLE_OF_BASE[m.group(2)])}({n_(m.group(1))})."]
+    m = re.match(r"Would you call (\w+) an? (.+)\?$", q)
+    if m:
+        return [f"? {n_(m.group(2))}({n_(m.group(1))})."]
+    m = re.match(r"Is (\w+) a (\w+) person\?$", q)
+    if m:
+        adj = ADJ_OF_SYN.get(m.group(2), m.group(2))
+        return [f"? {adj if preds is not None and adj in preds else m.group(2)}({n_(m.group(1))})."]
+    m = re.match(r"Would you describe (\w+) as (\w+)\?$", q) or re.match(r"Is (\w+) someone you would call (\w+)\?$", q)
+    if m:
+        return [f"? {m.group(2)}({n_(m.group(1))})."]
+    m = re.match(r"Is (\w+) where (\w+) lives\?$", q)
+    if m:
+        return [f"? lives_in({n_(m.group(2))}, {n_(m.group(1))})."]
+    m = re.match(r"Is (\w+) based in (\w+) these days\?$", q)
+    if m:       # a planted presupposition: the statement must never reach the memory
+        return [f'based_in({n_(m.group(1))}, {n_(m.group(2))}). @ "{m.group(1)} based in {m.group(2)}"',
+                f"? lives_in({n_(m.group(1))}, {n_(m.group(2))})."]
+    m = re.match(r"Is (\w+)'s home in (\w+)\?$", q)
+    if m:
+        return [f"? lives_in({n_(m.group(1))}, {n_(m.group(2))})."]
+    g = B.goal_of(q)
+    return [f"? {g[0]}."] if g else ["# cannot express: the question"]
+
+
 class Scripted:
-    def __init__(self): self.messages, self.calls = self, 0
+    def __init__(self, defects=None, mute_once=()):
+        """defects (logbook 91): {canonical question: 'name' | 'negation' | 'other' | 'judge' | 'stubborn'} plants a
+        defect in the first rewording of that question ('stubborn': in every rewording), or {'malformed': n} makes
+        the n first list replies malformed. mute_once: free questions whose first reading has no question line."""
+        self.messages, self.calls, self.by = self, 0, Counter()
+        self.defects, self.mute, self.malformed = dict(defects or {}), set(mute_once), int((defects or {}).get("malformed", 0))
+
+    def _reply(self, model, text):
+        return SimpleNamespace(id="s", model=model, content=[SimpleNamespace(text=text)],
+                               usage=SimpleNamespace(input_tokens=1, output_tokens=1))
+
+    def _writer(self, model, u):
+        self.by["writer"] += 1
+        qs = [l.split(". ", 1)[1] for l in u.split("\n") if re.match(r"\d+\. ", l)]
+        again = "was refused" in u
+        if not again and self.malformed > 0:
+            self.malformed -= 1
+            return self._reply(model, "Here are the questions: " + "; ".join(reword(q) for q in qs))
+        out = []
+        for q in qs:
+            d = self.defects.get(q)
+            p = q.split()[1]
+            if d == "stubborn" or (d == "judge" and not again):
+                out.append(unfaithful(q))
+            elif d == "name" and not again:
+                out.append(reword(q).replace(p, "this person"))
+            elif d == "negation" and not again:
+                out.append("Is it not the case that " + reword(q)[0].lower() + reword(q)[1:])
+            elif d == "other" and not again:
+                out.append(reword(q).replace(p, p + " (like " + ("Zack" if p != "Zack" else "Yara") + ")"))
+            else:
+                out.append(reword(q))
+        return self._reply(model, json.dumps([{"n": i + 1, "q": t} for i, t in enumerate(out)]))
+
+    def _judge(self, model, u):
+        self.by["judge"] += 1
+        second = u.split("Second: ", 1)[1]
+        bad = " once " in second or any(re.search(rf"\b{a}\b", second) for a in ANT.values())
+        return self._reply(model, "DIFFERENT" if bad else "SAME")
+
+    def _question(self, model, u):
+        self.by["question"] += 1
+        q = u.split("QUESTION (or statement to verify):\n", 1)[1].split("\n")[0].strip()
+        if q in self.mute and "YOUR PROGRAM" not in u:
+            self.mute.discard(q)
+            return self._reply(model, "```nx\n# let me think about this question\n```")
+        preds = None
+        if "NAMES ALREADY IN MEMORY: predicates " in u:
+            names = u.split("NAMES ALREADY IN MEMORY: predicates ", 1)[1].split(";")[0]
+            preds = {x.split("/")[0].strip() for x in names.split(",")}
+        return self._reply(model, "```nx\n" + "\n".join(read_free(q, preds)) + "\n```")
+
     def create(self, model, max_tokens, system, messages):
         self.calls += 1
         u = messages[0]["content"]
+        role = system if isinstance(system, str) else ""       # the translator sends its system prompt as a cached block
+        if role.startswith("You reword"):
+            return self._writer(model, u)
+        if role.startswith("You compare"):
+            return self._judge(model, u)
+        if B.QUESTION_TEXT in u:
+            return self._question(model, u)
+        self.by["reading"] += 1
         canonical = "ONTOLOGY OF THE MEMORY" in u or "(none:" not in u          # a concat reading is consistent by itself
         text = u.split("TEXT:\n")[-1].split("\n\nQUESTION")[0]
         q = u.split("QUESTION (or statement to verify):\n")[-1].strip()
@@ -78,3 +209,13 @@ class BatchAPI:
     def results(self, bid):
         for req in self.server[bid]:
             yield SimpleNamespace(custom_id=req["custom_id"], result=SimpleNamespace(type="succeeded", message=self.reader.create(**req["params"])))
+
+
+class DualAPI:
+    """Fake client with both interfaces (logbook 91): messages.create, synchronous (the question writer and judge),
+    and messages.batches (the readings of a --batch run), both answered by the same scripted stand-in."""
+    def __init__(self, server, scripted=None, interrupt_first_wait=False):
+        self.scripted = scripted or Scripted()
+        self.batches = BatchAPI(server, interrupt_first_wait)
+        self.batches.reader = self.scripted
+        self.messages = SimpleNamespace(create=self.scripted.create, batches=self.batches)

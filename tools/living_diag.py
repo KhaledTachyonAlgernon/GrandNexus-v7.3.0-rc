@@ -35,7 +35,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tools"))
 
-from living_bench import WorldV2                                                           # noqa: E402
+from living_bench import MEASURED_SEEDS, WorldV2                                           # noqa: E402
 from living_language import Paraphraser                                                    # noqa: E402
 from living_llm import READ_QUERY, Memory, lexicon_block, node                             # noqa: E402
 
@@ -181,8 +181,8 @@ def regate(path: str) -> dict:
     of failed readings count as not read, and moves come from the world (logbook 90)."""
     d = json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
     a = d["args"]
-    if a["seed"] == 13:
-        raise SystemExit("seed 13 holds the measured worlds of logbook 84-85")
+    if a["seed"] in MEASURED_SEEDS:
+        raise SystemExit(f"seed {a['seed']} holds measured worlds: never read them for a diagnosis")
     facts, failed_readings, readings = [], 0, 0
     for w, rec in enumerate(d["worlds"]):
         world = WorldV2(a["seed"] * 1000 + w, a["sessions"], 5, 3)
@@ -240,8 +240,8 @@ def main(argv=None, client=None) -> dict:
             path.write_text(json.dumps({"source": a.regate, **r}, indent=1), encoding="utf-8")
             print(f"written: {path.relative_to(ROOT)}")
         return r
-    if a.seed == 13:
-        raise SystemExit("seed 13 holds the measured worlds of logbook 84-85: diagnose on other seeds")
+    if a.seed in MEASURED_SEEDS:
+        raise SystemExit(f"seed {a.seed} holds measured worlds (seeds {MEASURED_SEEDS}): diagnose on other seeds")
     worlds = [WorldV2(a.seed * 1000 + w, a.sessions, 5, 3) for w in range(a.worlds)]
     n_read = sum(1 for w in worlds for f, _ in w.sessions if f)
     print(f"seed {a.seed}, {a.worlds} worlds, level {a.level}: {n_read} readings with the lexicon (+ corrective rounds, about 15%); "
