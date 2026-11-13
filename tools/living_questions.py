@@ -619,7 +619,7 @@ def run(a, client=None) -> dict:
            "failed_calls": failed, "pipelines": {}, "criteria": {}, "rows": rows, "questions": questions}
     print(f"\n=== phase D, {mode}: seed {a.seed}, {a.worlds} worlds, facts at level {a.level}, {n_q} questions "
           f"(set sha {frozen['sha'][:16]}; always-unknown floor {floor:.1f}%)")
-    print(f"{'pipeline':15} {'right':>7} " + " ".join(f"{k:>10}" for k in KINDS_V2) + f" {'asserted err':>13} {'facts/q':>8}")
+    print(f"{'pipeline':20} {'right':>7} " + " ".join(f"{k:>10}" for k in KINDS_V2) + f" {'asserted err':>13} {'facts/q':>8}")
     for p in PIPELINES:
         rs = by[p]
         if not rs:
@@ -628,7 +628,7 @@ def run(a, client=None) -> dict:
         st = {"n": len(rs), "pct": round(100 * sum(map(ok, rs)) / len(rs), 2), "asserted_errors": asserted(rs),
               "facts_per_question": round(sum(r["facts"] for r in rs) / len(rs), 2), "per_kind": per}
         out["pipelines"][p] = st
-        print(f"{p:15} {st['pct']:6.1f}% " + " ".join(f"{c:>4}/{k:<5}" for c, k in per.values())
+        print(f"{p:20} {st['pct']:6.1f}% " + " ".join(f"{c:>4}/{k:<5}" for c, k in per.values())
               + f" {st['asserted_errors']:>13} {st['facts_per_question']:>8.2f}")
     agree = sum(q.get("goal_names") == q["goal_canon"] for q in questions)
     print(f"goal read with the names = canonical goal: {agree}/{n_q} ({100 * agree / max(1, n_q):.1f}%, reported)")
@@ -662,7 +662,7 @@ def run(a, client=None) -> dict:
               f"names right {l_} | sign test p = {sign_test(w_, l_):.2g}  {'PASS' if crit['D2'] else 'FAIL'}{tag}")
     if mode == "measurement":
         crit["claim"] = v_ok and d1 and d3
-        print(f"CLAIM (V, D1 and D3): {'ESTABLISHED within the scope of logbook 91' if crit['claim'] else 'NOT established'}")
+        print(f"CLAIM (V, D1 and D3): {'ESTABLISHED within the scope of logbook 91' + (' (phase D', logbook 94)' if a.question_note == 2 else '') if crit['claim'] else 'NOT established'}")
     out["criteria"] = crit
     if a.gate:
         g1, audit = audit_ok(frozen, a.questions_dir)
