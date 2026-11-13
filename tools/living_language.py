@@ -49,8 +49,10 @@ def cap(s: str) -> str:
 class Paraphraser:
     """Writes each fact at a given level; deterministic for a (seed, world)."""
 
-    def __init__(self, level: int, seed: int) -> None:
-        self.level, self.rng = level, random.Random(seed)
+    def __init__(self, level: int, seed: int, version: int = 1) -> None:
+        """version 2 (logbook 88): the level-1 first-residence form "X has a flat in C", which does not say that X lives
+        in C, becomes "X's home is in C"; version 1 reproduces logbook 81-87."""
+        self.level, self.rng, self.version = level, random.Random(seed), version
         self.has_city: set = set()
         self.forms: dict = {}          # surface sentence -> index of the form it used (diagnosis, logbook 86)
 
@@ -94,7 +96,8 @@ class Paraphraser:
                      2: [f"{p} recently relocated to {city}.", f"{p} left for {city}."],
                      3: [f"{p} called today. {he} moved to {city}."]}
         else:
-            forms = {0: [f"{p} lives in {city}."], 1: [f"{p} resides in {city}.", f"{p} has a flat in {city}."],
+            first1 = f"{p} has a flat in {city}." if self.version == 1 else f"{p}'s home is in {city}."
+            forms = {0: [f"{p} lives in {city}."], 1: [f"{p} resides in {city}.", first1],
                      2: [f"{p} settled in {city} a while ago."], 3: [f"{p} called today. {he} lives in {city}."]}
         return pick(forms[L])
 
@@ -105,6 +108,7 @@ def main(argv=None) -> dict:
     ap.add_argument("--worlds", type=int, default=20)
     ap.add_argument("--sessions", type=int, default=12)
     ap.add_argument("--levels", default="0,1,2,3")
+    ap.add_argument("--paraphraser", type=int, default=1, help="1: logbook 81-87; 2: logbook 88")
     ap.add_argument("--no-write", action="store_true")
     a = ap.parse_args(argv)
     logging.disable(logging.CRITICAL)
@@ -116,7 +120,7 @@ def main(argv=None) -> dict:
         rows, fid = [], [0, 0]
         for w in range(a.worlds):
             seed = a.seed * 1000 + w
-            r, f = LAB.run_world(WorldV2(seed, a.sessions, 5, 3), extractor, reasoner, Paraphraser(L, seed * 10 + L))
+            r, f = LAB.run_world(WorldV2(seed, a.sessions, 5, 3), extractor, reasoner, Paraphraser(L, seed * 10 + L, a.paraphraser))
             rows += r
             fid[0] += f[0]
             fid[1] += f[1]

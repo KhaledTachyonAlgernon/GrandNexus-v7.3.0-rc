@@ -51,8 +51,8 @@ def expected(meta) -> str:
     return f"lives_in({node(a)}, {node(b)})"
 
 
-def run_world(tr, world: WorldV2, level: int, seed: int) -> dict:
-    para = Paraphraser(level, seed * 10 + level)
+def run_world(tr, world: WorldV2, level: int, seed: int, version: int = 1, ontology: int = 1) -> dict:
+    para = Paraphraser(level, seed * 10 + level, version)
     mem = Memory()
     facts_log, questions_log, sessions_log = [], [], []
     moved_seen: set = set()
@@ -63,7 +63,7 @@ def run_world(tr, world: WorldV2, level: int, seed: int) -> dict:
         program = []
         if texts:
             try:
-                prog = tr.translate(" ".join(texts), READ_QUERY, lexicon_block(mem, True))["parsed"]
+                prog = tr.translate(" ".join(texts), READ_QUERY, lexicon_block(mem, True, ontology))["parsed"]
             except Exception as e:  # noqa: BLE001
                 prog = None
                 program = [f"(reading failed: {type(e).__name__})"]
@@ -147,6 +147,9 @@ def main(argv=None, client=None) -> dict:
     ap.add_argument("--sessions", type=int, default=12)
     ap.add_argument("--level", type=int, default=1)
     ap.add_argument("--model", default="claude-sonnet-5-5")
+    ap.add_argument("--paraphraser", type=int, default=1, help="1: logbook 86-87; 2: logbook 88")
+    ap.add_argument("--ontology", type=int, default=1, help="1: logbook 86-87; 2: logbook 88")
+    ap.add_argument("--gate", action="store_true", help="evaluate the gate of logbook 88 (first residences and role facts >= 95%%)")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--no-write", action="store_true")
     a = ap.parse_args(argv)
@@ -164,7 +167,7 @@ def main(argv=None, client=None) -> dict:
     tr = Translator(client=client, model=a.model) if client is not None else Translator(model=a.model)
     res = []
     for w, world in enumerate(worlds):
-        res.append(run_world(tr, world, a.level, a.seed * 1000 + w))
+        res.append(run_world(tr, world, a.level, a.seed * 1000 + w, a.paraphraser, a.ontology))
         print(f"  world {w + 1}/{len(worlds)} done ({len(tr.receipts)} calls so far)")
     qs = [q for r in res for q in r["questions"]]
     right = sum(q["answer"] == q["gold"] for q in qs)
@@ -175,6 +178,15 @@ def main(argv=None, client=None) -> dict:
     if c:
         print(f"\ncost: ${c['usd']:.3f} ({c['calls']} calls)")
     out = {"args": vars(a), "right": right, "n": len(qs), "asserted_errors": asserted, "summary": summary, "worlds": res, "cost": c}
+    if a.gate:
+        facts = [f for r in res for f in r["facts"]]
+        first = [f for f in facts if f["rel"] == "lives in" and not f.get("move")]
+        roles = [f for f in facts if f["rel"] == "instance_of"]
+        r1 = sum(f["read_as_expected"] for f in first) / max(1, len(first))
+        r2 = sum(f["read_as_expected"] for f in roles) / max(1, len(roles))
+        out["gate"] = {"first_residences": round(r1, 4), "role_facts": round(r2, 4), "pass": r1 >= 0.95 and r2 >= 0.95}
+        print(f"\nGATE (logbook 88): first residences read as lives_in {100 * r1:.1f}%, role facts read as the role predicate "
+              f"{100 * r2:.1f}% (both >= 95%) -> {'PASS' if out['gate']['pass'] else 'FAIL'}")
     if not a.no_write:
         d = ROOT / "tests_lab" / "resultats" / "living"
         d.mkdir(parents=True, exist_ok=True)
