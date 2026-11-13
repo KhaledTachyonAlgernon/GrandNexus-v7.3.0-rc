@@ -32,11 +32,18 @@ the names of the memory by itself.
    A question whose reading call failed counts as wrong; a failed fact reading counts as an empty reading.
    Gate on debug worlds (--gate): G1 Khaled's audit of 30 pairs finds at most 1 unfaithful; G2 = D1 on the debug
    worlds; G3 = V on the debug set.
+5. Phase D' (logbook 93-94): n°93 failed by one asserted error, the reader having replaced a quality absent from memory
+   by a neighbouring name present in it. Repairs, on by default: the question note 2 (keep the question's own word for
+   what no name in memory says) and the substitution check (a predicate or constant of the goal that does not appear
+   in the question is checked by the fidelity judge against it; DIFFERENT -> unknown). free_names is the checked
+   answer, free_names_unchecked the same readings without the check. --question-note 1 --no-substitution-check
+   reproduces n°91. Phase D': --seed 23 --worlds 20 --batch --skip-nonames.
 
   step 1a  python tools/living_questions.py --seed 11 --worlds 5 --generate-only --audit-sheet
   step 1b  python tools/living_questions.py --seed 11 --worlds 5 --audit-verdict none        (or "4,17")
   step 1c  python tools/living_questions.py --seed 11 --worlds 5 --gate
-  step 2   python tools/living_questions.py --seed 19 --worlds 10 --batch --state-dir <Drive folder>
+  step 2   python tools/living_questions.py --seed 19 --worlds 10 --batch --state-dir <Drive folder>   (n°91; phase D':
+           --seed 23 --worlds 20 --batch --skip-nonames, with the gate on the same debug set and audit)
   any step with --dry-run prints its calls and an estimated cost without a call
 """
 from __future__ import annotations
@@ -63,7 +70,7 @@ from living_lab_language import reading, sign_test, surfaces                    
 WRITER_MODEL, JUDGE_MODEL, READER_MODEL = "claude-opus-5-5", "claude-haiku-5-5", "claude-sonnet-5-5"
 GENERATION_VERSION = "g1"            # writer prompt, checks and judge prompt below; recorded in the frozen set
 MAX_WORDS, MAX_REWRITES, AUDIT_N = 25, 2, 30
-PIPELINES = ("canon", "free_names", "free_names_bfs", "free_nonames", "free_template")
+PIPELINES = ("canon", "free_names", "free_names_unchecked", "free_names_bfs", "free_nonames", "free_template")
 QUESTIONS_DIR = ROOT / "tests_lab" / "questions"
 RESULTS_DIR = ROOT / "tests_lab" / "resultats" / "living"
 
@@ -183,10 +190,10 @@ class Ledger:
         return out
 
 
-def _ask(client, ledger: Ledger, model: str, system: str, user: str, max_tokens: int) -> str:
+def _ask(client, ledger: Ledger, model: str, system: str, user: str, max_tokens: int, **kw) -> str:
     from grandnexus.llm_interface.translator_v5 import create_with_retry
     resp = create_with_retry(client, log=ledger.retries, model=model, max_tokens=max_tokens, system=system,
-                             messages=[{"role": "user", "content": user}])
+                             messages=[{"role": "user", "content": user}], **kw)
     ledger.add(model, resp)
     return "".join(getattr(b, "text", "") for b in resp.content)
 
@@ -235,6 +242,56 @@ def judge_same(client, ledger: Ledger, model: str, canonical: str, free: str) ->
     return reply.strip().upper().startswith("SAME")
 
 
+# ---- the substitution check (logbook 94) ---------------------------------------------------------------------------
+def _appears(token: str, words: list) -> bool:
+    key = token[:4]
+    return any(w.startswith(key) for w in words)
+
+
+def substitutions(question: str, lits: list) -> list:
+    """The names of the goal that come from nowhere in the question: a predicate or a constant none of whose parts
+    (longer than 2 letters) starts a word of the question with its first four letters. Variables are not names."""
+    words = re.findall(r"[a-z]+", question.lower())
+    out = []
+    for l in lits:
+        names = [l.atom.pred] + [str(c) for c in l.atom.args if not str(c)[:1].isupper()]
+        for n in names:
+            parts = [t for t in n.split("_") if len(t) > 2]
+            if parts and not any(_appears(t, words) for t in parts) and n not in out:
+                out.append(n)
+    return out
+
+
+def render_goal(lits: list) -> str:
+    """A goal as a plain yes/no question, for the judge: lives_in(rita, lyon) -> 'Is it true that Rita lives in Lyon?'."""
+    nice = lambda c: str(c).replace("_", " ").title()
+    clauses = []
+    for l in lits:
+        a = l.atom
+        args, words = [nice(x) for x in a.args], a.pred.replace("_", " ")
+        if a.pred == "lives_in" and len(args) == 2:
+            c = f"{args[0]} lives in {args[1]}"
+        elif len(args) == 1:
+            c = f"{args[0]} is {words}"
+        elif len(args) == 2:
+            c = f"{args[0]} is {words} {args[1]}"
+        else:
+            c = f"{words} holds"
+        clauses.append(("it is not the case that " if l.neg else "") + c)
+    return "Is it true that " + " and ".join(clauses) + "?"
+
+
+def check_substitution(client, ledger: Ledger, model: str, question: str, lits: list) -> dict:
+    """{'checked': False} when the goal names only what the question says; otherwise the judge's verdict on the
+    substitution (temperature 0): kept when the rendered goal asks the same thing as the question."""
+    subs = substitutions(question, lits)
+    if not subs:
+        return {"checked": False}
+    rendered = render_goal(lits)
+    reply = _ask(client, ledger, model, SYSTEM_JUDGE, f"First: {question}\nSecond: {rendered}", 8, temperature=0.0)
+    return {"checked": True, "names": subs, "rendered": rendered, "kept": reply.strip().upper().startswith("SAME")}
+
+
 def frozen_path(seed: int, worlds: int, sessions: int, directory=None) -> pathlib.Path:
     return pathlib.Path(directory or QUESTIONS_DIR) / f"free_questions_seed{seed}_{worlds}w_{sessions}s.json"
 
@@ -265,6 +322,11 @@ def generate(a, client) -> dict:
     """The frozen set of free questions for (seed, worlds, sessions): loaded when it exists, written otherwise
     (resumable world by world: an interrupted generation keeps the worlds already done)."""
     path = frozen_path(a.seed, a.worlds, a.sessions, a.questions_dir)
+    repo_copy = frozen_path(a.seed, a.worlds, a.sessions)
+    if not path.exists() and repo_copy.exists() and repo_copy != path:   # e.g. phase D' on Colab: the set of n°93
+        path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(repo_copy, path)
+        print(f"frozen set taken from the repository: {repo_copy.name}")
     if path.exists():
         d = load_frozen(path)
         archive(path, QUESTIONS_DIR)
@@ -373,6 +435,8 @@ def audit_ok(frozen: dict, directory=None) -> tuple:
     """(G1, the recorded audit or None): the audit is of this very set, covers its whole sheet, and finds at most 1
     unfaithful pair."""
     p = audit_path(frozen, directory)
+    if not p.exists() and audit_path(frozen).exists():                       # the audit of n°93, kept in the repository
+        p = audit_path(frozen)
     audit = json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
     g1 = bool(audit) and audit["sha"] == frozen["sha"] and audit["n"] == len(audit_sample(frozen)) and len(audit["unfaithful"]) <= 1
     return g1, audit
@@ -401,7 +465,7 @@ def read_question(tr, question: str, block: str) -> dict:
     return {"program": program, "rounds": rounds}
 
 
-def fact_chain(tr, sess: list, ontology: int) -> list:
+def fact_chain(tr, sess: list, ontology: int, note: int = 1) -> list:
     """Job: the lexicon readings of one world, session after session (as in logbook 88). Per session: the parsed
     program (None when there is no text or the reading failed), and the two blocks a question asked at that session
     receives."""
@@ -414,7 +478,7 @@ def fact_chain(tr, sess: list, ontology: int) -> list:
             failed = prog is None
             if prog is not None:
                 mem.add_program(prog)
-        out.append({"prog": prog, "failed": failed, "names": B.question_block(mem, True, ontology),
+        out.append({"prog": prog, "failed": failed, "names": B.question_block(mem, True, ontology, note),
                     "nonames": B.question_block(mem, False, ontology)})
     return out
 
@@ -452,21 +516,22 @@ def run(a, client=None) -> dict:
                              "G2": None, "G3": None, "pass": False}}
     items = {(it["world"], it["session"], it["index"]): it for it in frozen["items"]}
     share = template_share(frozen["items"])
-    conds = ("names",) if (a.gate and not a.nonames) else ("names", "nonames")
+    conds = ("names",) if ((a.gate and not a.nonames) or a.skip_nonames) else ("names", "nonames")
     worlds = [WorldV2(a.seed * 1000 + w, a.sessions, 5, 3) for w in range(a.worlds)]
     surf = {w: surfaces(worlds[w], a.level, a.seed * 1000 + w, a.paraphraser) for w in range(a.worlds)}
     session = None
     if a.batch:
         from batch_runner import BatchSession
         key = hashlib.sha256(json.dumps([a.seed, a.worlds, a.sessions, a.level, a.model, a.paraphraser, a.ontology,
-                                         frozen["sha"], list(conds)]).encode()).hexdigest()[:10]
+                                         frozen["sha"], list(conds)] + ([a.question_note] if a.question_note != 1 else [])
+                                        ).encode()).hexdigest()[:10]
         out_dir = pathlib.Path(a.state_dir) if a.state_dir else RESULTS_DIR
         session = BatchSession(raw, out_dir / f"batch_state_phaseD_{key}.json")
         tr = Translator(client=session, model=a.model)
     else:
         tr = Translator(client=raw, model=a.model)
     # ---- 1. the fact readings (one sequential chain per world)
-    chain_jobs = {f"lex|{w}": (lambda sess=sess: fact_chain(tr, sess, a.ontology)) for w, sess in surf.items()}
+    chain_jobs = {f"lex|{w}": (lambda sess=sess: fact_chain(tr, sess, a.ontology, a.question_note)) for w, sess in surf.items()}
     print(f"{len(chain_jobs)} lexicon chains ({sum(1 for s in surf.values() for t, _ in s if t)} fact readings), then "
           f"{len(items) * len(conds)} question readings ({', '.join(conds)})")
     if session is not None:
@@ -495,6 +560,7 @@ def run(a, client=None) -> dict:
     # ---- 3. offline: memories rebuilt from the chains, every pipeline decided
     rows, questions = [], []
     failed = {"fact_readings": 0, "question_names": 0, "question_nonames": 0}
+    checks, check_ledger = {"checked": 0, "kept": 0, "refused": 0}, Ledger()
     for w, sess in surf.items():
         mem, chain = B.Memory(), chains[f"lex|{w}"]
         for s, (texts, qs) in enumerate(sess):
@@ -514,13 +580,25 @@ def run(a, client=None) -> dict:
                         failed[f"question_{c}"] += 1
                         ans[f"free_{c}"] = ("unknown", 0, True)
                         if c == "names":
-                            ans["free_names_bfs"] = ("unknown", 0, True)
+                            ans["free_names_bfs"] = ans["free_names_unchecked"] = ("unknown", 0, True)
                         rec[f"goal_{c}"] = None
                         continue
                     prog = parse(r["program"])
                     ans[f"free_{c}"] = (*mem.decide_goal(prog), False)
                     if c == "names":
                         ans["free_names_bfs"] = (*mem.decide_goal(prog, trivial=True), False)
+                        ans["free_names_unchecked"] = ans["free_names"]
+                        g = B.goal_of_program(prog)
+                        if a.substitution_check and g is not None and not g[2]:
+                            chk = check_substitution(raw, check_ledger, a.judge, it["free"], g[1])
+                            if chk["checked"]:
+                                checks["checked"] += 1
+                                checks["kept" if chk["kept"] else "refused"] += 1
+                                rec["check"] = "kept" if chk["kept"] else "refused"
+                                if debug:
+                                    rec["check_rendered"] = chk["rendered"]
+                                if not chk["kept"]:
+                                    ans["free_names"] = ("unknown", 0, False)          # the system abstains
                     rec[f"goal_{c}"] = (B.goal_of_program(prog) or (None,))[0]
                     rec[f"rounds_{c}"] = r["rounds"]
                     if debug:
@@ -554,6 +632,12 @@ def run(a, client=None) -> dict:
               + f" {st['asserted_errors']:>13} {st['facts_per_question']:>8.2f}")
     agree = sum(q.get("goal_names") == q["goal_canon"] for q in questions)
     print(f"goal read with the names = canonical goal: {agree}/{n_q} ({100 * agree / max(1, n_q):.1f}%, reported)")
+    out["substitution_check"] = {**checks, "on": a.substitution_check, "question_note": a.question_note,
+                                 "per_kind": {k: [sum(q.get("check") == v and q["kind"] == k for q in questions)
+                                                  for v in ("kept", "refused")] for k in KINDS_V2}}
+    print(f"question note {a.question_note}; substitution check {'on' if a.substitution_check else 'off'}: "
+          f"{checks['checked']} goals named something the question does not say, {checks['kept']} kept by the judge, "
+          f"{checks['refused']} refused (answered unknown)")
     print(f"failed calls: {failed} (a failed question reading counts as wrong, a failed fact reading as an empty reading)")
     # ---- criteria (logbook 91)
     P = out["pipelines"]
@@ -597,11 +681,14 @@ def run(a, client=None) -> dict:
     # ---- cost
     u = session.usage() if session is not None else None
     c = cost.cost_usd(u, a.model) if u else cost.from_receipts(tr.receipts, a.model)
-    out["cost"] = {"reader": c, "generation": frozen["cost"], "usd": round((c["usd"] if c else 0) + frozen["cost"]["usd"], 4)}
+    cc = check_ledger.cost()
+    out["cost"] = {"reader": c, "generation": frozen["cost"], "checks": cc,
+                   "usd": round((c["usd"] if c else 0) + frozen["cost"]["usd"] + cc["usd"], 4)}
     out["retries"] = len(tr.retry_log)
     if c:
         print(f"\ncost: reader ${c['usd']:.3f} ({c['calls']} calls{', Batch API' if session is not None else ''}) + questions "
-              f"${frozen['cost']['usd']:.3f} (writer and judge, paid once) = ${out['cost']['usd']:.3f}; {len(tr.retry_log)} transient errors retried")
+              f"${frozen['cost']['usd']:.3f} (writer and judge, paid once) + checks ${cc['usd']:.3f} = ${out['cost']['usd']:.3f}; "
+              f"{len(tr.retry_log) + len(check_ledger.retries)} transient errors retried")
     if session is not None:
         out["batches"] = session.batches_created
         session.finish()
@@ -619,11 +706,11 @@ def dry_run(a) -> dict:
     worlds = [WorldV2(a.seed * 1000 + w, a.sessions, 5, 3) for w in range(a.worlds)]
     n_read = sum(1 for w in worlds for f, _ in w.sessions if f)
     n_q = sum(len(q) for w in worlds for _, q in w.sessions)
-    conds = 1 if (a.gate and not a.nonames) else 2
-    exists = frozen_path(a.seed, a.worlds, a.sessions, a.questions_dir).exists()
+    conds = 1 if ((a.gate and not a.nonames) or a.skip_nonames) else 2
+    exists = frozen_path(a.seed, a.worlds, a.sessions, a.questions_dir).exists() or frozen_path(a.seed, a.worlds, a.sessions).exists()
     half = 0.5 if a.batch else 1.0
     gen = 0.0 if exists else a.worlds * 0.03 + n_q * 0.00003
-    usd = gen + n_read * 1.15 * 0.0038 * half + n_q * conds * 1.05 * 0.0016 * half
+    usd = gen + n_read * 1.15 * 0.0038 * half + n_q * conds * 1.05 * 0.0016 * half + (n_q * 0.08 * 0.0002 if a.substitution_check else 0)
     print(f"seed {a.seed}, {a.worlds} worlds, level {a.level}: questions {'already frozen (0 call)' if exists else f'{a.worlds} writer calls + about {n_q} judge calls + rewrites'}; "
           f"{n_read} fact readings (+ corrective rounds, about 15%); {n_q} questions x {conds} reading(s) -> about "
           f"{int(n_read * 1.15 + n_q * conds * 1.05)} reader calls; estimated ${usd:.2f}"
@@ -649,6 +736,10 @@ def main(argv=None, client=None) -> dict:
     ap.add_argument("--nonames", action="store_true", help="with --gate: also read the questions without the names (information)")
     ap.add_argument("--sandbox", action="store_true", help="a run on a debug seed without gate: no claim (offline tests)")
     ap.add_argument("--show-failures", type=int, default=12, help="debug seeds: print that many free_names failures")
+    ap.add_argument("--question-note", type=int, default=2, choices=(1, 2), help="1: logbook 91; 2: logbook 94 (default)")
+    ap.add_argument("--no-substitution-check", dest="substitution_check", action="store_false",
+                    help="answer the goal read with the names as it is (logbook 91); default: the check of logbook 94")
+    ap.add_argument("--skip-nonames", action="store_true", help="do not read the questions without the names (phase D')")
     ap.add_argument("--batch", action="store_true")
     ap.add_argument("--state-dir", help="where the batch state is kept and the result copied (on Colab: a Drive folder, so that a reset runtime resumes)")
     ap.add_argument("--questions-dir", help="where the frozen sets and the audit live (default: tests_lab/questions; on Colab: a Drive folder; "
@@ -664,7 +755,7 @@ def main(argv=None, client=None) -> dict:
     if (a.gate or a.sandbox or a.audit_sheet or a.audit_verdict) and not debug:
         raise SystemExit(f"STOP: gate, sandbox and audit work on the debug seeds {DEBUG_SEEDS} only")
     if not (a.gate or a.sandbox or a.dry_run or debug) and a.seed in USED_SEEDS:
-        raise SystemExit(f"STOP: seed {a.seed} has already been used; a measurement needs never-used worlds (logbook 91: seed 19)")
+        raise SystemExit(f"STOP: seed {a.seed} has already been used; a measurement needs never-used worlds (phase D', logbook 94: seed 23)")
     if debug and not (a.gate or a.sandbox or a.generate_only or a.audit_verdict is not None or a.dry_run):
         raise SystemExit(f"STOP: seed {a.seed} is a debug seed: use --gate (step 1 of logbook 91) or --sandbox (no claim)")
     if a.dry_run:
