@@ -62,9 +62,9 @@ PIPELINES_V2 = PIPELINES + ("graph", "semantic")
 STOP = set("the a an is are does do every no not in of to live lives".split())
 # Seeds of the living bench (STATUS, handover): worlds of a measured seed are never read for a diagnosis nor printed,
 # and never measured again; debugging and offline tests use the debug seeds only.
-MEASURED_SEEDS = (7, 13, 17, 19)       # logbook 80, 85, 89, 91
+MEASURED_SEEDS = (7, 13, 17, 19, 23)       # logbook 80, 85, 89, 93, 94
 DEBUG_SEEDS = (5, 11)
-USED_SEEDS = (1, 3, 5, 7, 11, 13, 17)  # never the seed of a new measurement
+USED_SEEDS = (1, 3, 5, 7, 11, 13, 17, 19, 23)  # never the seed of a new measurement
 
 
 def article(role: str) -> str:

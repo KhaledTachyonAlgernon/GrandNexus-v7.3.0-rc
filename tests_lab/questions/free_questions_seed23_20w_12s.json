@@ -1,0 +1,8134 @@
+{
+ "args": {
+  "seed": 23,
+  "worlds": 20,
+  "sessions": 12,
+  "writer": "claude-opus-5-5",
+  "judge": "claude-haiku-5-5",
+  "generation": "g1"
+ },
+ "sha": "3ebb3e452edf154f9f448852fd52375dffb6c7d62f4d288e777ab4af3f899a9d",
+ "stats": {
+  "questions": 499,
+  "fallbacks": 0,
+  "reworded_first_try": 473,
+  "refusals": {
+   "form": 1,
+   "judge": 26
+  },
+  "template_share": 0.0
+ },
+ "cost": {
+  "claude-opus-5-5": {
+   "usd": 0.746,
+   "usd_without_cache": 0.746,
+   "calls": 47,
+   "batch": false,
+   "cache_hit_share": 0.0
+  },
+  "claude-haiku-5-5": {
+   "usd": 0.0128,
+   "usd_without_cache": 0.0128,
+   "calls": 525,
+   "batch": false,
+   "cache_hit_share": 0.0
+  },
+  "usd": 0.7588
+ },
+ "retries": 0,
+ "written": "2026-11-13 20:54:55",
+ "items": [
+  {
+   "world": 0,
+   "session": 2,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Heidi live in Nice?",
+   "free": "Is Heidi a resident of Nice?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nice the city where Heidi lives?",
+     "refused": "judge"
+    },
+    {
+     "text": "Is Heidi a resident of Nice?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 3,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Grace patient?",
+   "free": "Does Grace have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Grace have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 4,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Heidi live in Lyon?",
+   "free": "Is Heidi a resident of Lyon?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Heidi a resident of Lyon?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 4,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Heidi live in Nice?",
+   "free": "Is Heidi's home in Nice?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Heidi's home in Nice?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 5,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Uma a painter?",
+   "free": "Does Uma paint?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Uma paint?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 5,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Uma generous?",
+   "free": "Would you describe Uma as generous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Uma as generous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 6,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Dave generous?",
+   "free": "Does Dave show generosity?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Dave show generosity?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 6,
+   "index": 1,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Dave careful?",
+   "free": "Is carefulness one of Dave's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is carefulness one of Dave's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 6,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Uma a painter?",
+   "free": "Would you call Uma a painter?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Uma a painter?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 7,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Dave careful?",
+   "free": "Would you describe Dave as a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Dave as a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 7,
+   "index": 1,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Tina brave?",
+   "free": "Does Tina have courage?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Tina have courage?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 8,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Grace generous?",
+   "free": "Is generosity one of Grace's traits?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is generosity one of Grace's traits?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 8,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Grace generous?",
+   "free": "Would you say Grace is a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you say Grace is a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 8,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Paula a painter?",
+   "free": "Does Paula paint?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Paula paint?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 9,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Grace live in Nice?",
+   "free": "Is Nice where Grace lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nice where Grace lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 9,
+   "index": 1,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Grace brave?",
+   "free": "Would you describe Grace as brave?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Grace as brave?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 9,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Dave a pilot?",
+   "free": "Does Dave work as a pilot?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Dave work as a pilot?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 10,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Judy live in Dijon?",
+   "free": "Is Dijon the city Judy lives in?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Dijon the city Judy lives in?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 10,
+   "index": 1,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Uma careful?",
+   "free": "Does Uma act with care?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Uma act with care?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 10,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Uma strong?",
+   "free": "Does Uma have strength?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Uma have strength?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 11,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Uma a painter?",
+   "free": "Is Uma someone who paints?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Uma someone who paints?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 11,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Dave live in Lille?",
+   "free": "Is Lille where Dave resides?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Lille where Dave resides?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "session": 11,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Uma careful?",
+   "free": "Would you call Uma a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Uma a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 2,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Heidi a musician?",
+   "free": "Would you call Heidi a musician?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Heidi a musician?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 3,
+   "index": 0,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Tina careful?",
+   "free": "Would you describe Tina as a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Tina as a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 4,
+   "index": 0,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Xavier honest?",
+   "free": "Is Xavier truthful?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Xavier truthful?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 4,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Victor a swimmer?",
+   "free": "Does Victor swim?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Victor swim?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 4,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Xavier a farmer?",
+   "free": "Does Xavier farm?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Xavier farm?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 5,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Heidi curious?",
+   "free": "Does Heidi have a curious nature?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Heidi have a curious nature?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 5,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Wendy careful?",
+   "free": "Is carefulness a trait of Wendy?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is carefulness a trait of Wendy?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 5,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Tina a swimmer?",
+   "free": "Is Tina someone who swims?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Tina someone who swims?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 6,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Quinn live in Nice?",
+   "free": "Is Nice where Quinn lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nice where Quinn lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 6,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Victor a swimmer?",
+   "free": "Would you call Victor a swimmer?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Victor a swimmer?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 6,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Frank curious?",
+   "free": "Is Frank inquisitive?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Frank inquisitive?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 7,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Carol live in Nice?",
+   "free": "Is Carol a resident of Nice?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Carol a resident of Nice?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 7,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Victor a swimmer?",
+   "free": "Is swimming something Victor does?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is swimming something Victor does?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 7,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Rita careful?",
+   "free": "Is Rita a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Rita a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 8,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Heidi curious?",
+   "free": "Would you describe Heidi as a curious person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is curiosity one of Heidi's traits?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would you describe Heidi as a curious person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 8,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Xavier honest?",
+   "free": "Would you say Xavier is an honest person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you say Xavier is an honest person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 8,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Victor curious?",
+   "free": "Would you describe Victor as curious?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Victor as curious?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 9,
+   "index": 0,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Heidi strong?",
+   "free": "Is Heidi a strong person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Heidi a strong person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 9,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Xavier live in Nantes?",
+   "free": "Is Nantes the city where Xavier lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nantes the city where Xavier lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 9,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Victor curious?",
+   "free": "Is Victor an inquisitive person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Victor an inquisitive person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 10,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Wendy a chess player?",
+   "free": "Does Wendy play chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Wendy play chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 10,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Wendy strong?",
+   "free": "Would you describe Wendy as strong?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Wendy as strong?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 10,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Rita a painter?",
+   "free": "Does Rita paint?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Rita paint?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 11,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Tina a swimmer?",
+   "free": "Does Tina swim?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Tina swim?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 11,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Carol live in Nice?",
+   "free": "Is Nice the city Carol lives in?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nice the city Carol lives in?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "session": 11,
+   "index": 2,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Quinn live in Metz?",
+   "free": "Does Quinn reside in Metz?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Quinn reside in Metz?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 2,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Erin live in Nantes?",
+   "free": "Is Nantes where Erin lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nantes where Erin lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 2,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Zack honest?",
+   "free": "Would you describe Zack as an honest person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Zack as an honest person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 3,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Erin live in Nantes?",
+   "free": "Is Erin's home in Nantes?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Erin's home in Nantes?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 4,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Karl a painter?",
+   "free": "Does Karl paint?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Karl paint?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 4,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Karl calm?",
+   "free": "Would you call Karl a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Karl a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 4,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Erin calm?",
+   "free": "Does Erin have a calm temperament?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Erin have a calm temperament?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 5,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Karl strong?",
+   "free": "Would you describe Karl as a strong person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Karl as a strong person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 5,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Erin generous?",
+   "free": "Does Erin show generosity?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Erin show generosity?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 5,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Zack a chess player?",
+   "free": "Does Zack play chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Zack play chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 6,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Karl a painter?",
+   "free": "Is painting what Karl does?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is painting what Karl does?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 6,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Mike live in Nice?",
+   "free": "Is Nice the city where Mike lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nice the city where Mike lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 6,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Grace curious?",
+   "free": "Does Grace have a curious mind?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Grace have a curious mind?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 7,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Bob honest?",
+   "free": "Is honesty one of Bob's traits?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Bob show honesty?",
+     "refused": "judge"
+    },
+    {
+     "text": "Is honesty one of Bob's traits?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 7,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Mike live in Nice?",
+   "free": "Is Mike's home in Nice?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Mike's home in Nice?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 7,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Erin brave?",
+   "free": "Does Erin have courage?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Erin have courage?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 8,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Karl curious?",
+   "free": "Would you describe Karl as a curious person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Karl as a curious person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 8,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Karl calm?",
+   "free": "Is calmness one of Karl's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is calmness one of Karl's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 8,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Zack strong?",
+   "free": "Does Zack have strength?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Zack have strength?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 9,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Erin live in Dijon?",
+   "free": "Is Dijon where Erin lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Dijon where Erin lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 9,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Erin a painter?",
+   "free": "Does Erin paint?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Erin paint?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 9,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Bob brave?",
+   "free": "Would you call Bob a brave person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Bob a brave person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 10,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Bob careful?",
+   "free": "Does Bob act with care?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Bob act with care?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 10,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Tina careful?",
+   "free": "Would you describe Tina as a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Tina as a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 10,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Karl curious?",
+   "free": "Is curiosity one of Karl's traits?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is curiosity one of Karl's traits?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 11,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Erin live in Dijon?",
+   "free": "Is Erin's home in Dijon?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Erin's home in Dijon?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 11,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Grace patient?",
+   "free": "Does Grace have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Grace have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "session": 11,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Tina generous?",
+   "free": "Would you call Tina a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Tina a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 3,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Zack a musician?",
+   "free": "Would you describe Zack as a musician?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Zack as a musician?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 3,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Wendy brave?",
+   "free": "Does Wendy have courage?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Wendy have courage?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 3,
+   "index": 2,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Wendy brave?",
+   "free": "Would you call Wendy courageous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Wendy courageous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 4,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Oscar a nurse?",
+   "free": "Does Oscar work as a nurse?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Oscar work as a nurse?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 4,
+   "index": 1,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Zack curious?",
+   "free": "Is Zack an inquisitive person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Zack an inquisitive person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 4,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Zack curious?",
+   "free": "Does Zack have a curious nature?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Zack have a curious nature?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 5,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Bob curious?",
+   "free": "Would you describe Bob as curious?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Bob as curious?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 5,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Tina brave?",
+   "free": "Is Tina courageous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Tina courageous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 5,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Zack honest?",
+   "free": "Is Zack a truthful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Zack a truthful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 6,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Oscar a nurse?",
+   "free": "Is nursing Oscar's profession?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is nursing Oscar's profession?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 7,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Oscar curious?",
+   "free": "Does Oscar show curiosity?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Oscar show curiosity?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 7,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Wendy brave?",
+   "free": "Is Wendy a courageous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Wendy a courageous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 7,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Erin a chess player?",
+   "free": "Does Erin play chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Erin play chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 8,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Wendy brave?",
+   "free": "Would you say that Wendy has bravery?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you say that Wendy has bravery?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 8,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Erin generous?",
+   "free": "Is Erin a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Erin a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 8,
+   "index": 2,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Zack brave?",
+   "free": "Does Zack have courage?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Zack have courage?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 9,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Tina generous?",
+   "free": "Would you describe Tina as generous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Tina as generous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 9,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Erin live in Lille?",
+   "free": "Is Lille where Erin lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Lille where Erin lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 9,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Erin a chess player?",
+   "free": "Is Erin someone who plays chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Erin someone who plays chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 10,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Bob calm?",
+   "free": "Would you describe Bob as calm?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Bob as calm?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 10,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Bob patient?",
+   "free": "Does Bob have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Bob have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 10,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Oscar a nurse?",
+   "free": "Is Oscar someone who works as a nurse?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Oscar someone who works as a nurse?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 11,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Paula strong?",
+   "free": "Does Paula have strength?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Paula have strength?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 11,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Paula a farmer?",
+   "free": "Does Paula work as a farmer?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Paula work as a farmer?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "session": 11,
+   "index": 2,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Carol live in Rennes?",
+   "free": "Is Rennes the city where Carol lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Rennes the city where Carol lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 2,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Frank curious?",
+   "free": "Would you call Frank a curious person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Frank a curious person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 2,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Frank live in Brest?",
+   "free": "Is Brest where Frank lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Brest where Frank lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 3,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Bob a nurse?",
+   "free": "Does Bob work as a nurse?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Bob work as a nurse?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 3,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Mike careful?",
+   "free": "Is carefulness a quality Mike has?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is carefulness a quality Mike has?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 3,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Xavier patient?",
+   "free": "Does Xavier have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Xavier have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 4,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Alice calm?",
+   "free": "Would you describe Alice as a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Alice as a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 4,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Xavier a baker?",
+   "free": "Does Xavier work as a baker?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Xavier work as a baker?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 4,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Grace a painter?",
+   "free": "Does Grace paint?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Grace paint?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 5,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Xavier generous?",
+   "free": "Is Xavier a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is generosity one of Xavier's qualities?",
+     "refused": "judge"
+    },
+    {
+     "text": "Is Xavier a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 5,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Alice honest?",
+   "free": "Would you say Alice is an honest person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you say Alice is an honest person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 5,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a nurse?",
+   "free": "Is nursing Mike's profession?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is nursing Mike's profession?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 6,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Yara generous?",
+   "free": "Would you describe Yara as a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Yara as a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 6,
+   "index": 1,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Erin careful?",
+   "free": "Would you describe Erin as careful?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Erin as careful?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 6,
+   "index": 2,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Frank live in Brest?",
+   "free": "Does Frank reside in Brest?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Frank reside in Brest?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 7,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Erin patient?",
+   "free": "Is patience a quality Erin has?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is patience a quality Erin has?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 7,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Yara a painter?",
+   "free": "Does Yara work as a painter?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Yara work as a painter?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 7,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Alice patient?",
+   "free": "Does Alice have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Alice have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 8,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a nurse?",
+   "free": "Does Mike work as a nurse?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Mike work as a nurse?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 8,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Grace live in Paris?",
+   "free": "Is Paris where Grace lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Paris where Grace lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 8,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Erin curious?",
+   "free": "Is curiosity one of Erin's traits?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is curiosity one of Erin's traits?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 9,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Xavier a baker?",
+   "free": "Is Xavier's profession that of a baker?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Xavier's profession that of a baker?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 9,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Xavier calm?",
+   "free": "Would you call Xavier a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Xavier a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 9,
+   "index": 2,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Xavier careful?",
+   "free": "Would you say Xavier is a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you say Xavier is a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 10,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Bob live in Lille?",
+   "free": "Is Lille where Bob lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Lille where Bob lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 10,
+   "index": 1,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Heidi patient?",
+   "free": "Would you describe Heidi as patient?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Heidi as patient?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 10,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Grace patient?",
+   "free": "Is patience one of Grace's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is patience one of Grace's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 11,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Erin careful?",
+   "free": "Is carefulness one of Erin's traits?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is carefulness one of Erin's traits?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 11,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Bob live in Brest?",
+   "free": "Does Bob reside in Brest?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Bob reside in Brest?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "session": 11,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Heidi a pilot?",
+   "free": "Does Heidi work as a pilot?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Heidi work as a pilot?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 2,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Bob honest?",
+   "free": "Would you call Bob an honest person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Bob an honest person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 2,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a gardener?",
+   "free": "Does Mike garden?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Mike garden?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 2,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a gardener?",
+   "free": "Would you describe Mike as a gardener?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Mike as a gardener?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 3,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Bob a painter?",
+   "free": "Does Bob paint?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Bob paint?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 3,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Alice brave?",
+   "free": "Is Alice courageous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Alice courageous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 3,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Mike calm?",
+   "free": "Would you say Mike is a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you say Mike is a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 4,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Mike generous?",
+   "free": "Is generosity one of Mike's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is generosity one of Mike's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 4,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Laura patient?",
+   "free": "Does Laura have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Laura have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 4,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a gardener?",
+   "free": "Can Mike be called a gardener?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Can Mike be called a gardener?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 5,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a gardener?",
+   "free": "Is Mike someone who gardens?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Mike someone who gardens?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 6,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Zack a chess player?",
+   "free": "Does Zack play chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Zack play chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 6,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Paula calm?",
+   "free": "Is Paula a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Paula a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 6,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Paula generous?",
+   "free": "Would you describe Paula as generous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Paula as generous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 7,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Mike strong?",
+   "free": "Is Mike a strong person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Mike a strong person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 7,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Frank a chess player?",
+   "free": "Does Frank play chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Frank play chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 7,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Paula honest?",
+   "free": "Is honesty one of Paula's traits?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is honesty one of Paula's traits?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 8,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Zack a chess player?",
+   "free": "Is Zack someone who plays chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Zack someone who plays chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 8,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Frank honest?",
+   "free": "Would you say Frank is an honest person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you say Frank is an honest person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 8,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Alice a swimmer?",
+   "free": "Does Alice swim?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Alice swim?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 9,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Grace a teacher?",
+   "free": "Does Grace teach?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Grace teach?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 9,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Laura patient?",
+   "free": "Does Laura have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Laura a patient person?",
+     "refused": "judge"
+    },
+    {
+     "text": "Does Laura have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 9,
+   "index": 2,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Alice live in Dijon?",
+   "free": "Is Dijon where Alice lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Dijon where Alice lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 10,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Paula careful?",
+   "free": "Would you call Paula a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Paula a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 10,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Victor patient?",
+   "free": "Does Victor have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Victor have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 10,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Alice a swimmer?",
+   "free": "Is Alice someone who swims?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Alice someone who swims?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 11,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Grace live in Rouen?",
+   "free": "Is Rouen the city where Grace lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Rouen the city where Grace lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 11,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Alice a swimmer?",
+   "free": "Would you describe Alice as a swimmer?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Alice as a swimmer?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "session": 11,
+   "index": 2,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Mike live in Lille?",
+   "free": "Is Lille Mike's place of residence?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Lille Mike's place of residence?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 2,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Sam a painter?",
+   "free": "Does Sam paint?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Sam paint?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 3,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Erin patient?",
+   "free": "Does Erin have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Erin have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 3,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Sam generous?",
+   "free": "Would you call Sam a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Sam a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 3,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Alice brave?",
+   "free": "Does Alice have courage?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Alice have courage?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 5,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Sam live in Brest?",
+   "free": "Is Brest where Sam lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Brest where Sam lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 6,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Sam curious?",
+   "free": "Would you describe Sam as a curious person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is curiosity one of Sam's traits?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would you describe Sam as a curious person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 6,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Sam generous?",
+   "free": "Is generosity one of Sam's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is generosity one of Sam's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 7,
+   "index": 0,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Sam generous?",
+   "free": "Would you describe Sam as openhanded?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Sam as openhanded?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 7,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Erin generous?",
+   "free": "Is generosity part of Erin's character?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is generosity part of Erin's character?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 8,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Sam patient?",
+   "free": "Would you describe Sam as a patient person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Sam as a patient person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 8,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Erin generous?",
+   "free": "Would you say Erin is a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you say Erin is a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 8,
+   "index": 2,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Sam live in Paris?",
+   "free": "Is Sam a resident of Paris?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Sam a resident of Paris?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 9,
+   "index": 0,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Sam generous?",
+   "free": "Is Sam a giving person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Sam a giving person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 9,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Uma live in Nice?",
+   "free": "Is Nice the city where Uma lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nice the city where Uma lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 9,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Tina a baker?",
+   "free": "Does Tina work as a baker?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Tina work as a baker?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 10,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Tina a baker?",
+   "free": "Would you describe Tina as a baker?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Tina as a baker?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 11,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Sam live in Paris?",
+   "free": "Does Sam reside in Paris?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Sam reside in Paris?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 11,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Sam live in Paris?",
+   "free": "Is Paris the city Sam lives in?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Paris the city Sam lives in?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 6,
+   "session": 11,
+   "index": 2,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Uma live in Nice?",
+   "free": "Is Uma a resident of Nice?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Uma a resident of Nice?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 3,
+   "index": 0,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Frank generous?",
+   "free": "Would you call Frank a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Frank a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 3,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Xavier generous?",
+   "free": "Would you describe Xavier as a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is generosity one of Xavier's qualities?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would you describe Xavier as a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 4,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Frank a teacher?",
+   "free": "Does Frank work as a teacher?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Frank work as a teacher?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 5,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Xavier curious?",
+   "free": "Would you describe Xavier as a curious person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is curiosity one of Xavier's traits?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would you describe Xavier as a curious person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 5,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Xavier careful?",
+   "free": "Would you describe Xavier as a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Xavier as a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 7,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Ivan a chess player?",
+   "free": "Does Ivan play chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Ivan play chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 7,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Rita live in Rennes?",
+   "free": "Is Rennes where Rita lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Rennes where Rita lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 7,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Xavier strong?",
+   "free": "Does Xavier possess strength?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you say Xavier is a strong person?",
+     "refused": "judge"
+    },
+    {
+     "text": "Does Xavier possess strength?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 8,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Xavier live in Metz?",
+   "free": "Is Xavier a resident of Metz?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Xavier a resident of Metz?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 8,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Victor careful?",
+   "free": "Is carefulness one of Victor's traits?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is carefulness one of Victor's traits?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 8,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Xavier honest?",
+   "free": "Would you call Xavier an honest person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Xavier an honest person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 9,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Frank a teacher?",
+   "free": "Is teaching Frank's profession?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is teaching Frank's profession?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 9,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Mike brave?",
+   "free": "Would you describe Mike as brave?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Mike as brave?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 9,
+   "index": 2,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Mike careful?",
+   "free": "Is Mike a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Mike a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 10,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Mike live in Nantes?",
+   "free": "Is Nantes Mike's place of residence?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nantes Mike's place of residence?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 10,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Frank live in Tours?",
+   "free": "Is Frank a resident of Tours?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Frank a resident of Tours?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 10,
+   "index": 2,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Frank live in Metz?",
+   "free": "Is Metz where Frank lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Metz where Frank lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 11,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Dave a gardener?",
+   "free": "Does Dave work as a gardener?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Dave work as a gardener?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 11,
+   "index": 1,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Frank strong?",
+   "free": "Would you call Frank strong?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Frank strong?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 7,
+   "session": 11,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Dave generous?",
+   "free": "Would you describe Dave as a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Dave as a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 2,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Dave a baker?",
+   "free": "Does Dave work as a baker?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Dave work as a baker?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 4,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Paula live in Dijon?",
+   "free": "Is Dijon where Paula lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Dijon where Paula lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 4,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Paula live in Metz?",
+   "free": "Is Paula a resident of Metz?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Paula a resident of Metz?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 5,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Dave calm?",
+   "free": "Would you describe Dave as a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Dave as a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 5,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Quinn a gardener?",
+   "free": "Does Quinn work as a gardener?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Quinn work as a gardener?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 5,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Dave curious?",
+   "free": "Is Dave an inquisitive person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Dave an inquisitive person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 6,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Dave curious?",
+   "free": "Would you call Dave curious?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Dave curious?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 6,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Laura strong?",
+   "free": "Would you describe Laura as strong?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Laura as strong?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 7,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Paula live in Dijon?",
+   "free": "Is Paula's home in Dijon?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Paula's home in Dijon?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 7,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Quinn calm?",
+   "free": "Would you describe Quinn as calm?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is calm a fitting word for Quinn?",
+     "refused": "judge"
+    },
+    {
+     "text": null,
+     "refused": "form"
+    },
+    {
+     "text": "Would you describe Quinn as calm?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 7,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Dave curious?",
+   "free": "Would you call Dave a curious person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is curiosity one of Dave's traits?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would you call Dave a curious person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 8,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Laura a painter?",
+   "free": "Does Laura work as a painter?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Laura work as a painter?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 8,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Paula live in Dijon?",
+   "free": "Does Paula reside in Dijon?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Paula reside in Dijon?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 8,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Quinn a gardener?",
+   "free": "Would you describe Quinn as a gardener?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Quinn as a gardener?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 9,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Laura a painter?",
+   "free": "Is Laura someone who paints?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Laura someone who paints?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 10,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Frank live in Metz?",
+   "free": "Is Metz where Frank lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Metz where Frank lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 10,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Quinn calm?",
+   "free": "Would you call Quinn a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Quinn a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 10,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Paula curious?",
+   "free": "Is Paula inquisitive?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Paula inquisitive?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 11,
+   "index": 0,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Laura patient?",
+   "free": "Does Laura have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Laura have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 11,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Xavier calm?",
+   "free": "Is Xavier a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Xavier a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 8,
+   "session": 11,
+   "index": 2,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Paula live in Dijon?",
+   "free": "Is Dijon Paula's place of residence?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Dijon Paula's place of residence?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 2,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a painter?",
+   "free": "Does Mike paint?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Mike paint?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 2,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Karl strong?",
+   "free": "Can Karl be described as strong?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is strength one of Karl's qualities?",
+     "refused": "judge"
+    },
+    {
+     "text": "Can Karl be described as strong?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 3,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Paula calm?",
+   "free": "Is Paula a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Paula a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 3,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Karl curious?",
+   "free": "Does Karl have a curious nature?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Karl have a curious nature?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 4,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Karl live in Nice?",
+   "free": "Is Nice where Karl lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nice where Karl lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 4,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Karl curious?",
+   "free": "Would you describe Karl as inquisitive?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Karl as inquisitive?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 4,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Paula honest?",
+   "free": "Is honesty one of Paula's traits?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is honesty one of Paula's traits?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 5,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a painter?",
+   "free": "Is Mike someone who paints?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Mike someone who paints?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 5,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Heidi patient?",
+   "free": "Does Heidi have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Heidi have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 5,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Grace careful?",
+   "free": "Is Grace a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Grace a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 6,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Paula a gardener?",
+   "free": "Does Paula garden?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Paula garden?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 6,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Heidi strong?",
+   "free": "Is Heidi a strong person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Heidi a strong person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 6,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Uma a farmer?",
+   "free": "Does Uma farm?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Uma farm?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 7,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Sam a musician?",
+   "free": "Would you describe Sam as a musician?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Sam as a musician?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 7,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Karl live in Rennes?",
+   "free": "Does Karl reside in Rennes?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Karl reside in Rennes?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 7,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Uma a farmer?",
+   "free": "Is Uma someone who farms?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Uma someone who farms?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 8,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Sam generous?",
+   "free": "Would you describe Sam as generous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Sam as generous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 8,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Sam live in Paris?",
+   "free": "Is Paris Sam's place of residence?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Paris Sam's place of residence?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 8,
+   "index": 2,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Xavier live in Tours?",
+   "free": "Is Tours the city where Xavier lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Tours the city where Xavier lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 9,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Karl generous?",
+   "free": "Is generosity one of Karl's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is generosity one of Karl's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 9,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Heidi curious?",
+   "free": "Is Heidi inquisitive?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Heidi inquisitive?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 9,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Mike generous?",
+   "free": "Is Mike a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Mike a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 10,
+   "index": 0,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Heidi curious?",
+   "free": "Would you describe Heidi as a curious person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Heidi as a curious person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 10,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Zack a gardener?",
+   "free": "Is Zack someone who gardens?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Zack someone who gardens?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 10,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Grace a pilot?",
+   "free": "Would you call Grace a pilot?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Grace a pilot?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 11,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Xavier a baker?",
+   "free": "Would you describe Xavier as a baker?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Xavier as a baker?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 11,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Karl a musician?",
+   "free": "Would you call Karl a musician?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Karl a musician?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 9,
+   "session": 11,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Uma a farmer?",
+   "free": "Would you describe Uma as a farmer?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Uma as a farmer?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 2,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Grace live in Rennes?",
+   "free": "Is Rennes where Grace lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Rennes where Grace lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 2,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Judy a gardener?",
+   "free": "Would you describe Judy as a gardener?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Judy as a gardener?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 3,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Grace live in Nice?",
+   "free": "Does Grace reside in Nice?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Grace reside in Nice?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 3,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Ivan strong?",
+   "free": "Would you call Ivan a strong person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Ivan a strong person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 3,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Judy generous?",
+   "free": "Does Judy show generosity?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Judy show generosity?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 4,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Erin a musician?",
+   "free": "Would you call Erin a musician?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Erin a musician?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 4,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Grace live in Rennes?",
+   "free": "Is Grace a resident of Rennes?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Grace a resident of Rennes?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 4,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Ivan curious?",
+   "free": "Would you describe Ivan as a curious person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is curiosity one of Ivan's traits?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would you describe Ivan as a curious person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 5,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Erin a musician?",
+   "free": "Could Erin be described as a musician?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Could Erin be described as a musician?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 5,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Mike live in Metz?",
+   "free": "Is Metz the city where Mike lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Metz the city where Mike lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 5,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Judy generous?",
+   "free": "Is generosity one of Judy's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is generosity one of Judy's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 6,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Rita generous?",
+   "free": "Would you describe Rita as a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Rita as a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 6,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Rita calm?",
+   "free": "Does Rita have a calm temperament?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Rita have a calm temperament?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 6,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Erin a musician?",
+   "free": "Is Erin someone you would describe as a musician?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Erin someone you would describe as a musician?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 7,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Oscar live in Tours?",
+   "free": "Does Oscar reside in Tours?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Oscar reside in Tours?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 7,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Erin calm?",
+   "free": "Would you say that Erin is calm?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is calmness part of Erin's nature?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would you say that Erin is calm?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 8,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Oscar a musician?",
+   "free": "Would you call Oscar a musician?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Oscar a musician?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 8,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Ivan a gardener?",
+   "free": "Could Ivan be described as a gardener?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Could Ivan be described as a gardener?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 8,
+   "index": 2,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Oscar live in Tours?",
+   "free": "Is Tours where Oscar lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Tours where Oscar lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 9,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Oscar live in Rennes?",
+   "free": "Is Rennes the city where Oscar resides?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Rennes the city where Oscar resides?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 9,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Oscar live in Tours?",
+   "free": "Is Oscar a resident of Tours?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Oscar a resident of Tours?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 9,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Ivan generous?",
+   "free": "Does Ivan show generosity?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Ivan show generosity?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 10,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Ivan a gardener?",
+   "free": "Would you describe Ivan as a gardener?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Ivan as a gardener?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 10,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Ivan honest?",
+   "free": "Is honesty one of Ivan's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is honesty one of Ivan's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 10,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Rita calm?",
+   "free": "Would you say Rita is a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you say Rita is a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 11,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Carol generous?",
+   "free": "Is generosity one of Carol's traits?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is generosity one of Carol's traits?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 11,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a chess player?",
+   "free": "Does Mike play chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Mike play chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 10,
+   "session": 11,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Judy generous?",
+   "free": "Would you call Judy a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Judy a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 2,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Zack brave?",
+   "free": "Is Zack a courageous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Zack a courageous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 3,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Rita a farmer?",
+   "free": "Would you call Rita a farmer?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Rita a farmer?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 3,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Mike calm?",
+   "free": "Would you describe Mike as calm?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is calmness one of Mike's traits?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would you describe Mike as calm?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 3,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Carol patient?",
+   "free": "Does Carol have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Carol have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 4,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Mike brave?",
+   "free": "Would you call Mike courageous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Mike courageous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 4,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Quinn calm?",
+   "free": "Is Quinn a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Quinn a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 4,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Ivan brave?",
+   "free": "Is bravery a quality Ivan has?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is bravery a quality Ivan has?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 5,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a musician?",
+   "free": "Would you describe Mike as a musician?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Mike as a musician?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 5,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Xavier generous?",
+   "free": "Is Xavier a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Xavier a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 5,
+   "index": 2,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Xavier brave?",
+   "free": "Is Xavier courageous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Xavier courageous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 6,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Victor live in Lyon?",
+   "free": "Is Lyon where Victor lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Lyon where Victor lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 6,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Victor live in Lyon?",
+   "free": "Is Victor's home in Lyon?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Victor's home in Lyon?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 6,
+   "index": 2,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Karl live in Dijon?",
+   "free": "Is Dijon the city Karl lives in?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Dijon the city Karl lives in?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 7,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Rita live in Tours?",
+   "free": "Is Tours Rita's place of residence?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Tours Rita's place of residence?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 7,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Victor live in Caen?",
+   "free": "Does Victor reside in Caen?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Victor reside in Caen?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 7,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Karl generous?",
+   "free": "Does Karl have a generous nature?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Karl have a generous nature?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 8,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Xavier strong?",
+   "free": "Would you call Xavier a strong person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Xavier a strong person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 8,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Xavier live in Nantes?",
+   "free": "Is Nantes Xavier's home city?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nantes Xavier's home city?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 8,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Ivan patient?",
+   "free": "Is patience a quality Ivan possesses?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is patience a quality Ivan possesses?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 9,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Xavier a musician?",
+   "free": "Does Xavier count as a musician?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Xavier count as a musician?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 9,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Xavier live in Caen?",
+   "free": "Is Xavier a resident of Caen?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Xavier a resident of Caen?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 9,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Ivan a gardener?",
+   "free": "Would you call Ivan a gardener?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Ivan a gardener?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 10,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Carol brave?",
+   "free": "Does Carol have courage?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Carol have courage?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 10,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a musician?",
+   "free": "Can Mike be described as a musician?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Can Mike be described as a musician?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 10,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Karl strong?",
+   "free": "Would you describe Karl as strong?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Karl as strong?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 11,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Carol curious?",
+   "free": "Does Carol have a curious nature?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Carol have a curious nature?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 11,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Carol patient?",
+   "free": "Would you call Carol a patient person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Carol a patient person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 11,
+   "session": 11,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a musician?",
+   "free": "Does the word musician describe Mike?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does the word musician describe Mike?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 3,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Frank live in Dijon?",
+   "free": "Is Dijon the city where Frank lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Dijon the city where Frank lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 3,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a baker?",
+   "free": "Does Mike work as a baker?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Mike work as a baker?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 3,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Nina strong?",
+   "free": "Does Nina possess strength?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Nina possess strength?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 5,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Nina strong?",
+   "free": "Would you describe Nina as a strong person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Nina as a strong person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 5,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Nina a gardener?",
+   "free": "Does Nina work as a gardener?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Nina work as a gardener?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 6,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Nina curious?",
+   "free": "Would you describe Nina as a curious person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is curiosity one of Nina's traits?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would you describe Nina as a curious person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 7,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Frank strong?",
+   "free": "Is Frank a strong person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Frank a strong person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 7,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a baker?",
+   "free": "Would you call Mike a baker?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Mike a baker?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 7,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Xavier curious?",
+   "free": "Would you describe Xavier as a curious person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Xavier as a curious person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 8,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Karl live in Dijon?",
+   "free": "Is Karl a resident of Dijon?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Karl a resident of Dijon?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 8,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Heidi strong?",
+   "free": "Does Heidi have strength?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Heidi have strength?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 8,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Frank brave?",
+   "free": "Does Frank have courage?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Frank have courage?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 9,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Heidi a teacher?",
+   "free": "Does Heidi teach?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Heidi teach?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 9,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Karl live in Nice?",
+   "free": "Is Nice where Karl lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nice where Karl lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 9,
+   "index": 2,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Carol generous?",
+   "free": "Would you call Carol a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Carol a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 10,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Sam careful?",
+   "free": "Is Sam a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Sam a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 10,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Karl live in Nice?",
+   "free": "Is Karl a resident of Nice?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Karl a resident of Nice?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 10,
+   "index": 2,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Karl live in Nice?",
+   "free": "Does Karl make his home in Nice?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Karl make his home in Nice?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 11,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Carol a swimmer?",
+   "free": "Does Carol swim?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Carol swim?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 11,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Frank generous?",
+   "free": "Is generosity one of Frank's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is generosity one of Frank's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 12,
+   "session": 11,
+   "index": 2,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Sam brave?",
+   "free": "Would you describe Sam as a courageous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Sam as a courageous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 2,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Rita a pilot?",
+   "free": "Does Rita work as a pilot?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Rita work as a pilot?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 3,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Rita generous?",
+   "free": "Would you call Rita a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Rita a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 3,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Tina a painter?",
+   "free": "Is Tina someone who paints?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Tina someone who paints?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 3,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Sam generous?",
+   "free": "Does Sam show generosity?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Sam show generosity?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 4,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Grace honest?",
+   "free": "Would you describe Grace as an honest person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Grace as an honest person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 4,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Carol curious?",
+   "free": "Is curiosity one of Carol's traits?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is curiosity one of Carol's traits?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 5,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Carol brave?",
+   "free": "Does Carol have courage?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Carol have courage?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 5,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Grace strong?",
+   "free": "Does Grace possess strength?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Grace possess strength?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 6,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Judy curious?",
+   "free": "Would you say Judy is a curious person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you say Judy is a curious person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 6,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Grace generous?",
+   "free": "Is Grace a giving person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Grace a giving person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 6,
+   "index": 2,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Grace generous?",
+   "free": "Does Grace have a generous nature?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Grace have a generous nature?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 7,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Judy brave?",
+   "free": "Is Judy courageous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Judy courageous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 7,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Grace patient?",
+   "free": "Does Grace show patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Grace show patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 7,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Judy brave?",
+   "free": "Would you describe Judy as a brave person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Judy as a brave person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 8,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Zack live in Brest?",
+   "free": "Is Brest where Zack lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Brest where Zack lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 8,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Rita a pilot?",
+   "free": "Is Rita someone who pilots aircraft?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Rita someone who pilots aircraft?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 8,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Sam honest?",
+   "free": "Is honesty a quality Sam has?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is honesty a quality Sam has?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 9,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Rita live in Paris?",
+   "free": "Is Paris Rita's city of residence?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Paris Rita's city of residence?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 9,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Carol live in Dijon?",
+   "free": "Is Carol a resident of Dijon?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Carol a resident of Dijon?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 9,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Rita patient?",
+   "free": "Is patience a quality of Rita's?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is patience a quality of Rita's?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 10,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Xavier generous?",
+   "free": "Is Xavier a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Xavier a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 10,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Xavier careful?",
+   "free": "Does Xavier act with care?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Xavier act with care?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 10,
+   "index": 2,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Grace generous?",
+   "free": "Does generosity describe Grace?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does generosity describe Grace?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 11,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Tina live in Metz?",
+   "free": "Does Tina reside in Metz?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Tina reside in Metz?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 11,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Judy a gardener?",
+   "free": "Is Judy someone who gardens?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Judy someone who gardens?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 13,
+   "session": 11,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Sam a painter?",
+   "free": "Does Sam paint?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Sam paint?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 2,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Heidi honest?",
+   "free": "Would you call Heidi an honest person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Heidi an honest person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 3,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Karl curious?",
+   "free": "Does Karl have a curious nature?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Karl have a curious nature?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 4,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Heidi a swimmer?",
+   "free": "Does Heidi swim?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Heidi swim?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 4,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Heidi strong?",
+   "free": "Does Heidi possess strength?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Heidi possess strength?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 5,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Karl careful?",
+   "free": "Would you describe Karl as a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Karl as a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 5,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Karl a gardener?",
+   "free": "Does Karl do gardening?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Karl do gardening?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 5,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Carol honest?",
+   "free": "Can Carol be described as an honest person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Carol have honesty?",
+     "refused": "judge"
+    },
+    {
+     "text": "Can Carol be described as an honest person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 6,
+   "index": 0,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Grace patient?",
+   "free": "Does Grace have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Grace have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 6,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Heidi generous?",
+   "free": "Would you describe Heidi as a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is generosity one of Heidi's qualities?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would you describe Heidi as a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 7,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Karl strong?",
+   "free": "Would you say Karl is a strong person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you say Karl is a strong person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 7,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Carol a chess player?",
+   "free": "Does Carol play chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Carol play chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 7,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Alice patient?",
+   "free": "Does Alice have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Alice have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 8,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Heidi patient?",
+   "free": "Is patience one of Heidi's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is patience one of Heidi's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 8,
+   "index": 1,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Grace brave?",
+   "free": "Does Grace have courage?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Grace have courage?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 8,
+   "index": 2,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Grace patient?",
+   "free": "Would you describe Grace as a patient person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Grace as a patient person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 9,
+   "index": 0,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Heidi generous?",
+   "free": "Would you call Heidi a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Heidi a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 9,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Heidi generous?",
+   "free": "Does Heidi have a generous nature?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Heidi have a generous nature?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 9,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Grace brave?",
+   "free": "Would you describe Grace as a brave person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is courage one of Grace's qualities?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would you describe Grace as a brave person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 10,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Karl generous?",
+   "free": "Does Karl have generosity?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Karl have generosity?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 10,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Carol patient?",
+   "free": "Would you call Carol a patient person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Carol a patient person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 10,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Karl a gardener?",
+   "free": "Is gardening something Karl does?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is gardening something Karl does?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 11,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Rita live in Nantes?",
+   "free": "Is Nantes where Rita lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nantes where Rita lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 11,
+   "index": 1,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Karl strong?",
+   "free": "Would you say that Karl is a strong person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is strength one of Karl's qualities?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would you say that Karl is a strong person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 14,
+   "session": 11,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Carol a chess player?",
+   "free": "Does Carol play chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is chess a game Carol plays?",
+     "refused": "judge"
+    },
+    {
+     "text": "Does Carol play chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 2,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Zack live in Paris?",
+   "free": "Is Paris where Zack lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Paris where Zack lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 3,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Alice brave?",
+   "free": "Would you call Alice a brave person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Alice a brave person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 3,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Paula live in Brest?",
+   "free": "Is Paula's home in Brest?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Paula's home in Brest?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 4,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Alice strong?",
+   "free": "Would you describe Alice as strong?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Alice as strong?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 4,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Karl curious?",
+   "free": "Does Karl have a curious nature?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Karl have a curious nature?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 4,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Tina a swimmer?",
+   "free": "Does Tina swim?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Tina swim?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 5,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Zack curious?",
+   "free": "Is curiosity a trait of Zack's?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is curiosity a trait of Zack's?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 5,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Karl patient?",
+   "free": "Does Karl show patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Karl show patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 5,
+   "index": 2,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Tina live in Dijon?",
+   "free": "Is Dijon the city where Tina lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Dijon the city where Tina lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 6,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Grace careful?",
+   "free": "Would you describe Grace as a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Grace as a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 6,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Bob a baker?",
+   "free": "Does Bob work as a baker?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Bob work as a baker?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 6,
+   "index": 2,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Grace patient?",
+   "free": "Is Grace a patient person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Grace a patient person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 7,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Tina a swimmer?",
+   "free": "Is Tina someone who swims?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Tina someone who swims?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 7,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Mike honest?",
+   "free": "Would you say Mike is an honest person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you say Mike is an honest person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 7,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Mike a painter?",
+   "free": "Does Mike paint?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Mike paint?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 8,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Mike live in Tours?",
+   "free": "Is Tours where Mike lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Tours where Mike lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 8,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Alice a nurse?",
+   "free": "Does Alice work as a nurse?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Alice work as a nurse?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 8,
+   "index": 2,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Zack honest?",
+   "free": "Is honesty one of Zack's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is honesty one of Zack's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 9,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Alice curious?",
+   "free": "Would you call Alice curious?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Alice curious?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 9,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Paula patient?",
+   "free": "Does Paula have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Paula have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 9,
+   "index": 2,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Paula patient?",
+   "free": "Is patience a quality Paula has?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is patience a quality Paula has?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 10,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Tina a swimmer?",
+   "free": "Would you describe Tina as a swimmer?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Tina as a swimmer?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 10,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Paula live in Caen?",
+   "free": "Is Caen Paula's city of residence?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Caen Paula's city of residence?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 10,
+   "index": 2,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Zack honest?",
+   "free": "Can Zack be described as honest?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Can Zack be described as honest?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 11,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Mike live in Lyon?",
+   "free": "Is Lyon the place where Mike lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Lyon the place where Mike lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 11,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Zack live in Tours?",
+   "free": "Does Zack reside in Tours?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Zack reside in Tours?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 15,
+   "session": 11,
+   "index": 2,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Bob patient?",
+   "free": "Would you describe Bob as a patient person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Bob as a patient person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 2,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Xavier live in Tours?",
+   "free": "Is Tours the city where Xavier lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Tours the city where Xavier lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 3,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Oscar honest?",
+   "free": "Would you call Oscar an honest person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Oscar an honest person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 3,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Ivan honest?",
+   "free": "Is honesty one of Ivan's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is honesty one of Ivan's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 3,
+   "index": 2,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Xavier live in Tours?",
+   "free": "Is Xavier a resident of Tours?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Xavier a resident of Tours?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 4,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Oscar honest?",
+   "free": "Is Oscar truthful?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Oscar truthful?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 4,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Bob generous?",
+   "free": "Would you describe Bob as generous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Bob as generous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 5,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Bob live in Nantes?",
+   "free": "Is Nantes where Bob lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nantes where Bob lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 5,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Oscar a painter?",
+   "free": "Does Oscar paint?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Oscar paint?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 5,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Xavier a teacher?",
+   "free": "Does Xavier teach?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Xavier teach?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 6,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Wendy live in Nice?",
+   "free": "Is Nice the city Wendy lives in?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nice the city Wendy lives in?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 6,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Nina a gardener?",
+   "free": "Does Nina garden?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Nina garden?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 6,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Wendy curious?",
+   "free": "Would you call Wendy a curious person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is curiosity one of Wendy's traits?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would you call Wendy a curious person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 7,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Wendy live in Caen?",
+   "free": "Does Wendy reside in Caen?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Wendy reside in Caen?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 7,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Xavier a teacher?",
+   "free": "Is Xavier someone who teaches?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Xavier someone who teaches?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 7,
+   "index": 2,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Xavier live in Tours?",
+   "free": "Is Xavier's home in Tours?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Xavier's home in Tours?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 8,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Nina live in Rouen?",
+   "free": "Is Rouen where Nina lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Rouen where Nina lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 8,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Bob live in Nantes?",
+   "free": "Is Bob a resident of Nantes?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Bob a resident of Nantes?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 8,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Wendy a farmer?",
+   "free": "Does Wendy farm?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Wendy farm?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 9,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Xavier careful?",
+   "free": "Would you call Xavier a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Xavier a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 9,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Bob patient?",
+   "free": "Does Bob have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Bob have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 9,
+   "index": 2,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Wendy live in Caen?",
+   "free": "Is Caen the city Wendy lives in?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Caen the city Wendy lives in?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 10,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Dave a teacher?",
+   "free": "Does Dave teach?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Dave teach?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 10,
+   "index": 1,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Bob careful?",
+   "free": "Is Bob cautious?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Bob cautious?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 10,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Xavier a teacher?",
+   "free": "Is teaching what Xavier does?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is teaching what Xavier does?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 11,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Grace careful?",
+   "free": "Is carefulness one of Grace's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is carefulness one of Grace's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 11,
+   "index": 1,
+   "kind": "chain2",
+   "gold": "no",
+   "canonical": "Is Dave curious?",
+   "free": "Would you describe Dave as curious?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Dave as curious?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 16,
+   "session": 11,
+   "index": 2,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Nina brave?",
+   "free": "Does Nina have courage?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Nina have courage?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 3,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Zack calm?",
+   "free": "Would you call Zack a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Zack a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 3,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Quinn patient?",
+   "free": "Does Quinn have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Quinn have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 3,
+   "index": 2,
+   "kind": "chain",
+   "gold": "no",
+   "canonical": "Is Carol generous?",
+   "free": "Is generosity one of Carol's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is generosity one of Carol's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 4,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Quinn a chess player?",
+   "free": "Does Quinn play chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Quinn play chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 4,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Quinn careful?",
+   "free": "Would you describe Quinn as a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Quinn as a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 5,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Rita careful?",
+   "free": "Does Rita act with care?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Rita act with care?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 5,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Grace live in Rouen?",
+   "free": "Is Rouen where Grace lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Rouen where Grace lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 5,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Rita strong?",
+   "free": "Would you describe Rita as a strong person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Rita as a strong person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 6,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Grace live in Rouen?",
+   "free": "Is Grace a resident of Rouen?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Grace a resident of Rouen?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 6,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Quinn brave?",
+   "free": "Is Quinn courageous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Quinn courageous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 6,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Dave calm?",
+   "free": "Is Dave a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Dave a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 7,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Grace live in Rouen?",
+   "free": "Does Grace reside in Rouen?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Grace reside in Rouen?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 7,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Dave generous?",
+   "free": "Would you call Dave a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Dave a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 7,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Ivan curious?",
+   "free": "Would you describe Ivan as a curious person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Ivan as a curious person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 8,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Grace live in Nice?",
+   "free": "Is Nice where Grace lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nice where Grace lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 8,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Oscar patient?",
+   "free": "Would you call Oscar a patient person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Oscar a patient person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 8,
+   "index": 2,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Grace live in Rouen?",
+   "free": "Is Rouen the city Grace lives in?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Rouen the city Grace lives in?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 9,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Quinn a chess player?",
+   "free": "Does Quinn play chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is chess a game Quinn plays?",
+     "refused": "judge"
+    },
+    {
+     "text": "Does Quinn play chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 9,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Oscar brave?",
+   "free": "Is Oscar courageous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Oscar courageous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 9,
+   "index": 2,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Zack live in Lyon?",
+   "free": "Is Lyon where Zack lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Lyon where Zack lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 10,
+   "index": 0,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Paula a gardener?",
+   "free": "Does Paula garden?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Paula garden?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 10,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Quinn calm?",
+   "free": "Would you describe Quinn as calm?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Quinn as calm?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 10,
+   "index": 2,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Frank live in Metz?",
+   "free": "Is Metz where Frank lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Metz where Frank lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 11,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Grace live in Lyon?",
+   "free": "Is Grace a resident of Lyon?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Grace a resident of Lyon?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 11,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Oscar a swimmer?",
+   "free": "Does Oscar swim?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Oscar swim?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 17,
+   "session": 11,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Paula a gardener?",
+   "free": "Would it be accurate to describe Paula as a gardener?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is gardening something Paula does?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would it be accurate to describe Paula as a gardener?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 2,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Laura calm?",
+   "free": "Would you call Laura a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Laura a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 2,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Judy honest?",
+   "free": "Is honesty a quality Judy has?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is honesty a quality Judy has?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 3,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Uma careful?",
+   "free": "Does Uma act with care?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Uma act with care?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 4,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Judy brave?",
+   "free": "Does Judy have courage?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Judy have courage?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 5,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Laura patient?",
+   "free": "Is patience one of Laura's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is patience one of Laura's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 5,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Ivan generous?",
+   "free": "Would Ivan be described as generous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would Ivan be described as generous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 5,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Karl careful?",
+   "free": "Is Karl a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Karl a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 6,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Ivan patient?",
+   "free": "Does Ivan show patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Ivan show patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 6,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Judy a pilot?",
+   "free": "Would you describe Judy as a pilot?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Judy as a pilot?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 6,
+   "index": 2,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Frank honest?",
+   "free": "Is Frank truthful?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Frank truthful?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 7,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Karl strong?",
+   "free": "Is Karl a strong person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Karl a strong person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 7,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Uma careful?",
+   "free": "Can Uma be described as careful?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Can Uma be described as careful?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 8,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Uma honest?",
+   "free": "Is Uma an honest person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Uma an honest person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 8,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Frank calm?",
+   "free": "Is Frank someone who is calm?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Frank someone who is calm?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 8,
+   "index": 2,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Judy careful?",
+   "free": "Would you say Judy is careful?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you say Judy is careful?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 9,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Laura live in Nantes?",
+   "free": "Is Laura a resident of Nantes?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Laura a resident of Nantes?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 9,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Frank calm?",
+   "free": "Would you describe Frank as calm?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Frank as calm?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 9,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Frank generous?",
+   "free": "Is Frank a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Frank a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 10,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Uma patient?",
+   "free": "Does Uma have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Uma a patient person?",
+     "refused": "judge"
+    },
+    {
+     "text": "Does Uma have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 10,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Laura a chess player?",
+   "free": "Does Laura play chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Laura play chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 10,
+   "index": 2,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Karl strong?",
+   "free": "Would you describe Karl as strong?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Karl as strong?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 11,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Karl careful?",
+   "free": "Can Karl be called careful?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Can Karl be called careful?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 18,
+   "session": 11,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Laura a chess player?",
+   "free": "Is Laura someone who plays chess?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Laura someone who plays chess?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 2,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Nina generous?",
+   "free": "Would you describe Nina as a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Nina as a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 2,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Victor generous?",
+   "free": "Does Victor have a generous nature?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Victor have a generous nature?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 3,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Victor careful?",
+   "free": "Does Victor act with care?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Victor act with care?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 4,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Nina honest?",
+   "free": "Is honesty one of Nina's qualities?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is honesty one of Nina's qualities?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 4,
+   "index": 1,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Rita live in Paris?",
+   "free": "Is Paris where Rita lives?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Paris where Rita lives?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 4,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Victor a painter?",
+   "free": "Does Victor paint?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Victor paint?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 5,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Nina calm?",
+   "free": "Would you describe Nina as a calm person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Nina as a calm person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 6,
+   "index": 0,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Rita live in Lyon?",
+   "free": "Is Lyon the city Rita lives in?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Lyon the city Rita lives in?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 6,
+   "index": 1,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Rita calm?",
+   "free": "Does Rita have a calm temperament?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Rita have a calm temperament?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 7,
+   "index": 0,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Nina generous?",
+   "free": "Would you describe Nina as a generous person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is generosity part of Nina's character?",
+     "refused": "judge"
+    },
+    {
+     "text": "Would you describe Nina as a generous person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 7,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Rita a teacher?",
+   "free": "Does Rita teach?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Rita teach?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 7,
+   "index": 2,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Nina careful?",
+   "free": "Would you call Nina a careful person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Nina a careful person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 8,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Carol brave?",
+   "free": "Would you call Carol courageous?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you call Carol courageous?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 8,
+   "index": 1,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Tina patient?",
+   "free": "Does Tina have patience?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Tina have patience?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 8,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Victor a painter?",
+   "free": "Is Victor someone who paints?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Victor someone who paints?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 9,
+   "index": 0,
+   "kind": "update_new",
+   "gold": "yes",
+   "canonical": "Does Rita live in Nice?",
+   "free": "Does Rita reside in Nice?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Rita reside in Nice?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 9,
+   "index": 1,
+   "kind": "update_old",
+   "gold": "no",
+   "canonical": "Does Rita live in Paris?",
+   "free": "Is Rita a resident of Paris?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Rita a resident of Paris?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 10,
+   "index": 0,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Nina curious?",
+   "free": "Is Nina an inquisitive person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is Nina an inquisitive person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 10,
+   "index": 1,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Nina a musician?",
+   "free": "Does Nina make music?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Nina make music?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 10,
+   "index": 2,
+   "kind": "chain2",
+   "gold": "yes",
+   "canonical": "Is Ivan curious?",
+   "free": "Does Ivan have a curious mind?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Ivan have a curious mind?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 11,
+   "index": 0,
+   "kind": "chain",
+   "gold": "yes",
+   "canonical": "Is Rita patient?",
+   "free": "Would you describe Rita as a patient person?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Would you describe Rita as a patient person?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 11,
+   "index": 1,
+   "kind": "unknown",
+   "gold": "unknown",
+   "canonical": "Is Ivan honest?",
+   "free": "Is honesty a trait Ivan has?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Is honesty a trait Ivan has?",
+     "refused": null
+    }
+   ]
+  },
+  {
+   "world": 19,
+   "session": 11,
+   "index": 2,
+   "kind": "recall",
+   "gold": "yes",
+   "canonical": "Is Tina a swimmer?",
+   "free": "Does Tina swim?",
+   "fallback": false,
+   "attempts": [
+    {
+     "text": "Does Tina swim?",
+     "refused": null
+    }
+   ]
+  }
+ ]
+}

@@ -101,12 +101,12 @@ assert all(q["goal_names"] for q in sync["questions"]) and sync["failed_calls"] 
 # ---- 5. a question call that fails after the retries counts as wrong, even when its gold is unknown
 unk = next(it for it in fz["items"] if it["gold"] == "unknown" and not it["fallback"])
 class Down(Scripted):
-    def create(self, model, max_tokens, system, messages):
+    def create(self, model, max_tokens, system, messages, **kw):
         u = messages[0]["content"]
         if unk["free"] in u and "NAMES ALREADY IN MEMORY" in u and "A QUESTION IS ASKED" in u:
             e = type("ServiceUnavailableError", (Exception,), {})("down"); e.status_code = 503
             raise e
-        return super().create(model, max_tokens, system, messages)
+        return super().create(model, max_tokens, system, messages, **kw)
 down, _ = quiet(ARGS + ["--sandbox"], client=Down())
 n_unk = sum(it["free"] == unk["free"] for it in fz["items"])
 assert down["failed_calls"]["question_names"] == n_unk and down["retries"] == n_unk * len(T.DEFAULT_RETRY_WAITS)
@@ -169,4 +169,69 @@ finally:
 assert not (Q.QUESTIONS_DIR / Q.frozen_path(5, 4, 12).name).exists(), "an offline test must leave no frozen set in the repository"
 r = Q.main(["--seed", "19", "--worlds", "10", "--batch", "--dry-run"])
 assert r["questions"] > 200 and r["estimated_usd"] < 3
+# ---- 8. phase D' (logbook 94): the substitution check, and the question note 2
+from grandnexus.nexus_logic import parse
+lits = lambda g: B.goal_of_program(parse(f"? {g}."))[1]
+assert Q.substitutions("Would you describe Rita as patient?", lits("calm(rita)")) == ["calm"]
+assert Q.substitutions("Does Bob fly planes?", lits("pilot(bob)")) == ["pilot"]
+assert Q.substitutions("Does Uma bake bread?", lits("baker(uma)")) == []               # a part of the name starts a word
+assert Q.substitutions("Is Paris where Alice lives?", lits("lives_in(alice, paris)")) == []
+assert Q.substitutions("Is Paris where Alice lives?", lits("lives_in(alice, lyon)")) == ["lyon"]
+assert Q.substitutions("Is Alice based in Paris?", lits("lives_in(alice, paris)")) == ["lives_in"]
+assert Q.substitutions("Where does Alice live?", lits("lives_in(alice, X)")) == []       # a variable is not a name
+assert Q.render_goal(lits("lives_in(alice, paris)")) == "Is it true that Alice lives in Paris?"
+assert Q.render_goal(lits("not chess_player(bob)")) == "Is it true that it is not the case that Bob is chess player?"
+led = Q.Ledger()
+chk = lambda q, g: Q.check_substitution(Scripted(), led, Q.JUDGE_MODEL, q, lits(g))
+assert chk("Would you describe Rita as patient?", "calm(rita)")["kept"] is False
+assert chk("Is Heidi a courageous person?", "brave(heidi)")["kept"] is True
+assert chk("Is Paris where Alice lives?", "lives_in(alice, lyon)")["kept"] is False
+assert chk("Is Paris where Alice lives?", "lives_in(alice, paris)") == {"checked": False}
+SB = ARGS + ["--sandbox"]
+n93, _ = quiet(SB + ["--question-note", "1", "--no-substitution-check"], client=Scripted(attract=True))
+assert n93["pipelines"]["free_names"]["asserted_errors"] >= 1 and not n93["criteria"]["D1"], "the defect of n°93 is reproduced"
+assert n93["substitution_check"]["checked"] == 0
+caught, _ = quiet(SB + ["--question-note", "1"], client=Scripted(attract=True))
+sc_ = caught["substitution_check"]
+assert caught["pipelines"]["free_names"]["asserted_errors"] == 0 and caught["criteria"]["D1"], caught["pipelines"]["free_names"]
+assert sc_["refused"] >= n93["pipelines"]["free_names"]["asserted_errors"] and sc_["kept"] > 0
+assert caught["pipelines"]["free_names_unchecked"] == n93["pipelines"]["free_names"], "unchecked = the same readings without the check"
+note2, _ = quiet(SB, client=Scripted(attract=True))                                       # the defaults of phase D'
+assert note2["pipelines"]["free_names"]["asserted_errors"] == 0 and note2["substitution_check"]["refused"] == 0
+assert note2["substitution_check"]["on"] and note2["substitution_check"]["question_note"] == 2
+assert "free_nonames" in note2["pipelines"]
+skip, _ = quiet(SB + ["--skip-nonames"], client=Scripted())
+assert "free_nonames" not in skip["pipelines"] and "D2" not in skip["criteria"]
+# the frozen set and the audit kept in the repository are used when the Drive folder lacks them
+keep_q = Q.QUESTIONS_DIR
+Q.QUESTIONS_DIR = tmp
+try:
+    tmp3 = pathlib.Path(tempfile.mkdtemp())
+    again, _ = quiet(ARGS + ["--gate", "--questions-dir", str(tmp3)], client=Scripted())
+    assert (tmp3 / Q.frozen_path(5, 4, 12).name).exists() and again["questions_sha"] == fz["sha"]
+    assert again["gate"]["G1"] and again["gate"]["pass"], again["gate"]
+finally:
+    Q.QUESTIONS_DIR = keep_q
+# ---- 9. logbook 96: every API call of the tool through the REAL SDK, offline (its own argument checks)
+from scripted_translator import sdk_offline_client, SDK_PARAMS
+try:
+    Scripted().create("m", 8, "x", [{"role": "user", "content": "x"}], temperature=0.0)
+    assert SDK_PARAMS is None, "a keyword the installed SDK does not know must be refused"
+except TypeError:
+    pass
+real = sdk_offline_client()
+if real is None:
+    print("anthropic or httpx not installed: the real-SDK path is not checked")
+else:
+    led = Q.Ledger()
+    assert Q.check_substitution(real, led, Q.JUDGE_MODEL, "Would you describe Rita as patient?", lits("calm(rita)"))["kept"] is False
+    assert Q.write_list(real, led, Q.WRITER_MODEL, ["Is Bob a chess player?"])[0]
+    assert Q.judge_same(real, led, Q.JUDGE_MODEL, "Is Bob a chess player?", "Does Bob play chess?")
+    tmp4 = pathlib.Path(tempfile.mkdtemp())
+    viasdk, _ = quiet(["--seed", "5", "--worlds", "2", "--sessions", "8", "--questions-dir", str(tmp4), "--no-write",
+                       "--sandbox"], client=sdk_offline_client(Scripted(attract=True)))
+    assert viasdk["criteria"]["D1"] and viasdk["substitution_check"]["checked"] > 0, viasdk["substitution_check"]
+    import grandnexus.llm_interface.translator_v5 as T5
+    trx = T5.Translator(client=sdk_offline_client())
+    assert trx._call(T5.SYSTEM_TRANSLATE, "TEXT:\nA is p.\n\nQUESTION (or statement to verify):\nIs A p?", "x")
 print("ALL OK")

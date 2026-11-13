@@ -88,14 +88,24 @@ def lexicon_block(mem: "Memory", with_lexicon: bool, ontology: int = 1) -> str:
 # ---- questions asked alone, in free language (logbook 91) ---------------------------------------------------------
 QUESTION_TEXT = "(none: there is no text here, only a question asked to the memory; write its question line and nothing else)"
 QUESTION_NOTE = "A QUESTION IS ASKED TO THIS MEMORY: write its question line with the conventions above"
-QUESTION_NOTE_NAMES = QUESTION_NOTE + ", and when the question says in other words what a name already in memory says, use that name"
+QUESTION_NOTES_NAMES = {
+    # logbook 91
+    1: QUESTION_NOTE + ", and when the question says in other words what a name already in memory says, use that name",
+    # logbook 94: n°93 saw the reader replace a quality absent from memory by a neighbouring one present in it
+    2: QUESTION_NOTE + ". Use a name already in memory only when the question asks exactly what that name says, in other "
+       "words (a synonym, or a role named by what the person does). When the question asks about something that no name "
+       "in memory says, keep the question's own word, even if a name in memory is close to it: a related but different "
+       "quality is a different name (quiet is not shy, polite is not kind). The memory will then answer that it does not "
+       "know, which is right",
+}
+QUESTION_NOTE_NAMES = QUESTION_NOTES_NAMES[1]
 
 
-def question_block(mem: "Memory", with_names: bool, ontology: int = 2) -> str:
+def question_block(mem: "Memory", with_names: bool, ontology: int = 2, note: int = 1) -> str:
     """The block the translator receives before a question asked alone: the ontology's conventions, the names in memory
-    (with_names) and one line saying that a question is asked. Without names: the control of logbook 91 (free_nonames)."""
+    (with_names) and the question note (note 1: logbook 91; note 2: logbook 94). Without names: the control free_nonames."""
     if with_names:
-        return lexicon_block(mem, True, ontology).rstrip("\n") + "\n" + QUESTION_NOTE_NAMES + ".\n\n"
+        return lexicon_block(mem, True, ontology).rstrip("\n") + "\n" + QUESTION_NOTES_NAMES[note] + ".\n\n"
     return ONTOLOGIES[ontology] + "\n" + QUESTION_NOTE + ".\n\n"
 
 

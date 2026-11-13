@@ -7,9 +7,12 @@ opposite word or a past state) and for the reader of a question asked alone (wit
 the memory's name for a synonym; without them it keeps the word of the question)."""
 import json
 import re
+import sys
 import zlib
 from collections import Counter
 from types import SimpleNamespace
+sys.path.insert(0, "tools")
+from living_bench import CITIES                                                             # noqa: E402
 import living_llm as B
 from living_bench import ROLES, CLASSES, ADJS
 from living_language import ROLE_VERB
@@ -58,6 +61,7 @@ BASE = {"chess player": "play chess", "painter": "paint", "swimmer": "swim", "te
 ROLE_OF_BASE = {v: k for k, v in BASE.items()}
 SYN = {"brave": "courageous", "calm": "serene", "honest": "truthful", "strong": "powerful"}
 ADJ_OF_SYN = {v: k for k, v in SYN.items()}
+NEIGHBOUR = {"patient": "calm", "careful": "calm", "curious": "brave"}     # logbook 93: the attraction the note 1 allowed
 ANT = {"patient": "impatient", "curious": "indifferent", "brave": "cowardly", "calm": "nervous", "strong": "weak",
        "careful": "careless", "generous": "stingy", "honest": "dishonest"}
 
@@ -86,7 +90,7 @@ def unfaithful(q):
     p, x = re.match(r"Is (\w+) (?:an? )?(.+)\?$", q).groups()
     return f"Would you describe {p} as {ANT[x]}?" if x in ANT else f"Was {p} once a {x}?"
 
-def read_free(q, preds):
+def read_free(q, preds, attract=False):
     """Scripted reading of a free question: the lines of its program. preds: the predicate names in memory, or None
     when the names were not given (then a synonym keeps the word of the question)."""
     n_ = lambda x: x.lower().replace(" ", "_")
@@ -102,7 +106,10 @@ def read_free(q, preds):
         return [f"? {adj if preds is not None and adj in preds else m.group(2)}({n_(m.group(1))})."]
     m = re.match(r"Would you describe (\w+) as (\w+)\?$", q) or re.match(r"Is (\w+) someone you would call (\w+)\?$", q)
     if m:
-        return [f"? {m.group(2)}({n_(m.group(1))})."]
+        adj = m.group(2)
+        if attract and preds is not None and adj not in preds and NEIGHBOUR.get(adj) in preds:
+            adj = NEIGHBOUR[adj]            # a quality absent from memory replaced by a neighbouring name present in it
+        return [f"? {adj}({n_(m.group(1))})."]
     m = re.match(r"Is (\w+) where (\w+) lives\?$", q)
     if m:
         return [f"? lives_in({n_(m.group(2))}, {n_(m.group(1))})."]
@@ -118,12 +125,13 @@ def read_free(q, preds):
 
 
 class Scripted:
-    def __init__(self, defects=None, mute_once=()):
+    def __init__(self, defects=None, mute_once=(), attract=False):
         """defects (logbook 91): {canonical question: 'name' | 'negation' | 'other' | 'judge' | 'stubborn'} plants a
         defect in the first rewording of that question ('stubborn': in every rewording), or {'malformed': n} makes
         the n first list replies malformed. mute_once: free questions whose first reading has no question line."""
         self.messages, self.calls, self.by = self, 0, Counter()
         self.defects, self.mute, self.malformed = dict(defects or {}), set(mute_once), int((defects or {}).get("malformed", 0))
+        self.attract = attract
 
     def _reply(self, model, text):
         return SimpleNamespace(id="s", model=model, content=[SimpleNamespace(text=text)],
@@ -154,8 +162,12 @@ class Scripted:
 
     def _judge(self, model, u):
         self.by["judge"] += 1
-        second = u.split("Second: ", 1)[1]
+        first, second = u.split("Second: ", 1)[0], u.split("Second: ", 1)[1]
         bad = " once " in second or any(re.search(rf"\b{a}\b", second) for a in ANT.values())
+        qual = lambda t: {ADJ_OF_SYN.get(w, w) for w in re.findall(r"[a-z]+", t.lower()) if w in ANT or w in ADJ_OF_SYN}
+        bad = bad or (qual(first) and qual(second) and qual(first) != qual(second))     # two different qualities
+        place = lambda t: set(re.findall(r"\b(" + "|".join(CITIES) + r")\b", t))
+        bad = bad or (place(first) and place(second) and place(first) != place(second))  # two different places
         return self._reply(model, "DIFFERENT" if bad else "SAME")
 
     def _question(self, model, u):
@@ -168,9 +180,13 @@ class Scripted:
         if "NAMES ALREADY IN MEMORY: predicates " in u:
             names = u.split("NAMES ALREADY IN MEMORY: predicates ", 1)[1].split(";")[0]
             preds = {x.split("/")[0].strip() for x in names.split(",")}
-        return self._reply(model, "```nx\n" + "\n".join(read_free(q, preds)) + "\n```")
+        attract = self.attract and "use that name" in u          # only the question note 1 invites it
+        return self._reply(model, "```nx\n" + "\n".join(read_free(q, preds, attract)) + "\n```")
 
-    def create(self, model, max_tokens, system, messages):
+    def create(self, model, max_tokens, system, messages, **kw):
+        unknown = set(kw) - SDK_PARAMS if SDK_PARAMS is not None else set()
+        if unknown:                                   # logbook 96: the real SDK refuses what it does not know
+            raise TypeError(f"Messages.create() got an unexpected keyword argument {sorted(unknown)[0]!r}")
         self.calls += 1
         u = messages[0]["content"]
         role = system if isinstance(system, str) else ""       # the translator sends its system prompt as a cached block
@@ -220,3 +236,44 @@ class DualAPI:
         self.batches = BatchAPI(server, interrupt_first_wait)
         self.batches.reader = self.scripted
         self.messages = SimpleNamespace(create=self.scripted.create, batches=self.batches)
+
+
+# ---- logbook 96: the real SDK, offline ------------------------------------------------------------------------------
+# The scripted stand-ins above accepted any keyword, so the offline tests could not see that SDK 2.8.0 has no
+# `temperature` (the pre-flight of v7.8.1-rc stopped on it). Now they refuse any keyword the installed SDK does not
+# have, and sdk_offline_client() gives a REAL anthropic client whose HTTP transport is local: every call goes through
+# the SDK's own argument checks and request building, and is answered by the scripted stand-in. No network.
+try:
+    import inspect as _inspect
+    from anthropic.resources.messages import Messages as _Messages
+    SDK_PARAMS = {p for p in _inspect.signature(_Messages.create).parameters if p != "self"}
+except Exception:  # noqa: BLE001  (SDK not installed: no check)
+    SDK_PARAMS = None
+
+
+def sdk_offline_client(scripted=None):
+    """A real anthropic.Anthropic client answered locally by the scripted stand-in, or None without the SDK."""
+    try:
+        import anthropic
+    except ImportError:
+        return None
+    try:                                  # the HTTP package the installed SDK uses (httpx2 for SDK 2.8.0, else httpx)
+        import httpx2 as httpx
+    except ImportError:
+        try:
+            import httpx
+        except ImportError:
+            return None
+    sc = scripted or Scripted()
+
+    def handler(request):
+        body = json.loads(request.content)
+        r = sc.create(**body)
+        return httpx.Response(200, json={
+            "id": "msg_offline", "type": "message", "role": "assistant", "model": body["model"],
+            "content": [{"type": "text", "text": r.content[0].text}], "stop_reason": "end_turn", "stop_sequence": None,
+            "usage": {"input_tokens": 1, "output_tokens": 1, "cache_creation_input_tokens": 0, "cache_read_input_tokens": 0}})
+    client = anthropic.Anthropic(api_key="offline-test", max_retries=0,
+                                 http_client=httpx.Client(transport=httpx.MockTransport(handler)))
+    client.scripted = sc
+    return client
