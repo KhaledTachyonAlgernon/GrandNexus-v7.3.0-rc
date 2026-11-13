@@ -239,6 +239,10 @@ def frozen_path(seed: int, worlds: int, sessions: int, directory=None) -> pathli
     return pathlib.Path(directory or QUESTIONS_DIR) / f"free_questions_seed{seed}_{worlds}w_{sessions}s.json"
 
 
+def _rel(path: pathlib.Path) -> str:
+    return str(path.relative_to(ROOT)) if ROOT in path.parents else str(path)
+
+
 ARCHIVE = True      # False with --no-write: an offline test with scripted stand-ins must leave nothing in the repository
 
 
@@ -310,7 +314,7 @@ def generate(a, client) -> dict:
     archive(path, QUESTIONS_DIR)
     if partial.exists():
         partial.unlink()
-    print(f"frozen set written: {path.relative_to(ROOT) if ROOT in path.parents else path}, {len(items)} questions, sha {d['sha'][:16]}")
+    print(f"frozen set written: {_rel(path)}, {len(items)} questions, sha {d['sha'][:16]}")
     print(f"  reworded at the first try {d['stats']['reworded_first_try']}, refusals {d['stats']['refusals'] or 'none'}, "
           f"fallbacks to the canonical wording {d['stats']['fallbacks']}; generation cost ${d['cost']['usd']:.3f}")
     return d
@@ -430,6 +434,12 @@ def run(a, client=None) -> dict:
     import cost
     debug = a.seed in DEBUG_SEEDS
     mode = "gate" if a.gate else "sandbox" if a.sandbox else "measurement"
+    if mode == "measurement" and not a.no_write:      # a seed is measured once: a second run would be a second draw
+        for d in {RESULTS_DIR} | ({pathlib.Path(a.state_dir)} if a.state_dir else set()):
+            for f in sorted(d.glob("living_questions_D_measurement_*.json")):
+                if json.loads(f.read_text(encoding="utf-8")).get("args", {}).get("seed") == a.seed:
+                    raise SystemExit(f"STOP: seed {a.seed} has already been measured ({f.name}). A measurement is made once; "
+                                     f"send that result.")
     raw = client if client is not None else _default_client()
     frozen = generate(a, raw)
     if a.gate:                                     # G1 first: without a passing audit the gate cannot pass, so nothing is read
@@ -599,7 +609,7 @@ def run(a, client=None) -> dict:
         RESULTS_DIR.mkdir(parents=True, exist_ok=True)
         path = RESULTS_DIR / f"living_questions_D_{mode}_{time.strftime('%Y-%m-%d_%H%M%S')}.json"
         path.write_text(json.dumps(out, indent=1, default=str, ensure_ascii=False), encoding="utf-8")
-        print(f"written: {path.relative_to(ROOT)}")
+        print(f"written: {_rel(path)}")
         if a.state_dir:                              # a second copy next to the batch state (on Colab: the Drive)
             archive(path, pathlib.Path(a.state_dir))
     return out

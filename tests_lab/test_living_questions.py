@@ -149,6 +149,21 @@ try:
         raise AssertionError("the audit sheet of a non-debug seed must be refused")
     except SystemExit:
         pass
+    # a seed is measured once: with a result on disk, the same command stops before any call
+    keep_dirs = Q.RESULTS_DIR, Q.QUESTIONS_DIR
+    Q.RESULTS_DIR, Q.QUESTIONS_DIR = tmp2 / "res", tmp2 / "arch"
+    try:
+        sc2 = Scripted()
+        first, _ = quiet(["--seed", "5", "--worlds", "2", "--sessions", "8", "--questions-dir", str(tmp2)], client=sc2)
+        assert list(Q.RESULTS_DIR.glob("living_questions_D_measurement_*.json")) and (Q.QUESTIONS_DIR / Q.frozen_path(5, 2, 8).name).exists()
+        calls = sc2.calls
+        try:
+            quiet(["--seed", "5", "--worlds", "2", "--sessions", "8", "--questions-dir", str(tmp2)], client=sc2)
+            raise AssertionError("a second measurement of the same seed must be refused")
+        except SystemExit:
+            assert sc2.calls == calls
+    finally:
+        Q.RESULTS_DIR, Q.QUESTIONS_DIR = keep_dirs
 finally:
     Q.DEBUG_SEEDS, Q.USED_SEEDS = keep
 assert not (Q.QUESTIONS_DIR / Q.frozen_path(5, 4, 12).name).exists(), "an offline test must leave no frozen set in the repository"
