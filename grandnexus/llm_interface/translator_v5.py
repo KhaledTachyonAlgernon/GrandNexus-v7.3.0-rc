@@ -10,7 +10,9 @@ prompt evolved to v5.4 (universal questions, disjunctions, compound questions).
 from __future__ import annotations
 
 import os
+import random
 import re
+import time
 from dataclasses import dataclass
 from types import SimpleNamespace
 from typing import Any, Dict, List
@@ -107,6 +109,53 @@ def _default_client():
     return anthropic.Anthropic(api_key=key)
 
 
+# ---- retry of transient API errors (logbook 90) ------------------------------------------------------------------
+# The SDK retries twice within about ten seconds; on 2026-11-13 the API was unavailable for minutes and 50 of 120
+# synchronous readings of tools/living_diag.py failed (logbook 89). A transient error (unavailable, overloaded, rate
+# limit, timeout, lost connection) is retried with growing waits; the request is the same, so the answer it gets is
+# one the bench could have got on the first try. Any other error (bad request, authentication, an errored batch
+# request replayed by tools/batch_runner.py) is raised at once. The batch replay's Pending derives from BaseException
+# and is never caught here.
+TRANSIENT_STATUS = {408, 409, 429, 500, 502, 503, 504, 529}
+TRANSIENT_NAMES = {"APIConnectionError", "APITimeoutError", "InternalServerError", "ServiceUnavailableError",
+                   "OverloadedError", "RateLimitError", "GatewayTimeoutError", "DeadlineExceededError",
+                   "RequestTimeoutError"}
+DEFAULT_RETRY_WAITS = (5.0, 15.0, 30.0, 60.0, 120.0, 240.0)    # seconds; up to about 8 minutes before giving up
+SLEEP = time.sleep                                              # replaced by the offline tests
+
+
+def is_transient(e: BaseException) -> bool:
+    status = getattr(e, "status_code", None)
+    if isinstance(status, int):
+        return status in TRANSIENT_STATUS or (status >= 500 and status != 501)
+    return any(c.__name__ in TRANSIENT_NAMES for c in type(e).__mro__)
+
+
+def _retry_after(e: BaseException) -> float:
+    try:
+        v = getattr(getattr(e, "response", None), "headers", {}).get("retry-after")
+        return min(300.0, float(v)) if v is not None else 0.0
+    except Exception:  # noqa: BLE001
+        return 0.0
+
+
+def create_with_retry(client, retry_waits=DEFAULT_RETRY_WAITS, sleep=None, log=None, **kw) -> Any:
+    """client.messages.create(**kw) with retries of transient errors; the last error is raised when they run out.
+    Shared by the Translator and by the other API callers of the benches (question writer and judge, logbook 91)."""
+    for attempt in range(len(retry_waits) + 1):
+        try:
+            return client.messages.create(**kw)
+        except Exception as e:  # noqa: BLE001
+            if attempt >= len(retry_waits) or not is_transient(e):
+                raise
+            wait = max(retry_waits[attempt] * random.uniform(0.8, 1.2), _retry_after(e))
+            if log is not None:
+                log.append({"error": type(e).__name__, "status": getattr(e, "status_code", None),
+                            "attempt": attempt + 1, "wait_s": round(wait, 1)})
+            (sleep or SLEEP)(wait)
+    raise RuntimeError("unreachable")
+
+
 class FakeClient:
     """Offline stand-in for the SDK: returns the canned replies in order (tests without API, zero cost)."""
     def __init__(self, replies: List[str]) -> None:
@@ -134,7 +183,8 @@ class Receipt:
 
 class Translator:
     def __init__(self, client=None, model: str = DEFAULT_MODEL, corrective_rounds: int = 1,
-                 require_anchor: bool = True, max_tokens: int = 2000, cache_system: bool = True) -> None:
+                 require_anchor: bool = True, max_tokens: int = 2000, cache_system: bool = True,
+                 retry_waits=DEFAULT_RETRY_WAITS, sleep=None) -> None:
         """cache_system: the system prompt (identical for every call of a role) is marked for the API prompt cache
         (logbook 63). Per the API documentation, caching has no effect on the generated output: the answer is the one
         that would be obtained without it; only the billing of the cached prefix changes. Prompts shorter than the
@@ -143,12 +193,18 @@ class Translator:
         self.model, self.corrective_rounds, self.require_anchor, self.max_tokens = model, corrective_rounds, require_anchor, max_tokens
         self.cache_system = cache_system
         self.receipts: List[Receipt] = []
+        self.retry_waits, self._sleep = tuple(retry_waits), sleep
+        self.retry_log: List[Dict[str, Any]] = []      # one entry per retried transient error (logbook 90)
+
+    def _create(self, **kw) -> Any:
+        """client.messages.create with retries of transient errors; the last error is raised when they run out."""
+        return create_with_retry(self.client, self.retry_waits, self._sleep, self.retry_log, **kw)
 
     def _call(self, system: str, user: str, role: str) -> str:
         sys_param: Any = ([{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}]
                           if self.cache_system else system)
-        resp = self.client.messages.create(model=self.model, max_tokens=self.max_tokens, system=sys_param,
-                                           messages=[{"role": "user", "content": user}])
+        resp = self._create(model=self.model, max_tokens=self.max_tokens, system=sys_param,
+                            messages=[{"role": "user", "content": user}])
         u = getattr(resp, "usage", None)
         n = lambda field: int(getattr(u, field, 0) or 0)          # absent or None on fakes and older SDKs
         self.receipts.append(Receipt(getattr(resp, "id", "?"), getattr(resp, "model", self.model),
