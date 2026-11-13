@@ -1,7 +1,7 @@
-# GrandNexus — status (2026-11-12, v7.7.2-rc)
+# GrandNexus — status (2026-11-13, v7.7.2)
 
 **An anchored translator and a reference engine that decide without inventing, and a laboratory to measure whether a loop learns.**
-Read this file first; `LOGBOOK.md` holds every hypothesis -> result -> decision (88 entries); `MODULES.md` gives the status of every module.
+Read this file first; `LOGBOOK.md` holds every hypothesis -> result -> decision (89 entries); `MODULES.md` gives the status of every module.
 
 ## The core (what is demonstrated)
 | Part | File |
@@ -42,12 +42,16 @@ Module status (`MODULES.md`, generated from `grandnexus/module_status.py`): core
 - Module review (logbook 72, `AUDITIONS.md`): of the 62 experimental modules with code, 13 have a direct path to the verdict, 24 only make sense over time (memories, learning, graph), 25 are agent infrastructure.
 - n°2-4 (logbook 74), attention filter, linguistic patterns, reflection: FAIL, FAIL, FAIL. None beats a trivial control; the attention filter has a defect (a catch-all focus wins every time). The direct path is exhausted for the 2025 modules; what remains for them is a "living" bench.
 
+## Measured: the living bench in real language (logbook 84-89)
+- Pre-registered, 10 never-used worlds (seed 17), facts paraphrased and read by the anchored LLM translator with a shared lexicon (ontology v2) feeding the structured memory: level 1 100%, level 2 99.2%, 0 asserted errors, about 2 facts per question. Without the lexicon about 50%; reading everything at once with the same ontology 82.7% with 15 asserted errors (it keeps both residences of a person who moved) and 37 facts per question. All six criteria pass (logbook 89). Scope: synthetic worlds, a seeded paraphraser, canonical questions, "lives in" declared single-valued.
+
 ## Handover (read this first in a new conversation)
-- Pending run: `notebooks/GrandNexus_v7_7_2-rc_check_then_measure.ipynb` on Colab (logbook 88). Step 1: tools/living_diag.py, seed 11, level 1, paraphraser 2, ontology 2, gate = first residences and role facts read correctly >= 95%. Step 2, only if the gate passed: tools/living_lab_language.py --seed 17 --worlds 10 --levels 1,2 --concat-worlds 4 --batch --paraphraser 2 --ontology 2. Cost: about $0.5 + $1.3.
-- To check on the returned zip: the session commit adds only result JSONs (living_diag_L1_*.json, living_lab_language_C_*.json) on top of tag v7.7.2-rc; the arguments in the JSONs are those above; then read the gate, the tables and the six criteria (C1-C3 at levels 1 and 2), and log the result in LOGBOOK as n°89, as executed.
-- Seeds already used (never measure on them again): 1, 3, 5, 7, 11, 13; seed 17 is reserved for logbook 88.
-- Tools default to paraphraser 1 / ontology 1 so that the commands of logbook 81-87 reproduce; phase C' passes 2 / 2 explicitly.
-- GitHub (KhaledTachyonAlgernon/GrandNexus-v7.3.0-rc) is the reference; versions arrive as git bundles imported by Claude Code on the web (it cannot push tags; Khaled creates releases from the GitHub release page). Runs with the API go through Colab (Khaled's key); Claude Code runs every offline step.
+- State: v7.7.2 released locally (tag on the merge of the phase C' session); GitHub receives it as a bundle (grandnexus_v7.7.2.bundle), then Khaled publishes the release v7.7.2 from the GitHub release page on the tagged commit.
+- Seeds already used (never measure on them again): 1, 3, 5, 7, 11, 13, 17.
+- Known defect to repair first: tools/living_diag.py calls the API synchronously without retry (50/120 readings failed with ServiceUnavailableError on 2026-11-13) and its gate ignores failed readings (logbook 89). Use retries with backoff or the Batch API, and count failed readings in any gate.
+- Tools default to paraphraser 1 / ontology 1 (the commands of logbook 81-87 reproduce); phase C' passed 2 / 2 explicitly.
+- Circuit: GitHub (KhaledTachyonAlgernon/GrandNexus-v7.3.0-rc) is the reference; versions arrive as git bundles imported by Claude Code on the web (it cannot push tags); API runs go through Colab (Khaled's key) unless a dedicated key is set in the Claude Code environment as GRANDNEXUS_API_KEY (CLAUDE.md). Check the sha256 of every zip sent back: the wrong zip has been sent several times.
+- Candidate next steps (to choose with Khaled): questions in free language too (today they are canonical); facts written by people rather than by the paraphraser; relations whose single-valuedness is not declared; noisy or contradictory facts to flag; a "living" boot profile that wires the structured memory into GrandNexus itself.
 
 ## Open experiments
 - Living bench, sandbox (logbook 76, `tools/living_bench.py`, offline, synthetic worlds): 548 questions over 12 sessions. Concat 85.2% with 65 asserted errors (moves); a trivial "latest city" rule 85.2% with 0; word overlap 81.2% with 6 facts instead of 36; the 2025 WorkingMemory 63.1% and EpisodicMemory 33.6%, both below word overlap. Window for a real memory: time (supersession) and context size. Repaired 2025 episodic memory (logbook 77: retrieval by the question's words, succession for single-valued relations): 95.8% with 0 asserted errors and 6 facts per question, the best pipeline. World v2 with two-step chains (logbook 78): the 2025 graph engine and semantic memory, with the repaired episodic memory for time, answer 100% of 517 questions with 0 asserted errors and under 2 facts per question (concat: 89.0%, 57 errors, 37 facts); word-based retrieval misses the two-step chains even with 16 facts. Next: a lab version, with the structure of the facts extracted by the grammar pathway and criteria written first.
